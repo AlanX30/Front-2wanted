@@ -82,9 +82,43 @@ export const Posiciones = (idRoot, userList) => {
         }
     }
 
+    
     /* -----/3 Level----- */
+    
+    /* -----4 Level----- */
+    
+    let acum4 = 0
+    const childsId4 = []
+    const childsName4 = []
 
-    return {myName, acum1, childsId1, childsName1, acum2, childsId2, childsName2, acum3, childsId3, childsName3}
+    for (let i = 0; i<childsId3.length; i++) {
+        for(let j = 0; j<userList.length; j++){
+            const parentId = userList[j].parentId
+            const Id = userList[j].id
+            const name = userList[j].name
+            if(parentId === childsId3[i]){
+                childsId4.push(Id)
+                childsName4.push(name)
+                acum4 = acum4 + userList[j].ingreso
+            }
+        }  
+    }
+
+    for(let i = 0; i<16; i++){
+        if(childsName4[i] === undefined){
+            childsName4[i] = 'Posicion Vacia'
+        }
+    }
+    
+    /* -----/4 Level----- */
+    
+    const totalWin = acum3/2
+    
+    return {
+        totalWin ,myName, childsId1, childsName1, childsId2, 
+        childsName2, acum3, childsId3, childsName3, acum4, 
+        childsId4, childsName4
+    }
 
 }
 

@@ -5,3 +5,8 @@ body {
 .links:hover {
   text-decoration: none;
 }
+
+h5,
+p {
+  margin: 0;
+}
