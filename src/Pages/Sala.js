@@ -15,7 +15,7 @@ export const Sala = (props) => {
                 </div>
                 <div className="col">
                     <h1 className='text-center'>Estado Actual</h1>
-                    <h5>Numero de hijos en primera linea: <span>2</span></h5>
+                    <h5>Numero de hijos en primera linea: <span>8</span></h5>
                 </div>
             </div>
         </div>
