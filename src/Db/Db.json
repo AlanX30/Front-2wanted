@@ -1,0 +1,94 @@
+{
+  "users": [
+    {
+      "name": "@AlanS",
+      "id": 1,
+      "ingreso": 10000,
+      "parentId": 0
+    },
+    {
+      "name": "@Maria",
+      "id": 2,
+      "ingreso": 10000,
+      "parentId": 1
+    },
+    {
+      "name": "@Jesus",
+      "id": 3,
+      "ingreso": 10000,
+      "parentId": 1
+    },
+    {
+      "name": "@Buda",
+      "id": 4,
+      "ingreso": 10000,
+      "parentId": 2
+    },
+    {
+      "name": "@Lao Tse",
+      "id": 5,
+      "ingreso": 10000,
+      "parentId": 2
+    },
+    {
+      "name": "@Confusio",
+      "id": 6,
+      "ingreso": 10000,
+      "parentId": 3
+    },
+    {
+      "name": "@Horus",
+      "id": 7,
+      "ingreso": 10000,
+      "parentId": 3
+    },
+    {
+      "name": "@Samael Aun Weor",
+      "id": 8,
+      "ingreso": 10000,
+      "parentId": 4
+    },
+    {
+      "name": "@Delai Lama",
+      "id": 9,
+      "ingreso": 10000,
+      "parentId": 4
+    },
+    {
+      "name": "@Mahoma",
+      "id": 10,
+      "ingreso": 10000,
+      "parentId": 5
+    },
+    {
+      "name": "@Hermes Trimegisto",
+      "id": 11,
+      "ingreso": 10000,
+      "parentId": 5
+    },
+    {
+      "name": "@Carl Jung",
+      "id": 12,
+      "ingreso": 10000,
+      "parentId": 6
+    },
+    {
+      "name": "@Gurdieff",
+      "id": 13,
+      "ingreso": 10000,
+      "parentId": 6
+    },
+    {
+      "name": "@Rab Shimon bar Yojai",
+      "id": 14,
+      "ingreso": 10000,
+      "parentId": 7
+    },
+    {
+      "name": "@Abraham",
+      "id": 15,
+      "ingreso": 10000,
+      "parentId": 7
+    }
+  ]
+}

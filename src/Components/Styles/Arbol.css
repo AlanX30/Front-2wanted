@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  justify-content: center;
+}
+.arbol img {
+  height: 20px;
+}
+.leaves {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 25px;
+}
+.link {
+  color: black;
+}
+.labelRoot-arbol {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 25px;
+}

@@ -1,0 +1,12 @@
+.logo img {
+  height: 30px;
+}
+
+.user-button {
+  font-size: 15px;
+}
+
+.navbar-arbol {
+  display: flex;
+  justify-content: space-between;
+}
