@@ -23,14 +23,14 @@ export const Sala = (props) => {
 
     /* ----------------------------------------------------------------------------------------------------- */
 
-    const {totalWin ,childsId1, childsId2, childsId3, childsName3, childsName1, childsName2, childsId4, childsName4} = Posiciones(idRoot, userList)
+    const {totalWin ,childsId1, childsId2, childsId3, childsName3, childsName1, childsName2, childsId4, childsName4, childsId5, childsName5} = Posiciones(idRoot, userList)
 
     return(
         <>
         <div className="container-fluid">
             <div className="row">
                 <div className="arbol-container col-md-7 ml-4 mr-4">
-                    <Arbol childsId4={childsId4} childsName4={childsName4} idRoot={idRoot} user={user} childsId1={childsId1} childsId2={childsId2} childsId3={childsId3} childsName1={childsName1} childsName2={childsName2} childsName3={childsName3} />
+                    <Arbol childsId5={childsId5} childsName5={childsName5} childsId4={childsId4} childsName4={childsName4} idRoot={idRoot} user={user} childsId1={childsId1} childsId2={childsId2} childsId3={childsId3} childsName1={childsName1} childsName2={childsName2} childsName3={childsName3} />
                 </div>
                 <div className="estado-sala col">
                     <h1 className='text-center'>Estado Actual</h1>
