@@ -4,9 +4,15 @@
 
 .user-button {
   font-size: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-arbol {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+.dropdown-user {
+  border: none;
 }

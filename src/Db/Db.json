@@ -89,6 +89,96 @@
       "id": 15,
       "ingreso": 10000,
       "parentId": 7
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "",
+      "id": 188,
+      "ingreso": 0,
+      "parentId": 10
+    },
+    {
+      "name": "@ElVale",
+      "id": 16,
+      "ingreso": 10000,
+      "parentId": 15
     }
   ]
 }

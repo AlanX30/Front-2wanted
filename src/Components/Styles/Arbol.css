@@ -19,3 +19,70 @@
   margin-top: 5px;
   margin-bottom: 25px;
 }
+.item-par {
+  width: 50%;
+}
+.prueba {
+  padding-top: 5px;
+  transition: 0.3s;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.item-menu {
+  height: 20px;
+  padding: 2px;
+}
+
+.no {
+  position: absolute;
+  top: -400vh;
+}
+.fila-menu {
+  margin: 2px 0 12px 0;
+  display: flex;
+  width: 100%;
+}
+
+.n5 {
+  display: none;
+  margin-top: 20px;
+}
+.hidden-lable1 {
+  display: block;
+}
+.hidden-lable2 {
+  display: block;
+}
+.hidden-lable1.hidden2 {
+  display: none;
+}
+
+@media screen and (max-width: 560px) {
+  .leaves.hidden1 {
+    display: none;
+  }
+  .leaves.hidden2 {
+    display: none;
+  }
+  .n5.hidden2 {
+    margin-top: 8px;
+    display: table;
+  }
+  .hidden-lable2 {
+    display: none;
+  }
+  .hidden-lable1.hidden2 {
+    display: block;
+    margin-top: 8px;
+  }
+}
+@media screen and (max-width: 1580px) {
+  .hidden2 {
+    display: none;
+  }
+  .n5.hidden1 {
+    display: table;
+    margin-top: 8px;
+  }
+}

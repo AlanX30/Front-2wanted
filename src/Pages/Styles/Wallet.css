@@ -1,0 +1,19 @@
+.deposit {
+  flex-wrap: wrap;
+}
+.withdraw {
+  flex-wrap: wrap;
+}
+.deposit-title {
+  text-align: center;
+  flex-shrink: 0;
+  width: 100%;
+}
+.deposit-bearer {
+  text-align: center;
+  width: 50%;
+}
+.deposit-charge {
+  margin-top: 20px;
+  padding-left: 10%;
+}

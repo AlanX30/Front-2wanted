@@ -1,25 +1,37 @@
 import React from 'react'
 import Db from '../Db/Db.json'
 import {Posiciones} from '../Container/Posiciones'
+import {Arbol} from './Arbol'
 
 export const PagePersonas = (props) => {
 
-    const id = parseInt(props.match.params.id)
+    const idRoot = parseInt(props.match.params.id)
     const userList = Db.users
-    const ingresado = 10000
 
-    const {myName, acum1, childsName1, acum2, childsName2} = Posiciones(id, userList)
+    const {myName ,tAcum5 ,tAcum4 ,tAcum3,totalAcum ,childsId1, childsId2, childsId3, childsName3, childsName1, childsName2, childsId4, childsName4, childsId5, childsName5} = Posiciones(idRoot, userList)
     
     return(
         <>
-        <h2>{`Persona ${myName}`}</h2>
-        <h2>{`Total Ingresado = ${ingresado} Pesos`}</h2>
-        <h1>Primera Linea</h1>
-        <h2>Acomulado primera linea {`${acum1}`} Pesos</h2>
-        <h2>{`Hijos Primera Linea: ${childsName1[0]} y ${childsName1[1]}`}</h2>
-        <h1>Segunda linea</h1>
-        <h2>Acomulado segunda linea {`${acum2}`} Pesos</h2>
-        <h2>{`Hijos segunda Linea: ${childsName2[0]}, ${childsName2[1]}, ${childsName2[2]}, ${childsName2[3]}`}</h2>
+        <div className="container-fluid">
+            <div className="row">
+                <div className="arbol-container col-md-7 ml-4 mr-4">
+                    <Arbol childsId5={childsId5} childsName5={childsName5} childsId4={childsId4} childsName4={childsName4} idRoot={idRoot} user={myName} childsId1={childsId1} childsId2={childsId2} childsId3={childsId3} childsName1={childsName1} childsName2={childsName2} childsName3={childsName3} />
+                </div>
+                <div className="estado-sala col">
+                    <h1 className='text-center'>Estado Actual</h1>
+                    <p>Total Invertido</p>
+                    <span>$10000</span>
+                    <p>Ganado en Tercer Nivel:</p>
+                    <span>${tAcum3}</span>
+                    <p>Ganado en Cuarto Nivel:</p>
+                    <span>${tAcum4}</span>
+                    <p>Ganado en ultimo Nivel:</p>
+                    <span>${tAcum5}</span>
+                    <p>Total Ganado</p>
+                    <span>${totalAcum}</span>
+                </div>
+            </div>
+        </div>
         </>
     )
 }

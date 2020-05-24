@@ -23,7 +23,7 @@ export const Sala = (props) => {
 
     /* ----------------------------------------------------------------------------------------------------- */
 
-    const {totalWin ,childsId1, childsId2, childsId3, childsName3, childsName1, childsName2, childsId4, childsName4, childsId5, childsName5} = Posiciones(idRoot, userList)
+    const {tAcum5 ,tAcum4 ,tAcum3,totalAcum ,childsId1, childsId2, childsId3, childsName3, childsName1, childsName2, childsId4, childsName4, childsId5, childsName5} = Posiciones(idRoot, userList)
 
     return(
         <>
@@ -36,10 +36,14 @@ export const Sala = (props) => {
                     <h1 className='text-center'>Estado Actual</h1>
                     <p>Total Invertido</p>
                     <span>$10000</span>
+                    <p>Ganado en Tercer Nivel:</p>
+                    <span>${tAcum3}</span>
+                    <p>Ganado en Cuarto Nivel:</p>
+                    <span>${tAcum4}</span>
+                    <p>Ganado en ultimo Nivel:</p>
+                    <span>${tAcum5}</span>
                     <p>Total Ganado</p>
-                        <span>${totalWin}</span>
-                    <p>Numero de hijos en primera linea:</p>
-                    <span>{childsId1.length}</span>
+                    <span>${totalAcum}</span>
                 </div>
             </div>
         </div>

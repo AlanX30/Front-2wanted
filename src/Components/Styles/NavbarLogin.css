@@ -1,0 +1,12 @@
+.login-inputs {
+  margin: 0;
+}
+
+.logo img {
+  height: 30px;
+}
+
+.navbar-arbol {
+  display: flex;
+  justify-content: space-between;
+}

@@ -4,6 +4,7 @@ export const Posiciones = (idRoot, userList) => {
     /* -----1 Level----- */
     
     let acum1 = 0
+    let inversion 
     const childsId1 = []
     const childsName1 = []
 
@@ -19,10 +20,14 @@ export const Posiciones = (idRoot, userList) => {
         }
         if(Id === idRoot){
             myName = name
+            inversion = userList[i].ingreso
         }
     }
     for(let i = 0; i<2; i++){
         if(childsName1[i] === undefined){
+            childsName1[i] = 'Posicion Vacia'
+        }
+        if(childsName1[i] === ""){
             childsName1[i] = 'Posicion Vacia'
         }
     }
@@ -53,6 +58,9 @@ export const Posiciones = (idRoot, userList) => {
         if(childsName2[i] === undefined){
             childsName2[i] = 'Posicion Vacia'
         }
+        if(childsName2[i] === ""){
+            childsName2[i] = 'Posicion Vacia'
+        }
     }
 
     /* -----/2 Level----- */
@@ -78,6 +86,9 @@ export const Posiciones = (idRoot, userList) => {
 
     for(let i = 0; i<8; i++){
         if(childsName3[i] === undefined){
+            childsName3[i] = 'Posicion Vacia'
+        }
+        if(childsName3[i] === ""){
             childsName3[i] = 'Posicion Vacia'
         }
     }
@@ -108,6 +119,9 @@ export const Posiciones = (idRoot, userList) => {
         if(childsName4[i] === undefined){
             childsName4[i] = 'Posicion Vacia'
         }
+        if(childsName4[i] === ""){
+            childsName4[i] = 'Posicion Vacia'
+        }
     }
     
     /* -----/4 Level----- */
@@ -135,20 +149,26 @@ export const Posiciones = (idRoot, userList) => {
         if(childsName5[i] === undefined){
             childsName5[i] = 'Posicion Vacia'
         }
+        if(childsName5[i] === ""){
+            childsName5[i] = 'Posicion Vacia'
+        }
     }
     /* -----/5 Level----- */
     
+    const tAcum3 = acum3/2
+    const tAcum4 = acum4/4 
+    const tAcum5 = acum5/8
     
-    const totalWin = acum3/2
+    const totalAcum = tAcum3 + tAcum4 + tAcum5 
+    
     
     return {
         childsId1, childsName1, 
         childsId2, childsName2, 
-        childsId3, childsName3, acum3,
-        childsId4, childsName4, acum4, 
-        childsId5, childsName5, acum5, 
-        totalWin ,myName
+        childsId3, childsName3, tAcum3,
+        childsId4, childsName4, tAcum4, 
+        childsId5, childsName5, tAcum5, 
+        totalAcum ,myName, inversion
     }
-
 }
 

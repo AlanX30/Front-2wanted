@@ -1,0 +1,11 @@
+.join-modal p {
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 15px;
+}
+.join-modal span {
+  font-weight: 200;
+}
+.join-modal form {
+  margin-top: 30px;
+}
