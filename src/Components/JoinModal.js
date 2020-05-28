@@ -14,6 +14,7 @@ export const JoinModal = (props) => {
     }
 
     async function handleSubmit( e ){
+        console.log(joinData)
         e.preventDefault()
         await axios({
             data: joinData,

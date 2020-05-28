@@ -1,4 +1,4 @@
-.arbol-list {
+/* .arbol-list {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -48,7 +48,6 @@
 }
 .rom-filter {
   margin: -20px 20px 5px 20px;
-  /* background: #25242587; */
   padding: 12px 0;
   border-radius: 18px;
   margin-bottom: 10px;
@@ -93,3 +92,4 @@
 .myrooms-li span {
   font-weight: 400;
 }
+ */

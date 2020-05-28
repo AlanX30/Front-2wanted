@@ -1,5 +1,5 @@
 import React from 'react'
-import {ArbolList} from '../Components/ArbolList'
+import { HomeDescription } from '../Components/HomeDescription'
 import  Navbar  from '../Components/Navbar'
 
 export const Home = () => {
@@ -7,7 +7,7 @@ export const Home = () => {
     return(
         <>
         <Navbar />
-        <ArbolList />
+        <HomeDescription />
         </>
     )
 }

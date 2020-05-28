@@ -1,13 +1,4 @@
-.arbol-container {
-  border: 2px solid;
-  padding-top: 15px;
-  border-radius: 20px;
-  background: #efddaa;
-  box-shadow: 0px 5px 5px #948e8e;
-  padding-bottom: 25px;
-}
-
-.estado-sala p {
+/* .estado-sala p {
   font-weight: 800;
   font-size: 19px;
 }
@@ -15,4 +6,4 @@
 .estado-sala span {
   display: block;
   margin-bottom: 5px;
-}
+} */
