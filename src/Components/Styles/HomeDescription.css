@@ -1,0 +1,44 @@
+.sections {
+  display: flex;
+  width: 100vw;
+}
+
+.section-activeRooms {
+  background: var(--bg-objects);
+  width: 25%;
+  height: 100vh;
+  box-shadow: 3px 0px 11px #636161;
+  color: var(--text);
+  padding: 22px;
+}
+.actives-title {
+  font-size: 1.5rem;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.actives-links {
+  display: flex;
+}
+.actives-links img {
+  width: 15%;
+  margin-left: 20px;
+}
+.actives-description p {
+  font-size: 1rem;
+}
+.actives-description {
+  width: 100%;
+}
+.actives-li {
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width: 1024px) {
+  .actives-description p {
+    font-size: 0.7rem;
+  }
+  .section-activeRooms {
+    width: 40%;
+  }
+}

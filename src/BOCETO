@@ -6,3 +6,115 @@ export const COSA = () => {
         </>
     )
 }
+            <div className=''>
+
+                <div className=''>
+
+                    <div className=''>
+                        <h1 className=''>Room Search </h1>
+
+                        <form className='' onSubmit={searchRoom1} >
+
+                            <div className='form-group'>
+                                <input {...room1} className=" form-control" type='text' placeholder='Room Name'/>
+                            </div>
+                            <button type='submit' className='search-button btn btn-dark'>Search</button>
+                        </form>
+
+                        { 
+                            !oneString(room1.value) &&  <div className=''>Must not contain spaces</div>
+                        } 
+
+                        {
+                            filterSala && 
+                                <>                               
+                                    <div className=''>
+                                        <div className=''>
+                                            <img src={ArbolImg} className='' alt="..." />
+                                        </div>
+                                        <div className=''>
+                                            <p> Room Name: <span>{filterSala.name}</span>  </p>
+                                            <p> Password: <span>{filterSala.protected ? 'Yes' : 'No'}</span>  </p>
+                                            <p> Creator: <span>{filterSala.creator}</span>  </p>
+                                            <p> Price: <span>${filterSala.price}</span>  </p>
+                                            <button onClick={onOpen2Modal} className='btn btn-dark'>Join</button>
+                                        </div>
+                                    </div>
+                                </>     
+                        }
+                    </div>   
+                </div>
+
+
+
+
+
+
+
+
+
+<div className=''>
+
+                <div className=''>
+
+                    <div className=''>
+                        <h1 className=''> <span className=''>Create Rooms</span></h1>
+
+                        <div className=''>
+
+                            <div className=''>
+                                <button onClick={() => onOpenModal(1)} className='' >
+                                    <img src={ArbolImg} className='' alt="..." />
+                                    <div className='btn-dark'>
+                                        <p className=''>Create  $1</p>
+                                    </div>
+                                </button>
+                            </div>
+                            <div className=''>
+                                <button onClick={() => onOpenModal(3)} className='' >
+                                    <img src={ArbolImg} className='' alt="..." />
+                                    <div className='btn-dark'>
+                                        <p className=''>Create  $3</p>
+                                    </div>
+                                </button>
+                            </div>
+                            <div className=''>
+                                <button onClick={() => onOpenModal(10)} className='' >
+                                    <img src={ArbolImg} className='' alt="..." />
+                                    <div className='btn-dark'>
+                                        <p className="card-text text-center">Create  $10</p>
+                                    </div>
+                                </button>
+                            </div>
+                            <div className=''>
+                                <button onClick={() => onOpenModal(20)} className=''>
+                                    <img src={ArbolImg} className='' alt="..." />
+                                    <div className='btn-dark'>
+                                        <p className=''>Create  $20</p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className=''>
+                        <div className=''>
+                            <h1 className=''>Create Custom Room</h1>    
+                            <form className='' onSubmit={newSala} >
+                                <div className='form-group'>
+                                    <label className=''>Room Name:</label>
+                                    <input className="form-control" type='text' {...name} />
+                                </div>
+                                <div className='form-group'>
+                                    <label className='mb-0'>Price:</label>
+                                    <input className="form-control" type='text' {...price} />
+                                </div>
+                                <div className='form-group'>
+                                    <label className=''>Password:</label>
+                                    <input className="form-control" placeholder='Optional' type='password' {...password} />
+                                </div>
+                                <button className='btn btn-dark'>Create</button>
+                             </form>
+                        </div>             
+                </div>        
+            </div>

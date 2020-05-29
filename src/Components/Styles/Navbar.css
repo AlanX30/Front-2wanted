@@ -1,7 +1,18 @@
+nav {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  padding: 7px 13px;
+}
 .logo img {
   height: 30px;
 }
-
+.logo {
+  color: var(--text);
+}
+.none {
+  display: none;
+}
 .user-button {
   font-size: 15px;
   display: flex;
@@ -10,9 +21,101 @@
 
 .navbar-arbol {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
 }
 .dropdown-user {
   border: none;
+}
+.search-form-c {
+  height: 100%;
+}
+.search-form {
+  display: flex;
+  position: relative;
+}
+.filter-sala {
+  position: absolute;
+  padding: 15px;
+  border-radius: 10px;
+}
+.filter-sala-wrap {
+  display: flex;
+}
+.filter-sala-wrap img {
+  width: 25%;
+}
+.filter-sala-wrap p {
+  color: var(--text);
+}
+.icon-navbar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50%;
+  z-index: 2;
+}
+.dropdown-menu-navbar {
+  position: absolute;
+  right: 20px;
+  top: -600px;
+  padding: 15px;
+  display: block;
+  transition: 0.1s;
+  opacity: -1;
+  border-radius: 10px;
+}
+
+.isActive {
+  opacity: 1;
+  top: 45px;
+  display: block;
+  padding-top: 25px;
+  padding-bottom: 5px;
+}
+.none {
+  display: none;
+}
+.invitation-button {
+  display: flex;
+}
+.invitation-button img {
+  width: 15%;
+  margin-right: -30px;
+}
+.invitation-description {
+  width: 100%;
+  text-align: center;
+}
+@media screen and (max-width: 530px) {
+  .filter-sala {
+    top: 49px;
+    right: 10px;
+    left: 10px;
+  }
+  .search-form {
+    height: 33px;
+  }
+  .search-form-c {
+    margin-left: auto;
+  }
+  .search-input {
+    display: none;
+  }
+  .search-button-530 {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+@media screen and (max-width: 390px) {
+  .logo img {
+    height: 22px;
+  }
+  .logo {
+    font-size: 10px;
+    font-weight: 600;
+    margin-right: 5px;
+  }
 }
