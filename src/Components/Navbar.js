@@ -4,6 +4,7 @@ import logo from '../Images/logo.svg'
 import './Styles/Navbar.css'
 import { Link } from 'react-router-dom'
 import { useFormValues } from '../hooks/useFormValues'
+import { useComponentVisible } from '../hooks/useComponentVisible'
 import useMediaQuery from '../hooks/useMediaQuery'
 import { MdAccountCircle, MdSearch, MdAttachMoney, MdFeedback, MdKeyboardReturn } from "react-icons/md";
 import { JoinModal } from './JoinModal'
@@ -58,6 +59,10 @@ const Navbar = (props) => {
 
     const token = window.sessionStorage.getItem('token')
 
+    const toggle1 = useComponentVisible(false);
+    const toggle2 = useComponentVisible(false);
+    const toggle3 = useComponentVisible(false);
+
     const [invitations, setInvitations] = useState([])
 
     const [modalOpen, setModalOpen] = useState(null)
@@ -88,20 +93,9 @@ const Navbar = (props) => {
     const { userData } = useUserData()    
     const { logout } = useContext(Context)
     
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [dropdownOpen2, setDropdownOpen2] = useState(false);
-    const [dropdownOpen3, setDropdownOpen3] = useState(false);
-    
-    const toggle = () => setDropdownOpen(prevState => !prevState);
-    const toggle2 = () => setDropdownOpen2(prevState => !prevState);
-    const toggle3 = () => setDropdownOpen3(prevState => !prevState);
-    
     function handleLogout() {
         props.history.push('/')
         logout()
-    }
-    function handleWallet() {
-        props.history.push('/wallet')
     }
 
     return(
@@ -184,10 +178,10 @@ const Navbar = (props) => {
                 <div className={iconNone ? 'none' : 'd-flex'}>
 
                     <div className='mr-2'>
-                        <button onClick={toggle} className='btn icon-navbar bg-warning'>
+                        <button onClick={()=> toggle1.setIsComponentVisible(true)} className='btn icon-navbar bg-warning'>
                             <MdFeedback size='20' />
                         </button>
-                        <div className={dropdownOpen ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
+                        <div ref={toggle1.ref} className={toggle1.isComponentVisible ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
                             {
                                 invitations.map(invitation => {
                                     return (
@@ -209,19 +203,19 @@ const Navbar = (props) => {
                         </div>
                     </div>
                     <div className='mr-2'>
-                        <button onClick={toggle2} className='btn icon-navbar bg-warning'>
+                        <button onClick={()=>toggle2.setIsComponentVisible(true)} className='btn icon-navbar bg-warning'>
                             <MdAttachMoney size='20' />
                         </button>
-                        <div className={dropdownOpen2 ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
-                            <Link className={dropdownOpen2 ? 'w-100 mb-2 btn btn-warning' : 'none'} to='/wallet'>Deposit</Link>
-                            <Link className={dropdownOpen2 ? 'w-100 mb-2 btn btn-warning' : 'none'} to='/wallet'>Withdraw</Link>
+                        <div ref={toggle2.ref} className={toggle2.isComponentVisible ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
+                            <Link className='w-100 mb-2 btn btn-warning' to='/wallet'>Deposit</Link>
+                            <Link className='w-100 mb-2 btn btn-warning' to='/wallet'>Withdraw</Link>
                         </div>
                     </div>
                     <div>
-                        <button onClick={toggle3} className='btn icon-navbar bg-warning'>
+                        <button onClick={()=>toggle3.setIsComponentVisible(true)} className='btn icon-navbar bg-warning'>
                             <MdAccountCircle size='20' />
                         </button>
-                        <div className={dropdownOpen3 ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
+                        <div ref={toggle3.ref} className={toggle3.isComponentVisible ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
                             <button onClick={handleLogout} className='btn btn-warning'>Logout</button>
                         </div>
                     </div>
