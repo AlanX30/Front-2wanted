@@ -2,7 +2,6 @@
   display: flex;
   width: 100vw;
 }
-
 .section-activeRooms {
   background: var(--bg-objects);
   width: 25%;
@@ -13,7 +12,8 @@
 }
 .actives-title {
   font-size: 1.5rem;
-  color: var(--text);
+  margin-top: 30px;
+  color: black;
   font-weight: 500;
   margin-bottom: 10px;
 }
@@ -32,7 +32,40 @@
 }
 .actives-li {
   margin-bottom: 8px;
+  transition: .4s;
 }
+.actives-li:hover {
+  transform: scale(1.02);
+}
+
+.actives-dropdown-none {
+   display: none;
+ }
+ .actives-dropdown {
+  margin: 80px auto 0 auto;
+  margin-top: 80px;
+  width: 90%;
+  padding: 12px;
+  background: #343a40;
+    border-radius: 10px;
+    padding-bottom: 5px;
+ }
+
+ .navigation{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+ }
+ .navigation-button{
+   width: 50%;
+    border: none;
+    background: #ffc107;
+    height: 35px;
+ }
+ .home-description-500{
+   width: 100%;
+ }
 
 @media screen and (max-width: 1024px) {
   .actives-description p {
@@ -41,4 +74,12 @@
   .section-activeRooms {
     width: 40%;
   }
+}
+@media screen and (max-width: 600px) {
+ .actives-links img {
+  margin-left: 5px
+ }
+ .actives-title{
+   margin-top: 0;
+ }
 }

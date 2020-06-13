@@ -35,8 +35,6 @@ nav {
   position: relative;
 }
 .filter-sala {
-  position: absolute;
-  padding: 15px;
   border-radius: 10px;
 }
 .filter-sala-wrap {
@@ -67,10 +65,19 @@ nav {
   opacity: -1;
   border-radius: 10px;
 }
+.dropdown-menu-navbar-filter {
+  position: absolute;
+  top: -600px;
+  padding: 15px;
+  display: block;
+  transition: 0.1s;
+  opacity: -1;
+  border-radius: 10px;
+}
 
 .isActive {
   opacity: 1;
-  top: 45px;
+  top: 50px;
   display: block;
   padding-top: 25px;
   padding-bottom: 5px;
@@ -90,10 +97,9 @@ nav {
   text-align: center;
 }
 @media screen and (max-width: 530px) {
-  .filter-sala {
-    top: 49px;
-    right: 10px;
-    left: 10px;
+  .isActive {
+    left: 20px;
+    width: 90%;
   }
   .search-form {
     height: 33px;

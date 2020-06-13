@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ArbolImg from '../Images/arbol.svg'
 import { useUserData } from '../hooks/useUserData'
+import {MdHome, MdList} from "react-icons/md"
 import useMediaQuery from '../hooks/useMediaQuery'
 import NewSalaModal from './NewSalaModal'
 import './Styles/HomeDescription.css'
@@ -13,6 +14,7 @@ export const HomeDescription = () => {
     const token = window.sessionStorage.getItem('token')
 
     const [listRooms, setListRooms] = useState([])
+    const [activeDropdown, setActiveDropdown] = useState(false)
 
     useEffect(() => { 
 
@@ -97,8 +99,7 @@ export const HomeDescription = () => {
 
 {/*------------------------------------------------ACTIVES ROOMS-----------------------------------------------------------*/}
 
-                <div>{ dropDown ?
-                    <div className='sections'>
+                { dropDown ?
                         <div className='section-activeRooms'>
                             <p className='actives-title'>Active Rooms</p>    
                                 <ul className=''>
@@ -119,35 +120,41 @@ export const HomeDescription = () => {
                                         })
                                     }
                                 </ul>
-                        </div>   
-                    </div>
-                : <div>
-                    <p className='actives-title'>Active Rooms</p>    
-                                <ul className=''>
-                                    {
-                                        listRooms.map((data) => {
-                                            return (
-                                                <li className='actives-li' key={data._id}>
-                                                    <Link to={`/sala/${data._id}`} className='actives-links btn btn-warning'>
-                                                        <img src={ArbolImg} alt="ArbolImg"/>
-                                                        <div className='actives-description'>
-                                                            <p>Room Name: <span>{data.name}</span></p>
-                                                            <p>Price: <span>${data.price}</span></p>
-                                                            <p>Creator: <span>{data.creator}</span></p>
-                                                        </div>
-                                                    </Link>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                </div> 
-                } 
+                        </div> 
+                : <div className='home-description-500'>
+                <div className='navigation'>
+                    <button onClick={()=> setActiveDropdown(false) } className='navigation-button'><MdHome size='30' /></button>  
+                    <button onClick={()=> setActiveDropdown(true) } className='navigation-button'><MdList size='30' /></button>  
                 </div>
+                
+                <div className={activeDropdown ? 'actives-dropdown' : 'actives-dropdown-none'}>  
+                    <p className='actives-title'>Active Rooms</p>                
+                    <ul >
+                        {
+                            listRooms.map((data) => {
+                                return (
+                                    <li className='actives-li' key={data._id}>
+                                        <Link to={`/sala/${data._id}`} className='actives-links btn btn-warning'>
+                                            <img src={ArbolImg} alt="ArbolImg"/>
+                                            <div className='actives-description'>
+                                                <p>Room Name: <span>{data.name}</span></p>
+                                                <p>Price: <span>${data.price}</span></p>
+                                                <p>Creator: <span>{data.creator}</span></p>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>                       
+                </div>
+                } 
 
+ 
 {/*------------------------------------------------ACTIVES ROOMS-----------------------------------------------------------*/}
-           
-            </div>                       
+      
+</div>                      
 
             <NewSalaModal userData={userData} token={token} oneString={oneString} password={password} price={priceModal} isOpen={modalOpen} onClose={onCloseModal} />
         </>

@@ -18,7 +18,8 @@ const Navbar = (props) => {
 
     /* -----------------------------Busqueda---------------------------------------------------------------- */
     const [filterSala, setFilterSala] = useState(false)
-    
+    const dropdownFilter = useComponentVisible(false);
+    const [filterLoading, setFilterLoading] = useState(false)
     const [modal2Open, setModal2Open] = useState(null)
 
     const room1 = useFormValues()
@@ -38,6 +39,9 @@ const Navbar = (props) => {
     }
     async function searchRoom1( e ){
         e.preventDefault()
+        setFilterLoading(true)
+
+        dropdownFilter.setIsComponentVisible(true)
 
         if(oneString(room1.value)){
             const response = await axios({
@@ -48,8 +52,11 @@ const Navbar = (props) => {
                     authorization: token
                     }
             })
-            setFilterSala(response.data)
-        }
+            if(response.data.error){
+                setFilterSala(response.data)
+            }else{setFilterSala(response.data)}
+            
+        }else{setFilterSala(false)}
     }
 
     const query530 = useMediaQuery("(min-width: 530px)")
@@ -102,7 +109,7 @@ const Navbar = (props) => {
         <nav className="bg-dark">
             <div className='navbar-arbol'>
                 <div className={iconNone ? 'none': ''}>
-                    <Link className="navbar-brand logo" to="/home"><img src={logo} alt='logo-img' /> Save Money</Link>
+                    <Link className="Link navbar-brand logo" to="/home"><img src={logo} alt='logo-img' /> Save Money</Link>
                 </div>
 
 
@@ -115,27 +122,27 @@ const Navbar = (props) => {
                             </div>
                             <button type='submit' className='ml-2 mr-2 m-0 btn icon-navbar btn-warning'><MdSearch size='20' /></button>
                         </form>
-
-                        { 
-                        !oneString(room1.value) &&  <div className=''>Must not contain spaces</div>
-                        } 
-
-                        {
-                        filterSala && 
+                        <div ref={dropdownFilter.ref} className={dropdownFilter.isComponentVisible ? 'dropdown-menu-navbar-filter isActive bg-dark' : 'dropdown-menu-navbar-filter'}>
+                            { 
+                            !oneString(room1.value) ?  <div className=''>Must not contain spaces</div> :
+                            
+                            filterSala.data ? 
+                            
                             <div className='filter-sala bg-dark'>                               
                                 <div className='filter-sala-wrap'>
                                     <img src={ArbolImg} className='mr-4' alt="..." />
                                     <div className='text-center'>
-                                        <p> Room Name: <span>{filterSala.name}</span>  </p>
-                                        <p> Password: <span>{filterSala.protected ? 'Yes' : 'No'}</span>  </p>
-                                        <p> Creator: <span>{filterSala.creator}</span>  </p>
-                                        <p> Price: <span>${filterSala.price}</span>  </p>
+                                        <p> Room Name: <span>{filterSala.data.name}</span>  </p>
+                                        <p> Password: <span>{filterSala.data.protected ? 'Yes' : 'No'}</span>  </p>
+                                        <p> Creator: <span>{filterSala.data.creator}</span>  </p>
+                                        <p> Price: <span>${filterSala.data.price}</span>  </p>
                                     </div>
                                 </div>
                                     <button onClick={onOpen2Modal} className='btn btn-warning btn-block'>Join</button>
-                            </div>     
-                        }
-                    
+                            </div> : <div>{filterSala.error}</div>
+                            } 
+                                
+                        </div>
                     </div>
                     : <div className='search-button-530'>
                         <button onClick={()=>setIconNone(true)} className={iconNone? 'none' :'ml-2 mr-2 m-0 btn icon-navbar btn-warning'}><MdSearch size='20' /></button>
@@ -147,32 +154,31 @@ const Navbar = (props) => {
                             <button type='submit' className='ml-2 mr-2 m-0 btn icon-navbar btn-warning'><MdSearch size='20' /></button>
                         </form>
 
-                        { 
-                        !oneString(room1.value) &&  <div className=''>Must not contain spaces</div>
-                        } 
-
-                        {
-                        filterSala && 
+                        <div ref={dropdownFilter.ref} className={dropdownFilter.isComponentVisible ? 'dropdown-menu-navbar-filter isActive bg-dark' : 'dropdown-menu-navbar-filter'}>
+                            { 
+                            !oneString(room1.value) ?  <div className=''>Must not contain spaces</div> :
+                            
+                            filterSala.data ? 
+                            
                             <div className='filter-sala bg-dark'>                               
                                 <div className='filter-sala-wrap'>
                                     <img src={ArbolImg} className='mr-4' alt="..." />
                                     <div className='text-center'>
-                                        <p> Room Name: <span>{filterSala.name}</span>  </p>
-                                        <p> Password: <span>{filterSala.protected ? 'Yes' : 'No'}</span>  </p>
-                                        <p> Creator: <span>{filterSala.creator}</span>  </p>
-                                        <p> Price: <span>${filterSala.price}</span>  </p>
+                                        <p> Room Name: <span>{filterSala.data.name}</span>  </p>
+                                        <p> Password: <span>{filterSala.data.protected ? 'Yes' : 'No'}</span>  </p>
+                                        <p> Creator: <span>{filterSala.data.creator}</span>  </p>
+                                        <p> Price: <span>${filterSala.data.price}</span>  </p>
                                     </div>
                                 </div>
                                     <button onClick={onOpen2Modal} className='btn btn-warning btn-block'>Join</button>
-                            </div>     
-                        }
+                            </div> : <div>{filterSala.error}</div>
+                            } 
+                                
+                        </div>
+
                     </div>
                 }</div>
 
-                
-                
-                
-                
                 
                 
                 <div className={iconNone ? 'none' : 'd-flex'}>
