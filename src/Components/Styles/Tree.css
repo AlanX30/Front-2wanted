@@ -1,0 +1,29 @@
+.nivel {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  .child {
+    width: 20px;
+    height: 20px;
+    background: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 2px solid #01acea;
+  }
+  .noChild {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border: 2px solid;
+    padding: 0;
+    padding-bottom: 2px;
+  }

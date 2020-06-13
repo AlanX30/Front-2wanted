@@ -3,6 +3,7 @@ import logo from '../Images/logo.svg'
 import { useFormValues } from '../hooks/useFormValues'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
+import logoletra from '../Images/2WANTED.svg'
 import axios from 'axios'
 import './Styles/NavbarLogin.css'
 
@@ -30,9 +31,9 @@ import './Styles/NavbarLogin.css'
     }
 
     return(
-        <nav className="navbar-arbol mb-3 navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar-arbol navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-sm">
-                <Link className="navbar-brand logo" to="/"><img src={logo} alt='logo-img' /> Save Money</Link>
+                <Link className="logo" to="/"><img className='logo1' src={logo} alt='logo-img' /><img className='logo2' src={logoletra} alt="logoletra"/></Link>
                 <div>
                     <form onSubmit={handleSubmit} className="d-flex">
                         <div className="form-group login-inputs mr-3">

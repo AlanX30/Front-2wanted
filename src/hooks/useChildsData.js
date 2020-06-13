@@ -36,7 +36,7 @@ export const useChildsData = (salaId, price) => {
     let acum3 = 0
     let acum4 = 0   
     let acum5 = 0
-
+    console.log(arbolData)
     for(let i = 6; i<=13; i++){
         let divide = price/2   
         if(arbolData[i]){

@@ -4,6 +4,7 @@ import logo from '../Images/logo.svg'
 import './Styles/Navbar.css'
 import { Link } from 'react-router-dom'
 import { useFormValues } from '../hooks/useFormValues'
+import logoletra from '../Images/2WANTED.svg'
 import { useComponentVisible } from '../hooks/useComponentVisible'
 import useMediaQuery from '../hooks/useMediaQuery'
 import { MdAccountCircle, MdSearch, MdAttachMoney, MdFeedback, MdKeyboardReturn } from "react-icons/md";
@@ -109,7 +110,7 @@ const Navbar = (props) => {
         <nav className="bg-dark">
             <div className='navbar-arbol'>
                 <div className={iconNone ? 'none': ''}>
-                    <Link className="Link navbar-brand logo" to="/home"><img src={logo} alt='logo-img' /> Save Money</Link>
+                    <Link className="Link logo" to="/home">< img className='logo1' src={logo} alt='logo-img' /> <img className='logo2' src={logoletra} alt="logoletra"/> </Link>
                 </div>
 
 

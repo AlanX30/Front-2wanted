@@ -24,11 +24,11 @@ function NewSalaModal(props){
         price: props.price,
         creator: props.userData.userName
     }
-
     async function newSala( e ){
         e.preventDefault()
-        if(props.userData.wallet >= parseFloat(props.price.value)){
-            if(props.oneString(name.value)){
+        if(props.userData.wallet >= parseFloat(props.price)){
+           
+                console.log(newSalaData)
                 await axios({
                     data: newSalaData,
                     method: 'post',
@@ -38,7 +38,7 @@ function NewSalaModal(props){
                         }
                 })
                 props.onClose() 
-            }
+            
         }
     }
 
@@ -55,7 +55,7 @@ function NewSalaModal(props){
                     <label className='mb-0'>Password:</label>
                     <input className=" form-control" placeholder='Optional' type='password' {...password} />
                 </div>
-                <button className='mt-2 btn btn-dark'>Create</button>
+                <button type='submit' className='mt-2 btn btn-dark'>Create</button>
             </form>
             
         </Modal>

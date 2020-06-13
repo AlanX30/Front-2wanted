@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './Styles/SalaReal.css'
+import './Styles/Room.css'
 import { Tree } from '../Components/Tree'
 import { useChildsData }  from '../hooks/useChildsData'
 import { useUserData }  from '../hooks/useUserData'
@@ -23,16 +23,16 @@ export const Room = (props) => {
                     authorization: token
                     }
             })
-            setDataRoom(response.data)  
+            setDataRoom(response.data.data)  
         }
         searchRoom()
     },[salaId, token])
 
     const tAcum = acum3 + acum4 + acum5
-
+    console.log(dataRoom)
     return (
         <>
-            <div>
+            <div className='arbol-container'>
                 <Tree token={token} userName={userName} salaName={dataRoom.name} price={dataRoom.price} salaId={dataRoom._id} arbolData={arbolData} loading={loading} />
             </div>
             <div>

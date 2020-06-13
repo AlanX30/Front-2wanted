@@ -39,37 +39,37 @@ export const Signup = (props) => {
 
         <NavbarLogin toggleAuth={toggleAuth} />
 
-             <div className="row row-signup">
-                <div className="img-signup col-7">
-                    <img src={IMG} alt="IMG"/>
-                </div>
-                <div className="col-register col">
-                    <div className='card-signup'>
-                        <h3 className="card-header pl-4">
-                            Account Register
-                        </h3>
-                        <div className="card-body form-body">
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group form-inputs">
-                                    <input type="text" className='form-control' {...userName} placeholder='UserName'/>
-                                </div>
-                                <div className="form-group form-inputs">
-                                    <input type="email" className='form-control' {...email} placeholder='Email'/>
-                                </div>
-                                <div className="form-group form-inputs">
-                                    <input type="password"  className='form-control' {...password} placeholder='Password'/>
-                                </div>
-                                <div className="form-group form-inputs">
-                                    <input type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirm Password'/>
-                                </div>
-                                <button type='submit' className='form-btn btn btn-dark btn-block'>
-                                    Signup
-                                </button>
-                            </form>
+        <div className='signup-container'>
+             
+            <img className='signup-left' src={IMG} alt=""/>
+               
+             <div className='signup-right'>
+                <div className='card-signup'>
+                            <h3 className="card-header pl-4">
+                                Account Register
+                            </h3>
+                            <div className="card-body form-body">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-group form-inputs">
+                                        <input type="text" className='form-control' {...userName} placeholder='UserName'/>
+                                    </div>
+                                    <div className="form-group form-inputs">
+                                        <input type="email" className='form-control' {...email} placeholder='Email'/>
+                                    </div>
+                                    <div className="form-group form-inputs">
+                                        <input type="password"  className='form-control' {...password} placeholder='Password'/>
+                                    </div>
+                                    <div className="form-group form-inputs">
+                                        <input type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirm Password'/>
+                                    </div>
+                                    <button type='submit' className='form-btn btn btn-dark btn-block'>
+                                        Signup
+                                    </button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
                 </div>
-            </div>
+        </div>    
 
         </>
     )

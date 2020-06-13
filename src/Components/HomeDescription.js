@@ -36,7 +36,6 @@ export const HomeDescription = () => {
     const name = useFormValues()
     const price = useFormValues()
     const password = useFormValues()
-
     const newSalaData = {
         users: [
             {
@@ -53,7 +52,7 @@ export const HomeDescription = () => {
         price: price.value,
         creator: userData.userName
     }
-
+console.log(newSalaData)
     async function newSala( e ){
         e.preventDefault()
 
@@ -153,6 +152,7 @@ export const HomeDescription = () => {
 
  
 {/*------------------------------------------------ACTIVES ROOMS-----------------------------------------------------------*/}
+
       
 </div>                      
 

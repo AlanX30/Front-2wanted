@@ -1,31 +1,23 @@
-.card-signup {
-  background: #80808045;
-  border-radius: 10px;
+.signup-container {
+  background: #3E5151;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #DECBA4, #3E5151);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #DECBA4, #3E5151); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  display: flex;
+  height: 100vh;
+  width: 100vw;
 }
-.form-inputs {
-  margin: 1.5rem;
-}
-.form-body {
-  padding: 0;
-}
-.form-btn {
-  height: 49px;
-}
-.row-signup {
-  height: 100%;
-}
-.col-register {
-  margin-top: 70px;
-  margin-right: 320px;
-  height: 20px;
-}
-.img-signup img {
-  height: 100%;
-  margin-left: 30px;
-}
-.img-signup {
+.signup-left{
   display: flex;
   justify-content: center;
-  height: 600px;
-  margin-left: 30px;
+  width: 50%;
+}
+.signup-right{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  width: 50%;
+}
+.card-signup{
+  background: #00000047;
+  border-radius: 10px;
 }
