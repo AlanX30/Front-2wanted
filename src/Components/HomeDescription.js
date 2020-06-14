@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import ArbolImg from '../Images/arbol.svg'
+import price2 from '../Images/BOTON2.svg'
+import price4 from '../Images/BOTON4.svg'
+import price10 from '../Images/BOTON10.svg'
+import price15 from '../Images/boton15.svg'
+import price20 from '../Images/BOTON20.svg'
+import price50 from '../Images/BOTON50.svg'
+import ArbolImg from '../Images/ArbolitoBUSCADOS.svg'
 import { useUserData } from '../hooks/useUserData'
 import {MdHome, MdList} from "react-icons/md"
 import useMediaQuery from '../hooks/useMediaQuery'
@@ -153,7 +159,61 @@ console.log(newSalaData)
  
 {/*------------------------------------------------ACTIVES ROOMS-----------------------------------------------------------*/}
 
-      
+{/*------------------------------------------------CREATE ROOMS-----------------------------------------------------------*/}
+
+<div className='section-create'>
+    <div className="create-default">
+        <h1>Create Default Room</h1>
+        <div>
+            <div className='default-par'>
+                <button onClick={() => onOpenModal(2)} className=''>
+                    <img src={price2} className='' alt="..." />        
+                </button>    
+                <button onClick={() => onOpenModal(4)} className=''>
+                    <img src={price4} className='' alt="..." />        
+                </button>       
+            </div>
+            <div className='default-par'>
+                <button onClick={() => onOpenModal(10)} className=''>
+                    <img src={price10} className='' alt="..." />        
+                </button>    
+                <button onClick={() => onOpenModal(15)} className=''>
+                    <img src={price15} className='' alt="..." />        
+                </button>       
+            </div>
+            <div className='default-par'>
+                <button onClick={() => onOpenModal(20)} className=''>
+                    <img src={price20} className='' alt="..." />        
+                </button>    
+                <button onClick={() => onOpenModal(50)} className=''>
+                    <img src={price50} className='' alt="..." />        
+                </button> 
+            </div>
+            
+        </div>   
+    </div>
+    <div className="create-custom">
+                        <div className='create-form-container'>
+                            <h1 className=''>Create Custom Room</h1>    
+                            <form className='' onSubmit={newSala} >
+                                <div className='form-group'>
+                                    <label className=''>Room Name:</label>
+                                    <input className="form-control" type='text' {...name} />
+                                </div>
+                                <div className='form-group'>
+                                    <label className='mb-0'>Price:</label>
+                                    <input className="form-control" type='text' {...price} />
+                                </div>
+                                <div className='form-group'>
+                                    <label className=''>Password:</label>
+                                    <input className="form-control" placeholder='Optional' type='password' {...password} />
+                                </div>
+                                <button className='btn btn-warning'>Create</button>
+                             </form>   
+                </div>       
+    </div>
+</div>
+
 </div>                      
 
             <NewSalaModal userData={userData} token={token} oneString={oneString} password={password} price={priceModal} isOpen={modalOpen} onClose={onCloseModal} />

@@ -28,7 +28,7 @@ export const Room = (props) => {
         searchRoom()
     },[salaId, token])
 
-    const tAcum = acum3 + acum4 + acum5
+    const tAcum = acum3 + acum4
     console.log(dataRoom)
     return (
         <>
@@ -46,8 +46,6 @@ export const Room = (props) => {
                 <span>${acum3}</span>
                 <p>Accumulated level 4:</p>
                 <span>${acum4}</span>
-                <p>Accumulated level 5:</p>
-                <span>${acum5}</span>
                 <p>Total accumulated:</p>
                 <span>${tAcum}</span>
             </div>
