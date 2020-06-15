@@ -127,10 +127,6 @@ console.log(newSalaData)
                                 </ul>
                         </div> 
                 : <div className='home-description-500'>
-                <div className='navigation'>
-                    <button onClick={()=> setActiveDropdown(false) } className='navigation-button'><MdHome size='30' /></button>  
-                    <button onClick={()=> setActiveDropdown(true) } className='navigation-button'><MdList size='30' /></button>  
-                </div>
                 
                 <div className={activeDropdown ? 'actives-dropdown' : 'actives-dropdown-none'}>  
                     <p className='actives-title'>Active Rooms</p>                
@@ -158,13 +154,14 @@ console.log(newSalaData)
 
  
 {/*------------------------------------------------ACTIVES ROOMS-----------------------------------------------------------*/}
-
 {/*------------------------------------------------CREATE ROOMS-----------------------------------------------------------*/}
 
-<div className='section-create'>
+<div className={activeDropdown ? 'actives-dropdown-none' : 'section-create'}>
     <div className="create-default">
-        <h1>Create Default Room</h1>
-        <div>
+        <div className='text-center'>
+             <h1>Create Default Room</h1>
+        </div>
+        <div className='default-par-container'>
             <div className='default-par'>
                 <button onClick={() => onOpenModal(2)} className=''>
                     <img src={price2} className='' alt="..." />        
@@ -194,7 +191,7 @@ console.log(newSalaData)
     </div>
     <div className="create-custom">
                         <div className='create-form-container'>
-                            <h1 className=''>Create Custom Room</h1>    
+                            <h1 className='mb-2'>Create Custom Room</h1>    
                             <form className='' onSubmit={newSala} >
                                 <div className='form-group'>
                                     <label className=''>Room Name:</label>
@@ -215,8 +212,11 @@ console.log(newSalaData)
 </div>
 
 </div>                      
-
             <NewSalaModal userData={userData} token={token} oneString={oneString} password={password} price={priceModal} isOpen={modalOpen} onClose={onCloseModal} />
+            {!dropDown && <div className='navigation'>
+                <button onClick={()=> setActiveDropdown(false) } className='navigation-button'><MdHome size='30' /></button>  
+                <button onClick={()=> setActiveDropdown(true) } className='navigation-button'><MdList size='30' /></button>  
+            </div>}
         </>
     )
 }

@@ -1,11 +1,42 @@
+.room {
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  margin-right: 20px;
+  margin-top: 70px;
+}
 .arbol-container {
-  width: 80%;
+  width: 90%;
   border: 2px solid;
+  margin: 0 auto;
   padding-top: 15px;
+  height: max-content;
   border-radius: 20px;
   background-color: var(--bg-objects);
   padding-bottom: 25px;
-  margin-top: 70px;
+  box-shadow: -2px -1px #473616;
 }
-
+.room-details{
+  background-color: var(--bg-objects);
+  padding: 12px;
+  border-radius: 10px;
+  border: 4px solid;
+  box-shadow: -2px -1px #473616;
+}
+.room-details p {
+  font-weight: 700;
+}
+.room-details span {
+  font-weight: 400;
+}
+@media screen and (max-width: 790px) {
+  .room {
+    grid-template-columns: 1fr;
+    margin-top: 90px;
+    grid-gap: 10px;
+  }
+  .room-details {
+    width: max-content;
+    margin: 0 auto;
+  }
+}
 

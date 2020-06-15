@@ -33,7 +33,11 @@ export const Tree = (props) => {
         setDataModal(data)
     }
     
-    /* ---------------------------------------------------Modales------------------------- */
+    /* ---------------------------------------------------lineDropdown------------------------- */
+
+    const [lineDropDown, setLineDropdown] = useState(false)
+
+    /* ---------------------------------------------------lineDropdown------------------------- */
   
     if(props.loading){
         return <h1>Loading</h1>
@@ -65,7 +69,7 @@ export const Tree = (props) => {
                     <button onClick={arbolData[12] ? ()=> onOpenModal(arbolData[12]) : ()=> onOpen2Modal(arbolData[5])} className={arbolData[12] ? 'child' : 'noChild'}>+</button>
                     <button onClick={arbolData[13] ? ()=> onOpenModal(arbolData[13]) : ()=> onOpen2Modal(arbolData[5])} className={arbolData[13] ? 'child' : 'noChild'}>+</button>
                 </div>
-                <div className='nivel'>
+                <div className='nivel displayNone1'>
                     <button onClick={arbolData[14] ? ()=> onOpenModal(arbolData[14]) : ()=> onOpen2Modal(arbolData[6])} className={arbolData[14] ? 'child' : 'noChild'}>+</button>
                     <button onClick={arbolData[15] ? ()=> onOpenModal(arbolData[15]) : ()=> onOpen2Modal(arbolData[6])} className={arbolData[15] ? 'child' : 'noChild'}>+</button>
                     <button onClick={arbolData[16] ? ()=> onOpenModal(arbolData[16]) : ()=> onOpen2Modal(arbolData[7])} className={arbolData[16] ? 'child' : 'noChild'}>+</button>
@@ -82,6 +86,29 @@ export const Tree = (props) => {
                     <button onClick={arbolData[27] ? ()=> onOpenModal(arbolData[27]) : ()=> onOpen2Modal(arbolData[12])} className={arbolData[27] ? 'child' : 'noChild'}>+</button>
                     <button onClick={arbolData[28] ? ()=> onOpenModal(arbolData[28]) : ()=> onOpen2Modal(arbolData[13])} className={arbolData[28] ? 'child' : 'noChild'}>+</button>
                     <button onClick={arbolData[29] ? ()=> onOpenModal(arbolData[29]) : ()=> onOpen2Modal(arbolData[13])} className={arbolData[29] ? 'child' : 'noChild'}>+</button>
+                </div>
+                <button className='btn btn-warning btn-lineDropDown' onClick={()=> setLineDropdown(!lineDropDown)}>Last line</button>
+                <div className={lineDropDown ? 'nivel2' : 'displayNone'}>
+                    <div className='lineDropDown-separator'>
+                        <button onClick={arbolData[14] ? ()=> onOpenModal(arbolData[14]) : ()=> onOpen2Modal(arbolData[6])} className={arbolData[14] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[15] ? ()=> onOpenModal(arbolData[15]) : ()=> onOpen2Modal(arbolData[6])} className={arbolData[15] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[16] ? ()=> onOpenModal(arbolData[16]) : ()=> onOpen2Modal(arbolData[7])} className={arbolData[16] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[17] ? ()=> onOpenModal(arbolData[17]) : ()=> onOpen2Modal(arbolData[7])} className={arbolData[17] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[18] ? ()=> onOpenModal(arbolData[18]) : ()=> onOpen2Modal(arbolData[8])} className={arbolData[18] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[19] ? ()=> onOpenModal(arbolData[19]) : ()=> onOpen2Modal(arbolData[8])} className={arbolData[19] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[20] ? ()=> onOpenModal(arbolData[20]) : ()=> onOpen2Modal(arbolData[9])} className={arbolData[20] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[21] ? ()=> onOpenModal(arbolData[21]) : ()=> onOpen2Modal(arbolData[9])} className={arbolData[21] ? 'child' : 'noChild'}>+</button>
+                    </div>
+                    <div className='lineDropDown-separator'>
+                        <button onClick={arbolData[22] ? ()=> onOpenModal(arbolData[22]) : ()=> onOpen2Modal(arbolData[10])} className={arbolData[22] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[23] ? ()=> onOpenModal(arbolData[23]) : ()=> onOpen2Modal(arbolData[10])} className={arbolData[23] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[24] ? ()=> onOpenModal(arbolData[24]) : ()=> onOpen2Modal(arbolData[11])} className={arbolData[24] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[25] ? ()=> onOpenModal(arbolData[25]) : ()=> onOpen2Modal(arbolData[11])} className={arbolData[25] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[26] ? ()=> onOpenModal(arbolData[26]) : ()=> onOpen2Modal(arbolData[12])} className={arbolData[26] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[27] ? ()=> onOpenModal(arbolData[27]) : ()=> onOpen2Modal(arbolData[12])} className={arbolData[27] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[28] ? ()=> onOpenModal(arbolData[28]) : ()=> onOpen2Modal(arbolData[13])} className={arbolData[28] ? 'child' : 'noChild'}>+</button>
+                        <button onClick={arbolData[29] ? ()=> onOpenModal(arbolData[29]) : ()=> onOpen2Modal(arbolData[13])} className={arbolData[29] ? 'child' : 'noChild'}>+</button>
+                    </div>
                 </div>
             </div>
             <ChildModal user={userModal} isOpen={modalOpen} onClose={onCloseModal}/>
