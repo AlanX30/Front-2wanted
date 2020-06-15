@@ -82,13 +82,18 @@
     height: 100%;
     width: 100%;
 }
-.create-default button {
+
+.create-default-button{
   background: transparent;
-  border: 0;
-  width: 19%;
-  transition: 0.2s;
+    border: 0;
+    width: 19%;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
-.create-default button:hover {
+.create-default-button:hover {
   transform: scale(1.1);
 }
 .create-default h1 {
@@ -104,6 +109,10 @@
   display: flex;
     justify-content: center;
     width: 100%;
+    height: 100%;
+}
+.default-par-container{
+  height: 19%;
 }
 .create-form-container{
   display: inline-block;
@@ -116,8 +125,15 @@
 .create-form-container form {
   width: 60%;
 }
+.default-button-figure {
+  width: 85%;
+  display: block;
+    height: 86%;
+    background: yellow;
+    border-radius: 50%;
+}
 @media screen and (max-width: 1282px) {
-  .create-default button {
+  .create-default-button {
     width: 23%;
   }
 }
@@ -134,12 +150,12 @@
     .section-create h1 {
       font-size: 30px;
     }
-    .create-default button {
+    .create-default-button {
       width: 29%;
     }
 }
 @media screen and (max-width: 1015px) {
-  .create-default button {
+  .create-default-button {
     width: 31%;
   }
   .create-form-container form {
@@ -147,7 +163,7 @@
   }
 }
 @media screen and (max-width: 930px) {
-  .create-default button {
+  .create-default-button {
     width: 36%;
   }
 }
@@ -157,12 +173,12 @@
   }
 }
 @media screen and (max-width: 800px) {
-  .create-default button {
+  .create-default-button {
     width: 41%
   }
 }
 @media screen and (max-width: 715px) {
-  .create-default button {
+  .create-default-button {
     width: 46%
   }
   .section-create h1{
@@ -171,7 +187,7 @@
 }
 
 @media screen and (max-width: 700px) {
-  .create-default button {
+  .create-default-button {
     width: 50%
   }
 }
@@ -180,7 +196,7 @@
  .actives-links img {
   margin-left: 5px
  }
- .create-default button {
+ .create-default-button {
   width: 38%
 }
  .actives-title{
@@ -194,7 +210,7 @@
  }
 }
 @media screen and (max-width: 512px) {
-  .create-default button {
+  .create-default-button {
     width: 44%
   }
 }
@@ -203,7 +219,7 @@
     display: flex;
     justify-content: center;
   }
-  .create-default button {
+  .create-default-button {
     width: 50%;
     padding: 0 3px;
   }

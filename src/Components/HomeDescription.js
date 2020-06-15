@@ -163,28 +163,28 @@ console.log(newSalaData)
         </div>
         <div className='default-par-container'>
             <div className='default-par'>
-                <button onClick={() => onOpenModal(2)} className=''>
-                    <img src={price2} className='' alt="..." />        
-                </button>    
-                <button onClick={() => onOpenModal(4)} className=''>
-                    <img src={price4} className='' alt="..." />        
-                </button>       
+                <div onClick={() => onOpenModal(2)} className='create-default-button'>
+                    <div className="default-button-figure"></div>       
+                </div>    
+                <div onClick={() => onOpenModal(4)} className='create-default-button'>
+                     <div className="default-button-figure"></div>   
+                </div>       
             </div>
             <div className='default-par'>
-                <button onClick={() => onOpenModal(10)} className=''>
-                    <img src={price10} className='' alt="..." />        
-                </button>    
-                <button onClick={() => onOpenModal(15)} className=''>
-                    <img src={price15} className='' alt="..." />        
-                </button>       
+                <div onClick={() => onOpenModal(10)} className='create-default-button'>
+                    <div className="default-button-figure"></div>         
+                </div>    
+                <div onClick={() => onOpenModal(15)} className='create-default-button'>
+                    <div className="default-button-figure"></div>  
+                </div>       
             </div>
             <div className='default-par'>
-                <button onClick={() => onOpenModal(20)} className=''>
-                    <img src={price20} className='' alt="..." />        
-                </button>    
-                <button onClick={() => onOpenModal(50)} className=''>
-                    <img src={price50} className='' alt="..." />        
-                </button> 
+                <div onClick={() => onOpenModal(20)} className='create-default-button'>
+                    <div className="default-button-figure"></div>  
+                </div>    
+                <div onClick={() => onOpenModal(50)} className='create-default-button'>
+                    <div className="default-button-figure"></div>  
+                </div> 
             </div>
             
         </div>   
