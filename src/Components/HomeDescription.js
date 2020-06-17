@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import price2 from '../Images/BOTON2.svg'
-import price4 from '../Images/BOTON4.svg'
-import price10 from '../Images/BOTON10.svg'
-import price15 from '../Images/boton15.svg'
-import price20 from '../Images/BOTON20.svg'
-import price50 from '../Images/BOTON50.svg'
-import ArbolImg from '../Images/ArbolitoBUSCADOS.svg'
+import ArbolImg from '../Images/arbol.svg'
 import { useUserData } from '../hooks/useUserData'
 import {MdHome, MdList} from "react-icons/md"
 import useMediaQuery from '../hooks/useMediaQuery'
@@ -21,22 +15,27 @@ export const HomeDescription = () => {
 
     const [listRooms, setListRooms] = useState([])
     const [activeDropdown, setActiveDropdown] = useState(false)
+    let [countActives, setCountActives] = useState(1) 
+    const [activesData, setActivesData] = useState({})
 
     useEffect(() => { 
-
         if(token){
             axios({
-                method: 'get',
+                method: 'post',
+                data: {page: countActives},
                 url: 'http://localhost:3500/search/listSalas',
                 headers: {
                     authorization: token
                     }
             })
-            .then(res => setListRooms(res.data)) 
-        } 
-    }, [token])
+            .then(res => {
+                setListRooms(res.data.data)
+                const data = {next: res.data.next, total: res.data.total} 
+                setActivesData(data)
+            }) 
 
-    
+        } 
+    }, [token, countActives])
 
     const { userData } = useUserData()  
     const name = useFormValues()
@@ -58,7 +57,7 @@ export const HomeDescription = () => {
         price: price.value,
         creator: userData.userName
     }
-console.log(newSalaData)
+
     async function newSala( e ){
         e.preventDefault()
 
@@ -97,7 +96,7 @@ console.log(newSalaData)
     }
 
     const dropDown = useMediaQuery("(min-width: 600px)")
-
+console.log(activesData)
     return(
         <>
             <div className='sections'>
@@ -106,14 +105,16 @@ console.log(newSalaData)
 
                 { dropDown ?
                         <div className='section-activeRooms'>
-                            <p className='actives-title'>Active Rooms</p>    
+                            <p className='actives-title'>Active Rooms</p>  
+                            <button disabled={countActives === 1 ? true : false } onClick={()=> setCountActives(countActives -= 1) } >Menos</button>  
+                            <button disabled={!activesData.next} onClick={()=> setCountActives(countActives += 1) }>Mas</button>  
                                 <ul className=''>
                                     {
                                         listRooms.map((data) => {
                                             return (
                                                 <li className='actives-li' key={data._id}>
-                                                    <Link to={`/sala/${data._id}`} className='actives-links btn btn-warning'>
-                                                        <img src={ArbolImg} alt="ArbolImg"/>
+                                                    <Link to={`/sala/${data._id}`} className='actives-links Link'>
+                                                            <img src={ArbolImg} alt="ArbolImg"/>
                                                         <div className='actives-description'>
                                                             <p>Room Name: <span>{data.name}</span></p>
                                                             <p>Price: <span>${data.price}</span></p>
@@ -164,26 +165,26 @@ console.log(newSalaData)
         <div className='default-par-container'>
             <div className='default-par'>
                 <div onClick={() => onOpenModal(2)} className='create-default-button'>
-                    <div className="default-button-figure"></div>       
+                    <div className="default-button-figure">$2</div>       
                 </div>    
                 <div onClick={() => onOpenModal(4)} className='create-default-button'>
-                     <div className="default-button-figure"></div>   
+                     <div className="default-button-figure">$4</div>   
                 </div>       
             </div>
             <div className='default-par'>
                 <div onClick={() => onOpenModal(10)} className='create-default-button'>
-                    <div className="default-button-figure"></div>         
+                    <div className="default-button-figure">$10</div>         
                 </div>    
                 <div onClick={() => onOpenModal(15)} className='create-default-button'>
-                    <div className="default-button-figure"></div>  
+                    <div className="default-button-figure">$15</div>  
                 </div>       
             </div>
             <div className='default-par'>
                 <div onClick={() => onOpenModal(20)} className='create-default-button'>
-                    <div className="default-button-figure"></div>  
+                    <div className="default-button-figure">$20</div>  
                 </div>    
                 <div onClick={() => onOpenModal(50)} className='create-default-button'>
-                    <div className="default-button-figure"></div>  
+                    <div className="default-button-figure">$50</div>  
                 </div> 
             </div>
             
