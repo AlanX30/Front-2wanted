@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ArbolImg from '../Images/arbol.svg'
 import { useUserData } from '../hooks/useUserData'
+import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
 import {MdHome, MdList} from "react-icons/md"
 import useMediaQuery from '../hooks/useMediaQuery'
 import NewSalaModal from './NewSalaModal'
@@ -30,7 +31,7 @@ export const HomeDescription = () => {
             })
             .then(res => {
                 setListRooms(res.data.data)
-                const data = {next: res.data.next, total: res.data.total} 
+                const data = {total: res.data.total} 
                 setActivesData(data)
             }) 
 
@@ -105,9 +106,12 @@ console.log(activesData)
 
                 { dropDown ?
                         <div className='section-activeRooms'>
-                            <p className='actives-title'>Active Rooms</p>  
-                            <button disabled={countActives === 1 ? true : false } onClick={()=> setCountActives(countActives -= 1) } >Menos</button>  
-                            <button disabled={!activesData.next} onClick={()=> setCountActives(countActives += 1) }>Mas</button>  
+                            <p className='actives-title'>Your Rooms</p>  
+                            <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
+                                <button className={countActives === 1 ? 'pagination-hidden' : 'pagination-button'} onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
+                                <p><span>{countActives}</span> - {activesData.total}</p> 
+                                <button className={countActives === activesData.total ? 'pagination-hidden' : 'pagination-button'} onClick={()=> setCountActives(countActives += 1) }><AiOutlineCaretRight size='30' /></button>
+                            </div>
                                 <ul className=''>
                                     {
                                         listRooms.map((data) => {
@@ -125,7 +129,7 @@ console.log(activesData)
                                             )
                                         })
                                     }
-                                </ul>
+                                </ul>  
                         </div> 
                 : <div className='home-description-500'>
                 

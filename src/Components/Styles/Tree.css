@@ -58,7 +58,7 @@
   .nivel2 {
     display: none;
   }
-  .displayNone{
+  .vNone{
     visibility: hidden;
     height: 0;
     opacity: 0;

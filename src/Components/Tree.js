@@ -93,7 +93,7 @@ export const Tree = (props) => {
                     <button onClick={arbolData[29] ? ()=> onOpenModal(arbolData[29]) : ()=> onOpen2Modal(arbolData[13])} className={arbolData[29] ? 'child' : 'noChild'}>+</button>
                 </div>
                 <button className='btn-lineDropDown' onClick={()=> setLineDropdown(!lineDropDown)}> <img src={abajo} alt="abajo"/> </button>
-                <div className={lineDropDown ? 'nivel2' : 'displayNone'}>
+                <div className={lineDropDown ? 'nivel2' : 'vNone'}>
                     <div className='lineDropDown-separator'>
                         <div className="linePar-container">
                             <p>1</p>

@@ -7,7 +7,7 @@ import { useFormValues } from '../hooks/useFormValues'
 import logoletra from '../Images/2WANTED.svg'
 import { useComponentVisible } from '../hooks/useComponentVisible'
 import useMediaQuery from '../hooks/useMediaQuery'
-import { MdAccountCircle, MdSearch, MdAttachMoney, MdFeedback, MdKeyboardReturn } from "react-icons/md";
+import { MdAccountCircle, MdSearch, MdNotificationsNone, MdKeyboardReturn } from "react-icons/md";
 import { JoinModal } from './JoinModal'
 import { Context } from '../context'
 import { withRouter } from 'react-router-dom'
@@ -60,7 +60,6 @@ const Navbar = (props) => {
         }else{setFilterSala(false)}
     }
 
-    const query530 = useMediaQuery("(min-width: 530px)")
     const [iconNone, setIconNone] = useState(false)
 
     /* -----------------------------Busqueda---------------------------------------------------------------- */
@@ -95,8 +94,6 @@ const Navbar = (props) => {
         })
         .then(res => setInvitations(res.data)) 
     },[token])
-
-    console.log(invitations)
     
     const { userData } = useUserData()    
     const { logout } = useContext(Context)
@@ -107,130 +104,90 @@ const Navbar = (props) => {
     }
 
     return(
-        <nav className="bg-dark">
-            <div className='navbar-arbol'>
-                <div className={iconNone ? 'none': ''}>
-                    <Link className="Link logo" to="/home">< img className='logo1' src={logo} alt='logo-img' /> <img className='logo2' src={logoletra} alt="logoletra"/> </Link>
-                </div>
+        <>
+        <nav>
+{/* ------------------------------------Section-Logos---------------------------------------------------------------------- */}       
+            <div className="section-logos">
 
-
-                <div className={query530 ? '' : 'w-100' }>{ query530 ? 
-                    <div className='search-form-c'>
-
-                        <form className='search-form h-100' onSubmit={searchRoom1} >
-                            <div className='search-input form-group h-100 m-0'>
-                                <input {...room1} className=" form-control h-100" type='text' placeholder='Room Name'/>
-                            </div>
-                            <button type='submit' className='ml-2 mr-2 m-0 btn icon-navbar btn-warning'><MdSearch size='20' /></button>
-                        </form>
-                        <div ref={dropdownFilter.ref} className={dropdownFilter.isComponentVisible ? 'dropdown-menu-navbar-filter isActive bg-dark' : 'dropdown-menu-navbar-filter'}>
-                            { 
-                            !oneString(room1.value) ?  <div className=''>Must not contain spaces</div> :
-                            
-                            filterSala.data ? 
-                            
-                            <div className='filter-sala bg-dark'>                               
-                                <div className='filter-sala-wrap'>
-                                    <img src={ArbolImg} className='mr-4' alt="..." />
-                                    <div className='text-center'>
-                                        <p> Room Name: <span>{filterSala.data.name}</span>  </p>
-                                        <p> Password: <span>{filterSala.data.protected ? 'Yes' : 'No'}</span>  </p>
-                                        <p> Creator: <span>{filterSala.data.creator}</span>  </p>
-                                        <p> Price: <span>${filterSala.data.price}</span>  </p>
-                                    </div>
-                                </div>
-                                    <button onClick={onOpen2Modal} className='btn btn-warning btn-block'>Join</button>
-                            </div> : <div>{filterSala.error}</div>
-                            } 
-                                
-                        </div>
-                    </div>
-                    : <div className='search-button-530'>
-                        <button onClick={()=>setIconNone(true)} className={iconNone? 'none' :'ml-2 mr-2 m-0 btn icon-navbar btn-warning'}><MdSearch size='20' /></button>
-                        <form className={iconNone ? 'search-form w-100 h-100' : 'none'} onSubmit={searchRoom1} >
-                            <button type='button' className='mr-2 btn icon-navbar btn-warning' onClick={()=>setIconNone(false)}><MdKeyboardReturn size='20' /></button>
-                            <div className='w-100'>
-                                <input {...room1} className='h-100 form-control' type='text' placeholder='Room Name'/>
-                            </div>
-                            <button type='submit' className='ml-2 mr-2 m-0 btn icon-navbar btn-warning'><MdSearch size='20' /></button>
-                        </form>
-
-                        <div ref={dropdownFilter.ref} className={dropdownFilter.isComponentVisible ? 'dropdown-menu-navbar-filter isActive bg-dark' : 'dropdown-menu-navbar-filter'}>
-                            { 
-                            !oneString(room1.value) ?  <div className=''>Must not contain spaces</div> :
-                            
-                            filterSala.data ? 
-                            
-                            <div className='filter-sala bg-dark'>                               
-                                <div className='filter-sala-wrap'>
-                                    <img src={ArbolImg} className='mr-4' alt="..." />
-                                    <div className='text-center'>
-                                        <p> Room Name: <span>{filterSala.data.name}</span>  </p>
-                                        <p> Password: <span>{filterSala.data.protected ? 'Yes' : 'No'}</span>  </p>
-                                        <p> Creator: <span>{filterSala.data.creator}</span>  </p>
-                                        <p> Price: <span>${filterSala.data.price}</span>  </p>
-                                    </div>
-                                </div>
-                                    <button onClick={onOpen2Modal} className='btn btn-warning btn-block'>Join</button>
-                            </div> : <div>{filterSala.error}</div>
-                            } 
-                                
-                        </div>
-
-                    </div>
-                }</div>
-
-                
-                
-                <div className={iconNone ? 'none' : 'd-flex'}>
-
-                    <div className='mr-2'>
-                        <button onClick={()=> toggle1.setIsComponentVisible(true)} className='btn icon-navbar bg-warning'>
-                            <MdFeedback size='20' />
-                        </button>
-                        <div ref={toggle1.ref} className={toggle1.isComponentVisible ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
-                            {
-                                invitations.map(invitation => {
-                                    return (
-                                        <li className='mb-2' key={invitation._id}>
-                                            <button className='btn btn-warning' onClick={()=> onOpenModal(invitation)}>
-                                                <div className='invitation-button'>
-                                                    <img src={ArbolImg} alt="ArbolImg"/>
-                                                    <div className='invitation-description'>
-                                                        <p>Invited for: <span>{invitation.host}</span></p>
-                                                        <p>Room Name: <span>{invitation.salaName}</span></p>
-                                                        <p>Price: <span>${invitation.price}</span></p>
-                                                    </div>
-                                                </div>
-                                            </button>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
-                    <div className='mr-2'>
-                        <button onClick={()=>toggle2.setIsComponentVisible(true)} className='btn icon-navbar bg-warning'>
-                            <MdAttachMoney size='20' />
-                        </button>
-                        <div ref={toggle2.ref} className={toggle2.isComponentVisible ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
-                            <Link className='w-100 mb-2 btn btn-warning' to='/wallet'>Deposit</Link>
-                            <Link className='w-100 mb-2 btn btn-warning' to='/wallet'>Withdraw</Link>
-                        </div>
-                    </div>
-                    <div>
-                        <button onClick={()=>toggle3.setIsComponentVisible(true)} className='btn icon-navbar bg-warning'>
-                            <MdAccountCircle size='20' />
-                        </button>
-                        <div ref={toggle3.ref} className={toggle3.isComponentVisible ? 'dropdown-menu-navbar isActive bg-dark' : 'dropdown-menu-navbar'}>
-                            <button onClick={handleLogout} className='btn btn-warning'>Logout</button>
-                        </div>
-                    </div>
-                </div>
+                <Link className="Link" to="/home">< img className='logo1' src={logo} alt='logo-img' /> <img className='logo2' src={logoletra} alt="logoletra"/> </Link>
+            
             </div>
-            <JoinModal token={token} price={filterSala.price} salaId={filterSala._id} isOpen={modal2Open} onClose={onClose2Modal}/>
-            <InvitationModal token={token} invitationData={invitationData} isOpen={modalOpen} onClose={onCloseModal} />
+{/* ------------------------------------/Section-Logos---------------------------------------------------------------------- */}       
+{/* ------------------------------------Section-Searcher---------------------------------------------------------------------- */}            
+            <div className="section-searcher">
+
+                <form onSubmit={searchRoom1} >
+                    <div>
+                        <input {...room1} type='text' placeholder='Room Name'/>
+                    </div>
+                    <button type='submit' className='icon-navbar'><MdSearch size='23' /></button>
+                </form>
+                
+                <div ref={dropdownFilter.ref} className={dropdownFilter.isComponentVisible ? 'dropdown-menu-navbar-filter isActive' : 'dropdown-menu-navbar-filter'}>
+                    { 
+                        !oneString(room1.value) ?  <div className=''>Must not contain spaces</div> :
+                            
+                        filterSala.data ? 
+                            
+                        <div className={dropdownFilter.isComponentVisible ? 'filter-sala isActive' : 'filter-sala'}>            
+                                <div className=' filter-sala-wrap'>
+                                    <img src={ArbolImg} className='' alt="..." />
+                                    <div>
+                                        <p> Room Name: <span>{filterSala.data.name}</span>  </p>
+                                        <p> Password: <span>{filterSala.data.protected ? 'Yes' : 'No'}</span>  </p>
+                                        <p> Creator: <span>{filterSala.data.creator}</span>  </p>
+                                        <p> Price: <span>${filterSala.data.price}</span>  </p>
+                                    </div>
+                                </div>
+                            <button onClick={onOpen2Modal} className=''>Join</button>
+                        </div> : <div>{filterSala.error}</div>
+                    } 
+                </div>
+
+            </div>
+{/* ------------------------------------/Section-Searcher---------------------------------------------------------------------- */}       
+{/* ------------------------------------Section-NavIcons---------------------------------------------------------------------- */}       
+            <div className="section-navIcons">
+
+                <div className='button-nav-1'>
+                    <button className='icon-navbar' onClick={()=> toggle1.setIsComponentVisible(true)}>
+                        <MdNotificationsNone size='23' />
+                    </button>
+                    <div ref={toggle1.ref} className={toggle1.isComponentVisible ? 'dropdown-menu-navbar1 isActive' : 'dropdown-menu-navbar1'}>
+                        {
+                            invitations.map(invitation => {
+                                return (
+                                    <li className={toggle1.isComponentVisible ? 'invitations-li isActive' : 'invitations-li'} key={invitation._id}>
+                                        <button className='' onClick={()=> onOpenModal(invitation)}>
+                                                <img src={ArbolImg} alt="ArbolImg"/>
+                                                <div className='invitation-description'>
+                                                    <p>Invited for: <span>{invitation.host}</span></p>
+                                                    <p>Room Name: <span>{invitation.salaName}</span></p>
+                                                    <p>Price: <span>${invitation.price}</span></p>
+                                                </div>
+                                        </button>
+                                    </li>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+
+                <div className='button-nav-2'>
+                    <button onClick={()=>toggle3.setIsComponentVisible(true)} className='icon-navbar'>
+                        <MdAccountCircle size='23' />
+                    </button>
+                    <div ref={toggle3.ref} className={toggle3.isComponentVisible ? 'dropdown-menu-navbar2 isActive' : 'dropdown-menu-navbar2'}>
+                        <button onClick={handleLogout}>Logout</button>
+                    </div> 
+                </div>          
+
+            </div>
+{/* ------------------------------------/Section-NavIcons--------------------------------------------------------------------- */}       
         </nav>
+        <JoinModal token={token} price={filterSala.price} salaId={filterSala._id} isOpen={modal2Open} onClose={onClose2Modal}/>
+        <InvitationModal token={token} invitationData={invitationData} isOpen={modalOpen} onClose={onCloseModal} />
+        </>
     )
 }
 
