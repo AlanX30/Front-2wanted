@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 import { useFormValues } from '../hooks/useFormValues'
 import logoletra from '../Images/2WANTED.svg'
 import { useComponentVisible } from '../hooks/useComponentVisible'
-import useMediaQuery from '../hooks/useMediaQuery'
 import { MdAccountCircle, MdSearch, MdNotificationsNone, MdKeyboardReturn } from "react-icons/md";
 import { JoinModal } from './JoinModal'
 import { Context } from '../context'
@@ -107,12 +106,28 @@ const Navbar = (props) => {
         <>
         <nav>
 {/* ------------------------------------Section-Logos---------------------------------------------------------------------- */}       
-            <div className="section-logos">
+            <div className={!iconNone ? "section-logos" : 'dNone'}>
 
                 <Link className="Link" to="/home">< img className='logo1' src={logo} alt='logo-img' /> <img className='logo2' src={logoletra} alt="logoletra"/> </Link>
             
             </div>
 {/* ------------------------------------/Section-Logos---------------------------------------------------------------------- */}       
+{/* ------------------------------------Section-Searcher hidden---------------------------------------------------------------------- */}      
+
+            <div className="section-searcher-hidden">
+                <button onClick={()=> setIconNone(true)} className={!iconNone ? 'icon-navbar' : 'dNone'}><MdSearch size='23' /></button>
+                
+                <div className={iconNone  ? 'searcher-hidden' : 'dNone'}>
+                    <form onSubmit={searchRoom1} >
+                        <button onClick={()=> setIconNone(false)} type='button' className='icon-navbar'><MdKeyboardReturn size='23' /></button>
+                        <input {...room1} type='text' placeholder='Room Name'/>
+                        <button type='submit' className='icon-navbar'><MdSearch size='23' /></button>
+                    </form>
+                </div>
+                
+            </div>
+
+{/* ------------------------------------/Section-Searcher hidden---------------------------------------------------------------------- */}            
 {/* ------------------------------------Section-Searcher---------------------------------------------------------------------- */}            
             <div className="section-searcher">
 
@@ -132,11 +147,11 @@ const Navbar = (props) => {
                         <div className={dropdownFilter.isComponentVisible ? 'filter-sala isActive' : 'filter-sala'}>            
                                 <div className=' filter-sala-wrap'>
                                     <img src={ArbolImg} className='' alt="..." />
-                                    <div>
-                                        <p> Room Name: <span>{filterSala.data.name}</span>  </p>
-                                        <p> Password: <span>{filterSala.data.protected ? 'Yes' : 'No'}</span>  </p>
-                                        <p> Creator: <span>{filterSala.data.creator}</span>  </p>
-                                        <p> Price: <span>${filterSala.data.price}</span>  </p>
+                                    <div className='filter-sala-description'>
+                                        <p> Room Name:  <span> {filterSala.data.name}</span>  </p>
+                                        <p> Password:  <span> {filterSala.data.protected ? 'Yes' : 'No'}</span>  </p>
+                                        <p> Creator:  <span> {filterSala.data.creator}</span>  </p>
+                                        <p> Price:  <span> ${filterSala.data.price}</span>  </p>
                                     </div>
                                 </div>
                             <button onClick={onOpen2Modal} className=''>Join</button>
@@ -147,7 +162,7 @@ const Navbar = (props) => {
             </div>
 {/* ------------------------------------/Section-Searcher---------------------------------------------------------------------- */}       
 {/* ------------------------------------Section-NavIcons---------------------------------------------------------------------- */}       
-            <div className="section-navIcons">
+            <div className={!iconNone ? 'section-navIcons' : 'dNone'}>
 
                 <div className='button-nav-1'>
                     <button className='icon-navbar' onClick={()=> toggle1.setIsComponentVisible(true)}>
@@ -161,9 +176,9 @@ const Navbar = (props) => {
                                         <button className='' onClick={()=> onOpenModal(invitation)}>
                                                 <img src={ArbolImg} alt="ArbolImg"/>
                                                 <div className='invitation-description'>
-                                                    <p>Invited for: <span>{invitation.host}</span></p>
-                                                    <p>Room Name: <span>{invitation.salaName}</span></p>
-                                                    <p>Price: <span>${invitation.price}</span></p>
+                                                    <p>Invited for: <span> {invitation.host}</span></p>
+                                                    <p>Room Name: <span> {invitation.salaName}</span></p>
+                                                    <p>Price: <span> ${invitation.price}</span></p>
                                                 </div>
                                         </button>
                                     </li>
@@ -178,7 +193,35 @@ const Navbar = (props) => {
                         <MdAccountCircle size='23' />
                     </button>
                     <div ref={toggle3.ref} className={toggle3.isComponentVisible ? 'dropdown-menu-navbar2 isActive' : 'dropdown-menu-navbar2'}>
-                        <button onClick={handleLogout}>Logout</button>
+                        <div  className="item-menu-right">
+                            User
+                        </div>
+                        <div className='item-menu-right-wallet-container'>
+                            <div>Wallet</div>
+                            <div>{userData.wallet}</div>
+                        </div>
+                        <div className='item-menu-right-cashier'>
+                            <div className='button-deposit'>Deposit</div>
+                            <div className='button-withdraw'>Withdraw</div>
+                        </div>
+                        <div className="item-menu-right">
+                            Balance history
+                        </div>
+                        <div className="item-menu-right">
+                            Instruccions
+                        </div>
+                        <div className="item-menu-right">
+                            User Configuration
+                        </div>
+                        <div className="item-menu-right">
+                            Help
+                        </div>
+                        <div className="item-menu-right">
+                            Support
+                        </div>
+                        <div onClick={handleLogout} className="item-menu-right">
+                            Log Out
+                        </div>
                     </div> 
                 </div>          
 

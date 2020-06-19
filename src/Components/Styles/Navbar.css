@@ -9,11 +9,15 @@ nav {
     align-items: center;
     background: #343a40;
 }
+
 .section-searcher form {
   display: flex;
   height: 100%;
 }
 .section-searcher form svg {
+  height: 30px;
+}
+.section-searcher-hidden svg {
   height: 30px;
 }
 .section-searcher input {
@@ -31,6 +35,7 @@ nav {
 }
 .dropdown-menu-navbar-filter.isActive {
   transition: .5s;
+  max-width: 250px;
   height: auto;
   background: var(--bg-objects);
   border-radius: 10px;
@@ -50,7 +55,7 @@ nav {
   height: auto;
   visibility: visible;
     flex-wrap: wrap;
-    max-width: 230px;
+    width: 100%;
     align-items: center;
     border-radius: 10px;
     overflow: hidden;
@@ -67,15 +72,21 @@ nav {
   height: 40px;
   margin-right: 5px;
 }
+.filter-sala-description {
+  width: 173px;
+}
 .filter-sala p {
-  display: flex;
+  overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    white-space: nowrap;
     flex-wrap: wrap;
     align-items: center;
     font-size: 10px;
     font-weight: 600;
 }
-.filter-sala span {font-weight: 400;
-
+.filter-sala span {
+  font-weight: 400;
 }
 .filter-sala button {
   width: 100%;
@@ -162,7 +173,7 @@ nav {
 .dropdown-menu-navbar2{
   position: absolute;
   right: -1000px;
-  transition: all 1s;
+  transition: all 2s;
   height: 100vh;
   top: 0;
   bottom: 0;
@@ -170,7 +181,7 @@ nav {
 }
 .dropdown-menu-navbar2.isActive{
   border-left: 4px solid;
-  transition: all .2s;
+  transition: all .3s;
   position: absolute;
   background: var(--bg-objects);
   height: 100vh;
@@ -178,4 +189,93 @@ nav {
   right: 0;
   top: 0;
   bottom: 0;
+}
+.logo1 {
+  height: 40px;
+}
+.logo2{
+  height: 25px;
+  margin-left: -5px;
+}
+.section-searcher-hidden {
+  display: none;
+}
+.item-menu-right {
+  height: 40px;
+  padding: 6px 5px 5px 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all .4s;
+}
+.item-menu-right-wallet-container {
+  justify-content: space-between;
+  height: 40px;
+  padding: 6px 5px 5px 5px;
+  display: flex;
+  align-items: center;
+}
+.item-menu-right:hover {
+  background-color: #202020;
+  color: white;
+}
+.item-menu-right-cashier{
+  height: 40px;
+  padding: 6px 0px 5px 0px;
+  display: flex;
+  align-items: center;
+}
+.button-deposit {
+  width: 50%;
+  text-align: center;
+  background: #35a947;
+  height: 100%;
+  color: white;
+}
+.button-withdraw {
+  width: 50%;
+  text-align: center;
+  color: white;
+  height: 100%;
+  background: #ff5656;
+}
+@media screen and (max-width: 530px) {
+  .logo1 {
+    height: 30px;
+  }
+  .logo2 {
+    height: 20px;
+    margin-left: -9px;
+  }
+}
+@media screen and (max-width: 470px) {
+  .section-searcher form {
+    display: none;
+  }
+  .section-searcher-hidden {
+    position: relative;
+    display: flex;
+    display: flex;
+    margin-left: auto;
+    margin-right: 4px;
+  }
+  .searcher-hidden {
+    width: 100vw;
+    padding-right: 20px;
+  }
+  .searcher-hidden form {
+    position: relative;
+    display: flex;
+  }
+  .searcher-hidden input {
+    width: 100%;
+    margin: 0 6px;
+  }
+  .dropdown-menu-navbar-filter.isActive {
+    left: 30px;
+    top: 37px;
+    right: 30px;
+    display: flex;
+    justify-content: center;
+  }
 }

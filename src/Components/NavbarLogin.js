@@ -33,7 +33,7 @@ import './Styles/NavbarLogin.css'
     return(
         <nav className="navbar-arbol navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-sm">
-                <Link className="logo" to="/"><img className='logo1' src={logo} alt='logo-img' /><img className='logo2' src={logoletra} alt="logoletra"/></Link>
+                <Link className="logo" to="/"><img className='login-logo1' src={logo} alt='logo-img' /><img className='login-logo2' src={logoletra} alt="logoletra"/></Link>
                 <div>
                     <form onSubmit={handleSubmit} className="d-flex">
                         <div className="form-group login-inputs mr-3">
