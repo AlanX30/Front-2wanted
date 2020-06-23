@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom'
 import { useFormValues } from '../hooks/useFormValues'
 import logoletra from '../Images/2WANTED.svg'
 import { useComponentVisible } from '../hooks/useComponentVisible'
-import { MdAccountCircle, MdSearch, MdNotificationsNone, MdKeyboardReturn } from "react-icons/md";
+import { IoMdSettings, IoIosContact, IoIosCreate, IoMdContacts } from 'react-icons/io'
+import { MdAccountCircle, MdSearch, MdNotificationsNone, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
 import { JoinModal } from './JoinModal'
 import { Context } from '../context'
 import { withRouter } from 'react-router-dom'
@@ -70,6 +71,7 @@ const Navbar = (props) => {
     const toggle3 = useComponentVisible(false);
 
     const [invitations, setInvitations] = useState([])
+    let [notifications, setNotifications] = useState(0)
 
     const [modalOpen, setModalOpen] = useState(null)
     const [invitationData, setInvitationData] = useState(null)
@@ -86,13 +88,33 @@ const Navbar = (props) => {
     useEffect(()=>{
         axios({
             method: 'get',
-            url: 'http://localhost:3500/user/invite',
+            url: 'http://localhost:3500/invitations',
             headers: {
                 authorization: token
                 }
         })
-        .then(res => setInvitations(res.data)) 
+        
+        .then(res => {
+            setInvitations(res.data.invitations)
+            setNotifications(res.data.countNotification)
+        }) 
     },[token])
+
+    function notificationButton() {
+        toggle1.setIsComponentVisible(true)
+
+        if(notifications > 0) {
+            axios({
+                method: 'post',
+                url: 'http://localhost:3500/invitations-reset',
+                headers: {
+                    authorization: token
+                }
+            })
+    
+            setNotifications(0)
+        }
+    }
     
     const { userData } = useUserData()    
     const { logout } = useContext(Context)
@@ -165,7 +187,8 @@ const Navbar = (props) => {
             <div className={!iconNone ? 'section-navIcons' : 'dNone'}>
 
                 <div className='button-nav-1'>
-                    <button className='icon-navbar' onClick={()=> toggle1.setIsComponentVisible(true)}>
+                    <button className='icon-navbar' onClick={notificationButton}>
+                        <div className={notifications > 0 ? 'notification' : 'dNone'}>{notifications}</div>
                         <MdNotificationsNone size='23' />
                     </button>
                     <div ref={toggle1.ref} className={toggle1.isComponentVisible ? 'dropdown-menu-navbar1 isActive' : 'dropdown-menu-navbar1'}>
@@ -193,34 +216,31 @@ const Navbar = (props) => {
                         <MdAccountCircle size='23' />
                     </button>
                     <div ref={toggle3.ref} className={toggle3.isComponentVisible ? 'dropdown-menu-navbar2 isActive' : 'dropdown-menu-navbar2'}>
-                        <div  className="item-menu-right">
-                            User
+                        <div  className="item-menu-right user">
+                            < IoIosContact size='46'/>    <p> {userData.userName}</p>
                         </div>
                         <div className='item-menu-right-wallet-container'>
                             <div>Wallet</div>
-                            <div>{userData.wallet}</div>
+                            <p>${userData.wallet}</p>
                         </div>
                         <div className='item-menu-right-cashier'>
                             <div className='button-deposit'>Deposit</div>
                             <div className='button-withdraw'>Withdraw</div>
                         </div>
                         <div className="item-menu-right">
-                            Balance history
+                            <MdChromeReaderMode /><p>&nbsp;Balance history</p> 
                         </div>
                         <div className="item-menu-right">
-                            Instruccions
+                           < IoMdSettings /><p>&nbsp;User Configuration</p> 
                         </div>
                         <div className="item-menu-right">
-                            User Configuration
+                           <MdHelpOutline /><p>&nbsp;Help</p> 
                         </div>
                         <div className="item-menu-right">
-                            Help
-                        </div>
-                        <div className="item-menu-right">
-                            Support
+                           < IoMdContacts /><p>&nbsp;Support</p> 
                         </div>
                         <div onClick={handleLogout} className="item-menu-right">
-                            Log Out
+                           <MdExitToApp /><p>&nbsp;Log Out</p>  
                         </div>
                     </div> 
                 </div>          

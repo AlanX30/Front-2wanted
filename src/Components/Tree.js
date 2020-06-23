@@ -28,7 +28,7 @@ export const Tree = (props) => {
     
     function onOpen2Modal(parent){
         const data = {
-            parentUsername: parent, salaId: props.salaId, price: props.price, salaName: props.salaName
+            parentUsername: parent, salaId: props.salaId, price: props.price, salaName: props.salaName, host: props.userName
         }
         setModal2Open(true)
         setDataModal(data)

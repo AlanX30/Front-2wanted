@@ -122,27 +122,49 @@ nav {
     display: flex;
     align-items: center;
 }
+.notification {
+  position: absolute;
+    margin-top: -10px;
+    margin-left: 16px;
+    background: red;
+    border-radius: 50px;
+    width: 15px;
+    color: white;
+    font-size: 10px;
+}
 .dropdown-menu-navbar1{
   height: 0;
-  padding: 10px;
+  top: -500px;
+  padding: 2px 10px;
   right: 0;
   position: absolute;
   visibility: hidden;
   overflow: hidden;
   width: max-content;
+  margin-top: -12px;
 }
 .dropdown-menu-navbar1.isActive{
   position: absolute;
+  top: auto;
   transition: .4s;
   visibility: visible;
   height: max-content;
+  max-height: 314px;
   width: max-content;
   right: 0;
-  padding: 10px;
+  overflow-y: scroll;
+  padding: 2px 10px;
   background: var(--bg-objects);
   border-radius: 10px;
+  margin-top: 3px;
 }
-
+.dropdown-menu-navbar1.isActive::-webkit-scrollbar {
+  width: 5px;     /* Tamaño del scroll en vertical */
+}
+.dropdown-menu-navbar1.isActive::-webkit-scrollbar-thumb{
+  background:#65656557;
+    border-radius: 4px;
+}
 .dropdown-menu-navbar1 img {
   height: 25px;
   margin-right: 5px;
@@ -173,15 +195,16 @@ nav {
 .dropdown-menu-navbar2{
   position: absolute;
   right: -1000px;
-  transition: all 2s;
+  transition: all .3s;
   height: 100vh;
   top: 0;
   bottom: 0;
+  width: 30%;
   overflow: hidden;
 }
 .dropdown-menu-navbar2.isActive{
   border-left: 4px solid;
-  transition: all .3s;
+  transition: all .2s;
   position: absolute;
   background: var(--bg-objects);
   height: 100vh;
@@ -208,33 +231,51 @@ nav {
   cursor: pointer;
   transition: all .4s;
 }
+.item-menu-right.user {
+  height: 80px;
+  background-color: #212529;
+  color: white;
+  cursor: auto;
+  padding-left: 0;
+}
 .item-menu-right-wallet-container {
   justify-content: space-between;
   height: 40px;
-  padding: 6px 5px 5px 5px;
+  padding: 0px 5px 5px 7px;
+  background: #212529;
+  color: white;
+  margin-top: -17px;
   display: flex;
   align-items: center;
 }
+.item-menu-right-wallet-container p {
+  font-weight: 700;
+  font-size: 25px;
+  color: #35a947;
+}
 .item-menu-right:hover {
-  background-color: #202020;
+  background-color: #212529;
   color: white;
 }
 .item-menu-right-cashier{
   height: 40px;
-  padding: 6px 0px 5px 0px;
   display: flex;
   align-items: center;
 }
 .button-deposit {
   width: 50%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #35a947;
   height: 100%;
   color: white;
 }
 .button-withdraw {
   width: 50%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   height: 100%;
   background: #ff5656;

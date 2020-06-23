@@ -14,7 +14,7 @@ export const InviteModal = (props) => {
         data = {
             newUser: user.value, parentUsername: props.data.parentUsername,
             message: message.value, salaId: props.data.salaId,
-            price: props.data.price, salaName: props.data.salaName
+            price: props.data.price, salaName: props.data.salaName, host: props.data.host
         }
     }
 
@@ -23,7 +23,7 @@ export const InviteModal = (props) => {
         const res = await axios({
             data: data,
             method: 'post',
-            url: 'http://localhost:3500/user/invite',
+            url: 'http://localhost:3500/invitations',
             headers: {
                 authorization: props.token
             }
