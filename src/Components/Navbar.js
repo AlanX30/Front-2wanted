@@ -72,9 +72,10 @@ const Navbar = (props) => {
 
     const [invitations, setInvitations] = useState([])
     let [notifications, setNotifications] = useState(0)
-
+    const [totalPages, setTotalPages] = useState(1)
     const [modalOpen, setModalOpen] = useState(null)
     const [invitationData, setInvitationData] = useState(null)
+    let [countPages, setCountPages] = useState(1)
 
     function onCloseModal(){
         setModalOpen(null)
@@ -87,18 +88,20 @@ const Navbar = (props) => {
     
     useEffect(()=>{
         axios({
-            method: 'get',
+            method: 'post',
+            data: {page: countPages},
             url: 'http://localhost:3500/invitations',
             headers: {
                 authorization: token
-                }
+            }
         })
         
         .then(res => {
-            setInvitations(res.data.invitations)
+            setInvitations( invitations => invitations.concat(res.data.invitations) )
             setNotifications(res.data.countNotification)
+            setTotalPages(res.data.totalPages)
         }) 
-    },[token])
+    },[token, countPages])
 
     function notificationButton() {
         toggle1.setIsComponentVisible(true)
@@ -208,6 +211,7 @@ const Navbar = (props) => {
                                 )
                             })
                         }
+                    <button className={totalPages > countPages ? 'button-more-notifications' : 'dNone'} onClick={()=>{setCountPages(countPages + 1)}}>More ▼</button>
                     </div>
                 </div>
 

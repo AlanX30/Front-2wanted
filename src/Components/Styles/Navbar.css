@@ -132,6 +132,15 @@ nav {
     color: white;
     font-size: 10px;
 }
+.button-more-notifications {
+  background: var(--bg-color);
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
 .dropdown-menu-navbar1{
   height: 0;
   top: -500px;
@@ -149,7 +158,7 @@ nav {
   transition: .4s;
   visibility: visible;
   height: max-content;
-  max-height: 314px;
+  max-height: 348px;
   width: max-content;
   right: 0;
   overflow-y: scroll;
@@ -224,7 +233,7 @@ nav {
   display: none;
 }
 .item-menu-right {
-  height: 40px;
+  height: 50px;
   padding: 6px 5px 5px 5px;
   display: flex;
   align-items: center;
