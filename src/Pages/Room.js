@@ -11,7 +11,7 @@ export const Room = (props) => {
     const token = window.sessionStorage.getItem('token')
     const salaId = props.match.params.salaId
     const [dataRoom, setDataRoom] = useState(false)
-    const { arbolData, loading, acum3, acum4, acum5 } = useChildsData(salaId, dataRoom.price)
+    const { arbolData, loading, acum3, acum4 } = useChildsData(salaId, dataRoom.price)
 
     useEffect(()=>{
         async function searchRoom(){
@@ -21,7 +21,7 @@ export const Room = (props) => {
                 url: 'http://localhost:3500/search/sala',
                 headers: {
                     authorization: token
-                    }
+                }
             })
             setDataRoom(response.data.data)  
         }
@@ -29,7 +29,7 @@ export const Room = (props) => {
     },[salaId, token])
 
     const tAcum = acum3 + acum4
-    console.log(dataRoom)
+    
     return (
         <div className='room'>
             <div>

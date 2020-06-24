@@ -9,8 +9,11 @@ export const useChildsData = (salaId, price) => {
     const [loading, setLoading] = useState(false)
             
     useEffect(()=>{
+
         async function childsData(){
+
             setLoading(true)
+
             const response = await axios({
                 method: 'get',
                 url: `http://localhost:3500/sala?id=${salaId}`,
@@ -20,14 +23,19 @@ export const useChildsData = (salaId, price) => {
             })
                     
             const data = await response.data
+            
             let childList = []
+
             for(let i = 0; i<data.length; i++){
+                
                 if(data[i] === null){
                     data[i] = {userName: ''}
                 }
                 childList.push(data[i].userName)
             }
+
             await setArbolData(childList)
+
             setLoading(false)
         }  
         childsData()
@@ -35,8 +43,7 @@ export const useChildsData = (salaId, price) => {
 
     let acum3 = 0
     let acum4 = 0   
-    let acum5 = 0
-    console.log(arbolData)
+
     for(let i = 6; i<=13; i++){
         let divide = price/2   
         if(arbolData[i]){
@@ -49,13 +56,7 @@ export const useChildsData = (salaId, price) => {
             acum4 = acum4 + divide
         }
     }
-    for(let i = 30; i<=61; i++){
-        let divide = price/8
-        if(arbolData[i]){
-            acum5 = acum5 + divide
-        }
-    }
 
-    return {arbolData, loading, acum3, acum4, acum5}
+    return {arbolData, loading, acum3, acum4}
 
 }

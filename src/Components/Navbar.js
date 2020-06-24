@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { useFormValues } from '../hooks/useFormValues'
 import logoletra from '../Images/2WANTED.svg'
 import { useComponentVisible } from '../hooks/useComponentVisible'
-import { IoMdSettings, IoIosContact, IoIosCreate, IoMdContacts } from 'react-icons/io'
+import { IoMdSettings, IoIosContact, IoMdContacts } from 'react-icons/io'
 import { MdAccountCircle, MdSearch, MdNotificationsNone, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
 import { JoinModal } from './JoinModal'
 import { Context } from '../context'
@@ -20,7 +20,6 @@ const Navbar = (props) => {
     /* -----------------------------Busqueda---------------------------------------------------------------- */
     const [filterSala, setFilterSala] = useState(false)
     const dropdownFilter = useComponentVisible(false);
-    const [filterLoading, setFilterLoading] = useState(false)
     const [modal2Open, setModal2Open] = useState(null)
 
     const room1 = useFormValues()
@@ -40,7 +39,6 @@ const Navbar = (props) => {
     }
     async function searchRoom1( e ){
         e.preventDefault()
-        setFilterLoading(true)
 
         dropdownFilter.setIsComponentVisible(true)
 
@@ -57,7 +55,7 @@ const Navbar = (props) => {
                 setFilterSala(response.data)
             }else{setFilterSala(response.data)}
             
-        }else{setFilterSala(false)}
+        }
     }
 
     const [iconNone, setIconNone] = useState(false)
@@ -67,7 +65,6 @@ const Navbar = (props) => {
     const token = window.sessionStorage.getItem('token')
 
     const toggle1 = useComponentVisible(false);
-    const toggle2 = useComponentVisible(false);
     const toggle3 = useComponentVisible(false);
 
     const [invitations, setInvitations] = useState([])
@@ -228,8 +225,8 @@ const Navbar = (props) => {
                             <p>${userData.wallet}</p>
                         </div>
                         <div className='item-menu-right-cashier'>
-                            <div className='button-deposit'>Deposit</div>
-                            <div className='button-withdraw'>Withdraw</div>
+                            <Link to='/wallet' className='Link button-deposit'>Deposit</Link>
+                            <Link to='/wallet' className='Link button-withdraw'>Withdraw</Link>
                         </div>
                         <div className="item-menu-right">
                             <MdChromeReaderMode /><p>&nbsp;Balance history</p> 

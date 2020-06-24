@@ -20,7 +20,8 @@ export const InviteModal = (props) => {
 
     async function handleSubmit( e ){
         e.preventDefault()
-        const res = await axios({
+        
+        await axios({
             data: data,
             method: 'post',
             url: 'http://localhost:3500/new-invitation',
@@ -28,10 +29,10 @@ export const InviteModal = (props) => {
                 authorization: props.token
             }
         })
-        console.log(res)
+
         props.onClose() 
     }
-    console.log(data)
+    
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
            <h3>Invite User</h3>

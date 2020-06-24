@@ -97,7 +97,7 @@ export const HomeDescription = () => {
     }
 
     const dropDown = useMediaQuery("(min-width: 600px)")
-console.log(activesData)
+
     return(
         <>
             <div className='sections'>
