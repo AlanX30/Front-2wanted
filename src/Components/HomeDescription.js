@@ -13,43 +13,49 @@ import { Link } from 'react-router-dom'
 export const HomeDescription = () => {
 
     const token = window.sessionStorage.getItem('token')
+    const  {userData}  = useUserData()
 
+   
     const [listRooms, setListRooms] = useState([])
     const [activeDropdown, setActiveDropdown] = useState(false)
     let [countActives, setCountActives] = useState(1) 
     const [activesData, setActivesData] = useState({})
 
-    useEffect(() => { 
-        if(token){
-            axios({
-                method: 'post',
-                data: {page: countActives},
-                url: 'http://localhost:3500/search/listSalas',
-                headers: {
-                    authorization: token
+        useEffect(() => { 
+        
+            if(token){
+                axios({
+                    method: 'post',
+                    data: {page: countActives},
+                    url: 'http://localhost:3500/search/listSalas',
+                    headers: {
+                        authorization: token
                     }
-            })
-            .then(res => {
-                setListRooms(res.data.data)
-                const data = {total: res.data.total} 
-                setActivesData(data)
-            }) 
+                })
+                .then(res => {
+                    setListRooms(res.data.data)
+                    const data = {total: res.data.total} 
+                    setActivesData(data)
+                }) 
+    
+            } 
+        }, [token, countActives])
+    
 
-        } 
-    }, [token, countActives])
 
-    const { userData } = useUserData()  
+
     const name = useFormValues()
     const price = useFormValues()
     const password = useFormValues()
+    
     const newSalaData = {
         users: [
             {
-                user: userData._id,
+                user: userData.userName,
                 parentId: undefined,
                 childsId: {
-                    childId1: undefined,
-                    childId2: undefined
+                    childId1: '',
+                    childId2: ''
                 }
             }
         ],

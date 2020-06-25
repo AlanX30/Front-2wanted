@@ -11,7 +11,7 @@ export const Room = (props) => {
     const token = window.sessionStorage.getItem('token')
     const salaId = props.match.params.salaId
     const [dataRoom, setDataRoom] = useState(false)
-    const { arbolData, loading, acum3, acum4 } = useChildsData(salaId, dataRoom.price)
+    const { arbolData, loading, acum3, acum4 } = useChildsData(salaId, dataRoom.price, userName)
 
     useEffect(()=>{
         async function searchRoom(){

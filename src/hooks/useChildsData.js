@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export const useChildsData = (salaId, price) => {
+export const useChildsData = (salaId, price, userName) => {
 
     const token = window.sessionStorage.getItem('token')
 
@@ -15,36 +15,29 @@ export const useChildsData = (salaId, price) => {
             setLoading(true)
 
             const response = await axios({
-                method: 'get',
-                url: `http://localhost:3500/sala?id=${salaId}`,
+                method: 'post',
+                data: {user: userName},
+                url: `http://localhost:3500/in-sala?id=${salaId}`,
                 headers: {
                      authorization: token
                 }
-            })
-                    
-            const data = await response.data
+            })       
             
-            let childList = []
+            const data = await response.data
 
-            for(let i = 0; i<data.length; i++){
-                
-                if(data[i] === null){
-                    data[i] = {userName: ''}
-                }
-                childList.push(data[i].userName)
-            }
-
-            await setArbolData(childList)
+            await setArbolData(data)
 
             setLoading(false)
         }  
         childsData()
-    },[salaId, token])
+    },[salaId, userName, token])
+
+    console.log(arbolData)
 
     let acum3 = 0
     let acum4 = 0   
 
-    for(let i = 6; i<=13; i++){
+    for(let i = 6; i<=13; i++) {
         let divide = price/2   
         if(arbolData[i]){
             acum3 = acum3 + divide

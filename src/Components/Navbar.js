@@ -101,6 +101,7 @@ const Navbar = (props) => {
     },[token, countPages])
 
     function notificationButton() {
+        
         toggle1.setIsComponentVisible(true)
 
         if(notifications > 0) {
@@ -117,6 +118,7 @@ const Navbar = (props) => {
     }
     
     const { userData } = useUserData()    
+    
     const { logout } = useContext(Context)
     
     function handleLogout() {
