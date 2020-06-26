@@ -12,7 +12,7 @@ export const useUserData = () => {
         if(token){
             axios({
                 method: 'get',
-                url: 'http://localhost:3500/me',
+                url: 'http://localhost:3500/api/me',
                 headers: {
                     authorization: token
                     }

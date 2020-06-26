@@ -19,7 +19,7 @@ export const JoinModal = (props) => {
         await axios({
             data: joinData,
             method: 'post',
-            url: 'http://localhost:3500/newUserInSala',
+            url: 'http://localhost:3500/api/newUserInSala',
             headers: {
                 authorization: props.token
                 }

@@ -24,7 +24,7 @@ export const InviteModal = (props) => {
         await axios({
             data: data,
             method: 'post',
-            url: 'http://localhost:3500/new-invitation',
+            url: 'http://localhost:3500/api/new-invitation',
             headers: {
                 authorization: props.token
             }

@@ -27,7 +27,7 @@ export const HomeDescription = () => {
                 axios({
                     method: 'post',
                     data: {page: countActives},
-                    url: 'http://localhost:3500/search/listSalas',
+                    url: 'http://localhost:3500/api/search/listSalas',
                     headers: {
                         authorization: token
                     }
@@ -73,7 +73,7 @@ export const HomeDescription = () => {
                 await axios({
                     data: newSalaData,
                     method: 'post',
-                    url: 'http://localhost:3500/new/sala',
+                    url: 'http://localhost:3500/api/new/sala',
                     headers: {
                         authorization: token
                     }

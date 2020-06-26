@@ -18,7 +18,7 @@ export const Room = (props) => {
             const response = await axios({
                 data: { salaId: salaId },
                 method: 'post',
-                url: 'http://localhost:3500/search/sala',
+                url: 'http://localhost:3500/api/search/sala',
                 headers: {
                     authorization: token
                 }

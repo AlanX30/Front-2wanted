@@ -32,7 +32,7 @@ function NewSalaModal(props){
                 await axios({
                     data: newSalaData,
                     method: 'post',
-                    url: 'http://localhost:3500/new/sala',
+                    url: 'http://localhost:3500/api/new/sala',
                     headers: {
                         authorization: props.token
                         }

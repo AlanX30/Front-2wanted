@@ -19,7 +19,7 @@ import './Styles/NavbarLogin.css'
 
     function handleSubmit( e ){
         e.preventDefault()
-        axios.post('http://localhost:3500/users/signin', form)
+        axios.post('http://localhost:3500/api/users/signin', form)
         .then(res => {
             if(!res.data.error){
                 props.toggleAuth(res.data.token)
