@@ -240,6 +240,48 @@ nav {
   cursor: pointer;
   transition: all .4s;
 }
+.item-menu-right.payments {
+  padding: 0;
+    align-items: flex-start;
+    height: 40px;
+}
+.item-menu-right.payments form {
+  height: 100%;
+  width: 100%;
+}
+.item-menu-right.payments input {
+  height: 100%;
+  margin: 0;
+  width: 80%;
+  border: none;
+  border-bottom-left-radius: 5px;
+}
+.item-menu-right.payments button {
+  height: 101%;
+    color: white;
+    margin: 0;
+    background: #212529;
+    width: 20%;
+    border: none;
+    border-bottom-right-radius: 7px;
+}
+.button-pay {
+  width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+.item-menu-right.payments div a {
+  width: 100%;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #007bff;
+    color: black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 6px;
+}
 .item-menu-right.user {
   height: 80px;
   background-color: #212529;

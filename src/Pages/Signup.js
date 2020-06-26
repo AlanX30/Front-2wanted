@@ -12,12 +12,16 @@ export const Signup = (props) => {
 
     const userName = useFormValues()
     const email = useFormValues()
+    const phone = useFormValues()
+    const dni = useFormValues()
     const password = useFormValues()
     const confirm_password = useFormValues()
 
     const form = {
         userName: `@${userName.value}`,
         email: email.value,
+        phone: `+57${phone.value}`,
+        dni: dni.value,
         password: password.value,
         confirm_password: confirm_password.value
     }
@@ -55,6 +59,12 @@ export const Signup = (props) => {
                                     </div>
                                     <div className="form-group form-inputs">
                                         <input type="email" className='form-control' {...email} placeholder='Email'/>
+                                    </div>
+                                    <div className="form-group form-inputs">
+                                        <input type="text" className='form-control' {...phone} placeholder='Phone Number'/>
+                                    </div>
+                                    <div className="form-group form-inputs">
+                                        <input type="text" className='form-control' {...dni} placeholder='CC, DNI ETC...'/>
                                     </div>
                                     <div className="form-group form-inputs">
                                         <input type="password"  className='form-control' {...password} placeholder='Password'/>

@@ -126,6 +126,33 @@ const Navbar = (props) => {
         logout()
     }
 
+    //-------------Pagos--------------------------------------------------------//
+
+    const pay = useFormValues()
+
+    const [deposit, setDeposit] = useState(false)
+    const [buttonPay, setButtonPay] = useState(false)
+    const [urlPay, setUrlPay] = useState('')
+
+    const onPay = async (e) => {
+
+        e.preventDefault()
+
+        await axios({
+            method: 'post',
+            data: { price: pay.value },
+            url: 'http://localhost:3500/payments',
+            headers: {
+                authorization: token
+            }
+        }).then(res => {
+            setUrlPay(res.data)
+            setButtonPay(true)
+        })
+    }
+
+    //-------------Pagos--------------------------------------------------------//
+
     return(
         <>
         <nav>
@@ -227,8 +254,17 @@ const Navbar = (props) => {
                             <p>${userData.wallet}</p>
                         </div>
                         <div className='item-menu-right-cashier'>
-                            <Link to='/wallet' className='Link button-deposit'>Deposit</Link>
-                            <Link to='/wallet' className='Link button-withdraw'>Withdraw</Link>
+                            <div onClick={()=> setDeposit(true)} to='/wallet' className='button-deposit'>Deposit</div>
+                            <div to='/wallet' className='Link button-withdraw'>Withdraw</div>
+                        </div>
+                        <div className={deposit ? "item-menu-right payments" : "dNone"}>
+                             <form className={buttonPay ? 'dNone' : ''} onSubmit={onPay}>
+                                 <input className='pl-2' type="text" {...pay} placeholder='$'/>
+                                 <button type='submit'>Next</button>
+                             </form>
+                             <div className={buttonPay ? 'button-pay' : 'dNone'} >
+                                 <a className='Link' href={urlPay} rel="noopener noreferrer" target='_blank'>Pay</a>
+                             </div>
                         </div>
                         <div className="item-menu-right">
                             <MdChromeReaderMode /><p>&nbsp;Balance history</p> 
