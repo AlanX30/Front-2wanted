@@ -2,7 +2,8 @@
   --bg-color: #18191a;
   --bg-objects: #343a40;
   --bg-items-color: #4b4c4f;
-  --text: #212529;;
+  --text: #212529;
+  --button-primary: linear-gradient(to right, #fdc830, #f37335);
 }
 body {
   /*   background-color: #fbab7e;

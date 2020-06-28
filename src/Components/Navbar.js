@@ -242,10 +242,13 @@ const Navbar = (props) => {
                 </div>
 
                 <div className='button-nav-2'>
+
                     <button onClick={()=>toggle3.setIsComponentVisible(true)} className='icon-navbar'>
                         <MdAccountCircle size='23' />
                     </button>
+
                     <div ref={toggle3.ref} className={toggle3.isComponentVisible ? 'dropdown-menu-navbar2 isActive' : 'dropdown-menu-navbar2'}>
+                        <div onClick={()=>toggle3.setIsComponentVisible(false)} className='button-close-nav'>X</div>
                         <div  className="item-menu-right user">
                             < IoIosContact size='46'/>    <p> {userData.userName}</p>
                         </div>

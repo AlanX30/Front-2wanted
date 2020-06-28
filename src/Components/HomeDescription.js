@@ -140,7 +140,12 @@ export const HomeDescription = () => {
                 : <div className='home-description-500'>
                 
                 <div className={activeDropdown ? 'actives-dropdown' : 'actives-dropdown-none'}>  
-                    <p className='actives-title'>Active Rooms</p>                
+                    <p className='actives-title text-center'>Active Rooms</p>     
+                    <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
+                        <button className={countActives === 1 ? 'pagination-hidden' : 'pagination-button'} onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
+                        <p><span>{countActives}</span> - {activesData.total}</p> 
+                        <button className={countActives === activesData.total ? 'pagination-hidden' : 'pagination-button'} onClick={()=> setCountActives(countActives += 1) }><AiOutlineCaretRight size='30' /></button>
+                    </div>           
                     <ul >
                         {
                             listRooms.map((data) => {

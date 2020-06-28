@@ -1,13 +1,16 @@
 nav {
-  position: fixed;
-    top: 0;
-    justify-content: space-between;
-    width: 100%;
-    height: 40px;
-    padding: 6px 10px 5px 10px;
-    display: flex;
-    align-items: center;
-    background: #343a40;
+  position: absolute;
+  top: 0;
+  justify-content: space-between;
+  width: 100%;
+  height: 45px;
+  padding: 6px 10px 5px 10px;
+  display: flex;
+  align-items: center;
+  background: #343a40;
+}
+.section-searcher {
+  height: 100%;
 }
 
 .section-searcher form {
@@ -120,7 +123,9 @@ nav {
     background: #ffc107;
     padding: 0 5px;
     display: flex;
+    justify-content: center;
     align-items: center;
+    width: 35px;
 }
 .notification {
   position: absolute;
@@ -203,24 +208,39 @@ nav {
 }
 .dropdown-menu-navbar2{
   position: absolute;
-  right: -1000px;
-  transition: all .3s;
   height: 100vh;
   top: 0;
   bottom: 0;
-  width: 30%;
+  width: 0;
   overflow: hidden;
 }
 .dropdown-menu-navbar2.isActive{
   border-left: 4px solid;
   transition: all .2s;
-  position: absolute;
+  position: relative;
+  position: fixed;
   background: var(--bg-objects);
   height: 100vh;
   width: 30%;
   right: 0;
   top: 0;
   bottom: 0;
+  overflow: scroll;
+}
+.button-close-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  color: white;
+  border-radius: 5px;
+    background: #ff5656;
+    text-align: center;
+    width: 45px;
+    cursor: pointer;
+}
+.dropdown-menu-navbar2.isActive::-webkit-scrollbar {
+  display: none;
 }
 .logo1 {
   height: 40px;
@@ -331,7 +351,22 @@ nav {
   height: 100%;
   background: #ff5656;
 }
-@media screen and (max-width: 530px) {
+  @media screen and (max-width: 1000px) {
+  .dropdown-menu-navbar2.isActive{
+    width: 40%;
+  }
+  }
+  @media screen and (max-width: 700px) {
+  .dropdown-menu-navbar2.isActive{
+    width: 50%;
+  }
+  }
+  @media screen and (max-width: 530px) {
+  .dropdown-menu-navbar2.isActive{
+    width: 80%;
+  }
+  }
+  @media screen and (max-width: 530px) {
   .logo1 {
     height: 30px;
   }
@@ -347,6 +382,7 @@ nav {
   .section-searcher-hidden {
     position: relative;
     display: flex;
+    height: 100%;
     display: flex;
     margin-left: auto;
     margin-right: 4px;
@@ -357,10 +393,13 @@ nav {
   }
   .searcher-hidden form {
     position: relative;
+    height: 100%;
     display: flex;
   }
   .searcher-hidden input {
     width: 100%;
+    border-radius: 8px;
+    border: none;
     margin: 0 6px;
   }
   .dropdown-menu-navbar-filter.isActive {

@@ -1,7 +1,15 @@
 .login-inputs {
   margin: 0;
+  margin-right: 10px;
 }
-
+.login-inputs a {
+  cursor: pointer;
+  color: white;
+}
+.login-inputs a:hover {
+  text-decoration: underline;
+  color: #2d61f4
+}
 .login-logo1 {
   height: 40px;
 }
@@ -10,7 +18,52 @@
   margin-left: -5px;
 }
 
-.navbar-arbol {
+.navbar-arbol-login {
   display: flex;
+  padding-top: 10px;
   justify-content: space-between;
+  height: max-content;
+}
+.navbar-arbol-login form {
+  display: flex;
+}
+.login-button {
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: #ffc107;
+}
+
+@media screen and (max-width: 760px) {
+  .logo{
+    display: block;
+    text-align: center;
+  }
+  .navbar-arbol-login {
+    padding-top: 5px;
+    display: block;
+    height: max-content;
+  }
+  .navbar-arbol-login form {
+    justify-content: center;
+    padding-left: 10px;
+    margin-top: 5px;
+  }
+}
+@media screen and (max-width: 430px) {
+  .navbar-arbol-login form {
+    display: block;
+    padding: 0;
+    width: 85%;
+    margin: 0 auto;
+}
+
+  .login-inputs {
+    margin: 0;
+    margin-top: 10px;
+  }
+  .login-button {
+    margin: 8px 0;
+    width: 100%;
+  }
 }

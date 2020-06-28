@@ -3,6 +3,8 @@ import { useFormValues } from '../hooks/useFormValues'
 import NavbarLogin from '../Components/NavbarLogin'
 import { Context } from '../context'
 import axios from 'axios'
+import android from '../Images/ANDROID.png'
+import ios from '../Images/IOS.png'
 import IMG from '../Images/esfinge.svg'
 import './Styles/Signup.css'
 
@@ -44,9 +46,23 @@ export const Signup = (props) => {
         <NavbarLogin toggleAuth={toggleAuth} />
 
         <div className='signup-container'>
-             
-            <img className='signup-left' src={IMG} alt=""/>
-               
+
+            <div className='signup-left'>
+
+                <div className='apps-button'>
+                    <div>
+                        <img className='android-button' alt='android' src={android} />
+
+                    </div>
+                    <div>
+                        <img className='ios-button' alt='ios' src={ios} />
+                    </div>
+                </div>
+
+                <img className='logo-signup-p' src={IMG} alt=""/>
+
+            </div>
+
              <div className='signup-right'>
                 <div className='card-signup'>
                             <h3 className="card-header pl-4">

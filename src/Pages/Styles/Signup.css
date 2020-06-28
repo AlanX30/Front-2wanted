@@ -3,21 +3,101 @@
   background: -webkit-linear-gradient(to right, #DECBA4, #3E5151);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #DECBA4, #3E5151); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
   display: flex;
-  height: 100vh;
+  height: max-content;
   width: 100vw;
+  margin-top: 77px;
 }
 .signup-left{
-  display: flex;
   justify-content: center;
   width: 50%;
+}
+.apps-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: -25px;
+}
+.android-button {
+  width: 114px;
+  margin-right: 15px;
+}
+.ios-button {
+  width: 118px;
+}
+.logo-signup-p {
+  width: 100%;
 }
 .signup-right{
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 20px;
   width: 50%;
 }
 .card-signup{
   background: #00000047;
   border-radius: 10px;
+}
+@media screen and (max-width: 1660px) {
+  .signup-container {
+    height: 100%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .apps-button {
+    margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 760px) {
+  .signup-right {
+    margin-top: 14px;
+  }
+  .signup-container{
+    margin-top: 117px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .signup-left {
+    width: 45%;
+  }
+  .apps-button {
+    display: block;
+    text-align: center;
+  }
+  .android-button {
+    margin: 0;
+    margin-bottom: 4px;
+  }
+}
+@media screen and (max-width: 430px) {
+  .signup-container {
+    display: block;
+  }
+  .signup-left {
+    width: 100%;
+  }
+  .logo-signup-p {
+    display: none;
+  }
+  .card-signup {
+    width: 80%;
+  }
+  .apps-button {
+    display: flex;
+  }
+  .android-button {
+    margin-top: 10px;
+    margin-right: 5px;
+  }
+  .ios-button {
+    margin-top: 10px;
+  }
+  .signup-right{
+    margin-top: 7px;
+    margin-left: auto;
+    margin-right: auto ;
+    width: 100%;
+  }
+  .signup-container {
+    margin-top: 224px;
+  }
 }

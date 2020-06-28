@@ -11,11 +11,11 @@ function NewSalaModal(props){
     const newSalaData = {
         users: [
             {
-                user: props.userData._id,
+                user: props.userData.userName,
                 parentId: undefined,
                 childsId: {
-                    childId1: undefined,
-                    childId2: undefined
+                    childId1: '',
+                    childId2: ''
                 }
             }
         ],
@@ -28,14 +28,13 @@ function NewSalaModal(props){
         e.preventDefault()
         if(props.userData.wallet >= parseFloat(props.price)){
            
-                console.log(newSalaData)
                 await axios({
                     data: newSalaData,
                     method: 'post',
                     url: 'http://localhost:3500/api/new/sala',
                     headers: {
                         authorization: props.token
-                        }
+                    }
                 })
                 props.onClose() 
             

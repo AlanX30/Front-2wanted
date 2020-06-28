@@ -31,23 +31,20 @@ import './Styles/NavbarLogin.css'
     }
 
     return(
-        <nav className="navbar-arbol navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container-sm">
+        <nav className="navbar-arbol-login">
                 <Link className="logo" to="/"><img className='login-logo1' src={logo} alt='logo-img' /><img className='login-logo2' src={logoletra} alt="logoletra"/></Link>
-                <div>
-                    <form onSubmit={handleSubmit} className="d-flex">
-                        <div className="form-group login-inputs mr-3">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group login-inputs">
                             <input type="email" className='form-control' {...email} placeholder='Email'/>
                         </div>
-                        <div className="form-group login-inputs mr-2">
+                        <div className="form-group login-inputs">
                             <input className="form-control" type="password" {...password} placeholder="Password"/>
+                            <a href='https://www.youtube.com/' target='_blank' rel="noopener noreferrer">Forgot your account?</a>
                         </div>
-                        <button type='submit' className="btn btn-warning login-button">
+                        <button type='submit' className="login-button">
                             Login
                         </button>
                     </form>
-                </div>
-            </div>
         </nav>
     )
 }
