@@ -17,7 +17,7 @@ export const useChildsData = (salaId, price, userName) => {
             const response = await axios({
                 method: 'post',
                 data: {user: userName},
-                url: `http://localhost:3500/api/in-sala?id=${salaId}`,
+                url: `https://example2wanted.herokuapp.com/api/in-sala?id=${salaId}`,
                 headers: {
                      authorization: token
                 }

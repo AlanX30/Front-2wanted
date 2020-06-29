@@ -21,7 +21,7 @@ export const InvitationModal = (props) => {
         await axios({
             data: joinData,
             method: 'post',
-            url: 'http://localhost:3500/api/newUserInSala',
+            url: 'https://example2wanted.herokuapp.com/api/newUserInSala',
             headers: {
                 authorization: props.token
             }

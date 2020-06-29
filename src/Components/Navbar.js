@@ -46,7 +46,7 @@ const Navbar = (props) => {
             const response = await axios({
                 data: { name: room1.value },
                 method: 'post',
-                url: 'http://localhost:3500/api/search/sala',
+                url: 'https://example2wanted.herokuapp.com/api/search/sala',
                 headers: {
                     authorization: token
                     }
@@ -87,7 +87,7 @@ const Navbar = (props) => {
         axios({
             method: 'post',
             data: {page: countPages},
-            url: 'http://localhost:3500/api/invitations',
+            url: 'https://example2wanted.herokuapp.com/api/invitations',
             headers: {
                 authorization: token
             }
@@ -107,7 +107,7 @@ const Navbar = (props) => {
         if(notifications > 0) {
             axios({
                 method: 'post',
-                url: 'http://localhost:3500/api/invitations-reset',
+                url: 'https://example2wanted.herokuapp.com/api/invitations-reset',
                 headers: {
                     authorization: token
                 }
@@ -141,7 +141,7 @@ const Navbar = (props) => {
         await axios({
             method: 'post',
             data: { price: pay.value },
-            url: 'http://localhost:3500/api/payments',
+            url: 'https://example2wanted.herokuapp.com/api/payments',
             headers: {
                 authorization: token
             }

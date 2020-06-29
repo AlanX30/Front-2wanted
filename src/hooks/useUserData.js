@@ -12,7 +12,7 @@ export const useUserData = () => {
         if(token){
             axios({
                 method: 'get',
-                url: 'http://localhost:3500/api/me',
+                url: 'https://example2wanted.herokuapp.com/api/me',
                 headers: {
                     authorization: token
                     }

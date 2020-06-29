@@ -30,7 +30,7 @@ export const Signup = (props) => {
 
     function handleSubmit( e ){
         e.preventDefault()
-        axios.post('http://localhost:3500/api/users/signup', form)
+        axios.post('https://example2wanted.herokuapp.com/api/users/signup', form)
         .then(res => {
             if(!res.data.error){
                 toggleAuth(res.data.token)
