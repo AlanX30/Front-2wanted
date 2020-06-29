@@ -1,11 +1,12 @@
 .sections {
+  height: 100%;
   display: flex;
   justify-content: center;
   width: 100vw;
 }
 .section-activeRooms {
   background: var(--bg-objects);
-  height: 100vh;
+  height: 100%;
   width: 30%;
   box-shadow: 3px 0px 11px #636161;
   color: var(--text);
@@ -15,6 +16,7 @@
   margin-top: 10px;
 }
 .actives-title {
+  text-align: center;
   font-size: 1.5rem;
   margin-top: 30px;
   color: var(--text);
@@ -88,7 +90,7 @@
    display: none;
  }
  .actives-dropdown {
-  margin: 97px auto 0 auto;
+  margin: 60px auto 50px auto;
   width: 90%;
   padding: 12px;
   background: #343a40;
@@ -123,7 +125,9 @@
   grid-template-columns: 1fr 1fr;
   margin-bottom: 8px;
  }
-
+.section-create h1 {
+  color: var(--text);
+}
 .create-default img {
   object-fit: contain;
     height: 100%;
@@ -133,18 +137,19 @@
 .create-default-button{
   background: transparent;
     border: 0;
-    width: 19%;
     transition: 0.2s;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    margin: 0 5px;
 }
 .create-default-button:hover {
   transform: scale(1.1);
 }
 .create-default h1 {
   text-align: center;
+  color: var(--text);
   margin-bottom: 12px;
   padding: 5px 15px;
     display: inline-block;
@@ -154,7 +159,7 @@
 }
 .default-par{
   display: flex;
-    justify-content: center;
+    justify-content: space-around;
     width: 100%;
     height: 33%;
 }
@@ -162,6 +167,7 @@
   height: 316px;
 }
 .create-form-container{
+  color: var(--text);
   display: inline-block;
     background-color: #343a40;
     padding: 10px 15px;
@@ -173,27 +179,23 @@
   width: 60%;
 }
 .default-button-figure {
-  width: 90px;
-  display: block;
+  width: 130px;
   border: 4px solid #212121;;
   height: 86%;
   background: #808080;
   border-radius: 50%;
   display: flex;
   justify-content: center;
-    align-items: center;
-    font-weight: 800;
-    font-size: x-large;
+  align-items: center;
+  font-weight: 800;
+  font-size: x-large;
 }
 .dNone {
   display: none;
 }
-.pagination-hidden{
-  visibility: hidden;
-}
-@media screen and (max-width: 1282px) {
-  .create-default-button {
-    width: 23%;
+@media screen and (max-height: 520px) {
+  .section-activeRooms {
+    height: fit-content;
   }
 }
 
@@ -206,23 +208,15 @@
     .section-create h1 {
       font-size: 30px;
     }
-    .create-default-button {
-      width: 29%;
-    }
+
 }
 @media screen and (max-width: 1015px) {
-  .create-default-button {
-    width: 31%;
-  }
+  
   .create-form-container form {
     width: 100%;
   }
 }
-@media screen and (max-width: 930px) {
-  .create-default-button {
-    width: 36%;
-  }
-}
+
 @media screen and (max-width: 888px) {
   .section-create h1{
     font-size: 26px;
@@ -235,67 +229,82 @@
     font-size: .6rem;
   }
 }
-@media screen and (max-width: 800px) {
-  .create-default-button {
-    width: 41%
+@media screen and (max-width: 865px) {
+  .default-button-figure {
+    width: 100px;
+    font-size: larger;
+  }
+  .create-form-container {
+    font-size: 16px;
+  }
+  .create-form-container input {
+    height: 31px;
+  }
+}
+@media screen and (max-width: 765px) {
+  .default-button-figure {
+    width: 85px;
+    height: 80px;
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .default-button-figure {
+    width: 85px;
+    height: 80px;
   }
 }
 @media screen and (max-width: 715px) {
-  .create-default-button {
-    width: 46%
-  }
+ 
   .section-create h1{
     font-size: 23px;
   }
 }
 
-@media screen and (max-width: 700px) {
-  .create-default-button {
-    width: 50%
+@media screen and (max-width: 640px) {
+  .create-default {
+    margin-bottom: 40px;
   }
-}
-
-@media screen and (max-width: 600px) {
  .actives-links img {
   margin-left: 5px
  }
- .create-default-button {
-  width: 38%
-}
+
  .actives-title{
    margin-top: 0;
  }
  .section-create{
   position: absolute;
-    margin-top: 90px;
+    margin-top: 60px;
     margin-left: 0px;
     width: 95%;
  }
 }
-@media screen and (max-width: 512px) {
-  .create-default-button {
-    width: 44%
-  }
-}
+
 @media screen and (max-width: 470px) {
+  .create-default {
+    height: 155px;
+  }
+  .create-default h1 {
+    margin-bottom: 7px;
+  }
   .default-par{
+    display: block;
     height: 50px;
   }
   .default-button-figure {
-    width: 41px;
-    font-size: medium;
+    height: 50px;
+    margin: 5px 0;
+    width: 85px;
   }
   .default-par-container{
     display: flex;
     justify-content: center;
     height: auto;
   }
-  .create-default-button {
-    width: 50%;
-    padding: 0 3px;
-  }
+ 
   .section-create {
     grid-template-columns: 1fr;
+    grid-gap: 0px;
   }
   .create-custom {
     text-align: center;

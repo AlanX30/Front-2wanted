@@ -102,7 +102,7 @@ export const HomeDescription = () => {
         return false
     }
 
-    const dropDown = useMediaQuery("(min-width: 600px)")
+    const dropDown = useMediaQuery("(min-width: 640px)")
 
     return(
         <>
@@ -114,9 +114,9 @@ export const HomeDescription = () => {
                         <div className='section-activeRooms'>
                             <p className='actives-title'>Your Rooms</p>  
                             <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
-                                <button className={countActives === 1 ? 'pagination-hidden' : 'pagination-button'} onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
+                                <button disabled={countActives === 1 ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
                                 <p><span>{countActives}</span> - {activesData.total}</p> 
-                                <button className={countActives === activesData.total ? 'pagination-hidden' : 'pagination-button'} onClick={()=> setCountActives(countActives += 1) }><AiOutlineCaretRight size='30' /></button>
+                                <button disabled={countActives === activesData.total ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives += 1) }><AiOutlineCaretRight size='30' /></button>
                             </div>
                                 <ul className=''>
                                     {
@@ -140,12 +140,12 @@ export const HomeDescription = () => {
                 : <div className='home-description-500'>
                 
                 <div className={activeDropdown ? 'actives-dropdown' : 'actives-dropdown-none'}>  
-                    <p className='actives-title text-center'>Active Rooms</p>     
+                    <p className='actives-title text-center'>Your Rooms</p>     
                     <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
-                        <button className={countActives === 1 ? 'pagination-hidden' : 'pagination-button'} onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
+                        <button disabled={countActives === 1 ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
                         <p><span>{countActives}</span> - {activesData.total}</p> 
-                        <button className={countActives === activesData.total ? 'pagination-hidden' : 'pagination-button'} onClick={()=> setCountActives(countActives += 1) }><AiOutlineCaretRight size='30' /></button>
-                    </div>           
+                        <button disabled={countActives === activesData.total ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives += 1) }><AiOutlineCaretRight size='30' /></button>
+                    </div>          
                     <ul >
                         {
                             listRooms.map((data) => {
@@ -180,26 +180,26 @@ export const HomeDescription = () => {
         <div className='default-par-container'>
             <div className='default-par'>
                 <div onClick={() => onOpenModal(2)} className='create-default-button'>
-                    <div className="default-button-figure">$2</div>       
+                    <div className="default-button-figure">$5.000</div>       
                 </div>    
                 <div onClick={() => onOpenModal(4)} className='create-default-button'>
-                     <div className="default-button-figure">$4</div>   
+                     <div className="default-button-figure">$10.000</div>   
                 </div>       
             </div>
             <div className='default-par'>
                 <div onClick={() => onOpenModal(10)} className='create-default-button'>
-                    <div className="default-button-figure">$10</div>         
+                    <div className="default-button-figure">$20.000</div>         
                 </div>    
                 <div onClick={() => onOpenModal(15)} className='create-default-button'>
-                    <div className="default-button-figure">$15</div>  
+                    <div className="default-button-figure">$50.000</div>  
                 </div>       
             </div>
             <div className='default-par'>
                 <div onClick={() => onOpenModal(20)} className='create-default-button'>
-                    <div className="default-button-figure">$20</div>  
+                    <div className="default-button-figure">$80.000</div>  
                 </div>    
                 <div onClick={() => onOpenModal(50)} className='create-default-button'>
-                    <div className="default-button-figure">$50</div>  
+                    <div className="default-button-figure">$100.000</div>  
                 </div> 
             </div>
             

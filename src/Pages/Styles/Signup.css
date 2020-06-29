@@ -3,11 +3,13 @@
   background: -webkit-linear-gradient(to right, #DECBA4, #3E5151);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #DECBA4, #3E5151); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
   display: flex;
-  height: max-content;
+  height: 100%;
   width: 100vw;
   margin-top: 77px;
+  overflow: scroll;
 }
 .signup-left{
+  height: max-content;
   justify-content: center;
   width: 50%;
 }
@@ -29,11 +31,13 @@
 }
 .signup-right{
   display: flex;
+  height: max-content;
   justify-content: center;
   margin-top: 20px;
   width: 50%;
 }
 .card-signup{
+  box-shadow: 0 0px 7px black;
   background: #00000047;
   border-radius: 10px;
 }

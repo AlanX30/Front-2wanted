@@ -2,15 +2,23 @@
   --bg-color: #18191a;
   --bg-objects: #343a40;
   --bg-items-color: #4b4c4f;
-  --text: #212529;
+  --text: #a0a0a0;;
   --button-primary: linear-gradient(to right, #fdc830, #f37335);
+}
+.form-control {
+  box-shadow: 0 0px 7px black;
 }
 body {
   /*   background-color: #fbab7e;
   background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%); */
   background: var(--bg-color);
 }
-
+button:focus {
+  outline: none;
+}
+input:focus {
+  outline: none;
+}
 #app {
   height: 100vh;
 }

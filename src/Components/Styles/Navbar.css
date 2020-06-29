@@ -24,6 +24,7 @@ nav {
   height: 30px;
 }
 .section-searcher input {
+  box-shadow: 0 0px 7px black;
   border-radius: 3px;
   border: none;
   height: 100%;
@@ -116,7 +117,11 @@ nav {
   width: 100%;
   align-items: center;
 }
+.btn {
+  box-shadow: 0 3px 7px black;
+}
 .icon-navbar {
+  box-shadow: 0 -3px 7px black;
   border: none;
     height: 100%;
     border-radius: 50%;
@@ -228,6 +233,12 @@ nav {
   overflow: scroll;
 }
 .button-close-nav {
+  height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 700;
   position: absolute;
   top: 0;
   right: 0;
@@ -235,7 +246,6 @@ nav {
   color: white;
   border-radius: 5px;
     background: #ff5656;
-    text-align: center;
     width: 45px;
     cursor: pointer;
 }
@@ -253,6 +263,7 @@ nav {
   display: none;
 }
 .item-menu-right {
+  color: var(--text);
   height: 50px;
   padding: 6px 5px 5px 5px;
   display: flex;
@@ -334,6 +345,7 @@ nav {
   align-items: center;
 }
 .button-deposit {
+  cursor: pointer;
   width: 50%;
   display: flex;
   align-items: center;
@@ -343,6 +355,7 @@ nav {
   color: white;
 }
 .button-withdraw {
+  cursor: pointer;
   width: 50%;
   display: flex;
   align-items: center;
@@ -397,6 +410,7 @@ nav {
     display: flex;
   }
   .searcher-hidden input {
+    box-shadow: 0 0px 7px black;
     width: 100%;
     border-radius: 8px;
     border: none;
