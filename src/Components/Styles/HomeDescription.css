@@ -32,6 +32,13 @@
     align-items: center;
     color: white;
 }
+.no-rooms {
+  text-align: center;
+    margin-top: 33px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+}
 .pagination span {
   background: var(--bg-color);
     color: white;
@@ -148,6 +155,7 @@
   transform: scale(1.1);
 }
 .create-default h1 {
+  width: 100%;
   text-align: center;
   color: var(--text);
   margin-bottom: 12px;

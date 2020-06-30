@@ -189,9 +189,9 @@ const Navbar = (props) => {
                     <button type='submit' className='icon-navbar'><MdSearch size='23' /></button>
                 </form>
                 
-                <div ref={dropdownFilter.ref} className={dropdownFilter.isComponentVisible ? 'dropdown-menu-navbar-filter isActive' : 'dropdown-menu-navbar-filter'}>
+                <div ref={dropdownFilter.ref} className={dropdownFilter.isComponentVisible ? 'dropdown-menu-navbar-filter isActive' : 'dNone'}>
                     { 
-                        !oneString(room1.value) ?  <div className=''>Must not contain spaces</div> :
+                        !oneString(room1.value) ?  <div className='no-spaces'>Must not contain spaces</div> :
                             
                         filterSala.data ? 
                             
@@ -206,7 +206,7 @@ const Navbar = (props) => {
                                     </div>
                                 </div>
                             <button onClick={onOpen2Modal} className=''>Join</button>
-                        </div> : <div>{filterSala.error}</div>
+                        </div> : <div className='no-spaces'>{filterSala.error}!</div>
                     } 
                 </div>
 
@@ -221,6 +221,9 @@ const Navbar = (props) => {
                         <MdNotificationsNone size='23' />
                     </button>
                     <div ref={toggle1.ref} className={toggle1.isComponentVisible ? 'dropdown-menu-navbar1 isActive' : 'dropdown-menu-navbar1'}>
+                        {
+                            invitations.length === 0 && <p className='no-spaces'>No hay notificationes</p>
+                        }
                         {
                             invitations.map(invitation => {
                                 return (

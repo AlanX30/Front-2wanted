@@ -12,7 +12,9 @@ nav {
 .section-searcher {
   height: 100%;
 }
-
+.section-logos{
+  flex-shrink: 0;
+}
 .section-searcher form {
   display: flex;
   height: 100%;
@@ -35,7 +37,6 @@ nav {
   position: absolute;
   padding: 10px;
   overflow: hidden;
-  visibility: hidden;
 }
 .dropdown-menu-navbar-filter.isActive {
   transition: .5s;
@@ -46,12 +47,20 @@ nav {
   padding: 10px;
   position: absolute;
   visibility: visible;
+  border-bottom: 3px solid;
+    border-right: 3px solid;
+    border-left: 3px solid;
 }
 .filter-sala{
   visibility: hidden;
   display: block;
   height: 0;
   border-radius: 10px;
+}
+.no-spaces {
+  color: var(--text);
+    font-size: 20px;
+    font-weight: 600;
 }
 .filter-sala.isActive {
   transition: 1.2s;
@@ -80,6 +89,7 @@ nav {
   width: 173px;
 }
 .filter-sala p {
+  color: black;
   overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
@@ -163,6 +173,9 @@ nav {
   margin-top: -12px;
 }
 .dropdown-menu-navbar1.isActive{
+  border-bottom: 3px solid;
+  border-right: 3px solid;
+  border-left: 3px solid;
   position: absolute;
   top: auto;
   transition: .4s;
@@ -393,16 +406,15 @@ nav {
     display: none;
   }
   .section-searcher-hidden {
+    width: 100%;
     position: relative;
-    display: flex;
     height: 100%;
     display: flex;
-    margin-left: auto;
+    justify-content: flex-end;
     margin-right: 4px;
   }
   .searcher-hidden {
-    width: 100vw;
-    padding-right: 20px;
+    width: 100%
   }
   .searcher-hidden form {
     position: relative;
@@ -418,7 +430,7 @@ nav {
   }
   .dropdown-menu-navbar-filter.isActive {
     left: 30px;
-    top: 37px;
+    top: 43px;
     right: 30px;
     display: flex;
     justify-content: center;
