@@ -2,8 +2,7 @@
   --bg-color: #18191a;
   --bg-objects: #343a40;
   --bg-items-color: #4b4c4f;
-  --text: #a0a0a0;;
-  --button-primary: linear-gradient(to right, #fdc830, #f37335);
+  --text: #a0a0a0;
 }
 .form-control {
   box-shadow: 0 0px 7px black;
@@ -20,7 +19,7 @@ input:focus {
   outline: none;
 }
 #app {
-  height: 100vh;
+  height: 100%;
 }
 
 .links:hover {

@@ -1,4 +1,5 @@
 import React from 'react'
+import Swal from 'sweetalert2'
 import logo from '../Images/logo.svg'
 import { useFormValues } from '../hooks/useFormValues'
 import { Link } from 'react-router-dom'
@@ -6,6 +7,7 @@ import { withRouter } from 'react-router-dom'
 import logoletra from '../Images/2WANTED.svg'
 import axios from 'axios'
 import './Styles/NavbarLogin.css'
+import { useState } from 'react'
 
  const NavbarLogin = (props) => {
 
@@ -17,17 +19,33 @@ import './Styles/NavbarLogin.css'
         password: password.value
     }
 
+    const [loginLoading, setLoginLoading] = useState(false)
+
     function handleSubmit( e ){
         e.preventDefault()
+        setLoginLoading(true)
         axios.post('https://example2wanted.herokuapp.com/api/users/signin', form)
         .then(res => {
-            if(!res.data.error){
+            if(res.data.error){
+                setLoginLoading(false)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error,
+                })
+            }else{
                 props.toggleAuth(res.data.token)
                 props.history.push(`/home`)
             }
         })
-        .catch( err => console.error(err))
-
+        .catch( err => {
+            setLoginLoading(false)
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: err,
+            })
+        })
     }
 
     return(
@@ -42,7 +60,10 @@ import './Styles/NavbarLogin.css'
                             <a href='https://www.youtube.com/' target='_blank' rel="noopener noreferrer">Forgot your account?</a>
                         </div>
                         <button type='submit' className="login-button">
-                            Login
+                            <div className={loginLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        <p className={loginLoading ? 'dNone' : ''}>Login</p>
                         </button>
                     </form>
         </nav>

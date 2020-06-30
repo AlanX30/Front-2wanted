@@ -1,12 +1,15 @@
 .signup-container {
-  background: #3E5151;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #DECBA4, #3E5151);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #DECBA4, #3E5151); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  background: #f46b45; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #f46b45, #eea849); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f46b45, #eea849); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   display: flex;
   height: 100%;
-  width: 100vw;
+  width: 100%;
   margin-top: 77px;
   overflow: scroll;
+}
+.signup-container::-webkit-scrollbar {
+  display: none;
 }
 .signup-left{
   height: max-content;
@@ -37,9 +40,36 @@
   width: 50%;
 }
 .card-signup{
+  width: 300px;
   box-shadow: 0 0px 7px black;
-  background: #00000047;
+  background: var(--bg-objects);
+  border-radius: 5px;
+  margin-bottom: 40px;
+}
+.pre-formS {
+  margin-right: 4px;
+  box-shadow: 0 0px 7px black;
+  border: none;
+}
+.pre-form {
+  background-color: #f18647;
+  border: none;
+  color: black;
+  height: 100%;
+}
+.password-valid {
+  color: #ff4b4b;
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+.button-signup {
   border-radius: 10px;
+  border: 2px solid var(--bg-objects);
+  background: #f28247;
+  display: block;
+  height: 40px;
+  box-shadow: 0 3px 7px black;
+  width: 100%;
 }
 @media screen and (max-width: 1660px) {
   .signup-container {
@@ -77,6 +107,8 @@
     display: block;
   }
   .signup-left {
+    margin-top: -15px;
+    margin-bottom: 11px;
     width: 100%;
   }
   .logo-signup-p {
