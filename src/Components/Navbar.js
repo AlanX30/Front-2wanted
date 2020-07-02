@@ -95,13 +95,25 @@ const Navbar = (props) => {
             headers: {
                 authorization: token
             }
+        }).then(res => {
+            if(res.data.error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error,
+                })
+            }else{
+                setInvitations( invitations => invitations.concat(res.data.invitations) )
+                setNotifications(res.data.countNotification)
+                setTotalPages(res.data.totalPages)
+            }
+        }).catch( error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error,
+            })
         })
-        
-        .then(res => {
-            setInvitations( invitations => invitations.concat(res.data.invitations) )
-            setNotifications(res.data.countNotification)
-            setTotalPages(res.data.totalPages)
-        }) 
     },[token, countPages])
 
     function notificationButton() {

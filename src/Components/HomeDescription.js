@@ -97,7 +97,7 @@ export const HomeDescription = (props) => {
             await axios({
                 data: newSalaData,
                 method: 'post',
-                url: 'http://localhost:3500/api/new/sala',
+                url: 'https://example2wanted.herokuapp.com/api/new/sala',
                 headers: {
                     authorization: token
                 }

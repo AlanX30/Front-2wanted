@@ -1,5 +1,6 @@
 import React from "react"
 import Modal from "./Modal"
+import Swal from 'sweetalert2'
 import { useFormValues } from '../hooks/useFormValues'
 import axios from 'axios'
 
@@ -28,6 +29,20 @@ export const InviteModal = (props) => {
             headers: {
                 authorization: props.token
             }
+        }).then(res => {
+            if(res.data.error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error,
+                })
+            }
+        }).catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: err,
+            })
         })
 
         props.onClose() 
