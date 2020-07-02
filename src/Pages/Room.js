@@ -16,25 +16,35 @@ export const Room = (props) => {
     
     useEffect(()=>{
         async function searchRoom(){
-            const response = await axios({
-                data: { salaId: salaId },
-                method: 'post',
-                url: 'http://localhost:3500/api/search/sala',
-                headers: {
-                    authorization: token
+
+            try {
+                const response = await axios({
+                    data: { salaId: salaId },
+                    method: 'post',
+                    url: 'https://example2wanted.herokuapp.com/api/search/sala',
+                    headers: {
+                        authorization: token
+                    }
+                })
+                if(response.data.error){
+                    const error = response.data.error.name === 'CastError' ? 'Esta Sala no existe' : response.data.error.name
+                    setLoadingRoom(false)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error,
+                    })
+                }else{
+                    setLoadingRoom(false)
+                    setDataRoom(response.data.data)  
                 }
-            })
-            if(response.data.error){
-                const error = response.data.error.name === 'CastError' ? 'Esta Sala no existe' : response.data.error.name
+            }catch(error){
                 setLoadingRoom(false)
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: error,
                 })
-            }else{
-                setLoadingRoom(false)
-                setDataRoom(response.data.data)  
             }
         }
         searchRoom()
