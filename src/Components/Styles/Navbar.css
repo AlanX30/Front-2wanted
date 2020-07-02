@@ -41,6 +41,8 @@ nav {
 .dropdown-menu-navbar-filter.isActive {
   transition: .5s;
   max-width: 250px;
+  min-width: 180px;
+  text-align: center;
   height: auto;
   background: var(--bg-objects);
   border-radius: 10px;

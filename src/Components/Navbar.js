@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import ArbolImg from '../Images/arbol.svg'
+import Swal from 'sweetalert2'
 import logo from '../Images/logo.svg'
 import './Styles/Navbar.css'
 import { Link } from 'react-router-dom'
@@ -8,11 +9,11 @@ import logoletra from '../Images/2WANTED.svg'
 import { useComponentVisible } from '../hooks/useComponentVisible'
 import { IoMdSettings, IoIosContact, IoMdContacts } from 'react-icons/io'
 import { MdAccountCircle, MdSearch, MdNotificationsNone, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
-import { JoinModal } from './JoinModal'
+import  JoinModal  from './JoinModal'
 import { Context } from '../context'
 import { withRouter } from 'react-router-dom'
 import { useUserData } from '../hooks/useUserData'
-import { InvitationModal } from './InvitationModal'
+import  InvitationModal  from './InvitationModal'
 import axios from 'axios'
 
 const Navbar = (props) => {
@@ -21,15 +22,9 @@ const Navbar = (props) => {
     const [filterSala, setFilterSala] = useState(false)
     const dropdownFilter = useComponentVisible(false);
     const [modal2Open, setModal2Open] = useState(null)
-
+    const [searchLoading, setSearchLoading] = useState(false)
     const room1 = useFormValues()
 
-    function oneString(string) {
-        if(string.split(" ").length === 1 ){
-            return true
-        }
-        return false
-    }
     function onClose2Modal(){
         setModal2Open(null)
     }
@@ -40,22 +35,31 @@ const Navbar = (props) => {
     async function searchRoom1( e ){
         e.preventDefault()
 
+        setSearchLoading(true)
+
         dropdownFilter.setIsComponentVisible(true)
 
-        if(oneString(room1.value)){
-            const response = await axios({
-                data: { name: room1.value },
-                method: 'post',
-                url: 'https://example2wanted.herokuapp.com/api/search/sala',
-                headers: {
-                    authorization: token
+            try{
+                const response = await axios({
+                    data: { name: room1.value },
+                    method: 'post',
+                    url: 'https://example2wanted.herokuapp.com/api/search/sala',
+                    headers: {
+                        authorization: token
                     }
-            })
-            if(response.data.error){
+                })
+
+                setSearchLoading(false)
                 setFilterSala(response.data)
-            }else{setFilterSala(response.data)}
-            
-        }
+
+            }catch(error){
+                setSearchLoading(false)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: error,
+                })
+            }
     }
 
     const [iconNone, setIconNone] = useState(false)
@@ -191,7 +195,10 @@ const Navbar = (props) => {
                 
                 <div ref={dropdownFilter.ref} className={dropdownFilter.isComponentVisible ? 'dropdown-menu-navbar-filter isActive' : 'dNone'}>
                     { 
-                        !oneString(room1.value) ?  <div className='no-spaces'>Must not contain spaces</div> :
+
+                        searchLoading ? <div className= "spinner-border text-danger" role="status">
+                             <span class="sr-only">Loading...</span>
+                        </div> : 
                             
                         filterSala.data ? 
                             

@@ -7,6 +7,15 @@
 .form-control {
   box-shadow: 0 0px 7px black;
 }
+.swal2-popup {
+  background-color: var(--bg-objects);
+}
+.swal2-title {
+  color: white;
+}
+.swal2-content {
+  color: white;
+}
 body {
   /*   background-color: #fbab7e;
   background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%); */

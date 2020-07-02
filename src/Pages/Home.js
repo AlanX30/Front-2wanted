@@ -1,11 +1,11 @@
 import React from 'react'
 import { HomeDescription } from '../Components/HomeDescription'
 
-export const Home = () => {
+export const Home = (props) => {
 
     return(
         <>
-        <HomeDescription />
+        <HomeDescription props={props} />
         </>
     )
 }

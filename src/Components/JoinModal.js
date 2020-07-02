@@ -1,10 +1,12 @@
 import React from 'react'
+import Swal from 'sweetalert2'
 import './Styles/JoinModal.css'
+import { withRouter } from 'react-router-dom'
 import Modal from './Modal'
 import axios from 'axios'
 import { useFormValues } from '../hooks/useFormValues'
 
-export const JoinModal = (props) => {
+const JoinModal = (props) => {
 
     const parentUser = useFormValues()
 
@@ -14,7 +16,7 @@ export const JoinModal = (props) => {
     }
 
     async function handleSubmit( e ){
-        console.log(joinData)
+
         e.preventDefault()
         await axios({
             data: joinData,
@@ -22,10 +24,24 @@ export const JoinModal = (props) => {
             url: 'https://example2wanted.herokuapp.com/api/newUserInSala',
             headers: {
                 authorization: props.token
-                }
+            }
+        }).then(res => {
+            if(res.data.error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error,
+                })
+            }else{
+                props.history.push(`/sala/${res.data.id}`)
+            }
+        }).catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: err,
+            })
         })
-        props.onClose() 
-
     }
 
     return (
@@ -45,3 +61,5 @@ export const JoinModal = (props) => {
         </Modal>
     )
 }
+
+export default withRouter(JoinModal)

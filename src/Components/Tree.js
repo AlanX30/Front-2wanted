@@ -40,10 +40,6 @@ export const Tree = (props) => {
 
     /* ---------------------------------------------------lineDropdown------------------------- */
   
-    if(props.loading){
-        return <h1>Loading</h1>
-    }
-    
     return(
         <>
             <div>

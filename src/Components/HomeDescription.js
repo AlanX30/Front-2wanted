@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Swal from 'sweetalert2'
 import ArbolImg from '../Images/arbol.svg'
 import { useUserData } from '../hooks/useUserData'
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
@@ -10,20 +11,20 @@ import { useFormValues } from '../hooks/useFormValues'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-export const HomeDescription = () => {
+export const HomeDescription = (props) => {
 
     const token = window.sessionStorage.getItem('token')
     const  {userData}  = useUserData()
-
    
     const [listRooms, setListRooms] = useState([])
     const [activeDropdown, setActiveDropdown] = useState(false)
     let [countActives, setCountActives] = useState(1) 
     const [activesData, setActivesData] = useState({})
+    const [activesLoaing, setActivesLoading] = useState(false)
 
         useEffect(() => { 
-        
             if(token){
+                setActivesLoading(true)
                 axios({
                     method: 'post',
                     data: {page: countActives},
@@ -33,10 +34,27 @@ export const HomeDescription = () => {
                     }
                 })
                 .then(res => {
-                    setListRooms(res.data.data)
-                    const data = {total: res.data.total} 
-                    setActivesData(data)
-                }) 
+                    setActivesLoading(false)
+                    if(res.data.error) {
+                        return Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: res.data.error,
+                        })
+                    }else{
+                        setActivesLoading(false)
+                        setListRooms(res.data.data)
+                        const data = {total: res.data.total} 
+                        setActivesData(data)
+                    }
+                }).catch( err => {
+                    setActivesLoading(false)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: err,
+                    })
+                })
     
             } 
         }, [token, countActives])
@@ -61,22 +79,46 @@ export const HomeDescription = () => {
         price: price.value,
         creator: userData.userName
     }
+  
+    const [roomValid, setRoomValid] = useState(true)
+    const [priceValid, setPriceValid] = useState(true)
+    const [createLoading, setCreateLoading] = useState(false)
 
     async function newSala( e ){
         e.preventDefault()
 
-        if(userData.wallet >= parseFloat(price.value)) {
-            if(oneString(name.value)){
-                await axios({
-                    data: newSalaData,
-                    method: 'post',
-                    url: 'https://example2wanted.herokuapp.com/api/new/sala',
-                    headers: {
-                        authorization: token
-                    }
-                })
-            }
+        if(name.value.split(" ").length > 1 || name.value.length < 4){
+            return setRoomValid(false)
         }
+        if(parseFloat(price.value) < 5000 ){
+            return setPriceValid(false)
+        }
+        setCreateLoading(true)
+            await axios({
+                data: newSalaData,
+                method: 'post',
+                url: 'http://localhost:3500/api/new/sala',
+                headers: {
+                    authorization: token
+                }
+            }).then(res => {
+                setCreateLoading(false)
+                if (res.data.error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: res.data.error,
+                    })
+                }else{
+                    props.props.history.push(`/sala/${res.data.id}`)}
+            }).catch(err => {
+                setCreateLoading(false)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: err,
+                })
+            })
     }
 
     const [modalOpen, setModalOpen] = useState(null)
@@ -92,13 +134,6 @@ export const HomeDescription = () => {
         setPriceModal(price)
     }
 
-    function oneString(string) {
-        if(string.split(" ").length === 1 ){
-            return true
-        }
-        return false
-    }
-
     const dropDown = useMediaQuery("(min-width: 640px)")
 
     return(
@@ -107,9 +142,17 @@ export const HomeDescription = () => {
 
 {/*------------------------------------------------ACTIVES ROOMS-----------------------------------------------------------*/}
 
-                { dropDown ?
+                { dropDown ? activesLoaing ? 
+                
+                    <div className='section-activeRooms text-center'>
+                        <p className='actives-title'>Your Rooms</p>
+                        <div className="spinner-border mt-4 text-danger" role="status">
+                                <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                :
                         <div className='section-activeRooms'>
-                            <p className='actives-title'>Your Rooms</p>  
+                            <p className='actives-title'>Your Rooms</p>
                             <div>
                                 {
                                     listRooms.length === 0 && <p className='no-rooms'>No hay salas creadas!</p>  
@@ -137,16 +180,25 @@ export const HomeDescription = () => {
                                             )
                                         })
                                     }
-                                </ul>  
+                                </ul>        
                         </div> 
-                : <div className='home-description-500'>
+                : activesLoaing ? 
+                
+                <div className={activeDropdown ? 'actives-dropdown text-center' : 'dNone'}>
+                    <p className='actives-title'>Your Rooms</p>
+                    <div className="spinner-border mt-4 mb-4 text-danger" role="status">
+                            <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            :
+                <div className='home-description-500'>
                 
                 <div className={activeDropdown ? 'actives-dropdown' : 'actives-dropdown-none'}>  
                     <p className='actives-title text-center'>Your Rooms</p>   
                     <div>
-                                {
-                                    listRooms.length === 0 && <p className='no-rooms'>No hay salas creadas!</p>  
-                                }
+                        {
+                            listRooms.length === 0 && <p className='no-rooms'>No hay salas creadas!</p>  
+                        }
                     </div>  
                     <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
                         <button disabled={countActives === 1 ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
@@ -235,7 +287,7 @@ export const HomeDescription = () => {
 </div>
 
 </div>                      
-            <NewSalaModal userData={userData} token={token} oneString={oneString} password={password} price={priceModal} isOpen={modalOpen} onClose={onCloseModal} />
+            {/* <NewSalaModal userData={userData} token={token} oneString={oneString} password={password} price={priceModal} isOpen={modalOpen} onClose={onCloseModal} /> */}
             {!dropDown && <div className='navigation'>
                 <button onClick={()=> setActiveDropdown(false) } className='navigation-button'><MdHome size='30' /></button>  
                 <button onClick={()=> setActiveDropdown(true) } className='navigation-button'><MdList size='30' /></button>  

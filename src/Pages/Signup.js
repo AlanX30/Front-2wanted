@@ -37,9 +37,9 @@ export const Signup = (props) => {
     function handleSubmit( e ){
         e.preventDefault()
         if(userName.value.length < 4 || userName.value.length > 16){
-            if(userName.value.split(" ").length > 1 ){
-                setUserValid(false)
-            }setUserValid(false)
+            setUserValid(false)
+        }else if(userName.value.split(" ").length > 1 ) {
+            setUserValid(false)
         }else if(!reg_password.test(password.value)){
             setPassword_valid(false)
         }else{

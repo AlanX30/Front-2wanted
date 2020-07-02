@@ -1,9 +1,11 @@
 import React from "react"
+import Swal from 'sweetalert2'
+import { withRouter } from 'react-router-dom'
 import './Styles/InvitationModal.css'
 import Modal from "./Modal"
 import axios from 'axios'
 
-export const InvitationModal = (props) => {
+const InvitationModal = (props) => {
 
     const invitation = props.invitationData
 
@@ -25,12 +27,25 @@ export const InvitationModal = (props) => {
             headers: {
                 authorization: props.token
             }
-        })
-        props.onClose() 
+        }).then(res => {
+            if(res.data.error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error,
+                })
+            }else{
+                props.history.push(`/sala/${res.data.id}`)
+            }
+        }).catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: err,
+            })
+        }) 
     }
     
-    
-
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
            <h3>Are you sure?</h3>
@@ -49,3 +64,5 @@ export const InvitationModal = (props) => {
         </Modal>
     )
 }
+
+export default withRouter(InvitationModal)
