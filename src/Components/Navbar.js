@@ -312,7 +312,7 @@ const Navbar = (props) => {
             </div>
 {/* ------------------------------------/Section-NavIcons--------------------------------------------------------------------- */}       
         </nav>
-        <JoinModal token={token} price={filterSala.price} salaId={filterSala._id} isOpen={modal2Open} onClose={onClose2Modal}/>
+        <JoinModal token={token} data={filterSala.data} isOpen={modal2Open} onClose={onClose2Modal}/>
         <InvitationModal token={token} invitationData={invitationData} isOpen={modalOpen} onClose={onCloseModal} />
         </>
     )

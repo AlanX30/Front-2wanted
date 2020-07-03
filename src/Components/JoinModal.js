@@ -10,9 +10,15 @@ const JoinModal = (props) => {
 
     const parentUser = useFormValues()
 
-    const joinData = {
-        salaId: props.salaId,
-        parentUser: parentUser.value
+    let joinData
+    let price = 0
+
+    if(props.data){
+        joinData = {
+            salaId: props.data._id,
+            parentUser: parentUser.value
+        }
+        price = props.data.price
     }
 
     async function handleSubmit( e ){
@@ -48,7 +54,7 @@ const JoinModal = (props) => {
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <div className='join-modal'>
                 <h2>Are You sure?</h2>
-                <p>Price: <span>${props.price}</span></p>
+                <p>Price: <span>${price}</span></p>
 
                 <form onSubmit={handleSubmit}>
                     <p>Enter Parent Username</p>
