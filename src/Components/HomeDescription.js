@@ -3,9 +3,7 @@ import Swal from 'sweetalert2'
 import ArbolImg from '../Images/arbol.svg'
 import { useUserData } from '../hooks/useUserData'
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
-import {MdHome, MdList} from "react-icons/md"
-import useMediaQuery from '../hooks/useMediaQuery'
-import NewSalaModal from './NewSalaModal'
+import {MdHome, /* MdList, */  MdLockOutline, MdInfo} from "react-icons/md"
 import './Styles/HomeDescription.css'
 import { useFormValues } from '../hooks/useFormValues'
 import axios from 'axios'
@@ -17,10 +15,9 @@ export const HomeDescription = (props) => {
     const  {userData}  = useUserData()
    
     const [listRooms, setListRooms] = useState([])
-    const [activeDropdown, setActiveDropdown] = useState(false)
     let [countActives, setCountActives] = useState(1) 
     const [activesData, setActivesData] = useState({})
-    const [activesLoaing, setActivesLoading] = useState(false)
+    const [activesLoading, setActivesLoading] = useState(false)
 
         useEffect(() => { 
             if(token){
@@ -89,11 +86,13 @@ export const HomeDescription = (props) => {
 
         if(name.value.split(" ").length > 1 || name.value.length < 4){
             return setRoomValid(false)
-        }
+        }else { setRoomValid(true)}
         if(parseFloat(price.value) < 5000 ){
             return setPriceValid(false)
-        }
+        }else{ setPriceValid(true) }
+
         setCreateLoading(true)
+
             await axios({
                 data: newSalaData,
                 method: 'post',
@@ -120,178 +119,100 @@ export const HomeDescription = (props) => {
                 })
             })
     }
-
-    const [modalOpen, setModalOpen] = useState(null)
-    const [priceModal, setPriceModal] = useState(null)
     
-
-    function onCloseModal(){
-        setModalOpen(null)
-    }
-
-    function onOpenModal(price){
-        setModalOpen(true)
-        setPriceModal(price)
-    }
-
-    const dropDown = useMediaQuery("(min-width: 640px)")
-
     return(
-        <>
-            <div className='sections'>
+        <div className='home-container'>
 
-{/*------------------------------------------------ACTIVES ROOMS-----------------------------------------------------------*/}
+            <div className='home-left'>
 
-                { dropDown ? activesLoaing ? 
-                
-                    <div className='section-activeRooms text-center'>
-                        <p className='actives-title'>Your Rooms</p>
-                        <div className="spinner-border mt-4 text-danger" role="status">
-                                <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                :
-                        <div className='section-activeRooms'>
-                            <p className='actives-title'>Your Rooms</p>
-                            <div>
-                                {
-                                    listRooms.length === 0 && <p className='no-rooms'>No hay salas creadas!</p>  
-                                }
-                            </div>
-                            <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
-                                <button disabled={countActives === 1 ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
-                                <p><span>{countActives}</span> - {activesData.total}</p> 
-                                <button disabled={countActives === activesData.total ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives += 1) }><AiOutlineCaretRight size='30' /></button>
-                            </div>
-                                <ul className=''>
-                                    {
-                                        listRooms.map((data) => {
-                                            return (
-                                                <li className='actives-li' key={data._id}>
-                                                    <Link to={`/sala/${data._id}`} className='actives-links Link'>
-                                                            <img src={ArbolImg} alt="ArbolImg"/>
-                                                        <div className='actives-description'>
-                                                            <p>Room Name: <span>{data.name}</span></p>
-                                                            <p>Price: <span>${data.price}</span></p>
-                                                            <p>Creator: <span>{data.creator}</span></p>
-                                                        </div>
-                                                    </Link>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>        
-                        </div> 
-                : activesLoaing ? 
-                
-                <div className={activeDropdown ? 'actives-dropdown text-center' : 'dNone'}>
-                    <p className='actives-title'>Your Rooms</p>
-                    <div className="spinner-border mt-4 mb-4 text-danger" role="status">
-                            <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
-            :
-                <div className='home-description-500'>
-                
-                <div className={activeDropdown ? 'actives-dropdown' : 'actives-dropdown-none'}>  
-                    <p className='actives-title text-center'>Your Rooms</p>   
-                    <div>
-                        {
-                            listRooms.length === 0 && <p className='no-rooms'>No hay salas creadas!</p>  
-                        }
-                    </div>  
+
+                <div className='actives-rooms'>
+                    <h3>Your Rooms</h3>
                     <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
                         <button disabled={countActives === 1 ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
-                        <p><span>{countActives}</span> - {activesData.total}</p> 
+                            <p><span>{countActives}</span> - {activesData.total}</p> 
                         <button disabled={countActives === activesData.total ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives += 1) }><AiOutlineCaretRight size='30' /></button>
-                    </div>          
-                    <ul >
-                        {
-                            listRooms.map((data) => {
-                                return (
-                                    <li className='actives-li' key={data._id}>
-                                        <Link to={`/sala/${data._id}`} className='actives-links btn btn-warning'>
-                                            <img src={ArbolImg} alt="ArbolImg"/>
-                                            <div className='actives-description'>
-                                                <p>Room Name: <span>{data.name}</span></p>
-                                                <p>Price: <span>${data.price}</span></p>
-                                                <p>Creator: <span>{data.creator}</span></p>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>                       
+                    </div>
+                    {
+                    activesLoading ? 
+                        <div className=' text-center'>
+                            <div className="spinner-border spiner-actives text-danger" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div> : 
+                        <div>
+                            {
+                                listRooms.length === 0 ? <p className='no-salas-actives'>No hay salas creadas!</p>  :
+
+                                <div>
+                                    
+                                    <ul>
+                                        {
+                                            listRooms.map((data) => {
+                                                return (
+                                                    <li className='actives-li' key={data._id}>
+                                                        <Link to={`/sala/${data._id}`} className='actives-links Link'>
+                                                            <img src={ArbolImg} alt="ArbolImg"/>
+                                                            <div className='actives-description'>
+                                                                <p>Room Name: <span>{data.name}</span></p>
+                                                                <p>Price: <span>${data.price}</span></p>
+                                                                <p>Creator: <span>{data.creator}</span></p>
+                                                            </div>
+                                                        </Link>
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                    </ul>        
+                                </div>
+                            }
+                        </div> 
+                    }
+                    
                 </div>
-                } 
+            </div>
 
- 
-{/*------------------------------------------------ACTIVES ROOMS-----------------------------------------------------------*/}
-{/*------------------------------------------------CREATE ROOMS-----------------------------------------------------------*/}
+            <div className='home-right'>
 
-<div className={activeDropdown ? 'actives-dropdown-none' : 'section-create'}>
-    <div className="create-default">
-        <div className='text-center'>
-             <h1>Create Default Room</h1>
+                <div className="create-custom">
+                    <div className='create-form-container'>
+                        <h3>Create Custom Room</h3>    
+                        <form onSubmit={newSala} >
+                            <div className={roomValid ? 'mb-3' : 'mb-2'}>
+                                <div className='d-flex'>
+                                    <div>
+                                        <div class="input-group-text input-guide">< MdHome /></div>
+                                    </div>
+                                    <input type='text' {...name} placeholder='Room Name' />
+                                </div>
+                                <label className={!roomValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimo 4 caracteres, no debe haber espacios</label>
+                            </div>
+                            <div className={priceValid ? 'mb-3' : 'mb-2'}>
+                                <div className='d-flex'>
+                                    <div>
+                                        <div class="input-group-text input-guide">$</div>
+                                    </div>
+                                    <input  placeholder='Minimo $5.000' type='text' {...price} />
+                                </div>
+                                <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />precio Minimo de Sala $5.000 COP</label>
+                            </div>
+                            <div className='form-group d-flex'>
+                                <div>
+                                    <div class="input-group-text input-guide">< MdLockOutline /></div>
+                                </div>
+                                <input placeholder='Optional Password' type='password' {...password} />
+                            </div>
+                            <button>
+                                <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <p className={createLoading ? 'dNone' : ''}>Create!</p>
+                            </button>
+                        </form>   
+                    </div>       
+                </div>
+            </div>
+            <footer className='home-footer'></footer>
         </div>
-        <div className='default-par-container'>
-            <div className='default-par'>
-                <div className='create-default-button'>
-                    <div onClick={() => onOpenModal(5000)} className="default-button-figure">$5.000</div>       
-                </div>    
-                <div className='create-default-button'>
-                     <div onClick={() => onOpenModal(10000)} className="default-button-figure">$10.000</div>   
-                </div>       
-            </div>
-            <div className='default-par'>
-                <div className='create-default-button'>
-                    <div onClick={() => onOpenModal(20000)} className="default-button-figure">$20.000</div>         
-                </div>    
-                <div className='create-default-button'>
-                    <div onClick={() => onOpenModal(50000)} className="default-button-figure">$50.000</div>  
-                </div>       
-            </div>
-            <div className='default-par'>
-                <div className='create-default-button'>
-                    <div onClick={() => onOpenModal(80000)} className="default-button-figure">$80.000</div>  
-                </div>    
-                <div className='create-default-button'>
-                    <div onClick={() => onOpenModal(100000)} className="default-button-figure">$100.000</div>  
-                </div> 
-            </div>
-            
-        </div>   
-    </div>
-    <div className="create-custom">
-                        <div className='create-form-container'>
-                            <h1 className='mb-2'>Create Custom Room</h1>    
-                            <form className='' onSubmit={newSala} >
-                                <div className='form-group'>
-                                    <label className=''>Room Name:</label>
-                                    <input className="form-control" type='text' {...name} />
-                                </div>
-                                <div className='form-group'>
-                                    <label className='mb-0'>Price:</label>
-                                    <input className="form-control" type='text' {...price} />
-                                </div>
-                                <div className='form-group'>
-                                    <label className=''>Password:</label>
-                                    <input className="form-control" placeholder='Optional' type='password' {...password} />
-                                </div>
-                                <button className='btn btn-warning'>Create</button>
-                             </form>   
-                </div>       
-    </div>
-</div>
-
-</div>                      
-            {/* <NewSalaModal userData={userData} token={token} oneString={oneString} password={password} price={priceModal} isOpen={modalOpen} onClose={onCloseModal} /> */}
-            {!dropDown && <div className='navigation'>
-                <button onClick={()=> setActiveDropdown(false) } className='navigation-button'><MdHome size='30' /></button>  
-                <button onClick={()=> setActiveDropdown(true) } className='navigation-button'><MdList size='30' /></button>  
-            </div>}
-        </>
     )
 }
