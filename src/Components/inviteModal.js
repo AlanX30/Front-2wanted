@@ -60,7 +60,7 @@ export const InviteModal = (props) => {
                     <p>Message</p>
                     <input {...message} type="text" placeholder='Optional' className='form-control'/>
                 </div>
-                <button className='btn btn-dark btn-block'>Invite</button>
+                <button className='btn btn-dark btn-block invitation-button'>Invite</button>
             </form>
         </Modal>
     )

@@ -1,3 +1,12 @@
 .invitationModal p {
-  margin: 30px 0;
+  margin: 18px 0;
+  font-weight: 800;
+}
+.invitationModal span {
+  font-weight: 300;
+}
+.invitation-button {
+  background: #ff9f22;
+    color: black;
+    font-weight: 800;
 }

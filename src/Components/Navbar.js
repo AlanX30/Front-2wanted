@@ -187,7 +187,7 @@ const Navbar = (props) => {
                 <div className={iconNone  ? 'searcher-hidden' : 'dNone'}>
                     <form onSubmit={searchRoom1} >
                         <button onClick={()=> setIconNone(false)} type='button' className='icon-navbar'><MdKeyboardReturn size='23' /></button>
-                        <input {...room1} type='text' placeholder='Room Name'/>
+                        <input {...room1} type='text' placeholder={`Room Name`} />
                         <button type='submit' className='icon-navbar'><MdSearch size='23' /></button>
                     </form>
                 </div>
@@ -214,7 +214,7 @@ const Navbar = (props) => {
                             
                         filterSala.data ? 
                             
-                        <div className={dropdownFilter.isComponentVisible ? 'filter-sala isActive' : 'filter-sala'}>            
+                        <div className={dropdownFilter.isComponentVisible ? 'filter-sala' : 'dNone'}>            
                                 <div className=' filter-sala-wrap'>
                                     <img src={ArbolImg} className='' alt="..." />
                                     <div className='filter-sala-description'>

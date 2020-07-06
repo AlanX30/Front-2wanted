@@ -57,7 +57,7 @@ const InvitationModal = (props) => {
                     <p>Price: <span>${invitation.price}</span></p>
                     <p>In Parent User: <span>{invitation.parentUsername}</span></p>
                     <p>Message: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
-                    <button className='btn btn-dark btn-block' onClick={handleClick}>Join</button>
+                    <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>Join</button>
                 </div>
             }
            

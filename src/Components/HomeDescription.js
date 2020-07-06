@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import ArbolImg from '../Images/arbol.svg'
 import { useUserData } from '../hooks/useUserData'
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
-import {MdHome, /* MdList, */  MdLockOutline, MdInfo} from "react-icons/md"
+import {MdHome, MdList,  MdLockOutline, MdInfo} from "react-icons/md"
 import './Styles/HomeDescription.css'
 import { useFormValues } from '../hooks/useFormValues'
 import axios from 'axios'
@@ -13,7 +13,7 @@ export const HomeDescription = (props) => {
 
     const token = window.sessionStorage.getItem('token')
     const  {userData}  = useUserData()
-   
+    const [actives_560, setActives_560] = useState(false)
     const [listRooms, setListRooms] = useState([])
     let [countActives, setCountActives] = useState(1) 
     const [activesData, setActivesData] = useState({})
@@ -34,6 +34,7 @@ export const HomeDescription = (props) => {
                     setActivesLoading(false)
                     if(res.data.error) {
                         return Swal.fire({
+                            background: '#18191',
                             icon: 'error',
                             title: 'Error',
                             text: res.data.error,
@@ -87,7 +88,7 @@ export const HomeDescription = (props) => {
         if(name.value.split(" ").length > 1 || name.value.length < 4){
             return setRoomValid(false)
         }else { setRoomValid(true)}
-        if(parseFloat(price.value) < 5000 ){
+        if(parseFloat(price.value) < 5000 || price.value ===  '' ){
             return setPriceValid(false)
         }else{ setPriceValid(true) }
 
@@ -123,7 +124,7 @@ export const HomeDescription = (props) => {
     return(
         <div className='home-container'>
 
-            <div className='home-left'>
+            <div className={actives_560 ? 'home-left' : 'home-left home-left-560'}>
 
 
                 <div className='actives-rooms'>
@@ -172,7 +173,7 @@ export const HomeDescription = (props) => {
                 </div>
             </div>
 
-            <div className='home-right'>
+            <div className={!actives_560 ? 'home-right' : 'home-right home-right-560'}>
 
                 <div className="create-custom">
                     <div className='create-form-container'>
@@ -212,7 +213,10 @@ export const HomeDescription = (props) => {
                     </div>       
                 </div>
             </div>
-            <footer className='home-footer'></footer>
+            <div className='navigation-container'>
+                <button onClick={()=> setActives_560(false) } className={!actives_560 ? 'navigation-button navigation-left' : 'navigation-button left-button' }><MdHome size='35' /></button>  
+                <button onClick={()=> setActives_560(true) } className={actives_560 ? 'navigation-button navigation-right' : 'navigation-button' }><MdList size='35' /></button>  
+            </div>
         </div>
     )
 }

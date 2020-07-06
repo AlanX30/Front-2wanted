@@ -6,13 +6,13 @@
   .child {
     width: 20px;
     height: 20px;
-    background: #ffc107;
+    background:#f9c118;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     box-shadow: 0px -4px 0px black;
     align-items: center;
-    color: #ffc107;
+    color: #f9c118;
     border: none;
     animation: 2.4S wave infinite alternate;
   }
