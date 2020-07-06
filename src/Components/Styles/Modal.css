@@ -33,11 +33,11 @@
   background-color: #f5f5f5;
   padding: 0.5rem 1rem;
   border-radius: 10px;
-    border-bottom-right-radius: initial;
-    border-top-left-radius: initial;
-    background: #ff9f22;
-    color: black;
-    font-weight: 700;
+  border-bottom-right-radius: initial;
+  border-top-left-radius: initial;
+  background: #ff9f22;
+  color: black;
+  font-weight: 700;
 }
 @media screen and (max-height: 389px) {
   .Modal__container {

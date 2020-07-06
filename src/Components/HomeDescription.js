@@ -34,7 +34,6 @@ export const HomeDescription = (props) => {
                     setActivesLoading(false)
                     if(res.data.error) {
                         return Swal.fire({
-                            background: '#18191',
                             icon: 'error',
                             title: 'Error',
                             text: res.data.error,
