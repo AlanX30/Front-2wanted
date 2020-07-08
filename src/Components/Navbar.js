@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import io from 'socket.io-client'
 import ArbolImg from '../Images/arbol.svg'
 import Swal from 'sweetalert2'
 import logo from '../Images/logo.svg'
@@ -19,6 +20,7 @@ import axios from 'axios'
 const Navbar = (props) => {
 
     /* -----------------------------Busqueda---------------------------------------------------------------- */
+    const { userData } = useUserData() 
     const [filterSala, setFilterSala] = useState(false)
     const dropdownFilter = useComponentVisible(false);
     const [modal2Open, setModal2Open] = useState(null)
@@ -77,7 +79,9 @@ const Navbar = (props) => {
     const [modalOpen, setModalOpen] = useState(null)
     const [invitationData, setInvitationData] = useState(null)
     let [countPages, setCountPages] = useState(1)
-
+    let [count, setCount] = useState(0) 
+    let cuenta = 0
+    
     function onCloseModal(){
         setModalOpen(null)
     }
@@ -86,8 +90,25 @@ const Navbar = (props) => {
         setModalOpen(true)
         setInvitationData(invitationData)
     }
+
+    const socket = io('https://example2wanted.herokuapp.com')
+ 
+    if(userData.userName){
+        socket.emit('user_online', userData.userName)
+    }
+    
+    socket.on('new_message', () => {
+        cuenta = cuenta + 1 
+        setCount(cuenta) 
+    })
+    
     
     useEffect(()=>{
+
+        if(count > 0){
+            setCountPages(1)
+        }
+        
         axios({
             method: 'post',
             data: {page: countPages},
@@ -103,9 +124,16 @@ const Navbar = (props) => {
                     text: res.data.error,
                 })
             }else{
-                setInvitations( invitations => invitations.concat(res.data.invitations) )
-                setNotifications(res.data.countNotification)
-                setTotalPages(res.data.totalPages)
+                if(countPages === 1 || count > 0){
+                    setNotifications(res.data.countNotification)
+                    setTotalPages(res.data.totalPages)
+                    setInvitations(res.data.invitations)
+                    setCount(0)
+                }else{
+                    setInvitations( invitations => invitations.concat(res.data.invitations) )
+                    setNotifications(res.data.countNotification)
+                    setTotalPages(res.data.totalPages)
+                }
             }
         }).catch( error => {
             Swal.fire({
@@ -114,8 +142,9 @@ const Navbar = (props) => {
                 text: error,
             })
         })
-    },[token, countPages])
 
+    },[token, countPages, count])
+    
     function notificationButton() {
         
         toggle1.setIsComponentVisible(true)
@@ -131,9 +160,7 @@ const Navbar = (props) => {
     
             setNotifications(0)
         }
-    }
-    
-    const { userData } = useUserData()    
+    }   
     
     const { logout } = useContext(Context)
     

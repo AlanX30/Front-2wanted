@@ -137,7 +137,7 @@ export const HomeDescription = (props) => {
                     activesLoading ? 
                         <div className=' text-center'>
                             <div className="spinner-border spiner-actives text-danger" role="status">
-                                <span class="sr-only">Loading...</span>
+                                <span className="sr-only">Loading...</span>
                             </div>
                         </div> : 
                         <div>
@@ -181,7 +181,7 @@ export const HomeDescription = (props) => {
                             <div className={roomValid ? 'mb-3' : 'mb-2'}>
                                 <div className='d-flex'>
                                     <div>
-                                        <div class="input-group-text input-guide">< MdHome /></div>
+                                        <div className="input-group-text input-guide">< MdHome /></div>
                                     </div>
                                     <input type='text' {...name} placeholder='Room Name' />
                                 </div>
@@ -190,7 +190,7 @@ export const HomeDescription = (props) => {
                             <div className={priceValid ? 'mb-3' : 'mb-2'}>
                                 <div className='d-flex'>
                                     <div>
-                                        <div class="input-group-text input-guide">$</div>
+                                        <div className="input-group-text input-guide">$</div>
                                     </div>
                                     <input  placeholder='Minimo $5.000' type='text' {...price} />
                                 </div>
@@ -198,13 +198,13 @@ export const HomeDescription = (props) => {
                             </div>
                             <div className='form-group d-flex'>
                                 <div>
-                                    <div class="input-group-text input-guide">< MdLockOutline /></div>
+                                    <div className="input-group-text input-guide">< MdLockOutline /></div>
                                 </div>
                                 <input placeholder='Optional Password' type='password' {...password} />
                             </div>
                             <button>
                                 <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
-                                    <span class="sr-only">Loading...</span>
+                                    <span className="sr-only">Loading...</span>
                                 </div>
                                 <p className={createLoading ? 'dNone' : ''}>Create!</p>
                             </button>

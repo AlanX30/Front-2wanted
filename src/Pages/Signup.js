@@ -101,8 +101,8 @@ export const Signup = (props) => {
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-group form-inputs">
                                         <div className='d-flex'>
-                                            <div class="input-group- pre-formS">
-                                                <div class="input-group-text pre-form">@</div>
+                                            <div className="input-group- pre-formS">
+                                                <div className="input-group-text pre-form">@</div>
                                             </div>
                                             <input type="text" id="inlineFormInputGroupUsername2" className='form-control' {...userName} placeholder='UserName' required/>
                                         </div>
@@ -110,24 +110,24 @@ export const Signup = (props) => {
                                     </div>
                                     <div className="form-group form-inputs">
                                         <div className='d-flex'>
-                                            <div class="input-group- pre-formS">
-                                                <div class="input-group-text pre-form"><MdMail /></div>
+                                            <div className="input-group- pre-formS">
+                                                <div className="input-group-text pre-form"><MdMail /></div>
                                             </div>
                                             <input type="email" className='form-control' {...email} placeholder='Email' required/>
                                         </div>
                                     </div>
                                     <div className="form-group form-inputs">
                                         <div className='d-flex'>
-                                            <div class="input-group- pre-formS">
-                                                <div class="input-group-text pre-form"><MdCreditCard /></div>
+                                            <div className="input-group- pre-formS">
+                                                <div className="input-group-text pre-form"><MdCreditCard /></div>
                                             </div>
                                             <input type="text" className='form-control' {...dni} placeholder='CC, DNI ETC...' required/>
                                         </div>
                                     </div>
                                     <div className="form-group form-inputs">
                                         <div className='d-flex'>
-                                            <div class="input-group- pre-formS">
-                                                <div class="input-group-text pre-form"><MdLockOutline /></div>
+                                            <div className="input-group- pre-formS">
+                                                <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
                                             <input type="password"  className='form-control' {...password} placeholder='Password' required/>
                                         </div>
@@ -135,15 +135,15 @@ export const Signup = (props) => {
                                     </div>
                                     <div className="form-group form-inputs">
                                     <div className='d-flex'>
-                                            <div class="input-group- pre-formS">
-                                                <div class="input-group-text pre-form"><MdLockOutline /></div>
+                                            <div className="input-group- pre-formS">
+                                                <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
                                             <input type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirm Password' required/>
                                         </div>
                                     </div>
                                     <button type='submit' className='button-signup'>
                                         <div className={signupLoading ? "spinner-border text-danger" : 'dNone'} role="status">
-                                            <span class="sr-only">Loading...</span>
+                                            <span className="sr-only">Loading...</span>
                                         </div>
                                         <p className={signupLoading ? 'dNone' : ''}>Signup</p>
                                     </button>

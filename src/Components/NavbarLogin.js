@@ -61,7 +61,7 @@ import { useState } from 'react'
                         </div>
                         <button type='submit' className="login-button">
                             <div className={loginLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
-                                <span class="sr-only">Loading...</span>
+                                <span className="sr-only">Loading...</span>
                             </div>
                         <p className={loginLoading ? 'dNone' : ''}>Login</p>
                         </button>

@@ -17,9 +17,14 @@ export const useUserData = () => {
                     authorization: token
                     }
             })
-            .then(res => setUserData(res.data)) 
+            .then(res => {
+                if(res.data) {
+                    setUserData(res.data)
+                }
+            })
         } 
     }, [token])
+  
 
     return { userData }
 }
