@@ -44,9 +44,6 @@
     height: max-content;
     top: 5rem;
   }
-  .join-modal p {
-    font-size: 20px;
-  }
 }
 @media screen and (max-width: 630px) {
   .Modal__container {

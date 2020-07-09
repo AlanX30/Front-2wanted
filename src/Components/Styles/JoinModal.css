@@ -1,11 +1,40 @@
 .join-modal p {
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 600;
-  margin-top: 15px;
+  margin: 8px 0;
 }
 .join-modal span {
   font-weight: 200;
 }
 .join-modal form {
-  margin-top: 30px;
+  margin-top: 18px;
+}
+.join-modal label {
+  margin-left: 5px;
+  cursor: pointer;
+}
+.join-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #ff9f22;
+  padding: 0;
+  padding-left: 3px;
+  font-size: 16px;
+  color: #ff9f22;
+  width: 100%;
+}
+.join-input::-webkit-input-placeholder {
+  color: #ff9f225e;
+}
+.join-nota {
+  height: 74px;
+  margin-bottom: 1rem;
+}
+.join-nota p {
+  font-weight: 400;
+  font-size: 14px;
+}
+.join-nota span {
+  font-size: 14px;
+  font-weight: 700;
 }

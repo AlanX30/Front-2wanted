@@ -3,6 +3,7 @@ import Modal from "./Modal"
 import Swal from 'sweetalert2'
 import { useFormValues } from '../hooks/useFormValues'
 import axios from 'axios'
+import './Styles/Invite.css'
 
 export const InviteModal = (props) => {
     
@@ -13,7 +14,7 @@ export const InviteModal = (props) => {
 
     if(props.data){
         data = {
-            newUser: user.value, parentUsername: props.data.parentUsername,
+            newUser: `@${user.value}`, parentUsername: props.data.parentUsername,
             message: message.value, salaId: props.data.salaId,
             price: props.data.price, salaName: props.data.salaName, host: props.data.host
         }
@@ -50,15 +51,16 @@ export const InviteModal = (props) => {
     
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
-           <h3>Invite User</h3>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <p>User</p>
-                    <input {...user} type="text" className='form-control'/>
+           <h3>Invitar Usuario</h3>
+            <form className='invite-form' onSubmit={handleSubmit}>
+                <div className='d-flex'>
+                    <div className="pre-formS">
+                        <div className="input-group-text invite-pre-form">@</div>
+                    </div>
+                    <input {...user} type="text" placeholder='Usuario'/>
                 </div>
-                <div className="form-group">
-                    <p>Message</p>
-                    <input {...message} type="text" placeholder='Optional' className='form-control'/>
+                <div className="form-group mt-4 mb-4">
+                    <input {...message} type="text" placeholder='Mensaje Opcional'/>
                 </div>
                 <button className='btn btn-dark btn-block invitation-button'>Invite</button>
             </form>

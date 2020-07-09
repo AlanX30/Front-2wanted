@@ -35,6 +35,7 @@ const InvitationModal = (props) => {
                     text: res.data.error,
                 })
             }else{
+                props.onClose()
                 props.history.push(`/sala/${res.data.id}`)
             }
         }).catch(err => {

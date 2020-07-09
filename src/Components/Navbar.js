@@ -156,7 +156,7 @@ const Navbar = (props) => {
                 headers: {
                     authorization: token
                 }
-            })
+            }).then(res=>console.log(res))
     
             setNotifications(0)
         }
@@ -236,7 +236,7 @@ const Navbar = (props) => {
                     { 
 
                         searchLoading ? <div className= "spinner-border text-danger" role="status">
-                             <span class="sr-only">Loading...</span>
+                             <span className="sr-only">Loading...</span>
                         </div> : 
                             
                         filterSala.data ? 

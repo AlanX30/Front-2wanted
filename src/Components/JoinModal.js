@@ -5,8 +5,26 @@ import { withRouter } from 'react-router-dom'
 import Modal from './Modal'
 import axios from 'axios'
 import { useFormValues } from '../hooks/useFormValues'
+import { useState } from 'react'
 
 const JoinModal = (props) => {
+
+    const [radio1, setRadio1] = useState(true)
+    const [radio2, setRadio2] = useState(false)
+    const [parentInput, setParentInput] = useState(true)
+
+    function handleRadio1(){
+        setRadio1(true)
+        setRadio2(false)
+        setParentInput(true)
+    }
+    function handleRadio2(){
+        setRadio1(false)
+        setRadio2(true)
+        setParentInput(false)
+    }
+
+    /* ----------------------------------------------------API---------------------------------------------------- */
 
     const parentUser = useFormValues()
 
@@ -16,7 +34,7 @@ const JoinModal = (props) => {
     if(props.data){
         joinData = {
             salaId: props.data._id,
-            parentUser: parentUser.value
+            parentUser: `@${parentUser.value}`
         }
         price = props.data.price
     }
@@ -40,6 +58,7 @@ const JoinModal = (props) => {
                 })
             }else{
                 props.history.push(`/sala/${res.data.id}`)
+                props.onClose()
             }
         }).catch(err => {
             Swal.fire({
@@ -50,6 +69,8 @@ const JoinModal = (props) => {
         })
     }
 
+     /* ----------------------------------------------------API---------------------------------------------------- */
+
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <div className='join-modal'>
@@ -57,11 +78,31 @@ const JoinModal = (props) => {
                 <p>Price: <span>${price}</span></p>
 
                 <form onSubmit={handleSubmit}>
-                    <p>Enter Parent Username</p>
-                    <div className="form-group">
-                        <input {...parentUser} type="text" className='form-control'/>
+                    <div>
+                        <div>
+                            <input type="radio" checked={radio1} onChange={handleRadio1} />
+                            <label onClick={handleRadio1}>Elegir usuario padre</label>
+                        </div>
+                        <div>
+                            <input type="radio" checked={radio2} onChange={handleRadio2} />
+                            <label onClick={handleRadio2}>Usuario padre aleatorio</label>
+                        </div>
                     </div>
-                    <button className='btn btn-dark'>Confirm</button>
+                    <div className={parentInput ? 'form-group' : 'dNone'}>
+                        <p>Enter Parent Username</p>
+                        <div className='d-flex'>
+                            <div className="pre-formS">
+                                <div className="input-group-text invite-pre-form">@</div>
+                            </div>
+                            <input className='join-input' {...parentUser} placeholder='Usuario' type="text"/>
+                        </div>
+                    </div>
+                    <div className={!parentInput ? 'join-nota' : 'dNone'}>
+                        <p>
+                            <span>Nota:</span> "Sera agregado como referido de algun usuario aleatorio con espacio disponible en esta sala."
+                        </p>
+                    </div>
+                    <button className='btn btn-dark btn-block invitation-button'>Confirm</button>
                 </form>
             </div>
         </Modal>

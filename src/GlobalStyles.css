@@ -51,3 +51,6 @@ li {
 .dNone {
   display: none;
 }
+.vHidden {
+  visibility: hidden;
+}
