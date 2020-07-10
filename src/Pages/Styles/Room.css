@@ -7,29 +7,35 @@
 }
 .arbol-container {
   width: 90%;
-  border: 2px solid;
+  border: 4px solid;
   margin: 0 auto;
   padding-top: 15px;
   height: max-content;
   border-radius: 20px;
   background-color: var(--bg-objects);
   padding-bottom: 5px;
-  box-shadow: -2px -1px #473616;
+  box-shadow: -4px -4px 8px #000;
 }
 .room-details{
   background-color: var(--bg-objects);
-  color: #a0a0a0;
+  color: white;
   width: 90%;
   padding: 12px;
   border-radius: 10px;
-  border: 4px solid #212529;;
-  box-shadow: -2px -1px #473616;
+  border: 4px solid #212529;
+  box-shadow: 4px -4px 8px #000;
+  padding-left: 18px;
 }
-.room-details p {
-  font-weight: 700;
-}
+/* .room-details p {
+} */
 .room-details span {
-  font-weight: 400;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-top: -7px;
+    border-bottom: 1px solid
 }
 .loading-room {
   margin-top: 120px;

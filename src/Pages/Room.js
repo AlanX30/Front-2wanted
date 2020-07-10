@@ -93,17 +93,17 @@ export const Room = (props) => {
             </div>    
             <div>
                 <div className='room-details'>
-                    <p>Room Name:</p>
+                    <p>Nombre de sala:</p>
                     <span>{dataRoom.name}</span>
-                    <p>Creator:</p>
+                    <p>Creador:</p>
                     <span>{dataRoom.creator}</span>
-                    <p>Room Price:</p>
+                    <p>Valor de sala:</p>
                     <span>${dataRoom.price}</span>
-                    <p>Accumulated level 3:</p>
+                    <p>Acomulado en nivel 3:</p>
                     <span>${acum3}</span>
-                    <p>Accumulated level 4:</p>
+                    <p>Acomulado en nivel 4:</p>
                     <span>${acum4}</span>
-                    <p>Total accumulated:</p>
+                    <p>Total acomulado:</p>
                     <span>${tAcum}</span>
                 </div>
             </div>    

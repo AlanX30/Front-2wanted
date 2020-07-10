@@ -214,7 +214,7 @@ const Navbar = (props) => {
                 <div className={iconNone  ? 'searcher-hidden' : 'dNone'}>
                     <form onSubmit={searchRoom1} >
                         <button onClick={()=> setIconNone(false)} type='button' className='icon-navbar'><MdKeyboardReturn size='23' /></button>
-                        <input {...room1} type='text' placeholder={`Room Name`} />
+                        <input {...room1} type='text' placeholder='Nombre de sala' />
                         <button type='submit' className='icon-navbar'><MdSearch size='23' /></button>
                     </form>
                 </div>
@@ -227,7 +227,7 @@ const Navbar = (props) => {
 
                 <form onSubmit={searchRoom1} >
                     <div>
-                        <input {...room1} type='text' placeholder='Room Name'/>
+                        <input {...room1} type='text' placeholder='Nombre de sala'/>
                     </div>
                     <button type='submit' className='icon-navbar'><MdSearch size='23' /></button>
                 </form>
@@ -242,16 +242,15 @@ const Navbar = (props) => {
                         filterSala.data ? 
                             
                         <div className={dropdownFilter.isComponentVisible ? 'filter-sala' : 'dNone'}>            
-                                <div className=' filter-sala-wrap'>
+                                <div onClick={onOpen2Modal} className=' filter-sala-wrap'>
                                     <img src={ArbolImg} className='' alt="..." />
                                     <div className='filter-sala-description'>
-                                        <p> Room Name:  <span> {filterSala.data.name}</span>  </p>
-                                        <p> Password:  <span> {filterSala.data.protected ? 'Yes' : 'No'}</span>  </p>
-                                        <p> Creator:  <span> {filterSala.data.creator}</span>  </p>
-                                        <p> Price:  <span> ${filterSala.data.price}</span>  </p>
+                                        <p> Nombre de sala:  <span> {filterSala.data.name}</span>  </p>
+                                        <p> Creador:  <span> {filterSala.data.creator}</span>  </p>
+                                        <p> Valor:  <span> ${filterSala.data.price}</span>  </p>
                                     </div>
                                 </div>
-                            <button onClick={onOpen2Modal} className=''>Join</button>
+                            <button onClick={onOpen2Modal} className=''>Unirse</button>
                         </div> : <div className='no-spaces'>{filterSala.error}!</div>
                     } 
                 </div>
@@ -277,16 +276,16 @@ const Navbar = (props) => {
                                         <button className='' onClick={()=> onOpenModal(invitation)}>
                                                 <img src={ArbolImg} alt="ArbolImg"/>
                                                 <div className='invitation-description'>
-                                                    <p>Invited for: <span> {invitation.host}</span></p>
-                                                    <p>Room Name: <span> {invitation.salaName}</span></p>
-                                                    <p>Price: <span> ${invitation.price}</span></p>
+                                                    <p>Invitado por: <span> {invitation.host}</span></p>
+                                                    <p>Nombre de sala: <span> {invitation.salaName}</span></p>
+                                                    <p>valor: <span> ${invitation.price}</span></p>
                                                 </div>
                                         </button>
                                     </li>
                                 )
                             })
                         }
-                    <button className={totalPages > countPages ? 'button-more-notifications' : 'dNone'} onClick={()=>{setCountPages(countPages + 1)}}>More ▼</button>
+                        <button className={totalPages > countPages ? 'button-more-notifications' : 'dNone'} onClick={()=>{setCountPages(countPages + 1)}}>Ver mas ▼</button>
                     </div>
                 </div>
 
@@ -302,36 +301,33 @@ const Navbar = (props) => {
                             < IoIosContact size='46'/>    <p> {userData.userName}</p>
                         </div>
                         <div className='item-menu-right-wallet-container'>
-                            <div>Wallet</div>
+                            <div>Billetera</div>
                             <p>${userData.wallet}</p>
                         </div>
                         <div className='item-menu-right-cashier'>
-                            <div onClick={()=> setDeposit(true)} to='/wallet' className='button-deposit'>Deposit</div>
-                            <div to='/wallet' className='Link button-withdraw'>Withdraw</div>
+                            <div onClick={()=> setDeposit(true)} to='/wallet' className='button-deposit'>Depositar</div>
+                            <div to='/wallet' className='Link button-withdraw'>Retirar</div>
                         </div>
                         <div className={deposit ? "item-menu-right payments" : "dNone"}>
                              <form className={buttonPay ? 'dNone' : ''} onSubmit={onPay}>
                                  <input className='pl-2' type="text" {...pay} placeholder='$'/>
-                                 <button type='submit'>Next</button>
+                                 <button type='submit'>Continuar</button>
                              </form>
                              <div className={buttonPay ? 'button-pay' : 'dNone'} >
-                                 <a className='Link' href={urlPay} rel="noopener noreferrer" target='_blank'>Pay</a>
+                                <a className='Link' href={urlPay} rel="noopener noreferrer" target='_blank'>Confirmar pago por &nbsp; ${pay.value}</a>
                              </div>
                         </div>
                         <div className="item-menu-right">
-                            <MdChromeReaderMode /><p>&nbsp;Balance history</p> 
+                            <MdChromeReaderMode /><p>&nbsp;Historial de balance</p> 
                         </div>
                         <div className="item-menu-right">
-                           < IoMdSettings /><p>&nbsp;User Configuration</p> 
+                           < IoMdSettings /><p>&nbsp;Configuracion de usuario</p> 
                         </div>
                         <div className="item-menu-right">
-                           <MdHelpOutline /><p>&nbsp;Help</p> 
-                        </div>
-                        <div className="item-menu-right">
-                           < IoMdContacts /><p>&nbsp;Support</p> 
+                           <MdHelpOutline /><p>&nbsp;Ayuda</p> 
                         </div>
                         <div onClick={handleLogout} className="item-menu-right">
-                           <MdExitToApp /><p>&nbsp;Log Out</p>  
+                           <MdExitToApp /><p>&nbsp;Cerrar Sesion</p>  
                         </div>
                     </div> 
                 </div>          

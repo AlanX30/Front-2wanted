@@ -30,15 +30,17 @@ const JoinModal = (props) => {
 
     let joinData
     let price = 0
+    let random = radio2 ? true : false
 
     if(props.data){
         joinData = {
             salaId: props.data._id,
-            parentUser: `@${parentUser.value}`
+            parentUser: `@${parentUser.value}`,
+            random: random
         }
         price = props.data.price
     }
-
+ 
     async function handleSubmit( e ){
 
         e.preventDefault()
@@ -74,8 +76,8 @@ const JoinModal = (props) => {
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <div className='join-modal'>
-                <h2>Are You sure?</h2>
-                <p>Price: <span>${price}</span></p>
+                <h2>Estas Seguro?</h2>
+                <p>Valor: <span>${price}</span></p>
 
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -89,7 +91,7 @@ const JoinModal = (props) => {
                         </div>
                     </div>
                     <div className={parentInput ? 'form-group' : 'dNone'}>
-                        <p>Enter Parent Username</p>
+                        <p>Ingrese el usuario padre</p>
                         <div className='d-flex'>
                             <div className="pre-formS">
                                 <div className="input-group-text invite-pre-form">@</div>
@@ -102,7 +104,7 @@ const JoinModal = (props) => {
                             <span>Nota:</span> "Sera agregado como referido de algun usuario aleatorio con espacio disponible en esta sala."
                         </p>
                     </div>
-                    <button className='btn btn-dark btn-block invitation-button'>Confirm</button>
+                    <button className='btn btn-dark btn-block invitation-button'>Confirmar</button>
                 </form>
             </div>
         </Modal>

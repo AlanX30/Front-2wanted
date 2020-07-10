@@ -3,10 +3,13 @@
     justify-content: space-around;
     margin-bottom: 12px;
 }
-  .child {
+.tree-wrap span {
+  font-weight: 500;
+}
+.child {
     width: 20px;
     height: 20px;
-    background:#f9c118;
+    background: #eea749;
     border-radius: 50%;
     display: flex;
     justify-content: center;

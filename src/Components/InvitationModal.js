@@ -53,12 +53,12 @@ const InvitationModal = (props) => {
 
             {
                 invitation && <div className='invitationModal'>
-                    <p>Invited for: <span>{invitation.host}</span></p>
-                    <p>Room Name: <span>{invitation.salaName}</span></p>
-                    <p>Price: <span>${invitation.price}</span></p>
-                    <p>In Parent User: <span>{invitation.parentUsername}</span></p>
-                    <p>Message: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
-                    <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>Join</button>
+                    <p>Invitado por: <span>{invitation.host}</span></p>
+                    <p>Nombre de sala: <span>{invitation.salaName}</span></p>
+                    <p>Valor: <span>${invitation.price}</span></p>
+                    <p>Usuario padre: <span>{invitation.parentUsername}</span></p>
+                    <p>Mensaje: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
+                    <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>Unirse</button>
                 </div>
             }
            

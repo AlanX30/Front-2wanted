@@ -15,6 +15,7 @@
   justify-content: center;
 }
 .actives-rooms {
+  border: 4px solid;
   height: 500px;
   background: var(--bg-objects);
   width: 400px;

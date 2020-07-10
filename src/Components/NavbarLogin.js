@@ -56,14 +56,14 @@ import { useState } from 'react'
                             <input type="email" className='form-control' {...email} placeholder='Email'/>
                         </div>
                         <div className="form-group login-inputs">
-                            <input className="form-control" type="password" {...password} placeholder="Password"/>
-                            <a href='https://www.youtube.com/' target='_blank' rel="noopener noreferrer">Forgot your account?</a>
+                            <input className="form-control" type="password" {...password} placeholder="Contraseña"/>
+                            <a href='https://www.youtube.com/' target='_blank' rel="noopener noreferrer">Olvidaste tu cuenta?</a>
                         </div>
                         <button type='submit' className="login-button">
                             <div className={loginLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                                 <span className="sr-only">Loading...</span>
                             </div>
-                        <p className={loginLoading ? 'dNone' : ''}>Login</p>
+                        <p className={loginLoading ? 'dNone' : ''}>Entrar</p>
                         </button>
                     </form>
         </nav>

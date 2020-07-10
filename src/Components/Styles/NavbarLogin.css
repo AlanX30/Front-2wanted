@@ -34,6 +34,7 @@
   border: none;
   border-radius: 10px;
   background: #ffc107;
+  font-weight: 700;
 }
 .loading-login {
   width: 22px;

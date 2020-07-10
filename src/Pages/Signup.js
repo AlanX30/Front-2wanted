@@ -36,14 +36,19 @@ export const Signup = (props) => {
 
     function handleSubmit( e ){
         e.preventDefault()
+        
         if(userName.value.length < 4 || userName.value.length > 16){
-            setUserValid(false)
-        }else if(userName.value.split(" ").length > 1 ) {
-            setUserValid(false)
-        }else if(!reg_password.test(password.value)){
-            setPassword_valid(false)
-        }else{
+            return setUserValid(false)
+        }else{setUserValid(true)}
+        if(userName.value.split(" ").length > 1 ) {
+           return setUserValid(false)
+        }else{setUserValid(true)}
+        if(!reg_password.test(password.value)){
+           return setPassword_valid(false)
+        }else{setPassword_valid(true)}
+
         setSignupLoading(true)
+
         axios.post('https://example2wanted.herokuapp.com/api/users/signup', form)
         .then(res => {
             if(res.data.error){
@@ -66,7 +71,7 @@ export const Signup = (props) => {
                 text: err,
             })
         }) 
-    }
+    
     }
         
     return(
@@ -94,8 +99,8 @@ export const Signup = (props) => {
 
              <div className='signup-right'>
                 <div className='card-signup'>
-                            <h3 className="text-white card-header pl-4">
-                                Account Register
+                            <h3 className="text-center text-white card-header pl-4">
+                                Registrarse
                             </h3>
                             <div className="card-body form-body">
                                 <form onSubmit={handleSubmit}>
@@ -104,7 +109,7 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form">@</div>
                                             </div>
-                                            <input type="text" id="inlineFormInputGroupUsername2" className='form-control' {...userName} placeholder='UserName' required/>
+                                            <input type="text" id="inlineFormInputGroupUsername2" className='form-control' {...userName} placeholder='Nombre de usuario' required/>
                                         </div>
                                         <label className={!userValid ? 'password-valid' : 'dNone'}>Minimo 8 caracteres, Maximo , sin espacios</label>
                                     </div>
@@ -129,7 +134,7 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
-                                            <input type="password"  className='form-control' {...password} placeholder='Password' required/>
+                                            <input type="password"  className='form-control' {...password} placeholder='Contraseña' required/>
                                         </div>
                                         <label className={!password_valid ? 'password-valid' : 'dNone'}>Debe contener mayuscula, minuscula y numero, minimo 8 caracteres</label>
                                     </div>
@@ -138,14 +143,14 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
-                                            <input type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirm Password' required/>
+                                            <input type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirmar contraseña' required/>
                                         </div>
                                     </div>
                                     <button type='submit' className='button-signup'>
                                         <div className={signupLoading ? "spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
-                                        <p className={signupLoading ? 'dNone' : ''}>Signup</p>
+                                        <p className={signupLoading ? 'dNone' : ''}>Registrarse</p>
                                     </button>
                                 </form>
                             </div>

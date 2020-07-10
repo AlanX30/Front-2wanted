@@ -41,7 +41,7 @@ nav {
 }
 .dropdown-menu-navbar-filter.isActive {
   transition: .5s;
-  max-width: 250px;
+  width: 375px;
   min-width: 180px;
   text-align: center;
   height: auto;
@@ -53,6 +53,7 @@ nav {
   border-bottom: 3px solid;
     border-right: 3px solid;
     border-left: 3px solid;
+    top: 44px;
 }
 .filter-sala{
   display: flex;
@@ -74,15 +75,16 @@ nav {
   background: #eea748;;
   align-items: center;
   width: 100%;
-  padding: 10px;
+  padding: 5px;
   padding-left: 5px;
+  cursor: pointer;
 }
 .filter-sala img {
   height: 40px;
-  margin-right: 5px;
+  margin: 0 6px;
 }
 .filter-sala-description {
-  width: 173px;
+  width: 80%;
 }
 .filter-sala p {
   color: black;
@@ -92,7 +94,7 @@ nav {
     white-space: nowrap;
     flex-wrap: wrap;
     align-items: center;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 700;
 }
 .filter-sala span {
@@ -382,16 +384,26 @@ nav {
   }
   }
   @media screen and (max-width: 700px) {
+  .dropdown-menu-navbar-filter.isActive {
+    left: 200px;
+  }
   .dropdown-menu-navbar2.isActive{
     width: 50%;
   }
   }
+  @media screen and (max-width: 600px) {
+    .dropdown-menu-navbar-filter.isActive {
+      left: 125px;
+  }
+  }
   @media screen and (max-width: 530px) {
+
+  .dropdown-menu-navbar-filter.isActive {
+      left: 80px;
+  }
   .dropdown-menu-navbar2.isActive{
-    width: 80%;
+      width: 80%;
   }
-  }
-  @media screen and (max-width: 530px) {
   .logo1 {
     height: 30px;
   }
@@ -431,9 +443,14 @@ nav {
   }
   .dropdown-menu-navbar-filter.isActive {
     left: 30px;
-    top: 43px;
+    top: 44px;
     right: 30px;
     display: flex;
     justify-content: center;
+  }
+}
+@media screen and (max-width: 420px) {
+  .dropdown-menu-navbar-filter.isActive {
+    width: 85%;
   }
 }

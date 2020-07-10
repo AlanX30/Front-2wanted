@@ -65,9 +65,10 @@ export const HomeDescription = (props) => {
             {
                 user: userData.userName,
                 parentId: undefined,
+                space: 'true',
                 childsId: {
                     childId1: '',
-                    childId2: ''
+                    childId2: '',
                 }
             }
         ],
@@ -84,7 +85,7 @@ export const HomeDescription = (props) => {
     async function newSala( e ){
         e.preventDefault()
 
-        if(name.value.split(" ").length > 1 || name.value.length < 4){
+        if(name.value.split(" ").length > 1 || name.value.length < 4 || name.value.length > 15){
             return setRoomValid(false)
         }else { setRoomValid(true)}
         if(parseFloat(price.value) < 5000 || price.value ===  '' ){
@@ -127,7 +128,7 @@ export const HomeDescription = (props) => {
 
 
                 <div className='actives-rooms'>
-                    <h3>Your Rooms</h3>
+                    <h3>Tus Salas</h3>
                     <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
                         <button disabled={countActives === 1 ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
                             <p><span>{countActives}</span> - {activesData.total}</p> 
@@ -154,9 +155,9 @@ export const HomeDescription = (props) => {
                                                         <Link to={`/sala/${data._id}`} className='actives-links Link'>
                                                             <img src={ArbolImg} alt="ArbolImg"/>
                                                             <div className='actives-description'>
-                                                                <p>Room Name: <span>{data.name}</span></p>
-                                                                <p>Price: <span>${data.price}</span></p>
-                                                                <p>Creator: <span>{data.creator}</span></p>
+                                                                <p>Nombre de sala: <span>{data.name}</span></p>
+                                                                <p>Valor: <span>${data.price}</span></p>
+                                                                <p>Creador: <span>{data.creator}</span></p>
                                                             </div>
                                                         </Link>
                                                     </li>
@@ -176,37 +177,31 @@ export const HomeDescription = (props) => {
 
                 <div className="create-custom">
                     <div className='create-form-container'>
-                        <h3>Create Custom Room</h3>    
+                        <h3>Crear Sala</h3>    
                         <form onSubmit={newSala} >
                             <div className={roomValid ? 'mb-3' : 'mb-2'}>
                                 <div className='d-flex'>
                                     <div>
                                         <div className="input-group-text input-guide">< MdHome /></div>
                                     </div>
-                                    <input type='text' {...name} placeholder='Room Name' />
+                                    <input type='text' {...name} placeholder='Nombre de sala' />
                                 </div>
-                                <label className={!roomValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimo 4 caracteres, no debe haber espacios</label>
+                                <label className={!roomValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimo 4 caracteres, maximo 15, no debe haber espacios</label>
                             </div>
                             <div className={priceValid ? 'mb-3' : 'mb-2'}>
                                 <div className='d-flex'>
                                     <div>
                                         <div className="input-group-text input-guide">$</div>
                                     </div>
-                                    <input  placeholder='Minimo $5.000' type='text' {...price} />
+                                    <input  placeholder='Valor' type='text' {...price} />
                                 </div>
-                                <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />precio Minimo de Sala $5.000 COP</label>
-                            </div>
-                            <div className='form-group d-flex'>
-                                <div>
-                                    <div className="input-group-text input-guide">< MdLockOutline /></div>
-                                </div>
-                                <input placeholder='Optional Password' type='password' {...password} />
+                                <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Valor Minimo de Sala $5.000 COP</label>
                             </div>
                             <button>
                                 <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                                     <span className="sr-only">Loading...</span>
                                 </div>
-                                <p className={createLoading ? 'dNone' : ''}>Create!</p>
+                                <p className={createLoading ? 'dNone' : ''}>Crear</p>
                             </button>
                         </form>   
                     </div>       
