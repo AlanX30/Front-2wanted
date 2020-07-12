@@ -31,6 +31,7 @@ const JoinModal = (props) => {
     let joinData
     let price = 0
     let random = radio2 ? true : false
+    let salaName = ''
 
     if(props.data){
         joinData = {
@@ -39,6 +40,7 @@ const JoinModal = (props) => {
             random: random
         }
         price = props.data.price
+        salaName = props.data.name
     }
  
     async function handleSubmit( e ){
@@ -77,6 +79,7 @@ const JoinModal = (props) => {
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <div className='join-modal'>
                 <h2>Estas Seguro?</h2>
+                <p>Nombre de sala: <span>{salaName}</span></p>
                 <p>Valor: <span>${price}</span></p>
 
                 <form onSubmit={handleSubmit}>

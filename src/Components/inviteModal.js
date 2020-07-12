@@ -2,8 +2,10 @@ import React from "react"
 import Modal from "./Modal"
 import Swal from 'sweetalert2'
 import { useFormValues } from '../hooks/useFormValues'
+import { MdInfo } from "react-icons/md"
 import axios from 'axios'
 import './Styles/Invite.css'
+import { useState } from "react"
 
 export const InviteModal = (props) => {
     
@@ -20,8 +22,14 @@ export const InviteModal = (props) => {
         }
     }
 
+    const [msg_valid, setMsg_valid] = useState(true)
+
     async function handleSubmit( e ){
         e.preventDefault()
+
+        if(message.value.length > 50){
+            return setMsg_valid(false)
+        }else{setMsg_valid(true)}
         
         await axios({
             data: data,
@@ -61,6 +69,7 @@ export const InviteModal = (props) => {
                 </div>
                 <div className="form-group mt-4 mb-4">
                     <input {...message} type="text" placeholder='Mensaje Opcional'/>
+                    <label className={msg_valid ? 'dNone' : 'warning-invite'}><MdInfo />&nbsp;Maximo 50 caracteres</label>
                 </div>
                 <button className='btn btn-dark btn-block invitation-button'>Invitar</button>
             </form>

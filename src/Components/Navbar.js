@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom'
 import { useFormValues } from '../hooks/useFormValues'
 import logoletra from '../Images/2WANTED.svg'
 import { useComponentVisible } from '../hooks/useComponentVisible'
-import { IoMdSettings, IoIosContact, IoMdContacts } from 'react-icons/io'
-import { MdAccountCircle, MdSearch, MdNotificationsNone, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
+import { FcOk, FcHighPriority } from 'react-icons/fc'
+import { IoMdSettings, IoIosContact } from 'react-icons/io'
+import { MdAccountCircle, MdAccountBalanceWallet,  MdInfo, MdSearch, MdNotificationsNone, MdFileUpload, MdFileDownload, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
 import  JoinModal  from './JoinModal'
 import { Context } from '../context'
 import { withRouter } from 'react-router-dom'
@@ -239,7 +240,9 @@ const Navbar = (props) => {
                              <span className="sr-only">Loading...</span>
                         </div> : 
                             
-                        filterSala.data ? 
+                        filterSala.data ?
+
+                        <div>
                             
                         <div className={dropdownFilter.isComponentVisible ? 'filter-sala' : 'dNone'}>            
                                 <div onClick={onOpen2Modal} className=' filter-sala-wrap'>
@@ -251,7 +254,9 @@ const Navbar = (props) => {
                                     </div>
                                 </div>
                             <button onClick={onOpen2Modal} className=''>Unirse</button>
-                        </div> : <div className='no-spaces'>{filterSala.error}!</div>
+                        </div> 
+                        <p className='aviso-filtro'><MdInfo />  Recuerda respetar mayusculas y minusculas</p>
+                        </div> : <div className='no-spaces'>{filterSala.error}! <p className='aviso-filtro'><MdInfo />   Recuerda respetar mayusculas y minusculas</p></div>
                     } 
                 </div>
 
@@ -301,12 +306,12 @@ const Navbar = (props) => {
                             < IoIosContact size='46'/>    <p> {userData.userName}</p>
                         </div>
                         <div className='item-menu-right-wallet-container'>
-                            <div>Billetera</div>
+                            <div><MdAccountBalanceWallet />&nbsp;Billetera</div>
                             <p>${userData.wallet}</p>
                         </div>
                         <div className='item-menu-right-cashier'>
-                            <div onClick={()=> setDeposit(true)} to='/wallet' className='button-deposit'>Depositar</div>
-                            <div to='/wallet' className='Link button-withdraw'>Retirar</div>
+                            <div onClick={()=> setDeposit(true)} to='/wallet' className='button-deposit'><MdFileUpload />Depositar</div>
+                            <div to='/wallet' className='button-withdraw'><MdFileDownload />Retirar</div>
                         </div>
                         <div className={deposit ? "item-menu-right payments" : "dNone"}>
                              <form className={buttonPay ? 'dNone' : ''} onSubmit={onPay}>
@@ -314,7 +319,11 @@ const Navbar = (props) => {
                                  <button type='submit'>Continuar</button>
                              </form>
                              <div className={buttonPay ? 'button-pay' : 'dNone'} >
-                                <a className='Link' href={urlPay} rel="noopener noreferrer" target='_blank'>Confirmar pago por &nbsp; ${pay.value}</a>
+                                <div onClick={()=> {
+                                    setButtonPay(false) 
+                                    setDeposit(false)
+                                    }} className='cancel-pay'><FcHighPriority />&nbsp;Cancelar</div>
+                                <a className='Link' href={urlPay} rel="noopener noreferrer" target='_blank'><FcOk />&nbsp;Confirmar pago por &nbsp; ${pay.value}</a>
                              </div>
                         </div>
                         <div className="item-menu-right">

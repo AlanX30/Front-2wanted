@@ -49,7 +49,7 @@
   .room {
     grid-template-columns: 1fr;
     margin-top: 65px;
-    grid-gap: 10px;
+    grid-gap: 20px;
   }
   .room-details {
     margin: 0 auto;

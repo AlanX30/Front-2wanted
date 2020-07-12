@@ -9,23 +9,26 @@ import axios from 'axios'
 export const Room = (props) => {
 
     const [loadingRoom, setLoadingRoom] = useState(true)
-    const { userData: {userName} } = useUserData()
+    const [parent, setParent] = useState('')
     const token = window.sessionStorage.getItem('token')
     const salaId = props.match.params.salaId
     const [dataRoom, setDataRoom] = useState(false)
+
+    const { userData: {userName} } = useUserData()
     
     useEffect(()=>{
+        
         async function searchRoom(){
-
             try {
-                const response = await axios({
-                    data: { salaId: salaId },
-                    method: 'post',
-                    url: 'https://example2wanted.herokuapp.com/api/search/sala',
-                    headers: {
-                        authorization: token
-                    }
-                })
+                if(userName){
+                    const response = await axios({
+                        data: { salaId: salaId, username: userName },
+                        method: 'post',
+                        url: 'https://example2wanted.herokuapp.com/api/search/sala',
+                        headers: {
+                            authorization: token
+                        }
+                    })
                 if(response.data.error){
                     const error = response.data.error.name === 'CastError' ? 'Esta Sala no existe' : response.data.error.name
                     setLoadingRoom(false)
@@ -36,19 +39,23 @@ export const Room = (props) => {
                     })
                 }else{
                     setLoadingRoom(false)
+                    setParent(response.data.parentId)
                     setDataRoom(response.data.data)  
                 }
-            }catch(error){
-                setLoadingRoom(false)
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: error,
-                })
+            }
+                }catch(error){
+                    setLoadingRoom(false)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error,
+                    })
             }
         }
         searchRoom()
-    },[salaId, token])
+    },[userName, salaId, token])
+
+    console.log(parent)
 
     const { arbolData } = useChildsData(salaId, userName)
     
@@ -95,10 +102,12 @@ export const Room = (props) => {
                 <div className='room-details'>
                     <p>Nombre de sala:</p>
                     <span>{dataRoom.name}</span>
-                    <p>Creador:</p>
-                    <span>{dataRoom.creator}</span>
                     <p>Valor de sala:</p>
                     <span>${dataRoom.price}</span>
+                    <p>Tu usuario padre:</p>
+                    <span>{parent}</span>
+                    <p>Creador:</p>
+                    <span>{dataRoom.creator}</span>
                     <p>Acomulado en nivel 3:</p>
                     <span>${acum3}</span>
                     <p>Acomulado en nivel 4:</p>

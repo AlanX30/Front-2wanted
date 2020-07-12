@@ -56,14 +56,33 @@ nav {
     top: 44px;
 }
 .filter-sala{
+  box-shadow: 0 6px 5px black;
   display: flex;
-  height: auto;
+  height: 94px;
     flex-wrap: wrap;
     width: 100%;
     align-items: center;
     border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 7px;
+    transition: all .2s;
 }
+.filter-sala:hover {
+  height: 106%;
+  width: 102%;
+  /* transform: scale(1.02); */
+}
+
+.aviso-filtro {
+  color: #eea048;
+  font-variant: small-caps;
+  font-size: 16px;
+}
+
+.aviso-filtro svg {
+  margin-bottom: 3px;
+}
+
 .no-spaces {
   color: var(--text);
     font-size: 20px;
@@ -124,6 +143,11 @@ nav {
   height: 100%;
   width: 100%;
   align-items: center;
+  transition: all .2S;
+}
+.invitations-li  button:hover {
+  width: 103%;
+  height: 105%;
 }
 .btn {
   box-shadow: 0 3px 7px black;
@@ -316,16 +340,22 @@ nav {
     justify-content: center;
     height: 100%;
 }
+.cancel-pay {
+  width: 25%;
+    background: #212529;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .item-menu-right.payments div a {
-  width: 100%;
+  width: 75%;
     display: flex;
     height: 100%;
     justify-content: center;
     align-items: center;
     background: #007bff;
-    color: black;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 6px;
+    color: white;
 }
 .item-menu-right.user {
   height: 80px;
@@ -378,18 +408,25 @@ nav {
   height: 100%;
   background: #ff5656;
 }
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1123px) {
   .dropdown-menu-navbar2.isActive{
     width: 40%;
+  }
+}
+  @media screen and (max-width: 830px) {
+  .dropdown-menu-navbar2.isActive{
+    width: 50%;
   }
   }
   @media screen and (max-width: 700px) {
   .dropdown-menu-navbar-filter.isActive {
     left: 200px;
   }
-  .dropdown-menu-navbar2.isActive{
-    width: 50%;
-  }
+}
+  @media screen and (max-width: 680px) {
+    .dropdown-menu-navbar2.isActive{
+      width: 63%;
+    }
   }
   @media screen and (max-width: 600px) {
     .dropdown-menu-navbar-filter.isActive {
@@ -402,7 +439,7 @@ nav {
       left: 80px;
   }
   .dropdown-menu-navbar2.isActive{
-      width: 80%;
+      width: 90%;
   }
   .logo1 {
     height: 30px;
@@ -445,12 +482,17 @@ nav {
     left: 30px;
     top: 44px;
     right: 30px;
-    display: flex;
+    display: block;
     justify-content: center;
   }
 }
 @media screen and (max-width: 420px) {
   .dropdown-menu-navbar-filter.isActive {
     width: 85%;
+  }
+}
+@media screen and (max-width: 362px) {
+  .dropdown-menu-navbar2.isActive{
+    width: 100%;
   }
 }

@@ -6,7 +6,7 @@ export const ChildModal = (props) =>{
         <MiniModal isOpen={props.isOpen} onClose={props.onClose}>
             <h3>User:</h3>
             <br/>
-            <h5>{props.user}</h5>
+            <h4>{props.user}</h4>
         </MiniModal>
     )
 }

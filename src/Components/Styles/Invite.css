@@ -21,3 +21,10 @@
 .invite-form input::-webkit-input-placeholder {
     color: #ff9f225e;
 }
+.warning-invite {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 6px;
+    color: #c53535;
+}

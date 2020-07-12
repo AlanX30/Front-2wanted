@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import ArbolImg from '../Images/arbol.svg'
 import { useUserData } from '../hooks/useUserData'
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
-import {MdHome, MdList,  MdLockOutline, MdInfo} from "react-icons/md"
+import {MdHome, MdList, MdInfo} from "react-icons/md"
 import './Styles/HomeDescription.css'
 import { useFormValues } from '../hooks/useFormValues'
 import axios from 'axios'
@@ -205,6 +205,14 @@ export const HomeDescription = (props) => {
                             </button>
                         </form>   
                     </div>       
+                </div>
+                <div className='section-video'>
+                    <div className='youtube-container'>
+                        <h3>Instrucciones</h3>
+                        <div className='youtube-wrap'>
+                            <iframe className='youtube-video' width="560" height="315" title='Instrucciones' src="https://www.youtube.com/embed/kIBaxpNuGBs" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className='navigation-container'>

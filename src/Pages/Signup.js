@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useFormValues } from '../hooks/useFormValues'
 import Swal from 'sweetalert2'
 import NavbarLogin from '../Components/NavbarLogin'
-import { MdCreditCard, MdLockOutline, MdMail } from "react-icons/md";
+import { MdCreditCard, MdInfo, MdLockOutline, MdMail } from "react-icons/md";
 import { Context } from '../context'
 import axios from 'axios'
 import android from '../Images/ANDROID.png'
@@ -111,7 +111,7 @@ export const Signup = (props) => {
                                             </div>
                                             <input type="text" id="inlineFormInputGroupUsername2" className='form-control' {...userName} placeholder='Nombre de usuario' required/>
                                         </div>
-                                        <label className={!userValid ? 'password-valid' : 'dNone'}>Minimo 8 caracteres, Maximo , sin espacios</label>
+                                        <label className={!userValid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimo 8 caracteres, Maximo 16, sin espacios</label>
                                     </div>
                                     <div className="form-group form-inputs">
                                         <div className='d-flex'>
@@ -136,7 +136,7 @@ export const Signup = (props) => {
                                             </div>
                                             <input type="password"  className='form-control' {...password} placeholder='Contraseña' required/>
                                         </div>
-                                        <label className={!password_valid ? 'password-valid' : 'dNone'}>Debe contener mayuscula, minuscula y numero, minimo 8 caracteres</label>
+                                        <label className={!password_valid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Debe contener mayuscula, minuscula y numero, minimo 8 caracteres</label>
                                     </div>
                                     <div className="form-group form-inputs">
                                     <div className='d-flex'>

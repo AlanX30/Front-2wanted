@@ -8,21 +8,22 @@ export const useUserData = () => {
     const [userData, setUserData] = useState({})
     
     useEffect(() => { 
+        async function getUserData(){
 
         if(token){
-            axios({
+            const response = await axios({
                 method: 'get',
                 url: 'https://example2wanted.herokuapp.com/api/me',
                 headers: {
                     authorization: token
                     }
             })
-            .then(res => {
-                if(res.data) {
-                    setUserData(res.data)
-                }
-            })
+            if(response.data){
+                setUserData(response.data)
+            }
         } 
+    }
+    getUserData()
     }, [token])
   
 
