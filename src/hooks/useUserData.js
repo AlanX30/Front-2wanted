@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export const useUserData = () => {
+export const useUserData = (update) => {
     
     const token = window.sessionStorage.getItem('token')
     
@@ -24,7 +24,7 @@ export const useUserData = () => {
         } 
     }
     getUserData()
-    }, [token])
+    }, [token, update])
   
 
     return { userData }

@@ -25,7 +25,10 @@ export const Signup = (props) => {
         email: email.value,
         dni: dni.value,
         password: password.value,
-        confirm_password: confirm_password.value
+        confirm_password: confirm_password.value,
+        bank: {
+            titular: ''
+        }
     }
     const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
 
@@ -49,7 +52,7 @@ export const Signup = (props) => {
 
         setSignupLoading(true)
 
-        axios.post('https://example2wanted.herokuapp.com/api/users/signup', form)
+        axios.post('http://localhost:3500/api/users/signup', form)
         .then(res => {
             if(res.data.error){
                 setSignupLoading(false)

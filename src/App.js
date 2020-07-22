@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Layout from './Components/Layout'
+import { Blank } from './Components/Blank'
 import { Home } from './Pages/Home'
 import { Room } from './Pages/Room'
 import { Signup } from './Pages/Signup'
 import { Context } from './context'
 import { NotFound } from './Pages/NotFound';
-import { Wallet } from './Pages/Wallet';
+import {Profile } from './Pages/Profile';
 
 function App() {
 
@@ -19,8 +20,9 @@ function App() {
         {
           isAuth && 
           <Layout>
+            <Route exact path ='/profile/' component={Profile}/>
+            <Route exact path ='/Blank/' component={Blank}/>
             <Route exact path ='/home/' component={Home}/>
-            <Route exact path ='/wallet' component={Wallet}/>
             <Route exact path ='/sala/:salaId/' component={Room}/>
           </Layout>
         }

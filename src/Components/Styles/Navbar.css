@@ -374,6 +374,9 @@ nav {
   display: flex;
   align-items: center;
 }
+.item-menu-right-wallet-container svg {
+  margin-bottom: 2px;
+}
 .item-menu-right-wallet-container p {
   font-weight: 700;
   font-size: 25px;

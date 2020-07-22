@@ -329,9 +329,9 @@ const Navbar = (props) => {
                         <div className="item-menu-right">
                             <MdChromeReaderMode /><p>&nbsp;Historial de balance</p> 
                         </div>
-                        <div className="item-menu-right">
+                        <a href='http://localhost:3000/profile/' className="item-menu-right" >
                            < IoMdSettings /><p>&nbsp;Configuracion de usuario</p> 
-                        </div>
+                        </a>
                         <div className="item-menu-right">
                            <MdHelpOutline /><p>&nbsp;Ayuda</p> 
                         </div>
