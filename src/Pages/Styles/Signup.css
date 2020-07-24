@@ -81,7 +81,7 @@
 .button-signup:hover {
   background-color: var(--bg-color);
   border: 2px solid var(--bg-color);
-  color: white;
+  color: #f28247;
 }
 
 @media screen and (max-width: 1000px) {

@@ -136,7 +136,7 @@ nav {
 }
 .invitations-li  button  {
   border: none;
-  background: #eea748;;
+  background: #eea748;
   border-radius: 11px;
   box-shadow: -2px 2px 8px #000000;
   display: flex;
@@ -145,7 +145,7 @@ nav {
   align-items: center;
   transition: all .2S;
 }
-.invitations-li  button:hover {
+.invitations-li button:hover {
   width: 103%;
   height: 105%;
 }
@@ -163,6 +163,11 @@ nav {
     justify-content: center;
     align-items: center;
     width: 35px;
+    transition: .2s;
+}
+.icon-navbar:hover {
+  background: var(--bg-color);
+  color: #f9c118;
 }
 .notification {
   position: absolute;

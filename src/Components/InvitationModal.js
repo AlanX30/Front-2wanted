@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Swal from 'sweetalert2'
 import { withRouter } from 'react-router-dom'
 import './Styles/InvitationModal.css'
@@ -7,7 +7,13 @@ import axios from 'axios'
 
 const InvitationModal = (props) => {
 
+    function formatNumber(number){
+        return new Intl.NumberFormat("de-DE").format(number)
+    }
+
     const invitation = props.invitationData
+
+    const [invitationLoading, setInvitationLoading] = useState(false)
 
     let joinData
 
@@ -20,6 +26,9 @@ const InvitationModal = (props) => {
 
     async function handleClick( e ){
         e.preventDefault()
+
+        setInvitationLoading(true)
+
         await axios({
             data: joinData,
             method: 'post',
@@ -28,6 +37,7 @@ const InvitationModal = (props) => {
                 authorization: props.token
             }
         }).then(res => {
+            setInvitationLoading(false)
             if(res.data.error){
                 Swal.fire({
                     icon: 'error',
@@ -39,6 +49,7 @@ const InvitationModal = (props) => {
                 props.history.push(`/sala/${res.data.id}`)
             }
         }).catch(err => {
+            setInvitationLoading(false)
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -55,10 +66,15 @@ const InvitationModal = (props) => {
                 invitation && <div className='invitationModal'>
                     <p>Invitado por: <span>{invitation.host}</span></p>
                     <p>Nombre de sala: <span>{invitation.salaName}</span></p>
-                    <p>Valor: <span>${invitation.price}</span></p>
+                    <p>Valor: <span>${formatNumber(invitation.price)}</span></p>
                     <p>Usuario padre: <span>{invitation.parentUsername}</span></p>
                     <p>Mensaje: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
-                    <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>Unirse</button>
+                    <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>
+                        <div className={invitationLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                        <p  className={invitationLoading ? 'dNone' : ''}>Unirse</p>
+                    </button>
                 </div>
             }
            

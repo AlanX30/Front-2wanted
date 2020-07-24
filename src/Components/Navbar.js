@@ -28,6 +28,10 @@ const Navbar = (props) => {
     const [searchLoading, setSearchLoading] = useState(false)
     const room1 = useFormValues()
 
+    function formatNumber(number){
+        return new Intl.NumberFormat("de-DE").format(number)
+    }
+
     function onClose2Modal(){
         setModal2Open(null)
     }
@@ -92,7 +96,7 @@ const Navbar = (props) => {
         setInvitationData(invitationData)
     }
 
-    const socket = io('https://example2wanted.herokuapp.com')
+    const socket = io('http://localhost:3500')
  
     if(userData.userName){
         socket.emit('user_online', userData.userName)
@@ -113,7 +117,7 @@ const Navbar = (props) => {
         axios({
             method: 'post',
             data: {page: countPages},
-            url: 'https://example2wanted.herokuapp.com/api/invitations',
+            url: 'http://localhost:3500/api/invitations',
             headers: {
                 authorization: token
             }
@@ -153,11 +157,11 @@ const Navbar = (props) => {
         if(notifications > 0) {
             axios({
                 method: 'post',
-                url: 'https://example2wanted.herokuapp.com/api/invitations-reset',
+                url: 'http://localhost:3500/api/invitations-reset',
                 headers: {
                     authorization: token
                 }
-            }).then(res=>console.log(res))
+            })
     
             setNotifications(0)
         }
@@ -250,7 +254,7 @@ const Navbar = (props) => {
                                     <div className='filter-sala-description'>
                                         <p> Nombre de sala:  <span> {filterSala.data.name}</span>  </p>
                                         <p> Creador:  <span> {filterSala.data.creator}</span>  </p>
-                                        <p> Valor:  <span> ${filterSala.data.price}</span>  </p>
+                                        <p> Valor:  <span> ${formatNumber(filterSala.data.price)}</span>  </p>
                                     </div>
                                 </div>
                             <button onClick={onOpen2Modal} className=''>Unirse</button>
@@ -283,7 +287,7 @@ const Navbar = (props) => {
                                                 <div className='invitation-description'>
                                                     <p>Invitado por: <span> {invitation.host}</span></p>
                                                     <p>Nombre de sala: <span> {invitation.salaName}</span></p>
-                                                    <p>valor: <span> ${invitation.price}</span></p>
+                                                    <p>valor: <span> ${formatNumber(invitation.price)}</span></p>
                                                 </div>
                                         </button>
                                     </li>
@@ -307,7 +311,7 @@ const Navbar = (props) => {
                         </div>
                         <div className='item-menu-right-wallet-container'>
                             <div><MdAccountBalanceWallet />&nbsp;Billetera</div>
-                            <p>${userData.wallet}</p>
+                            <p>${formatNumber(userData.wallet)}</p>
                         </div>
                         <div className='item-menu-right-cashier'>
                             <div onClick={()=> setDeposit(true)} to='/wallet' className='button-deposit'><MdFileUpload />Depositar</div>
@@ -329,7 +333,7 @@ const Navbar = (props) => {
                         <div className="item-menu-right">
                             <MdChromeReaderMode /><p>&nbsp;Historial de balance</p> 
                         </div>
-                        <a href='http://localhost:3000/profile/' className="item-menu-right" >
+                        <a href='/profile/' className="item-menu-right" >
                            < IoMdSettings /><p>&nbsp;Configuracion de usuario</p> 
                         </a>
                         <div className="item-menu-right">

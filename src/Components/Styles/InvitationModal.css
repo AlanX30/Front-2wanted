@@ -10,3 +10,7 @@
     color: black;
     font-weight: 800;
 }
+.invitation-button:hover {
+  background: var(--bg-color);
+  color: #ff9f22;
+}

@@ -211,7 +211,7 @@
     margin-bottom: 6px;
 }
 
-.buttons-delete-bank button:nth-of-type(1) {
+.buttons-delete-bank button:nth-of-type(1), .cancelEditBank {
     margin-right: 10px;
     height: 33px;
     width: 100%;
@@ -223,13 +223,21 @@
     transition: .2s;
 }
 
-.buttons-delete-bank button:nth-of-type(1):hover {
+.cancelEditBank {
+    margin-bottom: 10px;
+}
+
+.buttons-delete-bank button:nth-of-type(1):hover, .cancelEditBank:hover {
     color: #b72a2a;
     background: var(--bg-color);
 }
 
-.buttons-delete-bank button svg {
+.buttons-delete-bank button svg, .cancelEditBank svg {
     margin-bottom: 2px;
+}
+.spinner-conf {
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 @media screen and (max-width: 750px) {
@@ -264,6 +272,9 @@
     .configuration-buttons {
         display: flex;
         width: 100%;
+    }
+    .debit-configuration-wrap {
+        margin-left: -15px;
     }
     .configuration-button {
         width: 50%;

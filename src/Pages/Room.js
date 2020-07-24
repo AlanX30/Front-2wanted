@@ -14,8 +14,13 @@ export const Room = (props) => {
     const salaId = props.match.params.salaId
     const [dataRoom, setDataRoom] = useState(false)
 
+    
     const { userData: {userName} } = useUserData()
     
+    function formatNumber(number){
+        return new Intl.NumberFormat("de-DE").format(number)
+    }
+
     useEffect(()=>{
         
         async function searchRoom(){
@@ -54,8 +59,6 @@ export const Room = (props) => {
         }
         searchRoom()
     },[userName, salaId, token])
-
-    console.log(parent)
 
     const { arbolData } = useChildsData(salaId, userName)
     
@@ -103,17 +106,17 @@ export const Room = (props) => {
                     <p>Nombre de sala:</p>
                     <span>{dataRoom.name}</span>
                     <p>Valor de sala:</p>
-                    <span>${dataRoom.price}</span>
+                    <span>${formatNumber(dataRoom.price)}</span>
                     <p>Tu usuario padre:</p>
                     <span>{parent}</span>
                     <p>Creador:</p>
                     <span>{dataRoom.creator}</span>
                     <p>Acomulado en nivel 3:</p>
-                    <span>${acum3}</span>
+                    <span>${formatNumber(acum3)}</span>
                     <p>Acomulado en nivel 4:</p>
-                    <span>${acum4}</span>
+                    <span>${formatNumber(acum4)}</span>
                     <p>Total acomulado:</p>
-                    <span>${tAcum}</span>
+                    <span>${formatNumber(tAcum)}</span>
                 </div>
             </div>    
         </div>

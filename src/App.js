@@ -6,7 +6,6 @@ import { Home } from './Pages/Home'
 import { Room } from './Pages/Room'
 import { Signup } from './Pages/Signup'
 import { Context } from './context'
-import { NotFound } from './Pages/NotFound';
 import {Profile } from './Pages/Profile';
 
 function App() {
@@ -26,7 +25,7 @@ function App() {
             <Route exact path ='/sala/:salaId/' component={Room}/>
           </Layout>
         }
-        <Route component={NotFound} />
+        <Route component={Signup} />
       </Switch>
     </BrowserRouter>
   )

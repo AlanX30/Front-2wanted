@@ -9,9 +9,14 @@ import { useState } from 'react'
 
 const JoinModal = (props) => {
 
+    const [joinLoading, setJoinLoading] = useState(false)
     const [radio1, setRadio1] = useState(true)
     const [radio2, setRadio2] = useState(false)
     const [parentInput, setParentInput] = useState(true)
+
+    function formatNumber(number){
+        return new Intl.NumberFormat("de-DE").format(number)
+    }
 
     function handleRadio1(){
         setRadio1(true)
@@ -44,8 +49,10 @@ const JoinModal = (props) => {
     }
  
     async function handleSubmit( e ){
-
         e.preventDefault()
+
+        setJoinLoading(true)
+
         await axios({
             data: joinData,
             method: 'post',
@@ -54,6 +61,7 @@ const JoinModal = (props) => {
                 authorization: props.token
             }
         }).then(res => {
+            setJoinLoading(false)
             if(res.data.error){
                 Swal.fire({
                     icon: 'error',
@@ -65,6 +73,7 @@ const JoinModal = (props) => {
                 props.onClose()
             }
         }).catch(err => {
+            setJoinLoading(false)
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -80,7 +89,7 @@ const JoinModal = (props) => {
             <div className='join-modal'>
                 <h2>Estas Seguro?</h2>
                 <p>Nombre de sala: <span>{salaName}</span></p>
-                <p>Valor: <span>${price}</span></p>
+                <p>Valor: <span>${formatNumber(price)}</span></p>
 
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -107,7 +116,12 @@ const JoinModal = (props) => {
                             <span>Nota:</span> "Sera agregado como referido de algun usuario aleatorio con espacio disponible en esta sala."
                         </p>
                     </div>
-                    <button className='btn btn-dark btn-block invitation-button'>Confirmar</button>
+                    <button className='btn btn-dark btn-block invitation-button'>
+                        <div className={joinLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                        <p  className={joinLoading ? 'dNone' : ''}>Confirmar</p>
+                    </button>
                 </form>
             </div>
         </Modal>

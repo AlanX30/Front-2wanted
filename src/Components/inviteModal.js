@@ -1,16 +1,17 @@
-import React from "react"
+import React, { useState } from "react"
 import Modal from "./Modal"
 import Swal from 'sweetalert2'
 import { useFormValues } from '../hooks/useFormValues'
 import { MdInfo } from "react-icons/md"
 import axios from 'axios'
 import './Styles/Invite.css'
-import { useState } from "react"
 
 export const InviteModal = (props) => {
     
     const user = useFormValues()
     const message = useFormValues()
+
+    const [inviteLoading, setInviteLoading] = useState(false)
 
     let data
 
@@ -30,23 +31,32 @@ export const InviteModal = (props) => {
         if(message.value.length > 50){
             return setMsg_valid(false)
         }else{setMsg_valid(true)}
+
+        setInviteLoading(true)
         
         await axios({
             data: data,
             method: 'post',
-            url: 'https://example2wanted.herokuapp.com/api/new-invitation',
+            url: 'http://localhost:3500/api/new-invitation',
             headers: {
                 authorization: props.token
             }
         }).then(res => {
+            setInviteLoading(false)
             if(res.data.error){
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: res.data.error,
                 })
+            }else{
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Invitacion enviada',
+                })
             }
         }).catch(err => {
+            setInviteLoading(false)
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -71,7 +81,12 @@ export const InviteModal = (props) => {
                     <input {...message} type="text" placeholder='Mensaje Opcional'/>
                     <label className={msg_valid ? 'dNone' : 'warning-invite'}><MdInfo />&nbsp;Maximo 50 caracteres</label>
                 </div>
-                <button className='btn btn-dark btn-block invitation-button'>Invitar</button>
+                <button className='btn btn-dark btn-block invitation-button'>
+                    <div className={inviteLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
+                        <span className="sr-only">Loading...</span>
+                    </div>
+                    <p className={inviteLoading ? 'dNone' : ''}>Invitar</p>
+                </button>
             </form>
         </Modal>
     )

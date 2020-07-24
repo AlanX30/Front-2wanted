@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 
 export const HomeDescription = (props) => {
 
+    const reg_whiteSpace = /^$|\s+/
     const token = window.sessionStorage.getItem('token')
     const  {userData}  = useUserData()
     const [actives_560, setActives_560] = useState(false)
@@ -18,6 +19,10 @@ export const HomeDescription = (props) => {
     let [countActives, setCountActives] = useState(1) 
     const [activesData, setActivesData] = useState({})
     const [activesLoading, setActivesLoading] = useState(false)
+
+    function formatNumber(number){
+        return new Intl.NumberFormat("de-DE").format(number)
+    }
 
         useEffect(() => { 
             if(token){
@@ -85,7 +90,7 @@ export const HomeDescription = (props) => {
     async function newSala( e ){
         e.preventDefault()
 
-        if(name.value.split(" ").length > 1 || name.value.length < 4 || name.value.length > 15){
+        if( reg_whiteSpace.test(name.value) || name.value.length < 4 || name.value.length > 15){
             return setRoomValid(false)
         }else { setRoomValid(true)}
         if(parseFloat(price.value) < 5000 || price.value ===  '' ){
@@ -156,7 +161,7 @@ export const HomeDescription = (props) => {
                                                             <img src={ArbolImg} alt="ArbolImg"/>
                                                             <div className='actives-description'>
                                                                 <p>Nombre de sala: <span>{data.name}</span></p>
-                                                                <p>Valor: <span>${data.price}</span></p>
+                                                                <p>Valor: <span>${formatNumber(data.price)}</span></p>
                                                                 <p>Creador: <span>{data.creator}</span></p>
                                                             </div>
                                                         </Link>
@@ -197,7 +202,7 @@ export const HomeDescription = (props) => {
                                 </div>
                                 <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Valor Minimo de Sala $5.000 COP</label>
                             </div>
-                            <button>
+                            <button disabled={createLoading ? true : false}>
                                 <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                                     <span className="sr-only">Loading...</span>
                                 </div>

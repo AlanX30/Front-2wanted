@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { IoMdSettings, IoIosContact, IoIosCloseCircle } from 'react-icons/io'
 import { MdInfo, MdAddCircle, MdAccountBalanceWallet, MdCreate, MdMail, MdLockOutline } from "react-icons/md"
 import { useFormValues } from '../hooks/useFormValues'
@@ -6,14 +6,12 @@ import { useUserData } from '../hooks/useUserData'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import './Styles/Profile.css'
-import { useEffect } from 'react'
 
 export const Profile = () => {
     
     const token = window.sessionStorage.getItem('token')
     const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
     const reg_numbers = /^([0-9])*$/
-    /* const reg_whiteSpace = /^$|\s+/ */
 
     const [count, setCount] = useState(0)
 
@@ -29,6 +27,7 @@ export const Profile = () => {
     const [newPasswordError, setNewPasswordError] = useState(false)
     const [newEmailError, setNewEmailError] = useState(false)
     const [password_valid, setPassword_valid] = useState(true)
+    const [passwordLoading, setPasswordLoading] = useState(false)
 
     function updatePassword(e){
         e.preventDefault()  
@@ -39,6 +38,8 @@ export const Profile = () => {
 
         if(newPassword.value === confirmNewPassword.value){
 
+            setPasswordLoading(true)
+
             axios({
                 method: 'post',
                 data: { password: password.value, newPassword: newPassword.value },
@@ -47,6 +48,7 @@ export const Profile = () => {
                     authorization: token
                 }
             }).then( res => {
+                setPasswordLoading(false)
                 if(res.data.error){
                     Swal.fire({
                         icon: 'error',
@@ -60,6 +62,7 @@ export const Profile = () => {
                     })
                 }
             }).catch( error => {
+                setPasswordLoading(false)
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -69,10 +72,15 @@ export const Profile = () => {
         }else{return setNewPasswordError(true)}
 
     }
+
+    const [emailLoading, setEmailLoading] = useState(false)
+
     function updateEmail(e){
         e.preventDefault()
 
         if(newEmail.value === confirmNewEmail.value){
+
+            setEmailLoading(true)
 
             axios({
                 method: 'post',
@@ -82,6 +90,7 @@ export const Profile = () => {
                     authorization: token
                 }
             }).then( res => {
+                setEmailLoading(false)
                 if(res.data.error){
                     Swal.fire({
                         icon: 'error',
@@ -95,6 +104,7 @@ export const Profile = () => {
                     })
                 }
             }).catch( error => {
+                setEmailLoading(false)
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -184,6 +194,7 @@ export const Profile = () => {
         titular: titular.value, tipo: type, dni: dni.value, banco: Bank, numeroCuenta: numeroCuenta.value, tipoCuenta: typeCount
     }
 
+    const [editBankLoading, setEditBankLoading] = useState(false)
     const [dni_valid, setDni_valid] = useState(true)
     const [numeroCuenta_valid, setNumeroCuenta_valid] = useState(true)
     const [tipo_valid, setTipo_valid] = useState(true)
@@ -209,6 +220,8 @@ export const Profile = () => {
             return setTipoCuenta_valid(false)
         }else{setTipoCuenta_valid(true)}
 
+        setEditBankLoading(true)
+
         await axios({
             method: 'post',
             data: editBankValues,
@@ -217,6 +230,7 @@ export const Profile = () => {
                 authorization: token
             }
         }).then( res => {
+            setEditBankLoading(false)
             if(res.data.error){
                 Swal.fire({
                     icon: 'error',
@@ -231,6 +245,7 @@ export const Profile = () => {
                 setCount(count + 1)
             }
         }).catch( error => {
+            setEditBankLoading(false)
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -283,6 +298,8 @@ export const Profile = () => {
         })
     }
 
+    const [cancelEditBank, setCancelEditBank] = useState(false)
+
     if(!userData.date) {return 'Loading'}
     
     return  <div className='configurations-container'>
@@ -325,7 +342,12 @@ export const Profile = () => {
                                     <input {...confirmNewPassword} autoComplete='true' required type="password" placeholder='Confirmar contraseña'/>
                                     <p className={newPasswordError ? 'configuration-warning' : 'dNone'}><MdInfo /> La confirmacion no coincide</p>
                                     <p className={!password_valid ? 'configuration-warning' : 'dNone'}><MdInfo />&nbsp;Debe contener mayuscula, minuscula y numero, minimo 8 caracteres</p>
-                                    <button>Actualizar Contraseña</button>
+                                    <button>
+                                        <div className={passwordLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                        <p className={passwordLoading ? 'dNone' : '' }> Actualizar Contraseña </p>
+                                    </button>
                                 </form>
                             </div>
                             <div className='email-configuration'>
@@ -335,7 +357,12 @@ export const Profile = () => {
                                     <input {...newEmail} autoComplete='true' required type="email" placeholder='Email nuevo'/>
                                     <input {...confirmNewEmail} autoComplete='true' required type="email" placeholder='Confirmar email'/>
                                     <p className={newEmailError ? 'configuration-warning' : 'dNone'}><MdInfo /> La confirmacion no coincide</p>
-                                    <button>Actualizar email</button>
+                                    <button>
+                                        <div className={emailLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                        <p className={emailLoading ? 'dNone' : '' }> Actualizar email</p>
+                                    </button>
                                 </form>
                             </div>
                             <div className='user-delete-configuration'>
@@ -348,7 +375,7 @@ export const Profile = () => {
                         <div className={buttonDebito ? 'debit-configuration-container' : 'dNone'}>
                             {
                             !editBank ?    
-                            <div>
+                            <div className='debit-configuration-wrap'>
                                 <h4>Agregar Cuenta Bancaria</h4>
                                 <form onSubmit={handleEditBank}>
                                     <input {...titular} required type="text" placeholder='Nombre y apellido del titular'/>
@@ -375,6 +402,7 @@ export const Profile = () => {
                                     </select>
                                     <p className={!bank_valid ? 'configuration-warning' : 'dNone'}><MdInfo /> Selecciona Banco</p>
                                     <input {...numeroCuenta} required type="text" placeholder='Numero de Cuenta' />
+                                    <p className='configuration-warning'><MdInfo />En caso de Nequi colocar numero telefonico</p>
                                     <p className={!numeroCuenta_valid ? 'configuration-warning' : 'dNone'}><MdInfo /> Solo Numeros</p>
                                     <select onClick={handleSelectTypeCount} required className='select-type largo' name="Tipo de cuenta">
                                         <option className='optiion-none'>Tipo de Cuenta</option>
@@ -385,7 +413,13 @@ export const Profile = () => {
                                         }
                                     </select>
                                     <p className={!tipoCuenta_valid ? 'configuration-warning' : 'dNone'}><MdInfo /> Selecciona Tipo de cuenta</p>
-                                    <button className='button-aggregate-count'><MdAddCircle />  Agregar</button>
+                                    <button className='button-aggregate-count'>
+                                        <div className={editBankLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                        <p className={editBankLoading ? 'dNone' : '' }><MdAddCircle />Agregar</p>
+                                    </button>
+                                    <button className={cancelEditBank ? 'cancelEditBank' : 'dNone' } onClick={()=>{setEditBank(true); setCancelEditBank(false)}} type='button'><IoIosCloseCircle />Cancelar</button>
                                 </form>
                             </div> :
                             <div className='datos-configuration'>
@@ -409,7 +443,7 @@ export const Profile = () => {
                                     </div>
                                     <div className='buttons-delete-bank'>
                                         <button onClick={handleRemoveBank}><IoIosCloseCircle />Eliminar</button>
-                                        <button onClick={()=>setEditBank(false)}><MdCreate />Editar</button>
+                                        <button onClick={()=>{setEditBank(false); setCancelEditBank(true) }}><MdCreate />Editar</button>
                                     </div>
                                 </div>
                             </div>

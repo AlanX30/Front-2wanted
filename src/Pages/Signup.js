@@ -11,6 +11,9 @@ import IMG from '../Images/esfinge.svg'
 import './Styles/Signup.css'
 
 export const Signup = (props) => {
+    
+    const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
+    const reg_whiteSpace = /^$|\s+/
 
     const { toggleAuth } = useContext(Context)
 
@@ -30,7 +33,6 @@ export const Signup = (props) => {
             titular: ''
         }
     }
-    const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
 
     const [password_valid, setPassword_valid] = useState(true)
     
@@ -43,7 +45,7 @@ export const Signup = (props) => {
         if(userName.value.length < 4 || userName.value.length > 16){
             return setUserValid(false)
         }else{setUserValid(true)}
-        if(userName.value.split(" ").length > 1 ) {
+        if(reg_whiteSpace.test(userName.value)) {
            return setUserValid(false)
         }else{setUserValid(true)}
         if(!reg_password.test(password.value)){
@@ -149,7 +151,7 @@ export const Signup = (props) => {
                                             <input type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirmar contraseña' required/>
                                         </div>
                                     </div>
-                                    <button type='submit' className='button-signup'>
+                                    <button disabled={signupLoading ? true : false} type='submit' className='button-signup'>
                                         <div className={signupLoading ? "spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>

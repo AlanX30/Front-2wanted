@@ -13,7 +13,7 @@
 }
 .actives-rooms {
   border: 4px solid;
-  height: 500px;
+  height: 508px;
   background: var(--bg-objects);
   width: 400px;
   padding-top: 8px;
@@ -172,6 +172,8 @@
 }
 .create-custom button:hover {
   transform: scale(1.02);
+  color: var(--bg-objects);
+  background: #f46d45;
 }
 
 .navigation-container {
