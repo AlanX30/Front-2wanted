@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Swal from 'sweetalert2'
 import logo from '../Images/logo.svg'
 import { useFormValues } from '../hooks/useFormValues'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
+import { url } from '../urlServer'
 import logoletra from '../Images/2WANTED.svg'
 import axios from 'axios'
 import './Styles/NavbarLogin.css'
-import { useState } from 'react'
 
  const NavbarLogin = (props) => {
 
@@ -24,7 +24,7 @@ import { useState } from 'react'
     function handleSubmit( e ){
         e.preventDefault()
         setLoginLoading(true)
-        axios.post('https://example2wanted.herokuapp.com/api/users/signin', form)
+        axios.post(url+'/api/users/signin', form)
         .then(res => {
             if(res.data.error){
                 setLoginLoading(false)
@@ -53,10 +53,10 @@ import { useState } from 'react'
                 <Link className="logo" to="/"><img className='login-logo1' src={logo} alt='logo-img' /><img className='login-logo2' src={logoletra} alt="logoletra"/></Link>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group login-inputs">
-                            <input type="email" className='form-control' {...email} placeholder='Email'/>
+                            <input autoComplete='true' type="email" className='form-control' {...email} placeholder='Email'/>
                         </div>
                         <div className="form-group login-inputs">
-                            <input className="form-control" type="password" {...password} placeholder="Contraseña"/>
+                            <input autoComplete='true' className="form-control" type="password" {...password} placeholder="Contraseña"/>
                             <a href='https://www.youtube.com/' target='_blank' rel="noopener noreferrer">Olvidaste tu cuenta?</a>
                         </div>
                         <button disabled={loginLoading ? true : false} type='submit' className="login-button">

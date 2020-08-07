@@ -44,6 +44,12 @@ export const Tree = (props) => {
 
     /* ---------------------------------------------------lineDropdown------------------------- */
   
+    if(props.loading){
+        return <div className="spinner-border tree-spinner text-danger" role="status">
+            <span className="sr-only">Loading...</span>
+        </div>
+    }
+
     return(
         <>
             <div className='tree-wrap'>

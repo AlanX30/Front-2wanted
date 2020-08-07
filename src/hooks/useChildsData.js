@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { url } from '../urlServer'
 import axios from 'axios'
 
 export const useChildsData = (salaId, userName) => {
@@ -6,15 +7,19 @@ export const useChildsData = (salaId, userName) => {
     const token = window.sessionStorage.getItem('token')
 
     const [arbolData, setArbolData] = useState([])
+
+    const [loadingChildsData, setLoadingChildsData] = useState(true)
             
     useEffect(()=>{
+
+        setLoadingChildsData(true)
 
         async function childsData(){
 
             const response = await axios({
                 method: 'post',
                 data: {user: userName},
-                url: `https://example2wanted.herokuapp.com/api/in-sala?id=${salaId}`,
+                url: `${url}/api/in-sala?id=${salaId}`,
                 headers: {
                      authorization: token
                 }
@@ -24,12 +29,12 @@ export const useChildsData = (salaId, userName) => {
 
             await setArbolData(data)
 
+            setLoadingChildsData(false)
+
         }  
         childsData()
     },[salaId, userName, token])
 
-
-
-    return {arbolData}
+    return {arbolData, loadingChildsData}
 
 }

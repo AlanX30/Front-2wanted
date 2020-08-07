@@ -8,6 +8,7 @@ import './Styles/HomeDescription.css'
 import { useFormValues } from '../hooks/useFormValues'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { url } from '../urlServer'
 
 export const HomeDescription = (props) => {
 
@@ -30,7 +31,7 @@ export const HomeDescription = (props) => {
                 axios({
                     method: 'post',
                     data: {page: countActives},
-                    url: 'https://example2wanted.herokuapp.com/api/search/listSalas',
+                    url: url+'/api/search/listSalas',
                     headers: {
                         authorization: token
                     }
@@ -102,7 +103,7 @@ export const HomeDescription = (props) => {
             await axios({
                 data: newSalaData,
                 method: 'post',
-                url: 'https://example2wanted.herokuapp.com/api/new/sala',
+                url: url+'/api/new/sala',
                 headers: {
                     authorization: token
                 }
@@ -118,6 +119,7 @@ export const HomeDescription = (props) => {
                     props.props.history.push(`/sala/${res.data.id}`)}
             }).catch(err => {
                 setCreateLoading(false)
+                console.log(err)
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',

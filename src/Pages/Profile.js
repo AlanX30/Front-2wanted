@@ -3,6 +3,7 @@ import { IoMdSettings, IoIosContact, IoIosCloseCircle } from 'react-icons/io'
 import { MdInfo, MdAddCircle, MdAccountBalanceWallet, MdCreate, MdMail, MdLockOutline } from "react-icons/md"
 import { useFormValues } from '../hooks/useFormValues'
 import { useUserData } from '../hooks/useUserData'
+import { url } from '../urlServer'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import './Styles/Profile.css'
@@ -16,6 +17,8 @@ export const Profile = () => {
     const [count, setCount] = useState(0)
 
     const { userData } = useUserData(count)
+
+    console.log(userData)
     
     const password = useFormValues()
     const newPassword = useFormValues()
@@ -43,7 +46,7 @@ export const Profile = () => {
             axios({
                 method: 'post',
                 data: { password: password.value, newPassword: newPassword.value },
-                url: 'http://localhost:3500/edit/passwordemail',
+                url: url+'/edit/passwordemail',
                 headers: {
                     authorization: token
                 }
@@ -85,7 +88,7 @@ export const Profile = () => {
             axios({
                 method: 'post',
                 data: { newEmail: newEmail.value, email: email.value },
-                url: 'http://localhost:3500/edit/passwordemail',
+                url: url+'/edit/passwordemail',
                 headers: {
                     authorization: token
                 }
@@ -225,7 +228,7 @@ export const Profile = () => {
         await axios({
             method: 'post',
             data: editBankValues,
-            url: 'http://localhost:3500/edit/bankAccount',
+            url: url+'/edit/bankAccount',
             headers: {
                 authorization: token
             }
@@ -257,6 +260,7 @@ export const Profile = () => {
     const [editBank, setEditBank] = useState(false)
 
     useEffect(()=>{
+
         if(userData.bank){
             if(userData.bank.titular){
                 setEditBank(true)
@@ -271,7 +275,7 @@ export const Profile = () => {
         axios({
             method: 'post',
             data: editBankValues,
-            url: 'http://localhost:3500/remove/bankAccount',
+            url: url+'/remove/bankAccount',
             headers: {
                 authorization: token
             }
@@ -331,7 +335,7 @@ export const Profile = () => {
                                 </div>
                                 <div className='datos-description-container'>
                                     <p className='datos-titles'>Fecha de creacion: </p>
-                                    <p className='datos-description'>{userData.date.split('T')[0]}</p>
+                                    <p className='datos-description'>{`${new Date(userData.date).getDate()}/${new Date(userData.date).getMonth() + 1}/${new Date(userData.date).getFullYear()}`}</p>
                                 </div>
                             </div>
                             <div className='password-configuration'>
@@ -342,7 +346,7 @@ export const Profile = () => {
                                     <input {...confirmNewPassword} autoComplete='true' required type="password" placeholder='Confirmar contraseña'/>
                                     <p className={newPasswordError ? 'configuration-warning' : 'dNone'}><MdInfo /> La confirmacion no coincide</p>
                                     <p className={!password_valid ? 'configuration-warning' : 'dNone'}><MdInfo />&nbsp;Debe contener mayuscula, minuscula y numero, minimo 8 caracteres</p>
-                                    <button>
+                                    <button disabled={passwordLoading ? true : false}>
                                         <div className={passwordLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
@@ -357,7 +361,7 @@ export const Profile = () => {
                                     <input {...newEmail} autoComplete='true' required type="email" placeholder='Email nuevo'/>
                                     <input {...confirmNewEmail} autoComplete='true' required type="email" placeholder='Confirmar email'/>
                                     <p className={newEmailError ? 'configuration-warning' : 'dNone'}><MdInfo /> La confirmacion no coincide</p>
-                                    <button>
+                                    <button disabled={emailLoading ? true : false}>
                                         <div className={emailLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
@@ -413,13 +417,13 @@ export const Profile = () => {
                                         }
                                     </select>
                                     <p className={!tipoCuenta_valid ? 'configuration-warning' : 'dNone'}><MdInfo /> Selecciona Tipo de cuenta</p>
-                                    <button className='button-aggregate-count'>
+                                    <button disabled={editBankLoading ? true : false} className='button-aggregate-count'>
                                         <div className={editBankLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
                                         <p className={editBankLoading ? 'dNone' : '' }><MdAddCircle />Agregar</p>
                                     </button>
-                                    <button className={cancelEditBank ? 'cancelEditBank' : 'dNone' } onClick={()=>{setEditBank(true); setCancelEditBank(false)}} type='button'><IoIosCloseCircle />Cancelar</button>
+                                    <button disabled={editBankLoading ? true : false} className={cancelEditBank ? 'cancelEditBank' : 'dNone' } onClick={()=>{setEditBank(true); setCancelEditBank(false)}} type='button'><IoIosCloseCircle />Cancelar</button>
                                 </form>
                             </div> :
                             <div className='datos-configuration'>

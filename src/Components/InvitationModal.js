@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import './Styles/InvitationModal.css'
 import Modal from "./Modal"
 import axios from 'axios'
+import { url } from '../urlServer'
 
 const InvitationModal = (props) => {
 
@@ -32,7 +33,7 @@ const InvitationModal = (props) => {
         await axios({
             data: joinData,
             method: 'post',
-            url: 'https://example2wanted.herokuapp.com/api/newUserInSala',
+            url: url+'/api/newUserInSala',
             headers: {
                 authorization: props.token
             }
@@ -69,7 +70,7 @@ const InvitationModal = (props) => {
                     <p>Valor: <span>${formatNumber(invitation.price)}</span></p>
                     <p>Usuario padre: <span>{invitation.parentUsername}</span></p>
                     <p>Mensaje: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
-                    <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>
+                    <button disabled={invitationLoading ? true : false} className='btn btn-dark btn-block invitation-button' onClick={handleClick}>
                         <div className={invitationLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                             <span className="sr-only">Loading...</span>
                         </div>

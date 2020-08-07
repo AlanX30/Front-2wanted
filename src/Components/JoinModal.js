@@ -1,11 +1,11 @@
-import React from 'react'
+import React ,{ useState } from 'react'
 import Swal from 'sweetalert2'
 import './Styles/JoinModal.css'
 import { withRouter } from 'react-router-dom'
 import Modal from './Modal'
 import axios from 'axios'
 import { useFormValues } from '../hooks/useFormValues'
-import { useState } from 'react'
+import { url } from '../urlServer'
 
 const JoinModal = (props) => {
 
@@ -56,7 +56,7 @@ const JoinModal = (props) => {
         await axios({
             data: joinData,
             method: 'post',
-            url: 'https://example2wanted.herokuapp.com/api/newUserInSala',
+            url: url+'/api/newUserInSala',
             headers: {
                 authorization: props.token
             }
@@ -116,7 +116,7 @@ const JoinModal = (props) => {
                             <span>Nota:</span> "Sera agregado como referido de algun usuario aleatorio con espacio disponible en esta sala."
                         </p>
                     </div>
-                    <button className='btn btn-dark btn-block invitation-button'>
+                    <button disabled={joinLoading ? true : false} className='btn btn-dark btn-block invitation-button'>
                         <div className={joinLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                             <span className="sr-only">Loading...</span>
                         </div>

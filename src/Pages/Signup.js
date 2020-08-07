@@ -9,9 +9,10 @@ import android from '../Images/ANDROID.png'
 import ios from '../Images/IOS.png'
 import IMG from '../Images/esfinge.svg'
 import './Styles/Signup.css'
+import { url } from '../urlServer'
 
 export const Signup = (props) => {
-    
+
     const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
     const reg_whiteSpace = /^$|\s+/
 
@@ -54,7 +55,7 @@ export const Signup = (props) => {
 
         setSignupLoading(true)
 
-        axios.post('http://localhost:3500/api/users/signup', form)
+        axios.post( url+'/api/users/signup', form)
         .then(res => {
             if(res.data.error){
                 setSignupLoading(false)
@@ -123,7 +124,7 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdMail /></div>
                                             </div>
-                                            <input type="email" className='form-control' {...email} placeholder='Email' required/>
+                                            <input autoComplete='true' type="email" className='form-control' {...email} placeholder='Email' required/>
                                         </div>
                                     </div>
                                     <div className="form-group form-inputs">
@@ -139,7 +140,7 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
-                                            <input type="password"  className='form-control' {...password} placeholder='Contraseña' required/>
+                                            <input autoComplete='true' type="password"  className='form-control' {...password} placeholder='Contraseña' required/>
                                         </div>
                                         <label className={!password_valid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Debe contener mayuscula, minuscula y numero, minimo 8 caracteres</label>
                                     </div>
@@ -148,7 +149,7 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
-                                            <input type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirmar contraseña' required/>
+                                            <input autoComplete='true' type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirmar contraseña' required/>
                                         </div>
                                     </div>
                                     <button disabled={signupLoading ? true : false} type='submit' className='button-signup'>

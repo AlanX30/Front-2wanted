@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import { Tree } from '../Components/Tree'
 import { useChildsData }  from '../hooks/useChildsData'
 import { useUserData }  from '../hooks/useUserData'
+import { url } from '../urlServer'
 import axios from 'axios'
 
 export const Room = (props) => {
@@ -23,13 +24,17 @@ export const Room = (props) => {
 
     useEffect(()=>{
         
+    }, [])
+
+    useEffect(()=>{
+        
         async function searchRoom(){
             try {
                 if(userName){
                     const response = await axios({
                         data: { salaId: salaId, username: userName },
                         method: 'post',
-                        url: 'https://example2wanted.herokuapp.com/api/search/sala',
+                        url: url+'/api/search/sala',
                         headers: {
                             authorization: token
                         }
@@ -58,9 +63,10 @@ export const Room = (props) => {
             }
         }
         searchRoom()
+
     },[userName, salaId, token])
 
-    const { arbolData } = useChildsData(salaId, userName)
+    const { arbolData, loadingChildsData } = useChildsData(salaId, userName)
     
     const price = dataRoom ? dataRoom.price : 0
 
@@ -81,8 +87,8 @@ export const Room = (props) => {
     }
 
     const tAcum = acum3 + acum4
- 
-    if(loadingRoom){
+    
+    if(loadingRoom || loadingChildsData){
         return <div className='loading-room'>
             <div className="spinner-border spiner-room text-danger" role="status">
                 <span className="sr-only">Loading...</span>
@@ -98,7 +104,7 @@ export const Room = (props) => {
         <div className='room'>
             <div>
                 <div className='arbol-container'>
-                    <Tree token={token} userName={userName} salaName={dataRoom.name} price={dataRoom.price} salaId={dataRoom._id} arbolData={arbolData} />
+                    <Tree loading={loadingChildsData} token={token} userName={userName} salaName={dataRoom.name} price={dataRoom.price} salaId={dataRoom._id} arbolData={arbolData} />
                 </div>
             </div>    
             <div>

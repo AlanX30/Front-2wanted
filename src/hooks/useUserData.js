@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { url } from '../urlServer'
 import axios from 'axios'
 
 export const useUserData = (update) => {
@@ -13,7 +14,7 @@ export const useUserData = (update) => {
         if(token){
             const response = await axios({
                 method: 'get',
-                url: 'https://example2wanted.herokuapp.com/api/me',
+                url: url+'/api/me',
                 headers: {
                     authorization: token
                     }

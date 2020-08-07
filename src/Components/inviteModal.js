@@ -5,6 +5,7 @@ import { useFormValues } from '../hooks/useFormValues'
 import { MdInfo } from "react-icons/md"
 import axios from 'axios'
 import './Styles/Invite.css'
+import { url } from '../urlServer'
 
 export const InviteModal = (props) => {
     
@@ -37,7 +38,7 @@ export const InviteModal = (props) => {
         await axios({
             data: data,
             method: 'post',
-            url: 'http://localhost:3500/api/new-invitation',
+            url: url+'/api/new-invitation',
             headers: {
                 authorization: props.token
             }
@@ -81,7 +82,7 @@ export const InviteModal = (props) => {
                     <input {...message} type="text" placeholder='Mensaje Opcional'/>
                     <label className={msg_valid ? 'dNone' : 'warning-invite'}><MdInfo />&nbsp;Maximo 50 caracteres</label>
                 </div>
-                <button className='btn btn-dark btn-block invitation-button'>
+                <button disabled={inviteLoading ? true : false} className='btn btn-dark btn-block invitation-button'>
                     <div className={inviteLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>

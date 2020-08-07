@@ -55,6 +55,12 @@
     transition: .2S;
     padding-top: 4px;
   }
+  .tree-spinner {
+    margin: 40px auto;
+    display: flex;
+    width: 8rem;
+    height: 8rem;
+  }
   .noChild:hover {
     transform: scale(1.3);
   }

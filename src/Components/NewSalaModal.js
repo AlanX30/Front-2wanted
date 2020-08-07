@@ -1,6 +1,7 @@
 import React from "react"
 import Modal from "./Modal"
 import axios from "axios"
+import { url } from '../urlServer'
 import { useFormValues } from "../hooks/useFormValues"
 
 function NewSalaModal(props){
@@ -31,7 +32,7 @@ function NewSalaModal(props){
                 await axios({
                     data: newSalaData,
                     method: 'post',
-                    url: 'https://example2wanted.herokuapp.com/api/new/sala',
+                    url: url+'/api/new/sala',
                     headers: {
                         authorization: props.token
                     }

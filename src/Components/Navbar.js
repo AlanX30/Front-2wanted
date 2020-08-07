@@ -13,6 +13,7 @@ import { IoMdSettings, IoIosContact } from 'react-icons/io'
 import { MdAccountCircle, MdAccountBalanceWallet,  MdInfo, MdSearch, MdNotificationsNone, MdFileUpload, MdFileDownload, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
 import  JoinModal  from './JoinModal'
 import { Context } from '../context'
+import { url } from '../urlServer'
 import { withRouter } from 'react-router-dom'
 import { useUserData } from '../hooks/useUserData'
 import  InvitationModal  from './InvitationModal'
@@ -50,7 +51,7 @@ const Navbar = (props) => {
                 const response = await axios({
                     data: { name: room1.value },
                     method: 'post',
-                    url: 'https://example2wanted.herokuapp.com/api/search/sala',
+                    url: url+'/api/search/sala',
                     headers: {
                         authorization: token
                     }
@@ -96,7 +97,7 @@ const Navbar = (props) => {
         setInvitationData(invitationData)
     }
 
-    const socket = io('http://localhost:3500')
+    const socket = io(url)
  
     if(userData.userName){
         socket.emit('user_online', userData.userName)
@@ -117,7 +118,7 @@ const Navbar = (props) => {
         axios({
             method: 'post',
             data: {page: countPages},
-            url: 'http://localhost:3500/api/invitations',
+            url: url+'/api/invitations',
             headers: {
                 authorization: token
             }
@@ -157,7 +158,7 @@ const Navbar = (props) => {
         if(notifications > 0) {
             axios({
                 method: 'post',
-                url: 'http://localhost:3500/api/invitations-reset',
+                url: url+'/api/invitations-reset',
                 headers: {
                     authorization: token
                 }
@@ -189,7 +190,7 @@ const Navbar = (props) => {
         await axios({
             method: 'post',
             data: { price: pay.value },
-            url: 'https://example2wanted.herokuapp.com/api/payments',
+            url: url+'/api/payments',
             headers: {
                 authorization: token
             }
@@ -330,12 +331,12 @@ const Navbar = (props) => {
                                 <a className='Link' href={urlPay} rel="noopener noreferrer" target='_blank'><FcOk />&nbsp;Confirmar pago por &nbsp; ${pay.value}</a>
                              </div>
                         </div>
-                        <div className="item-menu-right">
+                        <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/balance/' className="item-menu-right">
                             <MdChromeReaderMode /><p>&nbsp;Historial de balance</p> 
-                        </div>
-                        <a href='/profile/' className="item-menu-right" >
+                        </Link>
+                        <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/profile/' className="item-menu-right" >
                            < IoMdSettings /><p>&nbsp;Configuracion de usuario</p> 
-                        </a>
+                        </Link>
                         <div className="item-menu-right">
                            <MdHelpOutline /><p>&nbsp;Ayuda</p> 
                         </div>
