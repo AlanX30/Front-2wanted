@@ -53,10 +53,10 @@ import './Styles/NavbarLogin.css'
                 <Link className="logo" to="/"><img className='login-logo1' src={logo} alt='logo-img' /><img className='login-logo2' src={logoletra} alt="logoletra"/></Link>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group login-inputs">
-                            <input autoComplete='true' type="email" className='form-control' {...email} placeholder='Email'/>
+                            <input autoComplete="on" type="email" className='form-control' {...email} placeholder='Email'/>
                         </div>
                         <div className="form-group login-inputs">
-                            <input autoComplete='true' className="form-control" type="password" {...password} placeholder="Contraseña"/>
+                            <input autoComplete='on' className="form-control" type="password" {...password} placeholder="Contraseña"/>
                             <a href='https://www.youtube.com/' target='_blank' rel="noopener noreferrer">Olvidaste tu cuenta?</a>
                         </div>
                         <button disabled={loginLoading ? true : false} type='submit' className="login-button">

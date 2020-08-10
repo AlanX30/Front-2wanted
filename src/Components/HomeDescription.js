@@ -64,7 +64,6 @@ export const HomeDescription = (props) => {
 
     const name = useFormValues()
     const price = useFormValues()
-    const password = useFormValues()
     
     const newSalaData = {
         users: [
@@ -79,7 +78,6 @@ export const HomeDescription = (props) => {
             }
         ],
         name: name.value,
-        password: password.value,
         price: price.value,
         creator: userData.userName
     }

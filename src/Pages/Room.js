@@ -3,6 +3,7 @@ import './Styles/Room.css'
 import Swal from 'sweetalert2'
 import { Tree } from '../Components/Tree'
 import { useChildsData }  from '../hooks/useChildsData'
+import { MdAccountBalanceWallet } from "react-icons/md";
 import { useUserData }  from '../hooks/useUserData'
 import { url } from '../urlServer'
 import axios from 'axios'
@@ -11,6 +12,7 @@ export const Room = (props) => {
 
     const [loadingRoom, setLoadingRoom] = useState(true)
     const [parent, setParent] = useState('')
+    const [inBalance, setInBalance] = useState(0)
     const token = window.sessionStorage.getItem('token')
     const salaId = props.match.params.salaId
     const [dataRoom, setDataRoom] = useState(false)
@@ -48,6 +50,7 @@ export const Room = (props) => {
                         text: error,
                     })
                 }else{
+                    setInBalance(response.data.inBalance)
                     setLoadingRoom(false)
                     setParent(response.data.parentId)
                     setDataRoom(response.data.data)  
@@ -96,6 +99,17 @@ export const Room = (props) => {
         </div>
     }
 
+    async function handleToBalance(){
+        await axios({
+            method: 'post',
+            data: {user: userName, toBalance: 'true'},
+            url: `${url}/api/in-sala?id=${salaId}`,
+            headers: {
+                 authorization: token
+            }
+        })
+    }
+
     if(!dataRoom){
         return <div></div>
     }
@@ -117,12 +131,18 @@ export const Room = (props) => {
                     <span>{parent}</span>
                     <p>Creador:</p>
                     <span>{dataRoom.creator}</span>
-                    <p>Acomulado en nivel 3:</p>
+                    <p>Acumulado en nivel 3:</p>
                     <span>${formatNumber(acum3)}</span>
-                    <p>Acomulado en nivel 4:</p>
+                    <p>Acumulado en nivel 4:</p>
                     <span>${formatNumber(acum4)}</span>
-                    <p>Total acomulado:</p>
-                    <span>${formatNumber(tAcum)}</span>
+                    <p>Total acumulado:</p>
+                    <span>${formatNumber(tAcum)}</span>                   
+                    <p>Acumulado retirado:</p>
+                    <span>${formatNumber(inBalance)}</span>
+                    <button disabled={tAcum > inBalance ? false : true} onClick={handleToBalance}>
+                        <p>Retirar a billetera</p>
+                        <label>${tAcum > inBalance ? formatNumber(tAcum - inBalance) : 0} ➜ <MdAccountBalanceWallet /></label>
+                    </button>
                 </div>
             </div>    
         </div>

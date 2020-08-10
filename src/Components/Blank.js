@@ -1,6 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
-export const Blank = () => {
+export const Blank = (props) => {
+
+    useEffect(() => {
+        props.history.push('/')
+    }, [props])
+
     return(
         <div>
         </div>

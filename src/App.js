@@ -24,12 +24,11 @@ function App() {
           <Layout>
             <Route exact path ='/profile/' component={Profile}/>
             <Route exact path ='/balance/' component={Balance}/>
-            <Route exact path ='/Blank/' component={Blank}/>
             <Route exact path ='/home/' component={Home}/>
             <Route exact path ='/sala/:salaId/' component={Room}/>
           </Layout>
         }
-        <Route component={Signup} />
+        <Route component={Blank}/>
       </Switch>
     </BrowserRouter>
   )

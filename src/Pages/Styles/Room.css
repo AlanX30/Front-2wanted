@@ -25,9 +25,39 @@
   border: 4px solid #212529;
   box-shadow: 4px -4px 8px #000;
   padding-left: 18px;
+  margin-bottom: 20px;
 }
-/* .room-details p {
-} */
+.room-details button {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow: 0px 5px 8px #000;
+  background: var(--bg-color);
+  color: #f18e47;
+  font-weight: 600;
+  margin-bottom: 4px;
+  transition: .25s;
+}
+.room-details button svg {
+  margin-bottom: 4px;
+}
+.room-details label {
+  font-size: 19px;
+}
+.room-details button:hover {
+  background: #f18e47;
+  color: var(--bg-color);
+}
+.room-details button:disabled:hover {
+  background: var(--bg-color);
+  color: #f18e4738;
+}
+
+.room-details button:disabled {
+  color: #f18e4738;
+}
 .room-details span {
   font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size: 25px;
