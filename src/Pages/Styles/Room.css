@@ -75,6 +75,9 @@
   width: 9rem;
   height: 9rem;
 }
+.spinner-toBalance {
+  margin: 10px 0;
+}
 @media screen and (max-width: 790px) {
   .room {
     grid-template-columns: 1fr;

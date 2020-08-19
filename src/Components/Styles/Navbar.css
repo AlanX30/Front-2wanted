@@ -416,6 +416,28 @@ nav {
   height: 100%;
   background: #ff5656;
 }
+.balance-refresh-container {
+ position: absolute;
+ right: 10px;
+}
+.refresh-balance {
+  cursor: pointer;
+ color: white;
+ transition: .2s;
+}
+.refresh-balance:hover {
+  color: #eea048;
+}
+.refresh-balance:active {
+  transform: scale(1.2);
+  color: #eea048;
+  transform: rotate(360deg);
+}
+.refresh-balance-loading {
+  transform: scale(1.2);
+  color: #eea048;
+  transform: rotate(360deg) infinite;
+}
   @media screen and (max-width: 1123px) {
   .dropdown-menu-navbar2.isActive{
     width: 40%;

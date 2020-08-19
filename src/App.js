@@ -6,8 +6,9 @@ import { Home } from './Pages/Home'
 import { Room } from './Pages/Room'
 import { Signup } from './Pages/Signup'
 import { Balance } from './Pages/Balance'
+import { Administracion } from './Pages/Administracion'
 import { Context } from './context'
-import {Profile } from './Pages/Profile';
+import { Profile } from './Pages/Profile';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route exact path ='/' component={Signup}/>
         <Route exact path ='/pending/' component={Blank}/>
         <Route exact path ='/failure/' component={Blank}/>
+        <Route exact path ='/adm/' component={ Administracion }/>
         {
           isAuth && 
           <Layout>

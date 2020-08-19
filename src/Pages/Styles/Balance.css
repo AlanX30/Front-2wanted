@@ -138,6 +138,13 @@
     color: #eea649;
 }
 
+.pages-balance {
+    margin-top: -12px;
+}
+.pages-balance-down {
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 695px) {
     .date-form button {
         margin-top: 10px;

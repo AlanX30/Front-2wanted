@@ -4,6 +4,7 @@ import { useUserData } from '../hooks/useUserData'
 import axios from 'axios'
 import { RiArrowDownSLine } from "react-icons/ri"
 import { MdChromeReaderMode } from "react-icons/md"
+import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
 import './Styles/Balance.css'
 import { url } from '../urlServer'
 
@@ -26,12 +27,20 @@ export const Balance = () => {
     
     const [ balance, setBalance ] = useState([])
 
-    useEffect(() => { 
+    const [countPages, setCountPages] = useState(1)
+    
+    const [totalPages, setTotalPages] = useState(1)
+    
+    const [countLastestPages, setCountLastestPages] = useState(1)
+    
 
+    useEffect(() => { 
+        
         setLoading(true)
             
         axios({
             method: 'post',
+            data: {page: countPages},
             url: url+'/api/userbalance',
             headers: {
                 authorization: token
@@ -46,6 +55,7 @@ export const Balance = () => {
                     text: res.data.error,
                 })
             }else{
+                setTotalPages(res.data.totalPages)
                 setBalance(res.data.data)
             }
         }).catch( err => {
@@ -57,11 +67,15 @@ export const Balance = () => {
             })
         })
 
-    }, [token])
+    }, [token, countLastestPages])
+
+    const [activeDate, setActiveDate] = useState(false)
 
     function handleDate(e){
 
-        e.preventDefault()
+        if(e){
+            e.preventDefault()
+        }
 
         setLoading(true)
         
@@ -73,16 +87,22 @@ export const Balance = () => {
 
         const fechaFinal = new Date(splitDate2[0], splitDate2[1]-1, splitDate2[2], 24, 0, 0)
 
+        if(!activeDate) {
+            setCountPages(1)
+        }
+
         axios({
             method: 'post',
-            data: { getFechaInicial: fechaInicial, getFechaFinal: fechaFinal},
+            data: { getFechaInicial: fechaInicial, getFechaFinal: fechaFinal, page: countPages},
             url: url+'/api/userbalance',
             headers: {
                 authorization: token
             }
         }).then(res => {
-            setLoading(false)
+            setActiveDate(true)
             setBalance(res.data.data)
+            setTotalPages(res.data.totalPages)
+            setLoading(false)
         })
     }
 
@@ -103,6 +123,24 @@ export const Balance = () => {
             <input className={viewDates ? '' : 'none-balance'} type="date" required={true} onChange={(e)=>setValueFecha2(e.target.value)}/>
             <button className={viewDates ? '' : 'none-balance'}>Buscar</button>
         </form>
+
+        <div className={totalPages === 1 ? 'dNone' : 'pagination pages-balance'}>
+            <button disabled={countPages === 1 ? true : false} className='pagination-button' onClick={()=> {
+                setCountPages(countPages - 1)
+                if(activeDate){
+                    handleDate()
+                }else{setCountLastestPages(countLastestPages + 1)}
+                }} ><AiOutlineCaretLeft size='30'/>
+            </button> 
+                <p><span>{countPages}</span> - {totalPages}</p> 
+            <button disabled={countPages === totalPages ? true : false} className='pagination-button' onClick={()=> {
+                setCountPages(countPages + 1)
+                if(activeDate){
+                    handleDate()
+                }else{setCountLastestPages(countLastestPages + 1)}
+            }}><AiOutlineCaretRight size='30' />
+            </button>
+        </div>
 
         {
             loading ? <div>
@@ -154,6 +192,22 @@ export const Balance = () => {
             }
             </div>
         }
-
+        <div className={totalPages === 1 ? 'dNone' : 'pagination pages-balance-down'}>
+            <button disabled={countPages === 1 ? true : false} className='pagination-button' onClick={()=> {
+                setCountPages(countPages - 1)
+                if(activeDate){
+                    handleDate()
+                }else{setCountLastestPages(countLastestPages + 1)}
+                }} ><AiOutlineCaretLeft size='30'/>
+            </button> 
+                <p><span>{countPages}</span> - {totalPages}</p> 
+            <button disabled={countPages === totalPages ? true : false} className='pagination-button' onClick={()=> {
+                setCountPages(countPages + 1)
+                if(activeDate){
+                    handleDate()
+                }else{setCountLastestPages(countLastestPages + 1)}
+            }}><AiOutlineCaretRight size='30' />
+            </button>
+        </div>
     </div>
 }

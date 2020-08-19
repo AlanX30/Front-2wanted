@@ -7,8 +7,12 @@ export const useUserData = (update) => {
     const token = window.sessionStorage.getItem('token')
     
     const [userData, setUserData] = useState({})
+    const [loadingUserData, setLoadingUserData] = useState(false)
     
     useEffect(() => { 
+
+        setLoadingUserData(true)
+
         async function getUserData(){
 
         if(token){
@@ -21,6 +25,7 @@ export const useUserData = (update) => {
             })
             if(response.data){
                 setUserData(response.data)
+                setLoadingUserData(false)
             }
         } 
     }
@@ -28,5 +33,5 @@ export const useUserData = (update) => {
     }, [token, update])
   
 
-    return { userData }
+    return { userData, loadingUserData }
 }

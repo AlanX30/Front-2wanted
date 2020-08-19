@@ -203,10 +203,10 @@ export const HomeDescription = (props) => {
                                 <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Valor Minimo de Sala $5.000 COP</label>
                             </div>
                             <button disabled={createLoading ? true : false}>
-                                <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
+                                <div className={!createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                                     <span className="sr-only">Loading...</span>
                                 </div>
-                                <p className={createLoading ? 'dNone' : ''}>Crear</p>
+                                <p className={!createLoading ? 'dNone' : ''}>Crear</p>
                             </button>
                         </form>   
                     </div>       

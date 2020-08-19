@@ -10,7 +10,7 @@ import logoletra from '../Images/2WANTED.svg'
 import { useComponentVisible } from '../hooks/useComponentVisible'
 import { FcOk, FcHighPriority } from 'react-icons/fc'
 import { IoMdSettings, IoIosContact } from 'react-icons/io'
-import { MdAccountCircle, MdAccountBalanceWallet,  MdInfo, MdSearch, MdNotificationsNone, MdFileUpload, MdFileDownload, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
+import { MdRefresh, MdAccountCircle, MdAccountBalanceWallet,  MdInfo, MdSearch, MdNotificationsNone, MdFileUpload, MdFileDownload, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
 import  JoinModal  from './JoinModal'
 import { Context } from '../context'
 import { url } from '../urlServer'
@@ -22,7 +22,9 @@ import axios from 'axios'
 const Navbar = (props) => {
 
     /* -----------------------------Busqueda---------------------------------------------------------------- */
-    const { userData } = useUserData() 
+    const [countUserData, setCountUserData] = useState(0)
+    
+    const { userData, loadingUserData } = useUserData(countUserData) 
     const [filterSala, setFilterSala] = useState(false)
     const dropdownFilter = useComponentVisible(false);
     const [modal2Open, setModal2Open] = useState(null)
@@ -207,9 +209,7 @@ const Navbar = (props) => {
         <nav>
 {/* ------------------------------------Section-Logos---------------------------------------------------------------------- */}       
             <div className={!iconNone ? "section-logos" : 'dNone'}>
-
                 <Link className="Link" to="/home">< img className='logo1' src={logo} alt='logo-img' /> <img className='logo2' src={logoletra} alt="logoletra"/> </Link>
-            
             </div>
 {/* ------------------------------------/Section-Logos---------------------------------------------------------------------- */}       
 {/* ------------------------------------Section-Searcher hidden---------------------------------------------------------------------- */}      
@@ -312,7 +312,7 @@ const Navbar = (props) => {
                         </div>
                         <div className='item-menu-right-wallet-container'>
                             <div><MdAccountBalanceWallet />&nbsp;Billetera</div>
-                            <p>${formatNumber(userData.wallet)}</p>
+                            <p className='balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  ${formatNumber(userData.wallet)}</p>
                         </div>
                         <div className='item-menu-right-cashier'>
                             <div onClick={()=> setDeposit(true)} to='/wallet' className='button-deposit'><MdFileUpload />Depositar</div>

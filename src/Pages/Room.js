@@ -16,7 +16,8 @@ export const Room = (props) => {
     const token = window.sessionStorage.getItem('token')
     const salaId = props.match.params.salaId
     const [dataRoom, setDataRoom] = useState(false)
-
+    const [countUserData, setCountUserData] = useState(0)
+    const [loadingToBalance, setLoadingToBalance] = useState(false)
     
     const { userData: {userName} } = useUserData()
     
@@ -29,7 +30,6 @@ export const Room = (props) => {
     }, [])
 
     useEffect(()=>{
-        
         async function searchRoom(){
             try {
                 if(userName){
@@ -67,7 +67,7 @@ export const Room = (props) => {
         }
         searchRoom()
 
-    },[userName, salaId, token])
+    },[userName, salaId, token, countUserData])
 
     const { arbolData, loadingChildsData } = useChildsData(salaId, userName)
     
@@ -90,16 +90,9 @@ export const Room = (props) => {
     }
 
     const tAcum = acum3 + acum4
-    
-    if(loadingRoom || loadingChildsData){
-        return <div className='loading-room'>
-            <div className="spinner-border spiner-room text-danger" role="status">
-                <span className="sr-only">Loading...</span>
-            </div>
-        </div>
-    }
 
     async function handleToBalance(){
+        setLoadingToBalance(true)
         await axios({
             method: 'post',
             data: {user: userName, toBalance: 'true'},
@@ -107,7 +100,30 @@ export const Room = (props) => {
             headers: {
                  authorization: token
             }
+        }).then(res => {
+            setCountUserData(countUserData + 1)
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: res.data.msg,
+            })
+            setLoadingToBalance(false)
+        }).catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: error,
+            })
+            setLoadingToBalance(false)
         })
+    }
+    
+    if(loadingRoom || loadingChildsData){
+        return <div className='loading-room'>
+            <div className="spinner-border spiner-room text-danger" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+        </div>
     }
 
     if(!dataRoom){
@@ -140,8 +156,13 @@ export const Room = (props) => {
                     <p>Acumulado retirado:</p>
                     <span>${formatNumber(inBalance)}</span>
                     <button disabled={tAcum > inBalance ? false : true} onClick={handleToBalance}>
-                        <p>Retirar a billetera</p>
-                        <label>${tAcum > inBalance ? formatNumber(tAcum - inBalance) : 0} ➜ <MdAccountBalanceWallet /></label>
+                        <div className={!loadingToBalance ? '' : 'dNone'}>
+                            <p>Retirar a billetera</p>
+                            <label>${tAcum > inBalance ? formatNumber(tAcum - inBalance) : 0} ➜ <MdAccountBalanceWallet /></label>
+                        </div>
+                        <div className={loadingToBalance ? "spinner-toBalance spinner-border text-danger" : 'dNone'} role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
                     </button>
                 </div>
             </div>    
