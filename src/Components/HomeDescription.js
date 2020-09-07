@@ -203,10 +203,10 @@ export const HomeDescription = (props) => {
                                 <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Valor Minimo de Sala $5.000 COP</label>
                             </div>
                             <button disabled={createLoading ? true : false}>
-                                <div className={!createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
+                                <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                                     <span className="sr-only">Loading...</span>
                                 </div>
-                                <p className={!createLoading ? 'dNone' : ''}>Crear</p>
+                                <p className={createLoading ? 'dNone' : ''}>Crear</p>
                             </button>
                         </form>   
                     </div>       
@@ -215,7 +215,7 @@ export const HomeDescription = (props) => {
                     <div className='youtube-container'>
                         <h3>Instrucciones</h3>
                         <div className='youtube-wrap'>
-                            <iframe className='youtube-video' width="560" height="315" title='Instrucciones' src="https://www.youtube.com/embed/kIBaxpNuGBs" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                            <iframe className='youtube-video' width="560" height="315" title='Instrucciones' src="https://www.youtube.com/embed/-XOuu1vd_fk" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         </div>
                     </div>
                 </div>
