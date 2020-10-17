@@ -9,11 +9,12 @@ import { useFormValues } from '../hooks/useFormValues'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { url } from '../urlServer'
+import Cookies from 'js-cookie'
 
 export const HomeDescription = (props) => {
 
     const reg_whiteSpace = /^$|\s+/
-    const token = window.sessionStorage.getItem('token')
+    const token = Cookies.get('token')
     const  {userData}  = useUserData()
     const [actives_560, setActives_560] = useState(false)
     const [listRooms, setListRooms] = useState([])
@@ -70,7 +71,6 @@ export const HomeDescription = (props) => {
             {
                 user: userData.userName,
                 parentId: undefined,
-                space: 'true',
                 childsId: {
                     childId1: '',
                     childId2: '',
@@ -156,13 +156,13 @@ export const HomeDescription = (props) => {
                                         {
                                             listRooms.map((data) => {
                                                 return (
-                                                    <li className='actives-li' key={data._id}>
-                                                        <Link to={`/sala/${data._id}`} className='actives-links Link'>
+                                                    <li className='actives-li' key={data.salaId}>
+                                                        <Link to={`/sala/${data.salaId}`} className='actives-links Link'>
                                                             <img src={ArbolImg} alt="ArbolImg"/>
                                                             <div className='actives-description'>
-                                                                <p>Nombre de sala: <span>{data.name}</span></p>
-                                                                <p>Valor: <span>${formatNumber(data.price)}</span></p>
-                                                                <p>Creador: <span>{data.creator}</span></p>
+                                                                <p>Nombre de sala: <span>{data.salaName}</span></p>
+                                                                <p>Valor: <span>${formatNumber(data.salaPrice)}</span></p>
+                                                                <p>Creador: <span>{data.salaCreator}</span></p>
                                                             </div>
                                                         </Link>
                                                     </li>

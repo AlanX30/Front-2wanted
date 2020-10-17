@@ -6,14 +6,15 @@ import { useChildsData }  from '../hooks/useChildsData'
 import { MdAccountBalanceWallet } from "react-icons/md";
 import { useUserData }  from '../hooks/useUserData'
 import { url } from '../urlServer'
+import Cookies from 'js-cookie'
 import axios from 'axios'
 
 export const Room = (props) => {
 
+    const token = Cookies.get('token')
     const [loadingRoom, setLoadingRoom] = useState(true)
     const [parent, setParent] = useState('')
     const [inBalance, setInBalance] = useState(0)
-    const token = window.sessionStorage.getItem('token')
     const salaId = props.match.params.salaId
     const [dataRoom, setDataRoom] = useState(false)
     const [countUserData, setCountUserData] = useState(0)

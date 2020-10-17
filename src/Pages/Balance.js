@@ -7,10 +7,11 @@ import { MdChromeReaderMode } from "react-icons/md"
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
 import './Styles/Balance.css'
 import { url } from '../urlServer'
+import Cookies from 'js-cookie'
 
 export const Balance = () => {
 
-    const token = window.sessionStorage.getItem('token')
+    const token = Cookies.get('token')
 
     const { userData } = useUserData()
 
@@ -32,7 +33,8 @@ export const Balance = () => {
     const [totalPages, setTotalPages] = useState(1)
     
     const [countLastestPages, setCountLastestPages] = useState(1)
-    
+
+    const [amountPending, setAmountPending] = useState(0)
 
     useEffect(() => { 
         
@@ -57,6 +59,9 @@ export const Balance = () => {
             }else{
                 setTotalPages(res.data.totalPages)
                 setBalance(res.data.data)
+                if(res.data.pending){
+                    setAmountPending(res.data.amountPending)
+                }
             }
         }).catch( err => {
             setLoading(false)
@@ -123,7 +128,9 @@ export const Balance = () => {
             <input className={viewDates ? '' : 'none-balance'} type="date" required={true} onChange={(e)=>setValueFecha2(e.target.value)}/>
             <button className={viewDates ? '' : 'none-balance'}>Buscar</button>
         </form>
-
+        <div className={amountPending > 0 ? 'withdraw-pending-container' : 'dNone'}>
+            Retiro en proceso por el monto de ${formatNumber(amountPending)}
+        </div>
         <div className={totalPages === 1 ? 'dNone' : 'pagination pages-balance'}>
             <button disabled={countPages === 1 ? true : false} className='pagination-button' onClick={()=> {
                 setCountPages(countPages - 1)
@@ -141,7 +148,6 @@ export const Balance = () => {
             }}><AiOutlineCaretRight size='30' />
             </button>
         </div>
-
         {
             loading ? <div>
                 <div className="spinner-balance spinner-border text-danger" role="status">
@@ -151,7 +157,7 @@ export const Balance = () => {
             balance.length <= 0 ? <div>
                 <h3 className='no-events-balance'>No hay eventos</h3>
             </div> :
-            <div className='balance-list'>
+            <div className='balance-list'>       
             {
                 balance.map((balance)=> {
                     return (
@@ -181,11 +187,27 @@ export const Balance = () => {
                         </li> :
                         balance.type === 'deposit' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
-                            <p>Deposito</p>
+                            <div>
+                                <p className='balance-description-title'>Deposito:</p>
+                                <p>${formatNumber(balance.depositAmount)}</p>
+                                <p className='balance-description-title'>Billetera:</p>
+                                <p>${formatNumber(balance.wallet)}</p>
+                            </div>
+                            <div className='balance-won-amount-container'>
+                                <p className='balance-won-amount'>+ ${formatNumber(balance.depositAmount)}</p>
+                            </div>
                         </li> :
-                        balance.type === 'withdraw' && <li key={balance._id} >
+                        balance.state === 'completed' && <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
-                            <p>Retiro</p>
+                            <div>
+                                <p className='balance-description-title'>Retiro:</p>
+                                <p>${formatNumber(balance.withdrawAmount)}</p>
+                                <p className='balance-description-title'>Billetera:</p>
+                                <p>${formatNumber(balance.wallet)}</p>
+                            </div>
+                            <div className='balance-won-amount-container'>
+                                <p className='balance-buy-amount'>- ${formatNumber(balance.withdrawAmount)}</p>
+                            </div>
                         </li>
                     )   
                 })

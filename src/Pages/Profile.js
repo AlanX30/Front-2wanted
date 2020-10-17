@@ -6,11 +6,12 @@ import { useUserData } from '../hooks/useUserData'
 import { url } from '../urlServer'
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import './Styles/Profile.css'
 
 export const Profile = () => {
     
-    const token = window.sessionStorage.getItem('token')
+    const token = Cookies.get('token')
     const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
     const reg_numbers = /^([0-9])*$/
 

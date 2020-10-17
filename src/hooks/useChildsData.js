@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { url } from '../urlServer'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export const useChildsData = (salaId, userName) => {
 
-    const token = window.sessionStorage.getItem('token')
+    const token = Cookies.get('token')
 
     const [arbolData, setArbolData] = useState([])
 

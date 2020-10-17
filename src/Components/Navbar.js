@@ -18,16 +18,19 @@ import { withRouter } from 'react-router-dom'
 import { useUserData } from '../hooks/useUserData'
 import  InvitationModal  from './InvitationModal'
 import axios from 'axios'
+import { WithdrawModal } from './WithdrawModal'
+import Cookies from 'js-cookie'
 
 const Navbar = (props) => {
 
     /* -----------------------------Busqueda---------------------------------------------------------------- */
     const [countUserData, setCountUserData] = useState(0)
-    
+    const token = Cookies.get('token')
     const { userData, loadingUserData } = useUserData(countUserData) 
     const [filterSala, setFilterSala] = useState(false)
     const dropdownFilter = useComponentVisible(false);
     const [modal2Open, setModal2Open] = useState(null)
+    const [modal3Open, setModal3Open] = useState(null)
     const [searchLoading, setSearchLoading] = useState(false)
     const room1 = useFormValues()
 
@@ -38,8 +41,10 @@ const Navbar = (props) => {
     function onClose2Modal(){
         setModal2Open(null)
     }
-
-    function onOpen2Modal(price){
+    function onClose3Modal(){
+        setModal3Open(null)
+    }
+    function onOpen2Modal(){
         setModal2Open(true)
     }
     async function searchRoom1( e ){
@@ -75,8 +80,6 @@ const Navbar = (props) => {
     const [iconNone, setIconNone] = useState(false)
 
     /* -----------------------------Busqueda---------------------------------------------------------------- */
-
-    const token = window.sessionStorage.getItem('token')
 
     const toggle1 = useComponentVisible(false);
     const toggle3 = useComponentVisible(false);
@@ -316,7 +319,7 @@ const Navbar = (props) => {
                         </div>
                         <div className='item-menu-right-cashier'>
                             <div onClick={()=> setDeposit(true)} to='/wallet' className='button-deposit'><MdFileUpload />Depositar</div>
-                            <div to='/wallet' className='button-withdraw'><MdFileDownload />Retirar</div>
+                            <div onClick={()=>setModal3Open(true)} className='button-withdraw'><MdFileDownload />Retirar</div>
                         </div>
                         <div className={deposit ? "item-menu-right payments" : "dNone"}>
                              <form className={buttonPay ? 'dNone' : ''} onSubmit={onPay}>
@@ -349,6 +352,7 @@ const Navbar = (props) => {
             </div>
 {/* ------------------------------------/Section-NavIcons--------------------------------------------------------------------- */}       
         </nav>
+        <WithdrawModal token={token} wallet={userData.wallet} isOpen={modal3Open} onClose={onClose3Modal} />
         <JoinModal token={token} data={filterSala.data} isOpen={modal2Open} onClose={onClose2Modal}/>
         <InvitationModal token={token} invitationData={invitationData} isOpen={modalOpen} onClose={onCloseModal} />
         </>

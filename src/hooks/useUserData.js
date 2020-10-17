@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { url } from '../urlServer'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export const useUserData = (update) => {
     
-    const token = window.sessionStorage.getItem('token')
+    const token = Cookies.get('token')
     
     const [userData, setUserData] = useState({})
     const [loadingUserData, setLoadingUserData] = useState(false)

@@ -1,20 +1,23 @@
 import React, { createContext, useState } from 'react'
+import Cookies from 'js-cookie'
 
 export const Context = createContext()
 
 const Provider = ({ children }) => {
 
-  const [isAuth, setIsAuth] = useState(window.sessionStorage.getItem('token'))
+  const cookieToken = Cookies.get('token')
 
+  const [isAuth, setIsAuth] = useState(cookieToken)
+  
   const value = {
     isAuth,
     toggleAuth: (token) => {
       setIsAuth(true)
-      window.sessionStorage.setItem('token', token)
+      Cookies.set('token', token, { expires: 1 })
     },
     logout: () => { 
       setIsAuth(false)
-      window.sessionStorage.removeItem('token') 
+      Cookies.remove('token') 
     }
     
   }

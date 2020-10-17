@@ -1,0 +1,16 @@
+.withdraw-modal-cancelar {
+    background: #e02e2e;
+    color: black;
+    font-weight: 800;
+}
+.withdraw-modal-cancelar:hover {
+    color: #e02e2e;
+}
+.withdraw-modal input {
+    font-size: 20px;
+    padding: 5px;
+    margin: 10px 0 15px 0;
+}
+.withdraw-modal button {
+    margin-top: 10px;
+}
