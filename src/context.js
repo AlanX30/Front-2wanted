@@ -11,13 +11,15 @@ const Provider = ({ children }) => {
   
   const value = {
     isAuth,
-    toggleAuth: (token) => {
+    toggleAuth: (token, userName) => {
       setIsAuth(true)
       Cookies.set('token', token, { expires: 1 })
+      Cookies.set('username', userName, { expires: 1 })
     },
     logout: () => { 
       setIsAuth(false)
       Cookies.remove('token') 
+      Cookies.remove('username') 
     }
     
   }

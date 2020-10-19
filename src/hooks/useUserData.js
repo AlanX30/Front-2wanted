@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import {useCallback, useState, useEffect } from 'react'
 import { url } from '../urlServer'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -9,14 +9,14 @@ export const useUserData = (update) => {
     
     const [userData, setUserData] = useState({})
     const [loadingUserData, setLoadingUserData] = useState(false)
-    
-    useEffect(() => { 
 
+    
+    useEffect(() => {
+        
         setLoadingUserData(true)
 
         async function getUserData(){
 
-        if(token){
             const response = await axios({
                 method: 'get',
                 url: url+'/api/me',
@@ -29,7 +29,7 @@ export const useUserData = (update) => {
                 setLoadingUserData(false)
             }
         } 
-    }
+
     getUserData()
     }, [token, update])
   

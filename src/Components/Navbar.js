@@ -24,8 +24,9 @@ import Cookies from 'js-cookie'
 const Navbar = (props) => {
 
     /* -----------------------------Busqueda---------------------------------------------------------------- */
-    const [countUserData, setCountUserData] = useState(0)
     const token = Cookies.get('token')
+    const username = Cookies.get('username')
+    const [countUserData, setCountUserData] = useState(0)
     const { userData, loadingUserData } = useUserData(countUserData) 
     const [filterSala, setFilterSala] = useState(false)
     const dropdownFilter = useComponentVisible(false);
@@ -91,7 +92,6 @@ const Navbar = (props) => {
     const [invitationData, setInvitationData] = useState(null)
     let [countPages, setCountPages] = useState(1)
     let [count, setCount] = useState(0) 
-    let cuenta = 0
     
     function onCloseModal(){
         setModalOpen(null)
@@ -101,20 +101,18 @@ const Navbar = (props) => {
         setModalOpen(true)
         setInvitationData(invitationData)
     }
-
-    const socket = io(url)
- 
-    if(userData.userName){
-        socket.emit('user_online', userData.userName)
-    }
-    
-    socket.on('new_message', () => {
-        cuenta = cuenta + 1 
-        setCount(cuenta) 
-    })
-    
     
     useEffect(()=>{
+
+        const socket = io(url)
+    
+        socket.emit('user_online', username)
+        
+        socket.on('new_message', () => {
+            setCount(count + 1) 
+        })
+
+        console.log('algos')
 
         if(count > 0){
             setCountPages(1)

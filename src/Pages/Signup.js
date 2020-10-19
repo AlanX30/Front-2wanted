@@ -65,7 +65,7 @@ export const Signup = (props) => {
                     text: res.data.error,
                 })
             }else{
-                toggleAuth(res.data.token)
+                toggleAuth(res.data.token, res.data.userName)
                 props.history.push(`/home`)
             }
         })

@@ -34,7 +34,7 @@ import './Styles/NavbarLogin.css'
                     text: res.data.error,
                 })
             }else{
-                props.toggleAuth(res.data.token)
+                props.toggleAuth(res.data.token, res.data.userName)
                 props.history.push(`/home`)
             }
         })

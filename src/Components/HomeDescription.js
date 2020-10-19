@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Swal from 'sweetalert2'
 import ArbolImg from '../Images/arbol.svg'
-import { useUserData } from '../hooks/useUserData'
+import  {useUserData}  from '../hooks/useUserData'
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
 import {MdHome, MdList, MdInfo} from "react-icons/md"
 import './Styles/HomeDescription.css'
@@ -27,7 +27,6 @@ export const HomeDescription = (props) => {
     }
 
         useEffect(() => { 
-            if(token){
                 setActivesLoading(true)
                 axios({
                     method: 'post',
@@ -59,8 +58,6 @@ export const HomeDescription = (props) => {
                         text: err,
                     })
                 })
-    
-            } 
         }, [token, countActives])
 
     const name = useFormValues()
@@ -130,7 +127,6 @@ export const HomeDescription = (props) => {
         <div className='home-container'>
 
             <div className={actives_560 ? 'home-left' : 'home-left home-left-560'}>
-
 
                 <div className='actives-rooms'>
                     <h3>Tus Salas</h3>
