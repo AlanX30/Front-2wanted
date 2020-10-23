@@ -112,8 +112,6 @@ const Navbar = (props) => {
             setCount(count + 1) 
         })
 
-        console.log('algos')
-
         if(count > 0){
             setCountPages(1)
         }
@@ -152,7 +150,7 @@ const Navbar = (props) => {
             })
         })
 
-    },[token, countPages, count])
+    },[token, countPages, count, username])
     
     function notificationButton() {
         
