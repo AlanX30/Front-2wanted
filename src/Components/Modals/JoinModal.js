@@ -1,11 +1,11 @@
 import React ,{ useState } from 'react'
 import Swal from 'sweetalert2'
-import './Styles/JoinModal.css'
+import '../Styles/JoinModal.css'
 import { withRouter } from 'react-router-dom'
 import Modal from './Modal'
 import axios from 'axios'
-import { useFormValues } from '../hooks/useFormValues'
-import { url } from '../urlServer'
+import { useFormValues } from '../../hooks/useFormValues'
+import { url } from '../../urlServer'
 
 const JoinModal = (props) => {
 

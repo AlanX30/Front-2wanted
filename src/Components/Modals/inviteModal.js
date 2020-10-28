@@ -1,11 +1,11 @@
 import React, { useState } from "react"
 import Modal from "./Modal"
 import Swal from 'sweetalert2'
-import { useFormValues } from '../hooks/useFormValues'
+import { useFormValues } from '../../hooks/useFormValues'
 import { MdInfo } from "react-icons/md"
 import axios from 'axios'
-import './Styles/Invite.css'
-import { url } from '../urlServer'
+import '../Styles/Invite.css'
+import { url } from '../../urlServer'
 
 export const InviteModal = (props) => {
     

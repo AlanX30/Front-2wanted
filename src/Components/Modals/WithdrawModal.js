@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import Modal from './Modal'
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import { useFormValues } from '../hooks/useFormValues'
-import { url } from '../urlServer'
-import './Styles/WithdrawModal.css'
+import { useFormValues } from '../../hooks/useFormValues'
+import { url } from '../../urlServer'
+import '../Styles/WithdrawModal.css'
 
 export const WithdrawModal = props => {
 

@@ -11,14 +11,14 @@ import { useComponentVisible } from '../hooks/useComponentVisible'
 import { FcOk, FcHighPriority } from 'react-icons/fc'
 import { IoMdSettings, IoIosContact } from 'react-icons/io'
 import { MdRefresh, MdAccountCircle, MdAccountBalanceWallet,  MdInfo, MdSearch, MdNotificationsNone, MdFileUpload, MdFileDownload, MdKeyboardReturn,MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
-import  JoinModal  from './JoinModal'
+import  JoinModal  from './Modals/JoinModal'
 import { Context } from '../context'
 import { url } from '../urlServer'
 import { withRouter } from 'react-router-dom'
 import { useUserData } from '../hooks/useUserData'
-import  InvitationModal  from './InvitationModal'
+import  InvitationModal  from './Modals/InvitationModal'
 import axios from 'axios'
-import { WithdrawModal } from './WithdrawModal'
+import { WithdrawModal } from './Modals/WithdrawModal'
 import Cookies from 'js-cookie'
 
 const Navbar = (props) => {

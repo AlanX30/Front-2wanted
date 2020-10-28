@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import abajo from '../Images/abajo.svg'
 import './Styles/Tree.css'
-import { ChildModal } from './childModal'
-import { InviteModal } from './inviteModal'
+import { ChildModal } from './Modals/childModal'
+import { InviteModal } from './Modals/inviteModal'
 
 export const Tree = (props) => {
 

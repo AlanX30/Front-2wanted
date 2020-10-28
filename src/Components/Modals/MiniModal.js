@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import './Styles/MiniModal.css'
+import '../Styles/MiniModal.css'
 
 function MiniModal(props) {
     

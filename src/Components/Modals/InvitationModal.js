@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import Swal from 'sweetalert2'
 import { withRouter } from 'react-router-dom'
-import './Styles/InvitationModal.css'
+import '../Styles/InvitationModal.css'
 import Modal from "./Modal"
 import axios from 'axios'
-import { url } from '../urlServer'
+import { url } from '../../urlServer'
 
 const InvitationModal = (props) => {
 
