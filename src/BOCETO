@@ -1,10 +1,12 @@
 import React from 'react'
 
-export const COSA = () => {
+const COSA = () => {
     return(
         <>
         </>
     )
 }
+
+export default 
 
 ``

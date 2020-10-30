@@ -10,8 +10,15 @@ import ios from '../Images/IOS.png'
 import IMG from '../Images/esfinge.svg'
 import './Styles/Signup.css'
 import { url } from '../urlServer'
+import Cookies from 'js-cookie'
 
 export const Signup = (props) => {
+
+    const token = Cookies.get('token')
+
+    if(token){
+        props.history.push(`/home`)
+    }
 
     const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
     const reg_whiteSpace = /^$|\s+/

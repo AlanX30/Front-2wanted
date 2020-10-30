@@ -13,27 +13,29 @@ export const useChildsData = (salaId, userName) => {
             
     useEffect(()=>{
 
-        setLoadingChildsData(true)
-
-        async function childsData(){
-
-            const response = await axios({
-                method: 'post',
-                data: {user: userName},
-                url: `${url}/api/in-sala?id=${salaId}`,
-                headers: {
-                     authorization: token
-                }
-            })       
-            
-            const data = await response.data
-
-            await setArbolData(data)
-
-            setLoadingChildsData(false)
-
-        }  
-        childsData()
+        if(userName){
+            setLoadingChildsData(true)
+    
+            async function childsData(){
+    
+                const response = await axios({
+                    method: 'post',
+                    data: {user: userName},
+                    url: `${url}/api/in-sala?id=${salaId}`,
+                    headers: {
+                         authorization: token
+                    }
+                })       
+                
+                const data = await response.data
+    
+                await setArbolData(data)
+    
+                setLoadingChildsData(false)
+    
+            }  
+            childsData()
+        }
     },[salaId, userName, token])
 
     return {arbolData, loadingChildsData}

@@ -55,8 +55,7 @@ export const WithdrawModal = props => {
         })
     }
 
-    return (
-        <Modal isOpen={props.isOpen} onClose={props.onClose}>
+    return <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <h4 className={props.wallet >= 20000 ? 'dNone' : ''}>
                 Retiros apartir de $20.000
             </h4>
@@ -74,5 +73,4 @@ export const WithdrawModal = props => {
                 <button className='btn btn-dark btn-block withdraw-modal-cancelar' onClick={props.onClose} type='button'>Cancelar</button>
             </form>
         </Modal>
-    )
 }
