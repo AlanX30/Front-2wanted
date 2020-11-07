@@ -9,7 +9,7 @@ const TreeData = ({price, username, arbolData, onOpenModal, onOpen2Modal}) => {
     function formatNumber(number){
         return new Intl.NumberFormat("de-DE").format(number)
     }
-
+    console.log(arbolData)
     return(
         <div className='tree-wrap'>
             <div className='nivel'>

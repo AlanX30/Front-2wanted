@@ -1,0 +1,9 @@
+.emailVerification {
+    text-align: center;
+}
+.emailVerification h4 {
+    margin-top: 30px
+}
+.emailVerification label {
+    margin: 15px 0;
+}

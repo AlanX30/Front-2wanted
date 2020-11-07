@@ -11,6 +11,7 @@ import IMG from '../Images/esfinge.svg'
 import './Styles/Signup.css'
 import { url } from '../urlServer'
 import Cookies from 'js-cookie'
+import EmailVerificationModal from '../Components/Modals/EmailVerificationModal';
 
 export const Signup = (props) => {
 
@@ -24,6 +25,12 @@ export const Signup = (props) => {
     const reg_whiteSpace = /^$|\s+/
 
     const { toggleAuth } = useContext(Context)
+
+    const [modalOpen, setModalOpen] = useState(false)
+    
+    function onCloseModal(){
+        setModalOpen(null)
+    }
 
     const userName = useFormValues()
     const email = useFormValues()
@@ -64,16 +71,15 @@ export const Signup = (props) => {
 
         axios.post( url+'/api/users/signup', form)
         .then(res => {
+            setSignupLoading(false)
             if(res.data.error){
-                setSignupLoading(false)
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: res.data.error,
                 })
             }else{
-                toggleAuth(res.data.token, res.data.userName)
-                props.history.push(`/home`)
+                setModalOpen(true)
             }
         })
         .catch( err => {
@@ -170,7 +176,7 @@ export const Signup = (props) => {
                         </div>
                 </div>
         </div>    
-
+        <EmailVerificationModal email={email.value} isOpen={modalOpen} onClose={onCloseModal} />
         </>
     )
 }

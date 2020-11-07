@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import ArbolImg from '../Images/arbol.svg'
 import './Styles/Navbar.css'
 import { useComponentVisible } from '../hooks/useComponentVisible'
@@ -9,7 +9,6 @@ import NavbarForm from './Forms/NavbarForm'
 import Logo from './NavbarLogo'
 import ButtonNav1 from './Navbar_navigation1'
 import ButtonNav2 from './Navbar_navigation2'
-import { useCallback } from 'react'
 
 const Navbar = (props) => {
 

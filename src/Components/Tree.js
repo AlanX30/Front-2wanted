@@ -33,13 +33,6 @@ const Tree = (props) => {
         setModal2Open(true)
         setDataModal(data)
     },[props.price, props.salaId, props.salaName, props.userName])
-    
-    /* const ArbolDataComponent = () =>  */
-
-    /* ---------------------------------------------------lineDropdown------------------------- */
-
-
-    /* ---------------------------------------------------lineDropdown------------------------- */
   
     if(props.loading){
         return <div className="spinner-border tree-spinner text-danger" role="status">

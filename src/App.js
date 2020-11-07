@@ -5,6 +5,7 @@ import { Blank } from './Components/Blank'
 import { Home } from './Pages/Home'
 import { Room } from './Pages/Room'
 import { Signup } from './Pages/Signup'
+import MailVerification from './Pages/MailVerification'
 import { Balance } from './Pages/Balance'
 import { Context } from './context'
 import { Profile } from './Pages/Profile';
@@ -12,10 +13,11 @@ import { Profile } from './Pages/Profile';
 function App() {
 
   const { isAuth } = useContext(Context)
-
+  
   return (
     <BrowserRouter>
       <Switch>
+        <Route path ='/mailverification/:token/' component={MailVerification}/>
         <Route exact path ='/' component={Signup}/>
         <Route exact path ='/pending/' component={Blank}/>
         <Route exact path ='/failure/' component={Blank}/>

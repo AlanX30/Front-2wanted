@@ -6,7 +6,7 @@ import { WithdrawModal } from './Modals/WithdrawModal'
 import { DepositModal } from './Modals/DepositModal'
 import { useUserData } from '../hooks/useUserData'
 import { IoMdSettings, IoIosContact } from 'react-icons/io'
-import { MdRefresh, MdAccountCircle, MdAccountBalanceWallet, MdFileUpload, MdFileDownload, MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md";
+import { MdRefresh, MdAccountCircle, MdAccountBalanceWallet, MdFileUpload, MdFileDownload, MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md"
 
 const Navbar_navigation2 = props => {
     
