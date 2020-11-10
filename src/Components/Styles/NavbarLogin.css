@@ -46,6 +46,14 @@
   width: 22px;
   height: 22px;
 }
+.forgotPassworLogin {
+  color: white;
+  margin-top: 5px;
+  cursor: pointer;
+}
+.forgotPassworLogin:hover{
+  text-decoration: underline;
+}
 @media screen and (max-width: 760px) {
   .logo{
     display: block;

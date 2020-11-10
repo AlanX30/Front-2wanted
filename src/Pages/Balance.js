@@ -71,7 +71,7 @@ export const Balance = () => {
                 text: err,
             })
         })
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token, countLastestPages])
 
     const [activeDate, setActiveDate] = useState(false)

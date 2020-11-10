@@ -7,6 +7,7 @@ import { Room } from './Pages/Room'
 import { Signup } from './Pages/Signup'
 import MailVerification from './Pages/MailVerification'
 import { Balance } from './Pages/Balance'
+import { ChangePassword } from './Pages/ChangePassword'
 import { Context } from './context'
 import { Profile } from './Pages/Profile';
 
@@ -18,6 +19,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path ='/mailverification/:token/' component={MailVerification}/>
+        <Route path ='/changepasswordemail/:token/' component={ChangePassword}/>
         <Route exact path ='/' component={Signup}/>
         <Route exact path ='/pending/' component={Blank}/>
         <Route exact path ='/failure/' component={Blank}/>

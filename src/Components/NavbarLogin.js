@@ -9,13 +9,18 @@ import logoletra from '../Images/2WANTED.svg'
 import axios from 'axios'
 import './Styles/NavbarLogin.css'
 import EmailVerificationModal2 from './Modals/EmailVerificationModal2'
+import ForgotPasswordModal from './Modals/ForgotPasswordModal'
 
  const NavbarLogin = (props) => {
 
     const [modalOpen, setModalOpen] = useState(false)
+    const [modal2Open, setModal2Open] = useState(false)
     
     function onCloseModal(){
         setModalOpen(null)
+    }
+    function onClose2Modal(){
+        setModal2Open(null)
     }
 
     const email = useFormValues()
@@ -66,7 +71,7 @@ import EmailVerificationModal2 from './Modals/EmailVerificationModal2'
                 </div>
                 <div className="form-group login-inputs">
                     <input autoComplete='on' className="form-control" type="password" {...password} placeholder="Contraseña"/>
-                    <a href='https://www.youtube.com/' target='_blank' rel="noopener noreferrer">Olvidaste tu cuenta?</a>
+                    <label className='forgotPassworLogin' onClick={()=>setModal2Open(true)}>Olvidaste tu Contraseña?</label>
                 </div>
                 <button disabled={loginLoading ? true : false} type='submit' className="login-button">
                     <div className={loginLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
@@ -76,6 +81,7 @@ import EmailVerificationModal2 from './Modals/EmailVerificationModal2'
                 </button>
             </form>
             <EmailVerificationModal2 email={email.value} isOpen={modalOpen} onClose={onCloseModal}/>
+            <ForgotPasswordModal isOpen={modal2Open} onClose={onClose2Modal}/>
         </nav>
     )
 }

@@ -7,3 +7,27 @@
 .emailVerification label {
     margin: 15px 0;
 }
+.emailVerification form {
+    margin-top: 15px;
+}
+.emailVerification form div {
+    display: flex;
+    margin: 0 5%;
+    margin-top: 5px;
+}
+.emailVerification form button {
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    margin-left: 8px;
+    background: #ff9f22;
+    transition: .2s;
+}
+.emailVerification form button:hover {
+    color: #ff9f22;
+    background-color: var(--bg-color);
+    box-shadow: 0 3px 7px black;
+}   
+.forgotModalInput {
+    margin: 15px 0;
+}

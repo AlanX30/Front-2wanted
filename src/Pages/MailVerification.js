@@ -9,8 +9,11 @@ const MailVerification = (props) => {
     const emailHash = props.match.params.token
     const [ loading, setLoading ] = useState(false)
     const { toggleAuth } = useContext(Context)
+    
+    useEffect(()=>{
 
-    function mail(){
+        setLoading(true)
+
         axios({
             method: 'post',
             data: { emailHash: emailHash },
@@ -35,14 +38,14 @@ const MailVerification = (props) => {
                 text: error,
             })
         })    
-
-    }
-    
-    useEffect(()=>{
-        mail()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[emailHash])
 
-    return <div><h1>ALGOIOOO</h1></div>
+    return <div>
+        {
+            loading && <h1>LOADING......</h1>
+        }
+    </div>
 }
 
 export default MailVerification
