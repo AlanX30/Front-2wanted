@@ -52,7 +52,7 @@ const ListRooms = ({ token, url }) => {
 
     return(
         <div className='actives-rooms'>
-            <h3>Tus Salas</h3>
+            <h3>Your Rooms</h3>
             <div className={activesData.total === 1 ? 'dNone' : 'pagination'}>
                 <button disabled={countActives === 1 ? true : false} className='pagination-button' onClick={()=> setCountActives(countActives -= 1) } ><AiOutlineCaretLeft size='30'/></button> 
                     <p><span>{countActives}</span> - {activesData.total}</p> 
@@ -66,7 +66,7 @@ const ListRooms = ({ token, url }) => {
                 </div> : 
                 <div>
                     {
-                        listRooms.length === 0 ? <p className='no-salas-actives'>No hay salas creadas!</p>  :
+                        listRooms.length === 0 ? <p className='no-salas-actives'>No rooms created!</p>  :
                         <div> 
                             <ul>
                                 {
@@ -76,9 +76,9 @@ const ListRooms = ({ token, url }) => {
                                                 <Link to={`/sala/${data.salaId}`} className='actives-links Link'>
                                                     <img src={ArbolImg} alt="ArbolImg"/>
                                                     <div className='actives-description'>
-                                                        <p>Nombre de sala: <span>{data.salaName}</span></p>
-                                                        <p>Valor: <span>${formatNumber(data.salaPrice)}</span></p>
-                                                        <p>Creador: <span>{data.salaCreator}</span></p>
+                                                        <p>Room Name: <span>{data.salaName}</span></p>
+                                                        <p>Price: <span>${formatNumber(data.salaPrice)}</span></p>
+                                                        <p>Creator: <span>{data.salaCreator}</span></p>
                                                     </div>
                                                 </Link>
                                             </li>

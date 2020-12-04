@@ -79,22 +79,22 @@ const EmailVerificationModal = props => {
 
     return <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <div className='emailVerification'>
-            <h4>Se ha enviado un link de verificacion a la direccion de email, confirme para acceder.</h4>
+            <h4>A verification link has been sent to the email address, confirm to access.</h4>
 
             <form onSubmit={handleChangeEmail}>
                 <p>Cambiar email en caso de equivocacion y pulsar reintentar</p>
                 <div>
                     <input {...newEmail} className='join-input' placeholder='Email' type='email'/>
-                    <button disabled={loadingForm ? true : false}>Cambiar</button>
+                    <button disabled={loadingForm ? true : false}>Change</button>
                 </div>
             </form>
 
-            <label>Si, no ha recibido ningun email, pulse el boton reintentar</label>
+            <label>If you have not received an email, press the retry button</label>
             <button onClick={handleRefresh} disabled={loading || loadingForm ? true : false} className='btn btn-dark btn-block invitation-button'>
                 <div className={loading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                     <span className="sr-only">Loading...</span>
                 </div>
-                <p  className={loading ? 'dNone' : ''}><MdRefresh /> Reintentar</p>
+                <p  className={loading ? 'dNone' : ''}><MdRefresh /> Retry</p>
             </button>
         </div>
     </Modal>

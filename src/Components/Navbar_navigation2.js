@@ -49,24 +49,24 @@ const Navbar_navigation2 = props => {
                         < IoIosContact size='46'/>    <p> {userData.userName}</p>
                     </div>
                     <div className='item-menu-right-wallet-container'>
-                        <div><MdAccountBalanceWallet />&nbsp;Billetera</div>
+                        <div><MdAccountBalanceWallet />&nbsp;Wallet</div>
                         <p className='balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  ${formatNumber(userData.wallet)}</p>
                     </div>
                     <div className='item-menu-right-cashier'>
-                        <div onClick={()=> setModal4Open(true)} to='/wallet' className='button-deposit'><MdFileUpload />Depositar</div>
-                        <div onClick={()=>setModal3Open(true)} className='button-withdraw'><MdFileDownload />Retirar</div>
+                        <div onClick={()=> setModal4Open(true)} to='/wallet' className='button-deposit'><MdFileUpload />Deposit</div>
+                        <div onClick={()=>setModal3Open(true)} className='button-withdraw'><MdFileDownload />Withdraw</div>
                     </div>
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/balance/' className="item-menu-right">
-                                <MdChromeReaderMode /><p>&nbsp;Historial de balance</p> 
+                        <MdChromeReaderMode /><p>&nbsp;Balance history</p> 
                     </Link>
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/profile/' className="item-menu-right" >
-                    < IoMdSettings /><p>&nbsp;Configuracion de usuario</p> 
+                    < IoMdSettings /><p>&nbsp;User settings</p> 
                     </Link>
                     <div className="item-menu-right">
-                        <MdHelpOutline /><p>&nbsp;Ayuda</p> 
+                        <MdHelpOutline /><p>&nbsp;Help</p> 
                     </div>
                     <div onClick={handleLogout} className="item-menu-right">
-                        <MdExitToApp /><p>&nbsp;Cerrar Sesion</p>  
+                        <MdExitToApp /><p>&nbsp;Logout</p>  
                     </div>
                 </div> 
                 

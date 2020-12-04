@@ -114,19 +114,19 @@ export const Balance = () => {
     return <div className='balance-container'>
 
         <div className='balance-title'>
-            <h3><MdChromeReaderMode /> Historial de balance</h3>
+            <h3><MdChromeReaderMode />Balance History</h3>
         </div>
         <form className='date-form' onSubmit={handleDate}>
             <div className='wallet-balance'>
-                <label>Billetera:</label><span>${formatNumber(userData.wallet)}</span>
+                <label>Wallet:</label><span>${formatNumber(userData.wallet)}</span>
             </div>
-            <p onClick={()=>setViewDates(!viewDates)}>Busqueda por Fecha</p>
+            <p onClick={()=>setViewDates(!viewDates)}>Search by date</p>
             <div onClick={()=>setViewDates(!viewDates)} className='flecha-busqueda-balance'>< RiArrowDownSLine /></div>
-            <p className={viewDates ? '' : 'none-balance'}>Desde </p>
+            <p className={viewDates ? '' : 'none-balance'}>From </p>
             <input className={viewDates ? '' : 'none-balance'} type="date" required={true} onChange={(e)=>setValueFecha1(e.target.value)}/>
-            <p className={viewDates ? '' : 'none-balance'}>Hasta </p>
+            <p className={viewDates ? '' : 'none-balance'}>To </p>
             <input className={viewDates ? '' : 'none-balance'} type="date" required={true} onChange={(e)=>setValueFecha2(e.target.value)}/>
-            <button className={viewDates ? '' : 'none-balance'}>Buscar</button>
+            <button className={viewDates ? '' : 'none-balance'}>Search</button>
         </form>
         <div className={amountPending > 0 ? 'withdraw-pending-container' : 'dNone'}>
             Retiro en proceso por el monto de ${formatNumber(amountPending)}
@@ -155,7 +155,7 @@ export const Balance = () => {
             </div>
             </div> :
             balance.length <= 0 ? <div>
-                <h3 className='no-events-balance'>No hay eventos</h3>
+                <h3 className='no-events-balance'>Empty</h3>
             </div> :
             <div className='balance-list'>       
             {
@@ -164,9 +164,9 @@ export const Balance = () => {
                         balance.type === 'won' ?  <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
-                                <p className='balance-description-title'>Recibido en sala:</p>
+                                <p className='balance-description-title'>Won in room:</p>
                                 <p>{balance.salaName}</p>
-                                <p className='balance-description-title'>Billetera:</p>
+                                <p className='balance-description-title'>Wallet:</p>
                                 <p>${formatNumber(balance.wallet)}</p>
                             </div>
                             <div className='balance-won-amount-container'>
@@ -176,9 +176,9 @@ export const Balance = () => {
                         balance.type === 'buy' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
-                                <p className='balance-description-title'>Pago de sala:</p>
+                                <p className='balance-description-title'>Room payment:</p>
                                 <p>{balance.salaName}</p>
-                                <p className='balance-description-title'>Billetera:</p>
+                                <p className='balance-description-title'>Wallet:</p>
                                 <p>${formatNumber(balance.wallet)}</p>
                             </div>
                             <div className='balance-won-amount-container'>
@@ -188,9 +188,9 @@ export const Balance = () => {
                         balance.type === 'deposit' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
-                                <p className='balance-description-title'>Deposito:</p>
+                                <p className='balance-description-title'>Deposit:</p>
                                 <p>${formatNumber(balance.depositAmount)}</p>
-                                <p className='balance-description-title'>Billetera:</p>
+                                <p className='balance-description-title'>Wallet:</p>
                                 <p>${formatNumber(balance.wallet)}</p>
                             </div>
                             <div className='balance-won-amount-container'>
@@ -200,9 +200,9 @@ export const Balance = () => {
                         balance.state === 'completed' && <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
-                                <p className='balance-description-title'>Retiro:</p>
+                                <p className='balance-description-title'>Withdraw:</p>
                                 <p>${formatNumber(balance.withdrawAmount)}</p>
-                                <p className='balance-description-title'>Billetera:</p>
+                                <p className='balance-description-title'>Wallet:</p>
                                 <p>${formatNumber(balance.wallet)}</p>
                             </div>
                             <div className='balance-won-amount-container'>

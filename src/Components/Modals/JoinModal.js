@@ -87,40 +87,40 @@ const JoinModal = (props) => {
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <div className='join-modal'>
-                <h2>Estas Seguro?</h2>
-                <p>Nombre de sala: <span>{salaName}</span></p>
-                <p>Valor: <span>${formatNumber(price)}</span></p>
+                <h2>Are you sure?</h2>
+                <p>Room name: <span>{salaName}</span></p>
+                <p>Price: <span>${formatNumber(price)}</span></p>
 
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div>
                             <input type="radio" checked={radio1} onChange={handleRadio1} />
-                            <label onClick={handleRadio1}>Elegir usuario padre</label>
+                            <label onClick={handleRadio1}>Choose parent user</label>
                         </div>
                         <div>
                             <input type="radio" checked={radio2} onChange={handleRadio2} />
-                            <label onClick={handleRadio2}>Usuario padre aleatorio</label>
+                            <label onClick={handleRadio2}>Random parent user</label>
                         </div>
                     </div>
                     <div className={parentInput ? 'form-group' : 'dNone'}>
-                        <p>Ingrese el usuario padre</p>
+                        <p>Put the parent user</p>
                         <div className='d-flex'>
                             <div className="pre-formS">
                                 <div className="input-group-text invite-pre-form">@</div>
                             </div>
-                            <input className='join-input' {...parentUser} placeholder='Usuario' type="text"/>
+                            <input className='join-input' {...parentUser} placeholder='User' type="text"/>
                         </div>
                     </div>
                     <div className={!parentInput ? 'join-nota' : 'dNone'}>
                         <p>
-                            <span>Nota:</span> "Sera agregado como referido de algun usuario aleatorio con espacio disponible en esta sala."
+                            <span>Nota:</span> "You will be added as a referral from some random user with available space in this room."
                         </p>
                     </div>
                     <button disabled={joinLoading ? true : false} className='btn btn-dark btn-block invitation-button'>
                         <div className={joinLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                             <span className="sr-only">Loading...</span>
                         </div>
-                        <p  className={joinLoading ? 'dNone' : ''}>Confirmar</p>
+                        <p  className={joinLoading ? 'dNone' : ''}>Confirm</p>
                     </button>
                 </form>
             </div>

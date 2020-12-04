@@ -55,17 +55,17 @@ const UpdateEmailForm = ({url, useFormValues, token}) => {
 
     return(
         <div className='email-configuration'>
-            <h4><MdMail />&nbsp;Cambio de Email</h4>
+            <h4><MdMail />&nbsp;Change Email</h4>
             <form onSubmit={updateEmail}>
-                <input id='changeEmail' autoComplete='true' {...email} required type="email" placeholder='Email actual'/>
-                <input {...newEmail} autoComplete='true' required type="email" placeholder='Email nuevo'/>
-                <input {...confirmNewEmail} autoComplete='true' required type="email" placeholder='Confirmar email'/>
-                <p className={newEmailError ? 'configuration-warning' : 'dNone'}><MdInfo /> La confirmacion no coincide</p>
+                <input id='changeEmail' autoComplete='true' {...email} required type="email" placeholder='Email'/>
+                <input {...newEmail} autoComplete='true' required type="email" placeholder='New email'/>
+                <input {...confirmNewEmail} autoComplete='true' required type="email" placeholder='Confirm new email'/>
+                <p className={newEmailError ? 'configuration-warning' : 'dNone'}><MdInfo />The confirmation does not match</p>
                 <button disabled={emailLoading ? true : false}>
                     <div className={emailLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                    <p className={emailLoading ? 'dNone' : '' }> Actualizar email</p>
+                    <p className={emailLoading ? 'dNone' : '' }>Update email</p>
                 </button>
             </form>
         </div>

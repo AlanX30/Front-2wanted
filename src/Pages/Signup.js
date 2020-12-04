@@ -119,7 +119,7 @@ export const Signup = (props) => {
              <div className='signup-right'>
                 <div className='card-signup'>
                             <h3 className="text-center text-white card-header pl-4">
-                                Registrarse
+                                Signup
                             </h3>
                             <div className="card-body form-body">
                                 <form onSubmit={handleSubmit}>
@@ -128,9 +128,9 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form">@</div>
                                             </div>
-                                            <input type="text" id="inlineFormInputGroupUsername2" className='form-control' {...userName} placeholder='Nombre de usuario' required/>
+                                            <input type="text" id="inlineFormInputGroupUsername2" className='form-control' {...userName} placeholder='Username' required/>
                                         </div>
-                                        <label className={!userValid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimo 8 caracteres, Maximo 16, sin espacios</label>
+                                        <label className={!userValid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimum 8 characters without spaces, upper and lower case</label>
                                     </div>
                                     <div className="form-group form-inputs">
                                         <div className='d-flex'>
@@ -153,23 +153,23 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
-                                            <input autoComplete='true' type="password"  className='form-control' {...password} placeholder='Contraseña' required/>
+                                            <input autoComplete='true' type="password"  className='form-control' {...password} placeholder='Password' required/>
                                         </div>
-                                        <label className={!password_valid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Debe contener mayuscula, minuscula y numero, minimo 8 caracteres</label>
+                                        <label className={!password_valid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimum 8 characters without spaces, upper and lower case</label>
                                     </div>
                                     <div className="form-group form-inputs">
                                     <div className='d-flex'>
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
-                                            <input autoComplete='true' type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirmar contraseña' required/>
+                                            <input autoComplete='true' type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirm Password' required/>
                                         </div>
                                     </div>
                                     <button disabled={signupLoading ? true : false} type='submit' className='button-signup'>
                                         <div className={signupLoading ? "spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
-                                        <p className={signupLoading ? 'dNone' : ''}>Registrarse</p>
+                                        <p className={signupLoading ? 'dNone' : ''}>Signup</p>
                                     </button>
                                 </form>
                             </div>

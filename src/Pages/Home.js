@@ -28,7 +28,7 @@ export const Home = (props) => {
 
                 <div className='section-video'>
                     <div className='youtube-container'>
-                        <h3>Instrucciones</h3>
+                        <h3>instructions</h3>
                         <div className='youtube-wrap'>
                             <iframe className='youtube-video' width="560" height="315" title='Instrucciones' src="https://www.youtube.com/embed/-XOuu1vd_fk" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         </div>

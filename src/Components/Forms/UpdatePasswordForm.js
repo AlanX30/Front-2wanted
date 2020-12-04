@@ -60,18 +60,18 @@ const UpdatePasswordForm = ({useFormValues, url, token}) => {
 
     return(
         <div className='password-configuration'>
-            <h4><MdLockOutline />&nbsp;Cambio de contraseña</h4>
+            <h4><MdLockOutline />&nbsp;Change password</h4>
             <form onSubmit={updatePassword}>
-                <input {...password} autoComplete='true' required type="password" placeholder='Contraseña actual'/>
-                <input {...newPassword} autoComplete='true' required type="password" placeholder='Contraseña nueva'/>
-                <input {...confirmNewPassword} autoComplete='true' required type="password" placeholder='Confirmar contraseña'/>
-                <p className={newPasswordError ? 'configuration-warning' : 'dNone'}><MdInfo /> La confirmacion no coincide</p>
-                <p className={!password_valid ? 'configuration-warning' : 'dNone'}><MdInfo />&nbsp;Debe contener mayuscula, minuscula y numero, minimo 8 caracteres</p>
+                <input {...password} autoComplete='true' required type="password" placeholder='Password'/>
+                <input {...newPassword} autoComplete='true' required type="password" placeholder='New password'/>
+                <input {...confirmNewPassword} autoComplete='true' required type="password" placeholder='Confirm new password'/>
+                <p className={newPasswordError ? 'configuration-warning' : 'dNone'}><MdInfo />the confirmation does not match</p>
+                <p className={!password_valid ? 'configuration-warning' : 'dNone'}><MdInfo />&nbsp;Minimum 8 characters without spaces, upper and lower case</p>
                 <button disabled={passwordLoading ? true : false}>
                     <div className={passwordLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                    <p className={passwordLoading ? 'dNone' : '' }> Actualizar Contraseña </p>
+                    <p className={passwordLoading ? 'dNone' : '' }> Update password </p>
                 </button>
             </form>
         </div>

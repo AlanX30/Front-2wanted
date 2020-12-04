@@ -65,16 +65,16 @@ const InvitationModal = (props) => {
 
             {
                 invitation && <div className='invitationModal'>
-                    <p>Invitado por: <span>{invitation.host}</span></p>
-                    <p>Nombre de sala: <span>{invitation.salaName}</span></p>
-                    <p>Valor: <span>${formatNumber(invitation.price)}</span></p>
-                    <p>Usuario padre: <span>{invitation.parentUsername}</span></p>
-                    <p>Mensaje: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
+                    <p>Invited by: <span>{invitation.host}</span></p>
+                    <p>Room Name: <span>{invitation.salaName}</span></p>
+                    <p>Price: <span>${formatNumber(invitation.price)}</span></p>
+                    <p>Parent user: <span>{invitation.parentUsername}</span></p>
+                    <p>Message: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
                     <button disabled={invitationLoading ? true : false} className='btn btn-dark btn-block invitation-button' onClick={handleClick}>
                         <div className={invitationLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                             <span className="sr-only">Loading...</span>
                         </div>
-                        <p  className={invitationLoading ? 'dNone' : ''}>Unirse</p>
+                        <p  className={invitationLoading ? 'dNone' : ''}>Join</p>
                     </button>
                 </div>
             }

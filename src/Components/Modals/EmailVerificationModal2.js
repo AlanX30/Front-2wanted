@@ -45,13 +45,13 @@ const EmailVerificationModal2 = props => {
 
     return <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <div className='emailVerification'>
-            <h4>Este usuario no ha confirmado email de registro, para acceder dirigirse a link de correo y confirmar.</h4>
-            <label>Si no ha recibido ningun email o desea reenviar, pulse el boton reintentar</label>
+            <h4>This user has not confirmed registration email, to access go to email link and confirm.</h4>
+            <label>If you have not received any email or want to resend, press the retry button</label>
             <button onClick={handleRefresh} disabled={loading ? true : false} className='btn btn-dark btn-block invitation-button'>
                 <div className={loading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                     <span className="sr-only">Loading...</span>
                 </div>
-                <p  className={loading ? 'dNone' : ''}><MdRefresh /> Reintentar</p>
+                <p  className={loading ? 'dNone' : ''}><MdRefresh />Retry</p>
             </button>
         </div>
     </Modal>

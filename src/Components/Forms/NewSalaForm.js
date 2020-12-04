@@ -8,7 +8,7 @@ import  { useUserData }  from '../../hooks/useUserData'
 
 const NewSalaForm = props => {
 
-    const  {userData}  = useUserData()
+    const  { userData }  = useUserData()
     const [roomValid, setRoomValid] = useState(true)
     const [priceValid, setPriceValid] = useState(true)
     const [createLoading, setCreateLoading] = useState(false)
@@ -75,31 +75,31 @@ const NewSalaForm = props => {
     return(
         <div className="create-custom">
             <div className='create-form-container'>
-                <h3>Crear Sala</h3>    
+                <h3>Create Room</h3>    
                 <form onSubmit={newSala} >
                     <div className={roomValid ? 'mb-3' : 'mb-2'}>
                         <div className='d-flex'>
                             <div>
                                 <div className="input-group-text input-guide">< MdHome /></div>
                             </div>
-                            <input type='text' {...name} placeholder='Nombre de sala' />
+                            <input type='text' {...name} placeholder='Room Name' />
                         </div>
-                        <label className={!roomValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimo 4 caracteres, maximo 15, no debe haber espacios</label>
+                        <label className={!roomValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimum 4 characters, maximum 15, must not contain spaces</label>
                     </div>
                     <div className={priceValid ? 'mb-3' : 'mb-2'}>
                         <div className='d-flex'>
                             <div>
                                 <div className="input-group-text input-guide">$</div>
                             </div>
-                            <input  placeholder='Valor' type='text' {...price} />
+                            <input  placeholder='Price' type='text' {...price} />
                         </div>
-                        <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Valor Minimo de Sala $5.000 COP</label>
+                        <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimum room value $5.000 COP</label>
                     </div>
                     <button disabled={createLoading ? true : false}>
                         <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                             <span className="sr-only">Loading...</span>
                         </div>
-                        <p className={createLoading ? 'dNone' : ''}>Crear</p>
+                        <p className={createLoading ? 'dNone' : ''}>Create!</p>
                     </button>
                 </form>   
             </div>       

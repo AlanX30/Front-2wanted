@@ -70,14 +70,14 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
                     <input autoComplete="on" type="email" className='form-control' {...email} placeholder='Email'/>
                 </div>
                 <div className="form-group login-inputs">
-                    <input autoComplete='on' className="form-control" type="password" {...password} placeholder="Contraseña"/>
-                    <label className='forgotPassworLogin' onClick={()=>setModal2Open(true)}>Olvidaste tu Contraseña?</label>
+                    <input autoComplete='on' className="form-control" type="password" {...password} placeholder="Password"/>
+                    <label className='forgotPassworLogin' onClick={()=>setModal2Open(true)}>Forgot password?</label>
                 </div>
                 <button disabled={loginLoading ? true : false} type='submit' className="login-button">
                     <div className={loginLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                <p className={loginLoading ? 'dNone' : ''}>Entrar</p>
+                <p className={loginLoading ? 'dNone' : ''}>Signin</p>
                 </button>
             </form>
             <EmailVerificationModal2 email={email.value} isOpen={modalOpen} onClose={onCloseModal}/>

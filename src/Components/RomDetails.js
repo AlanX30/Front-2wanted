@@ -62,25 +62,25 @@ const RomDetails = ({count, url, salaId, userName, token, arbolData, dataRoom, i
 
     return(
         <div className='room-details'>
-            <p>Nombre de sala:</p>
+            <p>Room Name:</p>
             <span>{dataRoom.name}</span>
-            <p>Valor de sala:</p>
+            <p>Room Price:</p>
             <span>${formatNumber(dataRoom.price)}</span>
-            <p>Tu usuario padre:</p>
+            <p>Parent User:</p>
             <span>{parent}</span>
-            <p>Creador:</p>
+            <p>Creator:</p>
             <span>{dataRoom.creator}</span>
-            <p>Acumulado en nivel 3:</p>
+            <p>accumulated level 3:</p>
             <span>${formatNumber(acum3)}</span>
-            <p>Acumulado en nivel 4:</p>
+            <p>accumulated level 4:</p>
             <span>${formatNumber(acum4)}</span>
-            <p>Total acumulado:</p>
+            <p>Total accumulated:</p>
             <span>${formatNumber(tAcum)}</span>                   
-            <p>Acumulado retirado:</p>
+            <p>accumulated paid:</p>
             <span>${formatNumber(inBalance)}</span>
             <button disabled={tAcum > inBalance ? false : true} onClick={handleToBalance}>
                 <div className={!loadingToBalance ? '' : 'dNone'}>
-                    <p>Retirar a billetera</p>
+                    <p>Withdraw to wallet</p>
                     <label>${tAcum > inBalance ? formatNumber(tAcum - inBalance) : 0} ➜ <MdAccountBalanceWallet /></label>
                 </div>
                 <div className={loadingToBalance ? "spinner-toBalance spinner-border text-danger" : 'dNone'} role="status">
