@@ -30,28 +30,26 @@ export const Room = (props) => {
     useEffect(()=>{
         async function searchRoom(){
             try {
-                if(userName){
-                    const response = await axios({
-                        data: { salaId: salaId, username: userName },
-                        method: 'post',
-                        url: url+'/api/search/sala',
-                        headers: {
-                            authorization: token
-                        }
-                    })
+                const response = await axios({
+                    data: { salaId: salaId },
+                    method: 'post',
+                    url: url+'/api/search/sala',
+                    headers: {
+                        authorization: token
+                    }
+                })
                 if(response.data.error){
-                    const error = response.data.error.name === 'CastError' ? 'Esta Sala no existe' : response.data.error.name
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: error,
+                        text: response.data.error,
                     })
                 }else{
                     setInBalance(response.data.inBalance)
                     setParent(response.data.parentId)
                     setDataRoom(response.data.data)  
                 }
-            }
+            
             }catch(error){
                 Swal.fire({
                     icon: 'error',

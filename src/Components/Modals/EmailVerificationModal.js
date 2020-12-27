@@ -14,7 +14,7 @@ const EmailVerificationModal = props => {
     const [loadingForm, setLoadingForm] = useState(false)
     
     async function handleRefresh(){
-
+        
         setLoading(true)
 
         await axios({

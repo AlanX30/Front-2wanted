@@ -20,7 +20,6 @@ export const useChildsData = (salaId, userName) => {
     
                 const response = await axios({
                     method: 'post',
-                    data: {user: userName},
                     url: `${url}/api/in-sala?id=${salaId}`,
                     headers: {
                          authorization: token

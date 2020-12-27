@@ -64,6 +64,7 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
 
     return(
         <nav className="navbar-arbol-login">
+            <div className='wrap-1100'>
             <Link className="logo" to="/"><img className='login-logo1' src={logo} alt='logo-img' /><img className='login-logo2' src={logoletra} alt="logoletra"/></Link>
             <form onSubmit={handleSubmit}>
                 <div className="form-group login-inputs">
@@ -82,6 +83,7 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
             </form>
             <EmailVerificationModal2 email={email.value} isOpen={modalOpen} onClose={onCloseModal}/>
             <ForgotPasswordModal isOpen={modal2Open} onClose={onClose2Modal}/>
+            </div>
         </nav>
     )
 }

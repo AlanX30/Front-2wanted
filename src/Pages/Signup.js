@@ -5,9 +5,7 @@ import NavbarLogin from '../Components/NavbarLogin'
 import { MdCreditCard, MdInfo, MdLockOutline, MdMail } from "react-icons/md";
 import { Context } from '../context'
 import axios from 'axios'
-import android from '../Images/ANDROID.png'
-import ios from '../Images/IOS.png'
-import IMG from '../Images/esfinge.svg'
+import IMG from '../Images/bigLogo.svg'
 import './Styles/Signup.css'
 import { url } from '../urlServer'
 import Cookies from 'js-cookie'
@@ -93,24 +91,13 @@ export const Signup = (props) => {
     
     }
         
-    return(
-        <>   
+    return <div>   
 
         <NavbarLogin toggleAuth={toggleAuth} />
 
         <div className='signup-container'>
-
+            <div className='wrap-1100'>
             <div className='signup-left'>
-
-                <div className='apps-button'>
-                    <div>
-                        <img className='android-button' alt='android' src={android} />
-
-                    </div>
-                    <div>
-                        <img className='ios-button' alt='ios' src={ios} />
-                    </div>
-                </div>
 
                 <img className='logo-signup-p' src={IMG} alt=""/>
 
@@ -175,8 +162,8 @@ export const Signup = (props) => {
                             </div>
                         </div>
                 </div>
+                </div>
         </div>    
         <EmailVerificationModal email={email.value} isOpen={modalOpen} onClose={onCloseModal} />
-        </>
-    )
+        </div>
 }

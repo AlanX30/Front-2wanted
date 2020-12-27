@@ -2,13 +2,11 @@ import React, { useState } from 'react'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import '../../Pages/Styles/Home.css'
-import {MdHome, MdInfo} from "react-icons/md"
+import { MdHome, MdInfo } from "react-icons/md"
 import { useFormValues } from '../../hooks/useFormValues'
-import  { useUserData }  from '../../hooks/useUserData'
 
 const NewSalaForm = props => {
 
-    const  { userData }  = useUserData()
     const [roomValid, setRoomValid] = useState(true)
     const [priceValid, setPriceValid] = useState(true)
     const [createLoading, setCreateLoading] = useState(false)
@@ -19,19 +17,8 @@ const NewSalaForm = props => {
     const price = useFormValues()
     
     const newSalaData = {
-        users: [
-            {
-                user: userData.userName,
-                parentId: undefined,
-                childsId: {
-                    childId1: '',
-                    childId2: '',
-                }
-            }
-        ],
         name: name.value,
         price: price.value,
-        creator: userData.userName
     }
 
     async function newSala( e ){

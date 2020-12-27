@@ -15,7 +15,7 @@ export const Home = (props) => {
     
     return(
         <div className='home-container'>
-
+            <div className='wrap-1100'>
             <div className={actives_560 ? 'home-left' : 'home-left home-left-560'}>
 
                 <ListRooms Swal={Swal} token={token} axios={axios} url={url} />
@@ -40,6 +40,7 @@ export const Home = (props) => {
             <div className='navigation-container'>
                 <button onClick={()=> setActives_560(false) } className={!actives_560 ? 'navigation-button navigation-left' : 'navigation-button left-button' }><MdHome size='35' /></button>  
                 <button onClick={()=> setActives_560(true) } className={actives_560 ? 'navigation-button navigation-right' : 'navigation-button' }><MdList size='35' /></button>  
+            </div>
             </div>
         </div>
     )

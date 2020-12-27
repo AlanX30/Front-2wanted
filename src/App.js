@@ -26,9 +26,9 @@ function App() {
         {
           isAuth && 
           <Layout>
+            <Route exact path ='/home/' component={Home}/>
             <Route exact path ='/profile/' component={Profile}/>
             <Route exact path ='/balance/' component={Balance}/>
-            <Route exact path ='/home/' component={Home}/>
             <Route exact path ='/sala/:salaId/' component={Room}/>
           </Layout>
         }

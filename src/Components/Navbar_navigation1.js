@@ -65,7 +65,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token
                     setInvitations(res.data.invitations)
                     setCount(0)
                 }else{
-                    setInvitations( invitations => invitations.concat(res.data.invitations) )
+                    setInvitations( invitations => invitations.concat(res.data.invitations))
                     setNotifications(res.data.countNotification)
                     setTotalPages(res.data.totalPages)
                 }

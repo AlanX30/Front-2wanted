@@ -1,9 +1,9 @@
 .home-container {
   width: 100%;
   margin-top: 45px;
+  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
 }
 
 .home-left {
@@ -180,7 +180,6 @@
   display: none;
 }
 .section-video {
-  margin-bottom: 68px;
   display: flex;
   height: 265px;
   justify-content: center;
