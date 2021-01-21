@@ -6,7 +6,8 @@ import { WithdrawModal } from './Modals/WithdrawModal'
 import { DepositModal } from './Modals/DepositModal'
 import { useUserData } from '../hooks/useUserData'
 import { IoMdSettings, IoIosContact } from 'react-icons/io'
-import { MdRefresh, MdAccountCircle, MdAccountBalanceWallet, MdFileUpload, MdFileDownload, MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md"
+import { MdRefresh, MdAccountCircle, MdKeyboardTab, MdAccountBalanceWallet, MdFileUpload, MdFileDownload, MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md"
+import WithdrawToUserModal from './Modals/WithdrawToUserModal'
 
 const Navbar_navigation2 = props => {
     
@@ -14,9 +15,13 @@ const Navbar_navigation2 = props => {
     const { userData, loadingUserData } = useUserData(countUserData)
     const { logout } = useContext(Context)
     
+    const [modal2Open, setModal2Open] = useState(null)
     const [modal3Open, setModal3Open] = useState(null)
     const [modal4Open, setModal4Open] = useState(null)
 
+    function onClose2Modal(){
+        setModal2Open(null)
+    }
     function onClose3Modal(){
         setModal3Open(null)
     }
@@ -56,6 +61,9 @@ const Navbar_navigation2 = props => {
                         <div onClick={()=> setModal4Open(true)} to='/wallet' className='button-deposit'><MdFileUpload />Deposit</div>
                         <div onClick={()=>setModal3Open(true)} className='button-withdraw'><MdFileDownload />Withdraw</div>
                     </div>
+                    <div onClick={()=> setModal2Open(true)} className="item-menu-right-withdrawToUser">
+                        <MdKeyboardTab /> &nbsp;&nbsp; Send BTC to 2wanted User (free)
+                    </div>
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/balance/' className="item-menu-right">
                         <MdChromeReaderMode /><p>&nbsp;Balance history</p> 
                     </Link>
@@ -71,6 +79,7 @@ const Navbar_navigation2 = props => {
                 </div> 
                 
             </div>  
+            <WithdrawToUserModal token={props.token} isOpen={modal2Open} onClose={onClose2Modal}/>
             <WithdrawModal token={props.token} wallet={userData.wallet} isOpen={modal3Open} onClose={onClose3Modal} />
             <DepositModal token={props.token} isOpen={modal4Open} onClose={onClose4Modal} />        
         </div>

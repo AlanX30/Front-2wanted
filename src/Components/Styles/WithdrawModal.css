@@ -1,3 +1,7 @@
+.withdraw-modal svg {
+    margin-bottom: 4px;
+}
+
 .withdraw-modal-cancelar {
     background: #e02e2e;
     color: black;
@@ -6,10 +10,38 @@
 .withdraw-modal-cancelar:hover {
     color: #e02e2e;
 }
+
+.minimun-withdraw-p {
+    margin-top: 5px;
+}
+.minimun-withdraw-p.minimunBtc {
+    color: #e02e2e;
+}
+.p-withdrawModal {
+    margin-top: 15px;
+    margin-bottom: -8px;
+    margin-left: 5px;
+}
+
+.total-receive-withdraw {
+    margin: 20px 0;
+}
+
+.total-receive-withdraw p {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.total-receive-withdraw span {
+    font-weight: 400;
+}
+.total-receive-span{
+    color: #e02e2e;
+}
+
 .withdraw-modal input {
     font-size: 20px;
     padding: 5px;
-    margin: 10px 0 15px 0;
 }
 .withdraw-modal button {
     margin-top: 10px;

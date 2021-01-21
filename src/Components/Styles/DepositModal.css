@@ -1,18 +1,40 @@
+.depositForm {
+    text-align: center;
+}
+
+.depositForm p {
+    font-size: 14.5px;
+}
+
 .depositForm input {
     margin-top: 20px;
 }
-.next-depostit-modal, .link-mercadopago{
-    background: #ff9f22;
-    color: black;
-    margin-top: 20px;
-    display: block;
-    margin-bottom: 10px;
-    width: 100%;
-    border: none;
-    font-weight: 700;
-    text-align: center;
-}
-.next-depostit-modal:hover, .link-mercadopago:hover {
-    background-color: var(--bg-color);
+
+.button-copy-deposit {
+    margin-bottom: 20px;
+    margin-top: 5px;
     color: #ff9f22;
+    border: #ff9f22 solid;
+    border-radius: 10px;
+    background: transparent;
+    padding: 4px 15px;
+}
+
+.button-copy-deposit:hover {
+    background: #ff9f22;
+    color: #18191a;
+    font-weight: 700;
+}
+
+.button-copy-deposit svg {
+    margin-bottom: 3px;
+}
+
+.qr-container {
+    display: flex;
+    width: max-content;
+    margin: 15px auto;
+    padding: 15px;
+    border-radius: 10px;
+    background: white;
 }
