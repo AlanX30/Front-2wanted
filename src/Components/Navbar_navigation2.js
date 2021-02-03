@@ -36,10 +36,6 @@ const Navbar_navigation2 = props => {
 
     const toggle3 = props.useComponentVisible(false)
 
-    function formatNumber(number){
-        return new Intl.NumberFormat("de-DE").format(number)
-    }
-
     return (
         <div className='section-navIcons'>
             <div className='button-nav-2'>
@@ -55,7 +51,7 @@ const Navbar_navigation2 = props => {
                     </div>
                     <div className='item-menu-right-wallet-container'>
                         <div><MdAccountBalanceWallet />&nbsp;Wallet</div>
-                        <p className='balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  ${formatNumber(userData.wallet)}</p>
+                        <p className='balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  {userData.wallet} BTC</p>
                     </div>
                     <div className='item-menu-right-cashier'>
                         <div onClick={()=> setModal4Open(true)} to='/wallet' className='button-deposit'><MdFileUpload />Deposit</div>
@@ -79,7 +75,7 @@ const Navbar_navigation2 = props => {
                 </div> 
                 
             </div>  
-            <WithdrawToUserModal token={props.token} isOpen={modal2Open} onClose={onClose2Modal}/>
+            <WithdrawToUserModal token={props.token} wallet={userData.wallet} isOpen={modal2Open} onClose={onClose2Modal}/>
             <WithdrawModal token={props.token} wallet={userData.wallet} isOpen={modal3Open} onClose={onClose3Modal} />
             <DepositModal token={props.token} isOpen={modal4Open} onClose={onClose4Modal} />        
         </div>

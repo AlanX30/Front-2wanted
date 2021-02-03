@@ -8,10 +8,6 @@ import { url } from '../../urlServer'
 
 const InvitationModal = (props) => {
 
-    function formatNumber(number){
-        return new Intl.NumberFormat("de-DE").format(number)
-    }
-
     const invitation = props.invitationData
 
     const [invitationLoading, setInvitationLoading] = useState(false)
@@ -67,7 +63,7 @@ const InvitationModal = (props) => {
                 invitation && <div className='invitationModal'>
                     <p>Invited by: <span>{invitation.host}</span></p>
                     <p>Room Name: <span>{invitation.salaName}</span></p>
-                    <p>Price: <span>${formatNumber(invitation.price)}</span></p>
+                    <p>Price: <span>${invitation.price}</span></p>
                     <p>Parent user: <span>{invitation.parentUsername}</span></p>
                     <p>Message: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
                     <button disabled={invitationLoading ? true : false} className='btn btn-dark btn-block invitation-button' onClick={handleClick}>

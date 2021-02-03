@@ -22,6 +22,11 @@
     margin-bottom: -8px;
     margin-left: 5px;
 }
+.withdraw-confirm-address {
+    text-align: center;
+    margin-top: 22px;
+    word-break: break-word;
+}
 
 .total-receive-withdraw {
     margin: 20px 0;

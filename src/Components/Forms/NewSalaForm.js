@@ -27,7 +27,7 @@ const NewSalaForm = props => {
         if( reg_whiteSpace.test(name.value) || name.value.length < 4 || name.value.length > 15){
             return setRoomValid(false)
         }else { setRoomValid(true)}
-        if(parseFloat(price.value) < 5000 || price.value ===  '' ){
+        if(parseFloat(price.value) < 0.00005 || price.value === '' ){
             return setPriceValid(false)
         }else{ setPriceValid(true) }
 

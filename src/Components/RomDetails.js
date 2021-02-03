@@ -10,10 +10,6 @@ const RomDetails = ({count, url, salaId, userName, token, arbolData, dataRoom, i
 
     const price = dataRoom ? dataRoom.price : 0
 
-    function formatNumber(number){
-        return new Intl.NumberFormat("de-DE").format(number)
-    }
-
     async function handleToBalance(){
         setLoadingToBalance(true)
         await axios({
@@ -65,23 +61,23 @@ const RomDetails = ({count, url, salaId, userName, token, arbolData, dataRoom, i
             <p>Room Name:</p>
             <span>{dataRoom.name}</span>
             <p>Room Price:</p>
-            <span>${formatNumber(dataRoom.price)}</span>
+            <span>${dataRoom.price}</span>
             <p>Parent User:</p>
             <span>{parent}</span>
             <p>Creator:</p>
             <span>{dataRoom.creator}</span>
             <p>accumulated level 3:</p>
-            <span>${formatNumber(acum3)}</span>
+            <span>${acum3}</span>
             <p>accumulated level 4:</p>
-            <span>${formatNumber(acum4)}</span>
+            <span>${acum4}</span>
             <p>Total accumulated:</p>
-            <span>${formatNumber(tAcum)}</span>                   
+            <span>${tAcum}</span>                   
             <p>accumulated paid:</p>
-            <span>${formatNumber(inBalance)}</span>
+            <span>${inBalance}</span>
             <button disabled={tAcum > inBalance ? false : true} onClick={handleToBalance}>
                 <div className={!loadingToBalance ? '' : 'dNone'}>
                     <p>Withdraw to wallet</p>
-                    <label>${tAcum > inBalance ? formatNumber(tAcum - inBalance) : 0} ➜ <MdAccountBalanceWallet /></label>
+                    <label>${tAcum > inBalance ? tAcum - inBalance : 0} ➜ <MdAccountBalanceWallet /></label>
                 </div>
                 <div className={loadingToBalance ? "spinner-toBalance spinner-border text-danger" : 'dNone'} role="status">
                     <span className="sr-only">Loading...</span>

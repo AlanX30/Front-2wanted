@@ -12,10 +12,6 @@ const ListRooms = ({ token, url }) => {
     const [activesLoading, setActivesLoading] = useState(false)
     let [countActives, setCountActives] = useState(1) 
 
-    function formatNumber(number){
-        return new Intl.NumberFormat("de-DE").format(number)
-    }
-
     useEffect(() => { 
         setActivesLoading(true)
         axios({
@@ -77,7 +73,7 @@ const ListRooms = ({ token, url }) => {
                                                     <img src={ArbolImg} alt="ArbolImg"/>
                                                     <div className='actives-description'>
                                                         <p>Room Name: <span>{data.salaName}</span></p>
-                                                        <p>Price: <span>${formatNumber(data.salaPrice)}</span></p>
+                                                        <p>Price: <span>${data.salaPrice}</span></p>
                                                         <p>Creator: <span>{data.salaCreator}</span></p>
                                                     </div>
                                                 </Link>

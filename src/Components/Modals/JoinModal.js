@@ -14,10 +14,6 @@ const JoinModal = (props) => {
     const [radio2, setRadio2] = useState(false)
     const [parentInput, setParentInput] = useState(true)
 
-    function formatNumber(number){
-        return new Intl.NumberFormat("de-DE").format(number)
-    }
-
     function handleRadio1(){
         setRadio1(true)
         setRadio2(false)
@@ -89,7 +85,7 @@ const JoinModal = (props) => {
             <div className='join-modal'>
                 <h2>Are you sure?</h2>
                 <p>Room name: <span>{salaName}</span></p>
-                <p>Price: <span>${formatNumber(price)}</span></p>
+                <p>Price: <span>${price}</span></p>
 
                 <form onSubmit={handleSubmit}>
                     <div>

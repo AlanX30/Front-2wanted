@@ -13,6 +13,19 @@
     margin: 25px 0;
 }
 
+.redLetters {
+    color: #e02e2e;
+}
+
+.withdraw-toUser-confirm {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.withdraw-toUser-form svg {
+    margin-bottom: 4px;
+}
+
 .toUser-cancelar{
     background: #e02e2e;
     color: black;

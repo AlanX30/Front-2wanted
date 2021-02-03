@@ -17,16 +17,22 @@ export const useUserData = (update) => {
 
         async function getUserData(){
 
-            const response = await axios({
-                method: 'get',
-                url: url+'/api/me',
-                headers: {
-                    authorization: token
-                    }
-            })
-            if(response.data){
-                setUserData(response.data)
-                setLoadingUserData(false)
+            try{
+
+                const response = await axios({
+                    method: 'get',
+                    url: url+'/api/me',
+                    headers: {
+                        authorization: token
+                        }
+                })
+                if(response.data){
+                    setUserData(response.data)
+                    setLoadingUserData(false)
+                }
+                
+            }catch(error){
+                console.log('Error Interno')
             }
         } 
 

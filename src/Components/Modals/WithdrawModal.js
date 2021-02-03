@@ -12,6 +12,7 @@ export const WithdrawModal = props => {
     const [loading, setLoading] = useState(false)
     const [confirm, setConfirm] = useState(false)
     const [errorAmount, setErrorAmount] = useState(false)
+    const [errorBalance, setErrorBalance] = useState(false)
     const [errorAdress, setErrorAddress] = useState(false)
 
     const amount = useFormValues()
@@ -32,8 +33,14 @@ export const WithdrawModal = props => {
             setErrorAddress(true)
             return 
         }else{ setErrorAddress(false) }
-        if(amountNumber < 0.0003) { setErrorAmount(true)}else{
+        if(amountNumber < 0.0003) { 
+            setErrorAmount(true)
+            return
+        }else{ 
             setErrorAmount(false)
+        }
+        if(props.wallet < amountNumber) { setErrorBalance(true)}else{
+            setErrorBalance(false)
             setConfirm(true)
         }
     }
@@ -44,9 +51,9 @@ export const WithdrawModal = props => {
         setLoading(true)
 
         await axios({
-            data: {amount: amount.value},
+            data: {amount: amount.value, address: address.value},
             method: 'post',
-            url: url+'/api/newWithdraw',
+            url: url+'/api/sendbtc',
             headers: {
                 authorization: props.token
             }
@@ -80,7 +87,11 @@ export const WithdrawModal = props => {
             <form className='withdraw-modal' onSubmit={handleWithdraw} >
                 <h2>Send Bitcoin to address</h2>
                 <h4>Wallet ${props.wallet}</h4>
-                <div>
+                <div className={confirm ? 'withdraw-confirm-address' : 'dNone'}>
+                    <h4>To Address:</h4>
+                    <p>{address.value}</p>
+                </div>
+                <div className={confirm ? 'dNone' : ''}>
                     <div>
                         <p className='p-withdrawModal'>Address</p>
                         <input {...address} required={true} className='join-input' type="text" placeholder='bc1qwyxy6s5zegv70ynz247qwyypnns4zy6ljz8tst'/>
@@ -89,11 +100,12 @@ export const WithdrawModal = props => {
                     <div>
                         <p className='p-withdrawModal'>Amount</p>
                         <input {...amount} required={true} className='join-input' type="text" placeholder='$ 0.01'/>
+                        <p className={errorBalance ? 'minimun-withdraw-p minimunBtc' : 'dNone'}><MdInfo />  The balance in the wallet is not enough.</p>
                         <p className={errorAmount ? 'minimun-withdraw-p minimunBtc' : 'minimun-withdraw-p'}><MdInfo />  Minimum amount 0.0003 BTC.</p>
                     </div>
-                    <div className='total-receive-withdraw'>
-                        <p>Total to receive in address: <span className={totalAmount === 'Invalid value' ? 'total-receive-span' : ''}>{totalAmount}</span></p>
-                    </div>
+                </div>
+                <div className='total-receive-withdraw'>
+                    <p>Total to receive in address: <span className={totalAmount === 'Invalid value' ? 'total-receive-span' : ''}>{totalAmount}</span></p>
                 </div>
                 <div>
                     <p><MdInfo />  Fee: 0.00005 BTC.</p>
@@ -105,7 +117,7 @@ export const WithdrawModal = props => {
                     <div className={loading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                    <p className={loading ? 'dNone' : ''}>Confirmar retiro por {Number(amount.value)}</p>
+                    <p className={loading ? 'dNone' : ''}> Confirm withdrawal for {Number(amount.value)}</p>
                 </button>
                 <button className='btn btn-dark btn-block withdraw-modal-cancelar' onClick={onClose} type='button'>Cancel</button>
             </form>

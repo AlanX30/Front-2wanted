@@ -28,11 +28,11 @@ const Tree = (props) => {
     
     const onOpen2Modal = useCallback( parent => {
         const data = {
-            parentUsername: parent, salaId: props.salaId, price: props.price, salaName: props.salaName, host: props.userName
+            parentUsername: parent, salaId: props.salaId, price: props.price, salaName: props.salaName
         }
         setModal2Open(true)
         setDataModal(data)
-    },[props.price, props.salaId, props.salaName, props.userName])
+    },[props.price, props.salaId, props.salaName])
   
     if(props.loading){
         return <div className="spinner-border tree-spinner text-danger" role="status">

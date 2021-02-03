@@ -20,10 +20,6 @@ const NavbarForm = ({ ArbolImg, url, token, iconSet, useComponentVisible }) => {
         if(iconNone){iconSet(true)}else{iconSet(false)}
     },[iconNone, iconSet])
 
-    function formatNumber(number){
-        return new Intl.NumberFormat("de-DE").format(number)
-    }
-
     function onOpen2Modal(){
         setModal2Open(true)
     }
@@ -106,7 +102,7 @@ const NavbarForm = ({ ArbolImg, url, token, iconSet, useComponentVisible }) => {
                                 <div className='filter-sala-description'>
                                     <p> Room Name:  <span> {filterSala.data.name}</span>  </p>
                                     <p> Creator:  <span> {filterSala.data.creator}</span>  </p>
-                                    <p> Price:  <span> ${formatNumber(filterSala.data.price)}</span>  </p>
+                                    <p> Price:  <span> {filterSala.data.price} BTC</span>  </p>
                                 </div>
                             </div>
                         <button onClick={onOpen2Modal} className=''>Join</button>

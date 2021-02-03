@@ -17,10 +17,6 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token
     let [count, setCount] = useState(0) 
     let [notifications, setNotifications] = useState(0)
 
-    function formatNumber(number){
-        return new Intl.NumberFormat("de-DE").format(number)
-    }
-
     function onOpenModal(invitationData){
         setModalOpen(true)
         setInvitationData(invitationData)
@@ -116,7 +112,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token
                                     <div className='invitation-description'>
                                         <p>Invited by: <span> {invitation.host}</span></p>
                                         <p>Room Name: <span> {invitation.salaName}</span></p>
-                                        <p>Price: <span> ${formatNumber(invitation.price)}</span></p>
+                                        <p>Price: <span> {invitation.price} BTC</span></p>
                                     </div>
                                 </button>
                             </li>

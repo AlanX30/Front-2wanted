@@ -20,10 +20,6 @@ export const Balance = () => {
 
     const [viewDates, setViewDates] = useState(false)
 
-    function formatNumber(number){
-        return new Intl.NumberFormat("de-DE").format(number)
-    }
-
     const [ loading, setLoading ] = useState(false)
     
     const [ balance, setBalance ] = useState([])
@@ -118,7 +114,7 @@ export const Balance = () => {
         </div>
         <form className='date-form' onSubmit={handleDate}>
             <div className='wallet-balance'>
-                <label>Wallet:</label><span>${formatNumber(userData.wallet)}</span>
+                <label>Wallet:</label><span>${userData.wallet}</span>
             </div>
             <p onClick={()=>setViewDates(!viewDates)}>Search by date</p>
             <div onClick={()=>setViewDates(!viewDates)} className='flecha-busqueda-balance'>< RiArrowDownSLine /></div>
@@ -129,7 +125,7 @@ export const Balance = () => {
             <button className={viewDates ? '' : 'none-balance'}>Search</button>
         </form>
         <div className={amountPending > 0 ? 'withdraw-pending-container' : 'dNone'}>
-            Retiro en proceso por el monto de ${formatNumber(amountPending)}
+            Retiro en proceso por el monto de ${amountPending}
         </div>
         <div className={totalPages === 1 ? 'dNone' : 'pagination pages-balance'}>
             <button disabled={countPages === 1 ? true : false} className='pagination-button' onClick={()=> {
@@ -167,10 +163,10 @@ export const Balance = () => {
                                 <p className='balance-description-title'>Won in room:</p>
                                 <p>{balance.salaName}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${formatNumber(balance.wallet)}</p>
+                                <p>${balance.wallet}</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>+ ${formatNumber(balance.won)}</p>
+                                <p className='balance-won-amount'>+ ${balance.won}</p>
                             </div>
                         </li> :
                         balance.type === 'buy' ? <li key={balance._id} >
@@ -179,34 +175,52 @@ export const Balance = () => {
                                 <p className='balance-description-title'>Room payment:</p>
                                 <p>{balance.salaName}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${formatNumber(balance.wallet)}</p>
+                                <p>${balance.wallet}</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-buy-amount'>- ${formatNumber(balance.salaPrice)}</p>
+                                <p className='balance-buy-amount'>- ${balance.salaPrice}</p>
                             </div>
                         </li> :
                         balance.type === 'deposit' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <p className='balance-description-title'>Deposit:</p>
-                                <p>${formatNumber(balance.depositAmount)}</p>
+                                <p>${balance.depositAmount}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${formatNumber(balance.wallet)}</p>
+                                <p>${balance.wallet}</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>+ ${formatNumber(balance.depositAmount)}</p>
+                                <p className='balance-won-amount'>+ ${balance.depositAmount}</p>
                             </div>
                         </li> :
-                        balance.state === 'completed' && <li key={balance._id} >
+                        balance.type === 'withdrawToUser' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <p className='balance-description-title'>Withdraw:</p>
-                                <p>${formatNumber(balance.withdrawAmount)}</p>
+                                <p>${balance.withdrawAmount}</p>
+                                <p className='balance-description-title'>To user:</p>
+                                <p>{balance.toUser}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${formatNumber(balance.wallet)}</p>
+                                <p>${balance.wallet}</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-buy-amount'>- ${formatNumber(balance.withdrawAmount)}</p>
+                                <p className='balance-buy-amount'>- ${balance.withdrawAmount}</p>
+                            </div>
+                        </li> :
+                        balance.type === 'withdrawBtc' && <li key={balance._id} >
+                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div>
+                                <p className='balance-description-title'>Withdraw:</p>
+                                <p>${balance.withdrawAmount}</p>
+                                <p className='balance-description-title'>To Address:</p>
+                                <p>{balance.toAddress}</p>
+                                <p className='balance-description-title'>TxId:</p>
+                                <p>{balance.txId}</p>
+                                <p className='balance-description-title'>Wallet:</p>
+                                <p>${balance.wallet}</p>
+                            </div>
+                            <div className='balance-won-amount-container'>
+                                <p className='balance-buy-amount'>- ${balance.withdrawAmount}</p>
                             </div>
                         </li>
                     )   
