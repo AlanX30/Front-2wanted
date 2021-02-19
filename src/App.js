@@ -5,7 +5,6 @@ import { Blank } from './Components/Blank'
 import { Home } from './Pages/Home'
 import { Room } from './Pages/Room'
 import { Signup } from './Pages/Signup'
-import MailVerification from './Pages/MailVerification'
 import { Balance } from './Pages/Balance'
 import { ChangePassword } from './Pages/ChangePassword'
 import { Context } from './context'
@@ -18,7 +17,6 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path ='/mailverification/:token/' component={MailVerification}/>
         <Route path ='/changepasswordemail/:token/' component={ChangePassword}/>
         <Route exact path ='/' component={Signup}/>
         <Route exact path ='/pending/' component={Blank}/>

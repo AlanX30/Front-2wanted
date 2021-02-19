@@ -51,9 +51,8 @@ export const Signup = (props) => {
 
     function handleSubmit( e ){
         e.preventDefault()
-        
         if(userName.value.length < 4 || userName.value.length > 16){return setUserValid(false)}else{setUserValid(true)}
-        if(email2 === email){ setValidEmail(true)}else{ return setValidEmail(false)}
+        if(email2.value === email.value){ setValidEmail(true)}else{ return setValidEmail(false)}
         if(reg_whiteSpace.test(userName.value)){return setUserValid(false)}else{setUserValid(true)}
         if(!reg_password.test(password.value)){return setPassword_valid(false)}else{setPassword_valid(true)}
 
@@ -157,6 +156,6 @@ export const Signup = (props) => {
                 </div>
                 </div>
         </div>    
-        <EmailVerificationModal email={email.value} isOpen={modalOpen} onClose={onCloseModal} />
+        <EmailVerificationModal props={props} email={email.value} isOpen={modalOpen} onClose={onCloseModal} />
         </div>
 }

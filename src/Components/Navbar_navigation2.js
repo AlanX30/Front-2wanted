@@ -12,7 +12,7 @@ import WithdrawToUserModal from './Modals/WithdrawToUserModal'
 const Navbar_navigation2 = props => {
     
     const [countUserData, setCountUserData] = useState(0)
-    const { userData, loadingUserData } = useUserData(countUserData)
+    const { userData, loadingUserData, usdBtc } = useUserData(countUserData)
     const { logout } = useContext(Context)
     
     const [modal2Open, setModal2Open] = useState(null)
@@ -51,7 +51,10 @@ const Navbar_navigation2 = props => {
                     </div>
                     <div className='item-menu-right-wallet-container'>
                         <div><MdAccountBalanceWallet />&nbsp;Wallet</div>
-                        <p className='balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  {userData.wallet} BTC</p>
+                        <div>
+                            <div className='d-flex balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  {userData.wallet} <p>&nbsp;BTC</p></div>
+                            <div className='d-flex justify-content-center'><p>&nbsp;&nbsp;($&nbsp;</p><p>  {!usdBtc ? '' : userData.wallet < usdBtc ? 0 : Math.floor(userData.wallet / usdBtc)}</p><p>&nbsp;USD)</p></div>
+                        </div>
                     </div>
                     <div className='item-menu-right-cashier'>
                         <div onClick={()=> setModal4Open(true)} to='/wallet' className='button-deposit'><MdFileUpload />Deposit</div>

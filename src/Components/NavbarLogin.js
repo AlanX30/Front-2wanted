@@ -81,7 +81,7 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
                 <p className={loginLoading ? 'dNone' : ''}>Signin</p>
                 </button>
             </form>
-            <EmailVerificationModal2 email={email.value} isOpen={modalOpen} onClose={onCloseModal}/>
+            <EmailVerificationModal2 props={props} email={email.value} isOpen={modalOpen} onClose={onCloseModal}/>
             <ForgotPasswordModal isOpen={modal2Open} onClose={onClose2Modal}/>
             </div>
         </nav>

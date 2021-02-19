@@ -9,7 +9,7 @@ export const useUserData = (update) => {
     
     const [userData, setUserData] = useState({})
     const [loadingUserData, setLoadingUserData] = useState(false)
-
+    const [usdBtc, setUsdBtc] = useState(0)
     
     useEffect(() => {
         
@@ -24,21 +24,21 @@ export const useUserData = (update) => {
                     url: url+'/api/me',
                     headers: {
                         authorization: token
-                        }
+                    }
                 })
                 if(response.data){
-                    setUserData(response.data)
+                    setUserData(response.data.userData)
+                    setUsdBtc(response.data.usdBtc)
                     setLoadingUserData(false)
                 }
                 
             }catch(error){
-                console.log('Error Interno')
+                console.log('Internal Error')
             }
-        } 
-
-    getUserData()
+        }
+        
+        getUserData()
     }, [token, update])
-  
-
-    return { userData, loadingUserData }
+    
+    return { userData, loadingUserData, usdBtc }
 }

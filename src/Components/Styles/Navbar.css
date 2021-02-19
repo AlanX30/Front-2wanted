@@ -173,8 +173,8 @@ nav {
 }
 .notification {
   position: absolute;
-    margin-top: -10px;
-    margin-left: 16px;
+    margin-top: -20px;
+    margin-left: 25px;
     background: red;
     border-radius: 50px;
     width: 15px;
@@ -342,7 +342,7 @@ nav {
 }
 .item-menu-right-wallet-container {
   justify-content: space-between;
-  height: 40px;
+  height: 70px;
   padding: 0px 5px 5px 7px;
   background: #212529;
   color: white;
@@ -387,10 +387,7 @@ nav {
   height: 100%;
   background: #ff5656;
 }
-.balance-refresh-container {
- position: absolute;
- right: 10px;
-}
+
 .refresh-balance {
   cursor: pointer;
  color: white;
@@ -398,6 +395,11 @@ nav {
 }
 .refresh-balance:hover {
   color: #eea048;
+}
+.balance-refresh-container {
+  font-weight: 700;
+    font-size: 25px;
+    color: #35a947;
 }
 .refresh-balance:active {
   transform: scale(1.2);

@@ -11,6 +11,9 @@ import Cookies from 'js-cookie'
 import { useCallback } from 'react'
 
 export const Room = (props) => {
+
+    const { usdBtc } = useUserData()
+    const userName = Cookies.get('username')
     
     const token = Cookies.get('token')
     const salaId = props.match.params.salaId
@@ -18,8 +21,8 @@ export const Room = (props) => {
     const [inBalance, setInBalance] = useState(0)
     const [dataRoom, setDataRoom] = useState({})
     const [countUserData, setCountUserData] = useState(0)
-    const { userData: {userName} } = useUserData()
     const { arbolData, loadingChildsData } = useChildsData(salaId, userName)
+
     
     const count = useCallback((data) => {
         if(count){
@@ -39,11 +42,7 @@ export const Room = (props) => {
                     }
                 })
                 if(response.data.error){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: response.data.error,
-                    })
+                    props.history.push('/home')
                 }else{
                     setInBalance(response.data.inBalance)
                     setParent(response.data.parentId)
@@ -79,7 +78,7 @@ export const Room = (props) => {
                 </div>
             </div>    
             <div>
-                <RomDetails count={count} url={url} parent={parent} inBalance={inBalance} dataRoom={dataRoom} arbolData={arbolData} token={token} userName={userName} salaId={salaId}  />
+                <RomDetails usdBtc={usdBtc} count={count} url={url} parent={parent} inBalance={inBalance} dataRoom={dataRoom} arbolData={arbolData} token={token} userName={userName} salaId={salaId}  />
             </div>    
         </div>
     )

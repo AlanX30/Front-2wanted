@@ -53,7 +53,7 @@ export const InviteModal = (props) => {
             }else{
                 Swal.fire({
                     icon: 'success',
-                    title: 'Invitacion enviada',
+                    title: 'Invitation sent',
                 })
             }
         }).catch(err => {

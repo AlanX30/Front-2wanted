@@ -3,7 +3,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { MdAccountBalanceWallet } from "react-icons/md";
 
-const RomDetails = ({count, url, salaId, userName, token, arbolData, dataRoom, inBalance, parent}) => {
+const RomDetails = ({usdBtc, count, url, salaId, userName, token, arbolData, dataRoom, inBalance, parent}) => {
 
     const [loadingToBalance, setLoadingToBalance] = useState(false)
     const [countUserData, setCountUserData] = useState(0)
@@ -20,14 +20,22 @@ const RomDetails = ({count, url, salaId, userName, token, arbolData, dataRoom, i
                  authorization: token
             }
         }).then(res => {
-            setCountUserData(countUserData + 1)
-            count(countUserData + 1)
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: res.data.msg,
-            })
             setLoadingToBalance(false)
+            if(res.data.error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error,
+                })
+            }else{
+                setCountUserData(countUserData + 1)
+                count(countUserData + 1)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: res.data.msg,
+                })
+            }
         }).catch(error => {
             Swal.fire({
                 icon: 'error',
@@ -61,7 +69,7 @@ const RomDetails = ({count, url, salaId, userName, token, arbolData, dataRoom, i
             <p>Room Name:</p>
             <span>{dataRoom.name}</span>
             <p>Room Price:</p>
-            <span>${dataRoom.price}</span>
+            <span>{`${dataRoom.price} BTC  (${Math.floor(dataRoom.price / usdBtc)} USD)`}</span>
             <p>Parent User:</p>
             <span>{parent}</span>
             <p>Creator:</p>

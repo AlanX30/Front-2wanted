@@ -124,9 +124,6 @@ export const Balance = () => {
             <input className={viewDates ? '' : 'none-balance'} type="date" required={true} onChange={(e)=>setValueFecha2(e.target.value)}/>
             <button className={viewDates ? '' : 'none-balance'}>Search</button>
         </form>
-        <div className={amountPending > 0 ? 'withdraw-pending-container' : 'dNone'}>
-            Retiro en proceso por el monto de ${amountPending}
-        </div>
         <div className={totalPages === 1 ? 'dNone' : 'pagination pages-balance'}>
             <button disabled={countPages === 1 ? true : false} className='pagination-button' onClick={()=> {
                 setCountPages(countPages - 1)

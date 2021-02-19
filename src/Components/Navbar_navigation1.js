@@ -33,7 +33,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token
         socket.emit('user_online', username)
         
         socket.on('new_message', () => {
-            setCount(count + 1) 
+            setCount(count => count + 1) 
         })
 
         if(count > 0){

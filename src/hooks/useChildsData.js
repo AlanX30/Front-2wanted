@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { url } from '../urlServer'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import Cookies from 'js-cookie'
 
 export const useChildsData = (salaId, userName) => {
@@ -27,6 +28,14 @@ export const useChildsData = (salaId, userName) => {
                 })       
                 
                 const data = await response.data
+
+                if(data.error){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.error,
+                    })
+                }
     
                 await setArbolData(data)
     
