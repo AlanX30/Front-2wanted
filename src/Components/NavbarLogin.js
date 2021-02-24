@@ -48,7 +48,7 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
             }else if(res.data.isVerified === false){
                 setModalOpen(true)
             }else{
-                props.toggleAuth(res.data.token, res.data.userName)
+                props.toggleAuth(res.data.userName)
                 props.history.push(`/home`)
             }
         })

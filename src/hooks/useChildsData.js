@@ -6,8 +6,6 @@ import Cookies from 'js-cookie'
 
 export const useChildsData = (salaId, userName) => {
 
-    const token = Cookies.get('token')
-
     const [arbolData, setArbolData] = useState([])
 
     const [loadingChildsData, setLoadingChildsData] = useState(true)
@@ -21,10 +19,7 @@ export const useChildsData = (salaId, userName) => {
     
                 const response = await axios({
                     method: 'post',
-                    url: `${url}/api/in-sala?id=${salaId}`,
-                    headers: {
-                         authorization: token
-                    }
+                    url: `${url}/api/in-sala?id=${salaId}`
                 })       
                 
                 const data = await response.data
@@ -44,7 +39,7 @@ export const useChildsData = (salaId, userName) => {
             }  
             childsData()
         }
-    },[salaId, userName, token])
+    },[salaId, userName])
 
     return {arbolData, loadingChildsData}
 

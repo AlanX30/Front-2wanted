@@ -9,8 +9,6 @@ import UpdatePasswordForm from '../Components/Forms/UpdatePasswordForm'
 import UpdateEmailForm from '../Components/Forms/UpdateEmailForm'
 
 export const Profile = () => {
-    
-    const token = Cookies.get('token')
 
     const { userData } = useUserData()
 
@@ -44,9 +42,9 @@ export const Profile = () => {
                                 </div>
                             </div>
 
-                            <UpdatePasswordForm url={url} token={token} useFormValues={useFormValues} />
+                            <UpdatePasswordForm url={url} useFormValues={useFormValues} />
                             
-                            <UpdateEmailForm url={url} token={token} useFormValues={useFormValues} />
+                            <UpdateEmailForm url={url} useFormValues={useFormValues} />
 
                         </div>
 

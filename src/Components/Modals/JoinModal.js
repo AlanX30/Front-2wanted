@@ -52,10 +52,7 @@ const JoinModal = (props) => {
         await axios({
             data: joinData,
             method: 'post',
-            url: url+'/api/newUserInSala',
-            headers: {
-                authorization: props.token
-            }
+            url: url+'/api/newUserInSala'
         }).then(res => {
             setJoinLoading(false)
             if(res.data.error){

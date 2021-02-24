@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useFormValues } from '../hooks/useFormValues'
 import Swal from 'sweetalert2'
 import NavbarLogin from '../Components/NavbarLogin'
@@ -13,9 +13,9 @@ import EmailVerificationModal from '../Components/Modals/EmailVerificationModal'
 
 export const Signup = (props) => {
 
-    const token = Cookies.get('token')
+    const conected = Cookies.get('conected')
 
-    if(token){
+    if(conected){
         props.history.push(`/home`)
     }
 

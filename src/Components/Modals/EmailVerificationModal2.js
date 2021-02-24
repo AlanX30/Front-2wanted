@@ -35,7 +35,7 @@ const EmailVerificationModal2 = props => {
                     text: res.data.error,
                 })
             }else{
-                toggleAuth(res.data.token, res.data.userName)
+                toggleAuth(res.data.userName)
                 props.props.history.push(`/home`)
             }
         }).catch(err => {

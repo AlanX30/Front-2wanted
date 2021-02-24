@@ -53,10 +53,7 @@ export const WithdrawModal = props => {
         await axios({
             data: {amount: amount.value, address: address.value},
             method: 'post',
-            url: url+'/api/sendbtc',
-            headers: {
-                authorization: props.token
-            }
+            url: url+'/api/sendbtc'
         }).then(res => {
             setLoading(false)
             if(res.data.error){

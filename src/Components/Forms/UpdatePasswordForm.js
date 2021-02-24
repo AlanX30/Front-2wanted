@@ -4,7 +4,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { MdInfo, MdLockOutline } from "react-icons/md"
 
-const UpdatePasswordForm = ({useFormValues, url, token}) => {
+const UpdatePasswordForm = ({useFormValues, url}) => {
     
     const [newPasswordError, setNewPasswordError] = useState(false)
     const [password_valid, setPassword_valid] = useState(true)
@@ -29,10 +29,7 @@ const UpdatePasswordForm = ({useFormValues, url, token}) => {
             axios({
                 method: 'post',
                 data: { password: password.value, newPassword: newPassword.value },
-                url: url+'/edit/passwordemail',
-                headers: {
-                    authorization: token
-                }
+                url: url+'/edit/passwordemail'
             }).then( res => {
                 setPasswordLoading(false)
                 if(res.data.error){

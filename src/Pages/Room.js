@@ -15,7 +15,6 @@ export const Room = (props) => {
     const { usdBtc } = useUserData()
     const userName = Cookies.get('username')
     
-    const token = Cookies.get('token')
     const salaId = props.match.params.salaId
     const [parent, setParent] = useState('')
     const [inBalance, setInBalance] = useState(0)
@@ -36,10 +35,7 @@ export const Room = (props) => {
                 const response = await axios({
                     data: { salaId: salaId },
                     method: 'post',
-                    url: url+'/api/search/sala',
-                    headers: {
-                        authorization: token
-                    }
+                    url: url+'/api/search/sala'
                 })
                 if(response.data.error){
                     props.history.push('/home')
@@ -59,7 +55,7 @@ export const Room = (props) => {
         }
         searchRoom()
 
-    },[userName, salaId, token, countUserData])
+    },[userName, salaId, countUserData])
 
     
     if(!dataRoom || loadingChildsData){
@@ -74,11 +70,11 @@ export const Room = (props) => {
         <div className='room'>
             <div>
                 <div className='arbol-container'>
-                    <Tree loading={loadingChildsData} token={token} userName={userName} salaName={dataRoom.name} price={dataRoom.price} salaId={dataRoom._id} arbolData={arbolData} />
+                    <Tree loading={loadingChildsData} userName={userName} salaName={dataRoom.name} price={dataRoom.price} salaId={dataRoom._id} arbolData={arbolData} />
                 </div>
             </div>    
             <div>
-                <RomDetails usdBtc={usdBtc} count={count} url={url} parent={parent} inBalance={inBalance} dataRoom={dataRoom} arbolData={arbolData} token={token} userName={userName} salaId={salaId}  />
+                <RomDetails usdBtc={usdBtc} count={count} url={url} parent={parent} inBalance={inBalance} dataRoom={dataRoom} arbolData={arbolData} userName={userName} salaId={salaId}  />
             </div>    
         </div>
     )

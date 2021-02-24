@@ -10,7 +10,6 @@ import Cookies from 'js-cookie'
 
 export const Home = (props) => {
 
-    const token = Cookies.get('token')
     const [actives_560, setActives_560] = useState(false)
     
     return(
@@ -18,13 +17,13 @@ export const Home = (props) => {
             <div className='wrap-1100'>
             <div className={actives_560 ? 'home-left' : 'home-left home-left-560'}>
 
-                <ListRooms Swal={Swal} token={token} axios={axios} url={url} />
+                <ListRooms Swal={Swal} axios={axios} url={url} />
                 
             </div>
 
             <div className={!actives_560 ? 'home-right' : 'home-right home-right-560'}>
 
-                <NewSalaForm props={props} axios={axios} token={token} url={url} MdHome={MdHome} MdInfo={MdInfo}/>
+                <NewSalaForm props={props} axios={axios} url={url} MdHome={MdHome} MdInfo={MdInfo}/>
 
                 <div className='section-video'>
                     <div className='youtube-container'>

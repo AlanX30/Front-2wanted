@@ -2,6 +2,7 @@
   "name": "front2wanted",
   "version": "1.0.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "@sweetalert2/theme-dark": "^3.2.0",
     "@testing-library/jest-dom": "^4.2.4",

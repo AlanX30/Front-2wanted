@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { MdInfo, MdMail } from "react-icons/md"
 import axios from 'axios'
 
-const UpdateEmailForm = ({url, useFormValues, token}) => {
+const UpdateEmailForm = ({url, useFormValues}) => {
 
     const [newEmailError, setNewEmailError] = useState(false)
     const [emailLoading, setEmailLoading] = useState(false)
@@ -23,10 +23,7 @@ const UpdateEmailForm = ({url, useFormValues, token}) => {
             axios({
                 method: 'post',
                 data: { newEmail: newEmail.value, email: email.value },
-                url: url+'/edit/passwordemail',
-                headers: {
-                    authorization: token
-                }
+                url: url+'/edit/passwordemail'
             }).then( res => {
                 setEmailLoading(false)
                 if(res.data.error){

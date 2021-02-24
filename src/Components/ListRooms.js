@@ -5,7 +5,7 @@ import ArbolImg from '../Images/arbol.svg'
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
-const ListRooms = ({ token, url }) => {
+const ListRooms = ({ url }) => {
 
     const [listRooms, setListRooms] = useState([])
     const [activesData, setActivesData] = useState({})
@@ -17,10 +17,7 @@ const ListRooms = ({ token, url }) => {
         axios({
             method: 'post',
             data: {page: countActives},
-            url: url+'/api/search/listSalas',
-            headers: {
-                authorization: token
-            }
+            url: url+'/api/search/listSalas'
         })
         .then(res => {
             setActivesLoading(false)
@@ -44,7 +41,7 @@ const ListRooms = ({ token, url }) => {
                 text: err,
             })
         })
-    }, [token, countActives, url])
+    }, [countActives, url])
 
     return(
         <div className='actives-rooms'>

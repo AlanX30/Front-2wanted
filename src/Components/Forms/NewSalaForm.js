@@ -36,10 +36,7 @@ const NewSalaForm = props => {
         await axios({
             data: newSalaData,
             method: 'post',
-            url: props.url+'/api/new/sala',
-            headers: {
-                authorization: props.token
-            }
+            url: props.url+'/api/new/sala'
         }).then(res => {
             setCreateLoading(false)
             if (res.data.error) {

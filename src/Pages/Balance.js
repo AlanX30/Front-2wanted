@@ -11,8 +11,6 @@ import Cookies from 'js-cookie'
 
 export const Balance = () => {
 
-    const token = Cookies.get('token')
-
     const { userData } = useUserData()
 
     const [valueFecha1, setValueFecha1] = useState('') 
@@ -39,10 +37,7 @@ export const Balance = () => {
         axios({
             method: 'post',
             data: {page: countPages},
-            url: url+'/api/userbalance',
-            headers: {
-                authorization: token
-            }
+            url: url+'/api/userbalance'
         })
         .then(res => {
             setLoading(false)
@@ -68,7 +63,7 @@ export const Balance = () => {
             })
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token, countLastestPages])
+    }, [countLastestPages])
 
     const [activeDate, setActiveDate] = useState(false)
 
@@ -95,10 +90,7 @@ export const Balance = () => {
         axios({
             method: 'post',
             data: { getFechaInicial: fechaInicial, getFechaFinal: fechaFinal, page: countPages},
-            url: url+'/api/userbalance',
-            headers: {
-                authorization: token
-            }
+            url: url+'/api/userbalance'
         }).then(res => {
             setActiveDate(true)
             setBalance(res.data.data)

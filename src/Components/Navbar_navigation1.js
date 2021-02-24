@@ -6,7 +6,7 @@ import axios from 'axios'
 import  InvitationModal  from './Modals/InvitationModal'
 import { MdNotificationsNone } from "react-icons/md";
 
-const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token}) => {
+const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
 
     const toggle1 = useComponentVisible(false);
     const [invitations, setInvitations] = useState([])
@@ -43,10 +43,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token
         axios({
             method: 'post',
             data: {page: countPages},
-            url: url+'/api/invitations',
-            headers: {
-                authorization: token
-            }
+            url: url+'/api/invitations'
         }).then(res => {
             if(res.data.error){
                 Swal.fire({
@@ -74,7 +71,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token
             })
         })
 
-    },[token, countPages, count, username, url])
+    },[countPages, count, username, url])
 
     function notificationButton() {
         
@@ -83,10 +80,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token
         if(notifications > 0) {
             axios({
                 method: 'post',
-                url: url+'/api/invitations-reset',
-                headers: {
-                    authorization: token
-                }
+                url: url+'/api/invitations-reset'
             })
     
             setNotifications(0)
@@ -121,7 +115,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username, token
                 }
                 <button className={totalPages > countPages ? 'button-more-notifications' : 'dNone'} onClick={()=>{setCountPages(countPages + 1)}}>More ▼</button>
             </div>
-            <InvitationModal token={token} invitationData={invitationData} isOpen={modalOpen} onClose={onCloseModal} />
+            <InvitationModal invitationData={invitationData} isOpen={modalOpen} onClose={onCloseModal} />
         </div>
     )    
 }

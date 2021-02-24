@@ -3,7 +3,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { MdAccountBalanceWallet } from "react-icons/md";
 
-const RomDetails = ({usdBtc, count, url, salaId, userName, token, arbolData, dataRoom, inBalance, parent}) => {
+const RomDetails = ({usdBtc, count, url, salaId, userName, arbolData, dataRoom, inBalance, parent}) => {
 
     const [loadingToBalance, setLoadingToBalance] = useState(false)
     const [countUserData, setCountUserData] = useState(0)
@@ -15,10 +15,7 @@ const RomDetails = ({usdBtc, count, url, salaId, userName, token, arbolData, dat
         await axios({
             method: 'post',
             data: {user: userName, toBalance: 'true'},
-            url: `${url}/api/in-sala?id=${salaId}`,
-            headers: {
-                 authorization: token
-            }
+            url: `${url}/api/in-sala?id=${salaId}`
         }).then(res => {
             setLoadingToBalance(false)
             if(res.data.error){

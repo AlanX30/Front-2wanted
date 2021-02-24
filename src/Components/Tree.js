@@ -45,7 +45,7 @@ const Tree = (props) => {
             <TreeData price={props.price} username={props.userName} arbolData={arbolData} onOpen2Modal={onOpen2Modal} onOpenModal={onOpenModal} />
             
             <ChildModal user={userModal} isOpen={modalOpen} onClose={onCloseModal}/>
-            <InviteModal token={props.token} data={dataModal} isOpen={modal2Open} onClose={onClose2Modal}/>
+            <InviteModal data={dataModal} isOpen={modal2Open} onClose={onClose2Modal}/>
         </>
     )
 }

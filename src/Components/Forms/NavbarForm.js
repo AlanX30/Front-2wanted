@@ -38,10 +38,7 @@ const NavbarForm = ({ ArbolImg, url, token, iconSet, useComponentVisible }) => {
             const response = await axios({
                 data: { name: room1.value },
                 method: 'post',
-                url: url+'/api/search/sala',
-                headers: {
-                    authorization: token
-                }
+                url: url+'/api/search/sala'
             })
 
             setSearchLoading(false)
@@ -113,7 +110,7 @@ const NavbarForm = ({ ArbolImg, url, token, iconSet, useComponentVisible }) => {
             </div>
 
         </div>
-        <JoinModal token={token} data={filterSala.data} isOpen={modal2Open} onClose={onClose2Modal}/>
+        <JoinModal data={filterSala.data} isOpen={modal2Open} onClose={onClose2Modal}/>
     </>
 }
 

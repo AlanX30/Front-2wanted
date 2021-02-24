@@ -38,10 +38,7 @@ export const InviteModal = (props) => {
         await axios({
             data: data,
             method: 'post',
-            url: url+'/api/new-invitation',
-            headers: {
-                authorization: props.token
-            }
+            url: url+'/api/new-invitation'
         }).then(res => {
             setInviteLoading(false)
             if(res.data.error){

@@ -78,9 +78,9 @@ const Navbar_navigation2 = props => {
                 </div> 
                 
             </div>  
-            <WithdrawToUserModal token={props.token} wallet={userData.wallet} isOpen={modal2Open} onClose={onClose2Modal}/>
-            <WithdrawModal token={props.token} wallet={userData.wallet} isOpen={modal3Open} onClose={onClose3Modal} />
-            <DepositModal token={props.token} isOpen={modal4Open} onClose={onClose4Modal} />        
+            <WithdrawToUserModal wallet={userData.wallet} isOpen={modal2Open} onClose={onClose2Modal}/>
+            <WithdrawModal  wallet={userData.wallet} isOpen={modal3Open} onClose={onClose3Modal} />
+            <DepositModal isOpen={modal4Open} onClose={onClose4Modal} />        
         </div>
     )    
 }

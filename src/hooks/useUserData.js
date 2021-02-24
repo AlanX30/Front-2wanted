@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { Context } from '../context'
 import { url } from '../urlServer'
 import axios from 'axios'
-import Cookies from 'js-cookie'
 
 export const useUserData = (update) => {
     
-    const token = Cookies.get('token')
-    
+    const { csrfToken } = useContext(Context)
     const [userData, setUserData] = useState({})
     const [loadingUserData, setLoadingUserData] = useState(false)
     const [usdBtc, setUsdBtc] = useState(0)
+    console.log(csrfToken)
     
     useEffect(() => {
         
@@ -18,18 +18,19 @@ export const useUserData = (update) => {
         async function getUserData(){
 
             try{
-
-                const response = await axios({
-                    method: 'get',
+                if(csrfToken){ 
+                    const response = await axios({
+                    method: 'post',
                     url: url+'/api/me',
-                    headers: {
-                        authorization: token
+                    headers: { 
+                        'X-CSRF-Token': csrfToken
                     }
                 })
                 if(response.data){
                     setUserData(response.data.userData)
                     setUsdBtc(response.data.usdBtc)
                     setLoadingUserData(false)
+                }
                 }
                 
             }catch(error){
@@ -38,7 +39,7 @@ export const useUserData = (update) => {
         }
         
         getUserData()
-    }, [token, update])
+    }, [update, csrfToken])
     
     return { userData, loadingUserData, usdBtc }
 }

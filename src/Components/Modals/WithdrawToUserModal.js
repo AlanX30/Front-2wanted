@@ -52,10 +52,7 @@ const WithdrawToUserModal = props => {
         await axios({
             data: {amount: amount.value, username: `@${user.value}`},
             method: 'post',
-            url: url+'/api/sendinternalbtc',
-            headers: {
-                authorization: props.token
-            }
+            url: url+'/api/sendinternalbtc'
         }).then(res => {
             setLoading(false)
             if(res.data.error){
