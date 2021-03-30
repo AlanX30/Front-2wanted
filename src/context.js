@@ -12,7 +12,8 @@ export const Context = createContext()
 const Provider = ({ children }) => {
   
   const [isAuth, setIsAuth] = useState(Cookies.get('conected'))
-  const [csrfToken, setCsrfToken] = useState('')
+  const [isAdminAuth, setIsAdminAuth] = useState(Cookies.get('conectedAdmin'))
+  const [csrfToken, setCsrfToken] = useState(null)
 
   useEffect(() => {
     async function generateCsrf(){
@@ -31,14 +32,24 @@ const Provider = ({ children }) => {
       }
 
     }
+
     generateCsrf()
+
   },[])
+
+  const [userData, setUserData] = useState({})
+  const [loadingUserData, setLoadingUserData] = useState(false)
+  const [usdBtc, setUsdBtc] = useState(0)
+  const [update, setUpdate] = useState(0)
 
   async function onLogout(){
     try {
         const response = await axios({
             method: 'post',
-            url: url+'/api/logout'
+            url: url+'/api/logout',
+            headers: { 
+              'X-CSRF-Token': csrfToken
+            }
         })
         if(response.data.error){
           Swal.fire({
@@ -55,14 +66,59 @@ const Provider = ({ children }) => {
       })
     }
   }
+
+  useEffect(() => {
+    async function getUserData(){
+
+        setLoadingUserData(true)
+
+        const response = await axios({
+          method: 'post',
+          url: url+'/api/me',
+          headers: { 
+              'X-CSRF-Token': csrfToken
+          }
+        })
+        if(response.data.error){ 
+          axios({
+            method: 'post',
+            url: url+'/api/logout',
+            headers: { 
+              'X-CSRF-Token': csrfToken
+            }
+          }).then(()=>{
+            Cookies.remove('conected') 
+            Cookies.remove('username')
+            window.location.replace('/') 
+          })
+        }
+        if(response.data){
+            setUserData(response.data.userData)
+            setUsdBtc(response.data.usdBtc)
+            setLoadingUserData(false)
+        }
+      }
+    
+     if(csrfToken && isAuth){getUserData()} 
+
+  },[csrfToken, update, isAuth])
   
   const value = {
     isAuth,
+    isAdminAuth,
     csrfToken,
-    toggleAuth: (userName) => {
+    userData,
+    loadingUserData,
+    usdBtc,
+    onUpdate:(update)=>{setUpdate(update)},
+    toggleAuth:(userName)=>{
       setIsAuth(true)
-      Cookies.set('username', userName, { expires: 1 })
-      Cookies.set('conected', true, { expires: 1 })
+      Cookies.set('username', userName, { expires: 0.041660 })
+      Cookies.set('conected', true, { expires: 0.041660 })
+    },
+    toggleAdminAuth:()=>{
+      setIsAdminAuth(true)
+      Cookies.set('conectedAdmin', true, { expires: 0.00694444 })
     },
     logout: () => { 
       socket.emit('disconnectClient', Cookies.get('username'))

@@ -1,0 +1,36 @@
+.contact_asunto {
+    border-radius: 10px;
+    padding: 10px;
+    border: none;
+    margin-top: 15px;
+}
+.contact_msg {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 3px;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 100px;
+}
+
+.contact_send {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: none;
+    min-width: 100px;
+    box-shadow: -2px 3px 5px;
+    margin-left: 2px;
+    height: 30px;
+    font-weight: 700;
+    transition: .2s
+}
+
+.contact_text {
+    margin: 15px 0;
+}
+
+.contact_send:hover {
+    color: white;
+    background: rgb(80, 79, 79);
+    box-shadow: none;
+}

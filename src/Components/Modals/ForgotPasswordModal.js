@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Modal from './Modal'
 import { useFormValues } from '../../hooks/useFormValues'
+import { Context } from '../../context'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import { url } from '../../urlServer'
@@ -9,7 +10,7 @@ const ForgotPasswordModal = props => {
     
     const [ loading, setLoading ] = useState(false) 
     const [ count, setCount ] = useState(0)
-
+    const { csrfToken } = useContext(Context)
     const email = useFormValues()
 
     async function handleForgotPassword(e){
@@ -21,6 +22,9 @@ const ForgotPasswordModal = props => {
             method: 'post',
             data: { email: email.value },
             url: url+'/api/forgotpassword',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
         }).then(res => {
             setLoading(false)
             if(res.data.error){

@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { Context } from '../context'
 import abajo from '../Images/abajo.svg'
 import './Styles/Tree.css'
 
 const TreeData = ({price, username, arbolData, onOpenModal, onOpen2Modal}) => {
 
+    function formatNumber(number){
+        return new Intl.NumberFormat('en-US').format(number)
+    }
+
     const [lineDropDown, setLineDropdown] = useState(false)
+
+    const { usdBtc } = useContext(Context)
+
+    const level3 = (price/2) / usdBtc
+    const level4 = (price/4) / usdBtc
 
     return(
         <div className='tree-wrap'>
@@ -23,7 +33,7 @@ const TreeData = ({price, username, arbolData, onOpenModal, onOpen2Modal}) => {
                 <button onClick={arbolData[4] ? ()=> onOpenModal(arbolData[4]) : ()=> onOpen2Modal(arbolData[1])} className={arbolData[4] ? 'child' : 'noChild'}>+</button>
                 <button onClick={arbolData[5] ? ()=> onOpenModal(arbolData[5]) : ()=> onOpen2Modal(arbolData[1])} className={arbolData[5] ? 'child' : 'noChild'}>+</button>
             </div>
-            <p className='level-text'>Level 3 &nbsp; <span>{price / 2} BTC c/u</span></p>
+            <p className='level-text'>Level 3 &nbsp; <span>{formatNumber(level3)} USD c/u</span></p>
             <div className='nivel'>
                 <button onClick={arbolData[6] ? ()=> onOpenModal(arbolData[6]) : ()=> onOpen2Modal(arbolData[2])} className={arbolData[6] ? 'child' : 'noChild'}>+</button>
                 <button onClick={arbolData[7] ? ()=> onOpenModal(arbolData[7]) : ()=> onOpen2Modal(arbolData[2])} className={arbolData[7] ? 'child' : 'noChild'}>+</button>
@@ -34,7 +44,7 @@ const TreeData = ({price, username, arbolData, onOpenModal, onOpen2Modal}) => {
                 <button onClick={arbolData[12] ? ()=> onOpenModal(arbolData[12]) : ()=> onOpen2Modal(arbolData[5])} className={arbolData[12] ? 'child' : 'noChild'}>+</button>
                 <button onClick={arbolData[13] ? ()=> onOpenModal(arbolData[13]) : ()=> onOpen2Modal(arbolData[5])} className={arbolData[13] ? 'child' : 'noChild'}>+</button>
             </div>
-            <p className='level-text'>Level 4 &nbsp; <span>{price / 4} BTC c/u</span></p>
+            <p className='level-text'>Level 4 &nbsp; <span>{formatNumber(level4)} USD c/u</span></p>
             <div className='nivel displayNone1'>
                 <button onClick={arbolData[14] ? ()=> onOpenModal(arbolData[14]) : ()=> onOpen2Modal(arbolData[6])} className={arbolData[14] ? 'child' : 'noChild'}>+</button>
                 <button onClick={arbolData[15] ? ()=> onOpenModal(arbolData[15]) : ()=> onOpen2Modal(arbolData[6])} className={arbolData[15] ? 'child' : 'noChild'}>+</button>

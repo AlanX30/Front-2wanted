@@ -1,11 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import ArbolImg from '../Images/arbol.svg'
 import './Styles/Navbar.css'
 import { useComponentVisible } from '../hooks/useComponentVisible'
 import { url } from '../urlServer'
 import { withRouter } from 'react-router-dom'
 import Cookies from 'js-cookie'
-import axios from 'axios'
 import NavbarForm from './Forms/NavbarForm'
 import Logo from './NavbarLogo'
 import ButtonNav1 from './Navbar_navigation1'
@@ -19,7 +18,7 @@ const Navbar = (props) => {
 
     /* -----------------------------Busqueda---------------------------------------------------------------- */
 
-    const push = useCallback(() => props.history.push('/'), [props.history])
+    const pushLogout = useCallback(() => props.history.push('/'), [props.history])
 
     const [iconNone, setIconNone] = useState(false)
 
@@ -44,7 +43,7 @@ const Navbar = (props) => {
             
             <div className={!iconNone ? 'navbar-buttons-left' : 'dNone'}>
                 <ButtonNav1 ArbolImg={ArbolImg} useComponentVisible={useComponentVisible} url={url} username={username} />
-                <ButtonNav2 push={push} useComponentVisible={useComponentVisible} />
+                <ButtonNav2 pushLogout={pushLogout} useComponentVisible={useComponentVisible} />
             </div>
 {/* ------------------------------------/Section-NavIcons--------------------------------------------------------------------- */}       
         </nav>

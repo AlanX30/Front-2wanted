@@ -1,0 +1,52 @@
+.historyUsers-buttonsTop {
+    display: flex;
+    margin: 20px 0;
+    justify-content: space-around;
+}
+.historyUsers-buttonTop {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    box-shadow: -3px -3px 2px;
+    background: #f47146;
+    font-weight: 700;
+}
+.historyCards-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.historyCards-container li {
+    background: #efa049;
+    border-radius: 10px;
+    width: 46%;
+    padding: 10px;
+    text-align: center;
+    margin: 10px;
+    height: max-content;
+    min-height: 112px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.historyCards-group {
+    display: flex;
+    justify-content: center;
+}
+.historyCards-container li div {
+    width: 100%;
+    flex-shrink: 0;
+}
+.balance-won-amount {
+    font-weight: 700;
+    font-size: 25px;
+    margin-bottom: -8px;
+}
+.balance-description-title {
+    font-weight: 700;
+    margin-right: 6px
+}
+.balance-date-card {
+    font-weight: 700;
+}

@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { IoMdSettings, IoIosContact } from 'react-icons/io'
-import { useUserData } from '../hooks/useUserData'
+import { Context } from '../context'
 import { useFormValues } from '../hooks/useFormValues'
 import { url } from '../urlServer'
-import Cookies from 'js-cookie'
 import './Styles/Profile.css'
 import UpdatePasswordForm from '../Components/Forms/UpdatePasswordForm'
 import UpdateEmailForm from '../Components/Forms/UpdateEmailForm'
 
 export const Profile = () => {
 
-    const { userData } = useUserData()
+    const { userData } = useContext(Context)
 
     if(!userData.date) {return 'Loading'}
     

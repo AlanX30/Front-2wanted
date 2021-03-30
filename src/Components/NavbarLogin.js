@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Swal from 'sweetalert2'
 import logo from '../Images/logo.svg'
 import { useFormValues } from '../hooks/useFormValues'
 import { Link } from 'react-router-dom'
+import { Context } from '../context'
 import { withRouter } from 'react-router-dom'
 import { url } from '../urlServer'
 import logoletra from '../Images/2WANTED.svg'
@@ -15,6 +16,7 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
 
     const [modalOpen, setModalOpen] = useState(false)
     const [modal2Open, setModal2Open] = useState(false)
+    const { csrfToken } = useContext(Context)
     
     function onCloseModal(){
         setModalOpen(null)
@@ -36,7 +38,14 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
     function handleSubmit( e ){
         e.preventDefault()
         setLoginLoading(true)
-        axios.post(url+'/api/users/signin', form)
+        axios({
+            method: 'post',
+            data: form,
+            url: url+'/api/users/signin',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
+        })
         .then(res => {
             setLoginLoading(false)
             if(res.data.error){
@@ -47,6 +56,12 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
                 })
             }else if(res.data.isVerified === false){
                 setModalOpen(true)
+            }else if(res.data === 'has exceeded the number of attempts, try again in 10 minutes'){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data,
+                })
             }else{
                 props.toggleAuth(res.data.userName)
                 props.history.push(`/home`)

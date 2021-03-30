@@ -1,21 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { Context } from '../context'
 import { MdAccountBalanceWallet } from "react-icons/md";
 
-const RomDetails = ({usdBtc, count, url, salaId, userName, arbolData, dataRoom, inBalance, parent}) => {
+const RomDetails = ({loading, usdBtc, count, url, salaId, userName, arbolData, dataRoom, inBalance, parent}) => {
 
     const [loadingToBalance, setLoadingToBalance] = useState(false)
     const [countUserData, setCountUserData] = useState(0)
-
+    const { csrfToken } = useContext(Context)
     const price = dataRoom ? dataRoom.price : 0
+
+    function formatNumber(number){
+        return new Intl.NumberFormat('en-US').format(number)
+    }
 
     async function handleToBalance(){
         setLoadingToBalance(true)
         await axios({
             method: 'post',
             data: {user: userName, toBalance: 'true'},
-            url: `${url}/api/in-sala?id=${salaId}`
+            url: `${url}/api/in-sala?id=${salaId}`,
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
         }).then(res => {
             setLoadingToBalance(false)
             if(res.data.error){
@@ -61,28 +69,30 @@ const RomDetails = ({usdBtc, count, url, salaId, userName, arbolData, dataRoom, 
 
     const tAcum = acum3 + acum4
 
+    if(loading){ return <div className='room-details'>Loading...</div>}
+
     return(
         <div className='room-details'>
             <p>Room Name:</p>
             <span>{dataRoom.name}</span>
             <p>Room Price:</p>
-            <span>{`${dataRoom.price} BTC  (${Math.floor(dataRoom.price / usdBtc)} USD)`}</span>
+            <span>{`${dataRoom.price.toFixed(7)} BTC  (${formatNumber(dataRoom.price / usdBtc)} USD)`}</span>
             <p>Parent User:</p>
             <span>{parent}</span>
             <p>Creator:</p>
-            <span>{dataRoom.creator}</span>
+            <span>{`${dataRoom.creator}`}</span>
             <p>accumulated level 3:</p>
-            <span>${acum3}</span>
+            <span>{`${acum3 > 0 ? acum3.toFixed(7) : 0}  (${formatNumber(acum3 / usdBtc)} USD)`}</span>
             <p>accumulated level 4:</p>
-            <span>${acum4}</span>
+            <span>{`${acum4 > 0 ? acum4.toFixed(7) : 0}  (${formatNumber(acum4 / usdBtc)} USD)`}</span>
             <p>Total accumulated:</p>
-            <span>${tAcum}</span>                   
+            <span>{`${tAcum > 0 ? tAcum.toFixed(7) : 0}  (${formatNumber(tAcum / usdBtc)} USD)`}</span>                   
             <p>accumulated paid:</p>
-            <span>${inBalance}</span>
+            <span>{`${inBalance > 0 ? inBalance.toFixed(7) : 0}  (${formatNumber(inBalance / usdBtc)} USD)`}</span>
             <button disabled={tAcum > inBalance ? false : true} onClick={handleToBalance}>
                 <div className={!loadingToBalance ? '' : 'dNone'}>
                     <p>Withdraw to wallet</p>
-                    <label>${tAcum > inBalance ? tAcum - inBalance : 0} ➜ <MdAccountBalanceWallet /></label>
+                    <label>{tAcum > inBalance ? (tAcum - inBalance).toFixed(7) : 0} BTC ➜ <MdAccountBalanceWallet /></label>
                 </div>
                 <div className={loadingToBalance ? "spinner-toBalance spinner-border text-danger" : 'dNone'} role="status">
                     <span className="sr-only">Loading...</span>

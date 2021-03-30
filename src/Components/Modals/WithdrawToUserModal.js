@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
-import Swal from 'sweetalert2'
 import Modal from './Modal'
-import axios from 'axios'
 import '../Styles/WithdrawToUserModal.css'
 import { useFormValues } from '../../hooks/useFormValues'
 import { MdInfo } from 'react-icons/md'
 import { url } from '../../urlServer'
+import PasswordVerification from './PasswordVerfication'
 
 const WithdrawToUserModal = props => {
 
-    const [loading, setLoading] = useState(false)
     const [confirm, setConfirm] = useState(false)
-
     const [errorAmount, setErrorAmount] = useState(false)
+    const [modalOpen, setModalOpen] = useState(null)
     const [errorBalance, setErrorBalance] = useState(false)
     const [errorUser, setErrorUser] = useState(false)
 
     const user = useFormValues()
     const amount = useFormValues()
+
+    function onCloseModal(){
+        setModalOpen(null)
+    }
 
     const amountNumber = Number(amount.value)
 
@@ -44,52 +46,26 @@ const WithdrawToUserModal = props => {
         props.onClose()
     }
 
+    const data = {amount: amount.value, username: `@${user.value}`}
+
     async function handleWithdraw(e){
         e.preventDefault()
-
-        setLoading(true)
-
-        await axios({
-            data: {amount: amount.value, username: `@${user.value}`},
-            method: 'post',
-            url: url+'/api/sendinternalbtc'
-        }).then(res => {
-            setLoading(false)
-            if(res.data.error){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: res.data.error,
-                })
-            }else{
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: res.data.msg,
-                })
-                props.onClose()
-            }
-        }).catch(err => {
-            setLoading(false)
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: err,
-            })
-        })
+        setModalOpen(true)
     }
+
+    const wallet = props.wallet ? props.wallet.toFixed(7) : 0
 
     return <Modal isOpen={props.isOpen} onClose={onClose}>
         <form onSubmit={handleWithdraw} className='withdraw-toUser-form'>
             <h2>Send Bitcoin to user</h2>
 
-            <h4>Wallet ${props.wallet}</h4>
+            <h4>Wallet {wallet} BTC</h4>
 
             <div className={confirm ? 'withdraw-toUser-confirm' : 'dNone'}>
                 <h4>
                     To user:
                 </h4>
-                <p>{user.value}</p>
+                <p>@{user.value}</p>
             </div>
 
             <div className={confirm ? 'dNone' : ''}>
@@ -113,15 +89,13 @@ const WithdrawToUserModal = props => {
             <p className='toUser-info'>This transaction is instantaneous and free.</p>
 
             <button onClick={onError} className={!confirm ? 'btn btn-dark btn-block invitation-button' : 'dNone'} type='button'>Send</button>
-            <button disabled={loading ? true : false} className={confirm ? 'btn btn-dark btn-block invitation-button' : 'dNone'} type='submit'>
-                <div className={loading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
-                        <span className="sr-only">Loading...</span>
-                </div>
-                <p className={loading ? 'dNone' : ''}> Confirm withdrawal for {amount.value}</p>
+            <button className={confirm ? 'btn btn-dark btn-block invitation-button' : 'dNone'} type='submit'>
+                <p> Confirm withdrawal for {amount.value} BTC</p>
             </button>
             <button className='btn btn-dark btn-block toUser-cancelar' onClick={onClose} type='button'>Cancel</button>
 
         </form>
+        <PasswordVerification isOpen={modalOpen} onClose={onClose} onClose2={onCloseModal} data={data} url={url+'/api/sendinternalbtc'} />
     </Modal>
 }
 

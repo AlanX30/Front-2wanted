@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Modal from './Modal'
 import QRCode from 'react-qr-code'
 import '../Styles/DepositModal.css'
 import { MdContentCopy } from "react-icons/md"
+import { Context } from '../../context'
 import { IoIosCheckmarkCircle } from "react-icons/io"
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { useUserData } from '../../hooks/useUserData'
 
 export const DepositModal = props => {
 
     const [ copy, setCopy ] = useState(false)
 
-    const { userData } = useUserData()
+    const { userData } = useContext(Context)
 
     const address = userData.addressWallet
 

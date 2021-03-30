@@ -1,0 +1,41 @@
+.withdraw2wanted-modal-container p {
+    font-size: 20px;
+}
+.withdraw2wanted-modal-container h2 {
+    margin: 10px 0;
+}
+.withdraw2wanted-modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.withdraw2wanted-modal-buttons button:nth-child(1) {
+    background: #bd2020;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    transition: .3s;
+}
+
+.withdraw2wanted-modal-buttons button:nth-child(1):hover {
+    background: black;
+}
+.withdraw2wanted-modal-buttons button:nth-child(2) {
+    background: #ff9f22;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    transition: .3s;
+}
+.withdraw2wanted-modal-buttons button:nth-child(2):hover {
+    color: #ff9f22;
+    background: black;
+}
+.WithdrawUserModal-container p {
+    font-size: 20px;
+    margin: 10px 0;
+}

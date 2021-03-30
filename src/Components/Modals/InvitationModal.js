@@ -1,55 +1,38 @@
-import React, { useState } from "react"
-import Swal from 'sweetalert2'
+import React,{ useState } from "react"
 import { withRouter } from 'react-router-dom'
 import '../Styles/InvitationModal.css'
 import Modal from "./Modal"
-import axios from 'axios'
 import { url } from '../../urlServer'
+import PasswordVerificationNewRoom from './PasswordVerificationNewRoom'
 
 const InvitationModal = (props) => {
 
     const invitation = props.invitationData
 
-    const [invitationLoading, setInvitationLoading] = useState(false)
+    const [modalOpen, setModalOpen] = useState(null)
 
     let joinData
 
+    function onCloseModal(){
+        setModalOpen(null)
+    }
+
     if(invitation){
+
+        let random = false
+
+        if(!invitation.parentUsername){ random = true }
+
         joinData = {
             salaId: invitation.salaId,
-            parentUser: invitation.parentUsername
+            parentUser: invitation.parentUsername,
+            random: random
         }
     }
 
-    async function handleClick( e ){
+    function handleClick( e ){
         e.preventDefault()
-
-        setInvitationLoading(true)
-
-        await axios({
-            data: joinData,
-            method: 'post',
-            url: url+'/api/newUserInSala'
-        }).then(res => {
-            setInvitationLoading(false)
-            if(res.data.error){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: res.data.error,
-                })
-            }else{
-                props.onClose()
-                props.history.push(`/sala/${res.data.id}`)
-            }
-        }).catch(err => {
-            setInvitationLoading(false)
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: err,
-            })
-        }) 
+        setModalOpen(true)
     }
     
     return (
@@ -60,18 +43,16 @@ const InvitationModal = (props) => {
                 invitation && <div className='invitationModal'>
                     <p>Invited by: <span>{invitation.host}</span></p>
                     <p>Room Name: <span>{invitation.salaName}</span></p>
-                    <p>Price: <span>${invitation.price}</span></p>
+                    <p>Price: <span>{invitation.price.toFixed(7)} BTC</span></p>
                     <p>Parent user: <span>{invitation.parentUsername}</span></p>
                     <p>Message: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
-                    <button disabled={invitationLoading ? true : false} className='btn btn-dark btn-block invitation-button' onClick={handleClick}>
-                        <div className={invitationLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
-                        <p  className={invitationLoading ? 'dNone' : ''}>Join</p>
+                    <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>
+                        <p>Join</p>
                     </button>
                 </div>
             }
-           
+        
+        <PasswordVerificationNewRoom isOpen={modalOpen} onClose={onCloseModal} onClose2={props.onClose} data={joinData} history={props.history} url={url+'/api/newUserInSala'}/>
         </Modal>
     )
 }

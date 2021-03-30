@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
-import { useUserData } from '../hooks/useUserData'
 import axios from 'axios'
+import { Context } from '../context'
 import { RiArrowDownSLine } from "react-icons/ri"
 import { MdChromeReaderMode } from "react-icons/md"
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
 import './Styles/Balance.css'
 import { url } from '../urlServer'
-import Cookies from 'js-cookie'
 
 export const Balance = () => {
 
-    const { userData } = useUserData()
+    const { userData, csrfToken } = useContext(Context)
 
     const [valueFecha1, setValueFecha1] = useState('') 
     const [valueFecha2, setValueFecha2] = useState('') 
@@ -28,42 +27,43 @@ export const Balance = () => {
     
     const [countLastestPages, setCountLastestPages] = useState(1)
 
-    const [amountPending, setAmountPending] = useState(0)
-
     useEffect(() => { 
         
-        setLoading(true)
-            
-        axios({
-            method: 'post',
-            data: {page: countPages},
-            url: url+'/api/userbalance'
-        })
-        .then(res => {
-            setLoading(false)
-            if(res.data.error) {
-                return Swal.fire({
+        if(csrfToken){
+
+            setLoading(true)
+                
+            axios({
+                method: 'post',
+                data: {page: countPages},
+                url: url+'/api/userbalance',
+                headers: { 
+                    'X-CSRF-Token': csrfToken
+                }
+            })
+            .then(res => {
+                setLoading(false)
+                if(res.data.error) {
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: res.data.error,
+                    })
+                }else{
+                    setTotalPages(res.data.totalPages)
+                    setBalance(res.data.data)
+                }
+            }).catch( err => {
+                setLoading(false)
+                Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: res.data.error,
+                    text: err,
                 })
-            }else{
-                setTotalPages(res.data.totalPages)
-                setBalance(res.data.data)
-                if(res.data.pending){
-                    setAmountPending(res.data.amountPending)
-                }
-            }
-        }).catch( err => {
-            setLoading(false)
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: err,
             })
-        })
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [countLastestPages])
+    }, [countLastestPages, csrfToken])
 
     const [activeDate, setActiveDate] = useState(false)
 
@@ -90,7 +90,10 @@ export const Balance = () => {
         axios({
             method: 'post',
             data: { getFechaInicial: fechaInicial, getFechaFinal: fechaFinal, page: countPages},
-            url: url+'/api/userbalance'
+            url: url+'/api/userbalance',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
         }).then(res => {
             setActiveDate(true)
             setBalance(res.data.data)
@@ -99,6 +102,8 @@ export const Balance = () => {
         })
     }
 
+    const wallet = userData.wallet ? userData.wallet.toFixed(7) : 0
+
     return <div className='balance-container'>
 
         <div className='balance-title'>
@@ -106,7 +111,7 @@ export const Balance = () => {
         </div>
         <form className='date-form' onSubmit={handleDate}>
             <div className='wallet-balance'>
-                <label>Wallet:</label><span>${userData.wallet}</span>
+                <label>Wallet:</label><span>{wallet} BTC</span>
             </div>
             <p onClick={()=>setViewDates(!viewDates)}>Search by date</p>
             <div onClick={()=>setViewDates(!viewDates)} className='flecha-busqueda-balance'>< RiArrowDownSLine /></div>
@@ -152,10 +157,10 @@ export const Balance = () => {
                                 <p className='balance-description-title'>Won in room:</p>
                                 <p>{balance.salaName}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet}</p>
+                                <p>${balance.wallet.toFixed(7)}</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>+ ${balance.won}</p>
+                                <p className='balance-won-amount'>+ ${balance.won.toFixed(7)}</p>
                             </div>
                         </li> :
                         balance.type === 'buy' ? <li key={balance._id} >
@@ -164,7 +169,7 @@ export const Balance = () => {
                                 <p className='balance-description-title'>Room payment:</p>
                                 <p>{balance.salaName}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet}</p>
+                                <p>${balance.wallet.toFixed(7)}</p>
                             </div>
                             <div className='balance-won-amount-container'>
                                 <p className='balance-buy-amount'>- ${balance.salaPrice}</p>
@@ -174,42 +179,42 @@ export const Balance = () => {
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <p className='balance-description-title'>Deposit:</p>
-                                <p>${balance.depositAmount}</p>
+                                <p>${balance.depositAmount.toFixed(7)}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet}</p>
+                                <p>${balance.wallet.toFixed(7)}</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>+ ${balance.depositAmount}</p>
+                                <p className='balance-won-amount'>+ ${balance.depositAmount.toFixed(7)}</p>
                             </div>
                         </li> :
                         balance.type === 'withdrawToUser' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <p className='balance-description-title'>Withdraw:</p>
-                                <p>${balance.withdrawAmount}</p>
+                                <p>${balance.withdrawAmount.toFixed(7)}</p>
                                 <p className='balance-description-title'>To user:</p>
                                 <p>{balance.toUser}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet}</p>
+                                <p>${balance.wallet.toFixed(7)}</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-buy-amount'>- ${balance.withdrawAmount}</p>
+                                <p className='balance-buy-amount'>- ${balance.withdrawAmount.toFixed(7)}</p>
                             </div>
                         </li> :
                         balance.type === 'withdrawBtc' && <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <p className='balance-description-title'>Withdraw:</p>
-                                <p>${balance.withdrawAmount}</p>
+                                <p>${balance.withdrawAmount.toFixed(7)}</p>
                                 <p className='balance-description-title'>To Address:</p>
                                 <p>{balance.toAddress}</p>
                                 <p className='balance-description-title'>TxId:</p>
                                 <p>{balance.txId}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet}</p>
+                                <p>${balance.wallet.toFixed(7)}</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-buy-amount'>- ${balance.withdrawAmount}</p>
+                                <p className='balance-buy-amount'>- ${balance.withdrawAmount.toFixed(7)}</p>
                             </div>
                         </li>
                     )   

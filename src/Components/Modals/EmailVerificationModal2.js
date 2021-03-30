@@ -12,7 +12,7 @@ const EmailVerificationModal2 = props => {
 
     const [loading, setLoading] = useState(false)
 
-    const { toggleAuth } = useContext(Context)
+    const { toggleAuth, csrfToken } = useContext(Context)
 
     const code = useFormValues()
 
@@ -25,7 +25,10 @@ const EmailVerificationModal2 = props => {
         await axios({
             data: {email: props.email, code: code.value},
             method: 'post',
-            url: url+'/api/mailverification'
+            url: url+'/api/mailverification',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
         }).then(res => {
             setLoading(false)
             if(res.data.error){
@@ -33,6 +36,12 @@ const EmailVerificationModal2 = props => {
                     icon: 'error',
                     title: 'Error',
                     text: res.data.error,
+                })
+            }else if(res.data === 'has exceeded the number of attempts, try again in 10 minutes'){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data,
                 })
             }else{
                 toggleAuth(res.data.userName)

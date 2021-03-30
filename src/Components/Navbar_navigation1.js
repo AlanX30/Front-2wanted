@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './Styles/Navbar.css'
 import io from 'socket.io-client'
+import { Context } from '../context'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import  InvitationModal  from './Modals/InvitationModal'
@@ -16,6 +17,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
     let [countPages, setCountPages] = useState(1)
     let [count, setCount] = useState(0) 
     let [notifications, setNotifications] = useState(0)
+    const { csrfToken } = useContext(Context)
 
     function onOpenModal(invitationData){
         setModalOpen(true)
@@ -28,50 +30,55 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
 
     useEffect(()=>{
 
-        const socket = io(url)
+        if(csrfToken){
 
-        socket.emit('user_online', username)
-        
-        socket.on('new_message', () => {
-            setCount(count => count + 1) 
-        })
+            const socket = io(url)
 
-        if(count > 0){
-            setCountPages(1)
-        }
-        
-        axios({
-            method: 'post',
-            data: {page: countPages},
-            url: url+'/api/invitations'
-        }).then(res => {
-            if(res.data.error){
+            socket.emit('user_online', username)
+            
+            socket.on('new_message', () => {
+                setCount(count => count + 1) 
+            })
+
+            if(count > 0){
+                setCountPages(1)
+            }
+            
+            axios({
+                method: 'post',
+                data: {page: countPages},
+                url: url+'/api/invitations',
+                headers: { 
+                    'X-CSRF-Token': csrfToken
+                }
+            }).then(res => {
+                if(res.data.error){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: res.data.error,
+                    })
+                }else{
+                    if(countPages === 1 || count > 0){
+                        setNotifications(res.data.countNotification)
+                        setTotalPages(res.data.totalPages)
+                        setInvitations(res.data.invitations)
+                        setCount(0)
+                    }else{
+                        setInvitations( invitations => invitations.concat(res.data.invitations))
+                        setNotifications(res.data.countNotification)
+                        setTotalPages(res.data.totalPages)
+                    }
+                }
+            }).catch( error => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: res.data.error,
+                    text: error,
                 })
-            }else{
-                if(countPages === 1 || count > 0){
-                    setNotifications(res.data.countNotification)
-                    setTotalPages(res.data.totalPages)
-                    setInvitations(res.data.invitations)
-                    setCount(0)
-                }else{
-                    setInvitations( invitations => invitations.concat(res.data.invitations))
-                    setNotifications(res.data.countNotification)
-                    setTotalPages(res.data.totalPages)
-                }
-            }
-        }).catch( error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: error,
             })
-        })
-
-    },[countPages, count, username, url])
+        }    
+    },[countPages, count, username, url, csrfToken])
 
     function notificationButton() {
         
@@ -80,7 +87,10 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
         if(notifications > 0) {
             axios({
                 method: 'post',
-                url: url+'/api/invitations-reset'
+                url: url+'/api/invitations-reset',
+                headers: { 
+                    'X-CSRF-Token': csrfToken
+                }
             })
     
             setNotifications(0)
@@ -106,7 +116,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
                                     <div className='invitation-description'>
                                         <p>Invited by: <span> {invitation.host}</span></p>
                                         <p>Room Name: <span> {invitation.salaName}</span></p>
-                                        <p>Price: <span> {invitation.price} BTC</span></p>
+                                        <p>Price: <span> {invitation.price.toFixed(7)} BTC</span></p>
                                     </div>
                                 </button>
                             </li>

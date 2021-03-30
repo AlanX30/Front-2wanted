@@ -1,0 +1,204 @@
+.balance-container {
+    width: 80%;
+    max-width: 1000px;
+    background: var(--bg-objects);
+    border-radius: 10px;
+    min-height: 200px;
+    margin: 60px auto 50px;
+    border: 4px solid #212529;
+    box-shadow: 0 -1px 8px #000;
+}
+.section-title {
+    padding: 10px 0;
+    text-align: center;
+    color: white;
+}
+.balance-section-buttons {
+    display: flex;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+}
+.balance-button-top {
+    width: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: .2s;
+}
+.balance-button-top:hover {
+    color: #ef9c48;
+}
+.balance-button-top-active {
+    background: #212529;
+    color: #ef9c48;
+}
+.section-general-container {
+    color: white;
+    background: #212529;
+    min-height: 100vh;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    line-height: 40px;
+}
+.section-usuarios-container {
+    color: white;
+    background: #212529;
+    min-height: 100vh;
+    padding: 15px;
+}
+.usuarios-buttons-top {
+    display: flex;
+    align-items: center;
+    background: var(--bg-objects);
+    border-radius: 10px;
+    height: 40px;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+.usuarios-button-top {
+    cursor: pointer;
+    width: 50%;
+    text-align: center;
+    border-radius: 10px;
+}
+.usuarios-button-top.active {
+    color: #ef9d48;
+    background: #212529;
+}
+.container-historial-users {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.historial-fechas {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.withdrawform input {
+    margin: 10px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.general-inferiorButtons {
+    display: block;
+    margin: 15px auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+}
+.container-info-users {
+    text-align: center;
+}
+.container-info-users input {
+    padding: 10px;
+    border-radius: 10px;
+}
+.container-info-users textarea {
+    display: block;
+    width: 70%;
+    margin: 15px auto;
+    border-radius: 10px;
+    padding: 10px;
+}
+.container-info-users h2 {
+    margin: 15px;
+}
+.container-info-users button {
+    margin-left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+}
+.cardList-withdrawUsers {
+    display: flex;
+    flex-wrap: wrap;
+}
+.cardList-withdrawUsers li {
+    background: #efa049;
+    border-radius: 10px;
+    width: 46%;
+    padding: 10px;
+    text-align: center;
+    margin: 9px;
+    height: max-content;
+    min-height: 112px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    cursor: pointer;
+}
+.cardList-withdrawUsers p {
+    width: 100%;
+    flex-shrink: 0;
+    font-weight: 700;
+    color: black;
+}
+.cardList-withdrawUsers span {
+    font-weight: 400;
+}
+.listCards-withdraw2wanted li {
+    background: #efa049;
+    border-radius: 10px;
+    width: 46%;
+    padding: 10px;
+    text-align: center;
+    margin: 10px;
+    height: max-content;
+    margin: 15px auto;
+    color: black;
+}
+.listCards-withdraw2wanted span {
+    font-weight: 400;
+}
+.listCards-withdraw2wanted {
+    width: 100%;
+}
+.container-paginations-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    font-size: 20px;
+    align-items: center;
+    color: white;
+    font-weight: 700;
+    flex-wrap: wrap;
+}
+.container-paginations-buttons button {
+    background: #eea048;
+    border-radius: 50px;
+    padding: 12px;
+    font-size: 20px;
+    margin: 0 10px;
+}
+.navigation-back-button {
+    background: #efa049;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 20px;
+    font-size: 20px;
+    padding: 8px;
+}
+.pagination-withdrawUsers {
+    width: 100%;
+    margin-top: 25px;
+}
+.pagination-withdrawUsers p {
+    width: auto;
+    color: white;
+}
+.CARGANDO_P {
+    width: 100% !important;
+    text-align: center;
+    margin-top: 25px;
+}

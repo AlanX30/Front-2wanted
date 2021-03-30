@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './Styles/ChangePassword.css'
 import { useFormValues } from '../hooks/useFormValues'
+import { Context } from '../context'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import { url } from '../urlServer'
@@ -11,7 +12,7 @@ export const ChangePassword= props => {
     const forgotHash = props.match.params.token
 
     const [ loading, setLoading ] = useState(false)
-
+    const { csrfToken } = useContext(Context)
     const password = useFormValues()
     const confirmPassword = useFormValues()
 
@@ -33,6 +34,9 @@ export const ChangePassword= props => {
                 data: {forgotHash, password: password.value, confirmPassword: confirmPassword.value },
                 method: 'post',
                 url: url+'/api/changeForgotPassword',
+                headers: { 
+                    'X-CSRF-Token': csrfToken
+                }
             }).then(res => {
                 setLoading(false)
                 if(res.data.error){

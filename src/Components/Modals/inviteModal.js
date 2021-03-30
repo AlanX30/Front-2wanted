@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import Modal from "./Modal"
 import Swal from 'sweetalert2'
+import { Context } from '../../context'
 import { useFormValues } from '../../hooks/useFormValues'
 import { MdInfo } from "react-icons/md"
 import axios from 'axios'
@@ -11,7 +12,7 @@ export const InviteModal = (props) => {
     
     const user = useFormValues()
     const message = useFormValues()
-
+    const { csrfToken } = useContext(Context)
     const [inviteLoading, setInviteLoading] = useState(false)
 
     let data
@@ -38,7 +39,10 @@ export const InviteModal = (props) => {
         await axios({
             data: data,
             method: 'post',
-            url: url+'/api/new-invitation'
+            url: url+'/api/new-invitation',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
         }).then(res => {
             setInviteLoading(false)
             if(res.data.error){

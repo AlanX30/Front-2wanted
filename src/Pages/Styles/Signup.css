@@ -23,9 +23,8 @@
   width: 50%;
 }
 .card-signup{
-  border: 4px solid;
   width: 300px;
-  box-shadow: 0 0px 7px black;
+  box-shadow: 0 0px 4px black;
   background: var(--bg-objects);
   border-radius: 5px;
   margin-bottom: 18px;

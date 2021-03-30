@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import '../Styles/Navbar.css'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import JoinModal from '../Modals/JoinModal'
+import { Context } from '../../context'
 import { MdInfo, MdSearch, MdKeyboardReturn } from "react-icons/md";
 import { useFormValues } from '../../hooks/useFormValues'
 
-const NavbarForm = ({ ArbolImg, url, token, iconSet, useComponentVisible }) => {
+const NavbarForm = ({ ArbolImg, url, iconSet, useComponentVisible }) => {
 
     const room1 = useFormValues()
     const dropdownFilter = useComponentVisible(false)
+
+    const { csrfToken } = useContext(Context)
 
     const [iconNone, setIconNone] = useState(false)
     const [modal2Open, setModal2Open] = useState(null)
@@ -38,7 +41,10 @@ const NavbarForm = ({ ArbolImg, url, token, iconSet, useComponentVisible }) => {
             const response = await axios({
                 data: { name: room1.value },
                 method: 'post',
-                url: url+'/api/search/sala'
+                url: url+'/api/search/sala',
+                headers:{ 
+                    'X-CSRF-Token': csrfToken
+                }
             })
 
             setSearchLoading(false)
@@ -99,7 +105,7 @@ const NavbarForm = ({ ArbolImg, url, token, iconSet, useComponentVisible }) => {
                                 <div className='filter-sala-description'>
                                     <p> Room Name:  <span> {filterSala.data.name}</span>  </p>
                                     <p> Creator:  <span> {filterSala.data.creator}</span>  </p>
-                                    <p> Price:  <span> {filterSala.data.price} BTC</span>  </p>
+                                    <p> Price:  <span> {filterSala.data.price.toFixed(7)} BTC</span>  </p>
                                 </div>
                             </div>
                         <button onClick={onOpen2Modal} className=''>Join</button>

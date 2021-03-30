@@ -1,0 +1,20 @@
+.signin form {
+    width: max-content;
+    display: block;
+    margin: 0 auto;
+}
+.signin input {
+    display: block;
+    margin: 10px 0;
+    width: 210px;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+}
+.signin button {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 8px;
+    border-radius: 10px;
+}

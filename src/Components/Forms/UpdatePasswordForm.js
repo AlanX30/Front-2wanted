@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import '../../Pages/Styles/Profile.css'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { Context } from '../../context'
 import { MdInfo, MdLockOutline } from "react-icons/md"
 
 const UpdatePasswordForm = ({useFormValues, url}) => {
@@ -9,7 +10,7 @@ const UpdatePasswordForm = ({useFormValues, url}) => {
     const [newPasswordError, setNewPasswordError] = useState(false)
     const [password_valid, setPassword_valid] = useState(true)
     const [passwordLoading, setPasswordLoading] = useState(false)
-
+    const { csrfToken } = useContext(Context)
     const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
     const password = useFormValues()
     const newPassword = useFormValues()
@@ -29,7 +30,10 @@ const UpdatePasswordForm = ({useFormValues, url}) => {
             axios({
                 method: 'post',
                 data: { password: password.value, newPassword: newPassword.value },
-                url: url+'/edit/passwordemail'
+                url: url+'/edit/passwordemail',
+                headers: { 
+                    'X-CSRF-Token': csrfToken
+                }
             }).then( res => {
                 setPasswordLoading(false)
                 if(res.data.error){

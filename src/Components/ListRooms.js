@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import ArbolImg from '../Images/arbol.svg'
+import { Context } from '../context'
 import { AiOutlineCaretRight, AiOutlineCaretLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
@@ -11,37 +12,43 @@ const ListRooms = ({ url }) => {
     const [activesData, setActivesData] = useState({})
     const [activesLoading, setActivesLoading] = useState(false)
     let [countActives, setCountActives] = useState(1) 
+    const { csrfToken } = useContext(Context)
 
     useEffect(() => { 
-        setActivesLoading(true)
-        axios({
-            method: 'post',
-            data: {page: countActives},
-            url: url+'/api/search/listSalas'
-        })
-        .then(res => {
-            setActivesLoading(false)
-            if(res.data.error) {
-                return Swal.fire({
+        if(csrfToken){
+            setActivesLoading(true)
+            axios({
+                method: 'post',
+                data: {page: countActives},
+                url: url+'/api/search/listSalas',
+                headers: { 
+                    'X-CSRF-Token': csrfToken
+                }
+            })
+            .then(res => {
+                setActivesLoading(false)
+                if(res.data.error) {
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: res.data.error,
+                    })
+                }else{
+                    setActivesLoading(false)
+                    setListRooms(res.data.data)
+                    const data = {total: res.data.total} 
+                    setActivesData(data)
+                }
+            }).catch( err => {
+                setActivesLoading(false)
+                Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: res.data.error,
+                    text: err,
                 })
-            }else{
-                setActivesLoading(false)
-                setListRooms(res.data.data)
-                const data = {total: res.data.total} 
-                setActivesData(data)
-            }
-        }).catch( err => {
-            setActivesLoading(false)
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: err,
             })
-        })
-    }, [countActives, url])
+        }    
+    }, [countActives, url, csrfToken])
 
     return(
         <div className='actives-rooms'>
@@ -70,7 +77,7 @@ const ListRooms = ({ url }) => {
                                                     <img src={ArbolImg} alt="ArbolImg"/>
                                                     <div className='actives-description'>
                                                         <p>Room Name: <span>{data.salaName}</span></p>
-                                                        <p>Price: <span>${data.salaPrice}</span></p>
+                                                        <p>Price: <span>{data.salaPrice} BTC</span></p>
                                                         <p>Creator: <span>{data.salaCreator}</span></p>
                                                     </div>
                                                 </Link>

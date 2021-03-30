@@ -1,13 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
+import { MdInfo, MdLockOutline, MdMail } from "react-icons/md"
 import { useFormValues } from '../hooks/useFormValues'
+import { url } from '../urlServer'
 import Swal from 'sweetalert2'
 import NavbarLogin from '../Components/NavbarLogin'
-import { MdInfo, MdLockOutline, MdMail } from "react-icons/md";
 import { Context } from '../context'
 import axios from 'axios'
 import IMG from '../Images/bigLogo.svg'
 import './Styles/Signup.css'
-import { url } from '../urlServer'
 import Cookies from 'js-cookie'
 import EmailVerificationModal from '../Components/Modals/EmailVerificationModal';
 
@@ -22,7 +22,7 @@ export const Signup = (props) => {
     const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
     const reg_whiteSpace = /^$|\s+/
 
-    const { toggleAuth } = useContext(Context)
+    const { toggleAuth, csrfToken } = useContext(Context)
 
     const [modalOpen, setModalOpen] = useState(false)
     
@@ -58,7 +58,14 @@ export const Signup = (props) => {
 
         setSignupLoading(true)
 
-        axios.post( url+'/api/users/signup', form)
+        axios({
+            method: 'post',
+            data: form,
+            url: url+'/api/users/signup',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
+        })
         .then(res => {
             setSignupLoading(false)
             if(res.data.error){
@@ -66,6 +73,12 @@ export const Signup = (props) => {
                     icon: 'error',
                     title: 'Error',
                     text: res.data.error,
+                })
+            }else if(res.data === 'has exceeded the number of attempts, try again in 10 minutes'){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data,
                 })
             }else{
                 setModalOpen(true)
@@ -79,7 +92,6 @@ export const Signup = (props) => {
                 text: err,
             })
         }) 
-    
     }
         
     return <div>   

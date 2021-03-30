@@ -1,19 +1,38 @@
-import React, {useContext, useState } from 'react'
+import React, {useContext, useState, useEffect } from 'react'
 import './Styles/Navbar.css'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import { Context } from '../context'
 import { WithdrawModal } from './Modals/WithdrawModal'
 import { DepositModal } from './Modals/DepositModal'
-import { useUserData } from '../hooks/useUserData'
 import { IoMdSettings, IoIosContact } from 'react-icons/io'
-import { MdRefresh, MdAccountCircle, MdKeyboardTab, MdAccountBalanceWallet, MdFileUpload, MdFileDownload, MdHelpOutline, MdChromeReaderMode, MdExitToApp } from "react-icons/md"
+import { MdRefresh, MdAccountCircle, MdKeyboardTab, MdAccountBalanceWallet, MdFileUpload, MdFileDownload, MdHelpOutline, MdChromeReaderMode, MdExitToApp, MdMail } from "react-icons/md"
 import WithdrawToUserModal from './Modals/WithdrawToUserModal'
 
 const Navbar_navigation2 = props => {
-    
+
     const [countUserData, setCountUserData] = useState(0)
-    const { userData, loadingUserData, usdBtc } = useUserData(countUserData)
-    const { logout } = useContext(Context)
+
+    const { logout, userData, loadingUserData, usdBtc, onUpdate } = useContext(Context)
+
+    function formatNumber(number){
+        return new Intl.NumberFormat('en-US').format(number)
+    }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const cookie = Cookies.get('conected')
+            if(!cookie){ 
+                props.pushLogout()
+                logout() 
+            }
+        }, 290000)
+        return () => clearInterval(interval)
+    })
+
+    useEffect(() => {
+        if(countUserData > 0){onUpdate(countUserData)}
+    },[countUserData, onUpdate])
     
     const [modal2Open, setModal2Open] = useState(null)
     const [modal3Open, setModal3Open] = useState(null)
@@ -30,11 +49,13 @@ const Navbar_navigation2 = props => {
     }
 
     function handleLogout() {
-        props.push()
+        props.pushLogout()
         logout()
     }
 
     const toggle3 = props.useComponentVisible(false)
+
+    const wallet = userData.wallet ? userData.wallet.toFixed(7) : 0
 
     return (
         <div className='section-navIcons'>
@@ -52,8 +73,8 @@ const Navbar_navigation2 = props => {
                     <div className='item-menu-right-wallet-container'>
                         <div><MdAccountBalanceWallet />&nbsp;Wallet</div>
                         <div>
-                            <div className='d-flex balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  {userData.wallet} <p>&nbsp;BTC</p></div>
-                            <div className='d-flex justify-content-center'><p>&nbsp;&nbsp;($&nbsp;</p><p>  {!usdBtc ? '' : userData.wallet < usdBtc ? 0 : Math.floor(userData.wallet / usdBtc)}</p><p>&nbsp;USD)</p></div>
+                            <div className='d-flex balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  {wallet} <p>&nbsp;BTC</p></div>
+                            <div className='d-flex justify-content-center'><p>&nbsp;&nbsp;($&nbsp;</p><p>  {!usdBtc ? '' : userData.wallet < usdBtc ? 0 : formatNumber(userData.wallet / usdBtc)}</p><p>&nbsp;USD)</p></div>
                         </div>
                     </div>
                     <div className='item-menu-right-cashier'>
@@ -69,9 +90,12 @@ const Navbar_navigation2 = props => {
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/profile/' className="item-menu-right" >
                     < IoMdSettings /><p>&nbsp;User settings</p> 
                     </Link>
-                    <div className="item-menu-right">
-                        <MdHelpOutline /><p>&nbsp;Help</p> 
-                    </div>
+                    <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/help/' className="item-menu-right">
+                        <MdHelpOutline /><p>&nbsp;Instructions</p> 
+                    </Link>
+                    <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/contact_us/' className="item-menu-right">
+                        <MdMail /><p>&nbsp;Contact us</p> 
+                    </Link>
                     <div onClick={handleLogout} className="item-menu-right">
                         <MdExitToApp /><p>&nbsp;Logout</p>  
                     </div>

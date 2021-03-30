@@ -1,18 +1,21 @@
 import React ,{ useState } from 'react'
-import Swal from 'sweetalert2'
 import '../Styles/JoinModal.css'
 import { withRouter } from 'react-router-dom'
 import Modal from './Modal'
-import axios from 'axios'
 import { useFormValues } from '../../hooks/useFormValues'
 import { url } from '../../urlServer'
+import PasswordVerificationNewRoom from './PasswordVerificationNewRoom'
 
-const JoinModal = (props) => {
+const JoinModal = props => {
 
-    const [joinLoading, setJoinLoading] = useState(false)
+    const [modalOpen, setModalOpen] = useState(null)
     const [radio1, setRadio1] = useState(true)
     const [radio2, setRadio2] = useState(false)
     const [parentInput, setParentInput] = useState(true)
+
+    function onCloseModal(){
+        setModalOpen(null)
+    }
 
     function handleRadio1(){
         setRadio1(true)
@@ -44,35 +47,9 @@ const JoinModal = (props) => {
         salaName = props.data.name
     }
  
-    async function handleSubmit( e ){
+    async function handleSubmit(e){
         e.preventDefault()
-
-        setJoinLoading(true)
-
-        await axios({
-            data: joinData,
-            method: 'post',
-            url: url+'/api/newUserInSala'
-        }).then(res => {
-            setJoinLoading(false)
-            if(res.data.error){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: res.data.error,
-                })
-            }else{
-                props.history.push(`/sala/${res.data.id}`)
-                props.onClose()
-            }
-        }).catch(err => {
-            setJoinLoading(false)
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: err,
-            })
-        })
+        setModalOpen(true)
     }
 
      /* ----------------------------------------------------API---------------------------------------------------- */
@@ -82,7 +59,7 @@ const JoinModal = (props) => {
             <div className='join-modal'>
                 <h2>Are you sure?</h2>
                 <p>Room name: <span>{salaName}</span></p>
-                <p>Price: <span>${price}</span></p>
+                <p>Price: <span>{price.toFixed(7)} BTC</span></p>
 
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -109,14 +86,14 @@ const JoinModal = (props) => {
                             <span>Nota:</span> "You will be added as a referral from some random user with available space in this room."
                         </p>
                     </div>
-                    <button disabled={joinLoading ? true : false} className='btn btn-dark btn-block invitation-button'>
-                        <div className={joinLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
-                        <p  className={joinLoading ? 'dNone' : ''}>Confirm</p>
+                    <button className='btn btn-dark btn-block invitation-button'>
+                        <p>Confirm</p>
                     </button>
                 </form>
             </div>
+
+            <PasswordVerificationNewRoom isOpen={modalOpen} onClose={onCloseModal} onClose2={props.onClose} data={joinData} history={props.history} url={url+'/api/newUserInSala'}/>
+
         </Modal>
     )
 }

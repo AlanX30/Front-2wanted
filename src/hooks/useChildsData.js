@@ -1,25 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { url } from '../urlServer'
+import { Context } from '../context'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import Cookies from 'js-cookie'
 
 export const useChildsData = (salaId, userName) => {
 
     const [arbolData, setArbolData] = useState([])
-
+    const { csrfToken } = useContext(Context)
     const [loadingChildsData, setLoadingChildsData] = useState(true)
             
     useEffect(()=>{
 
-        if(userName){
+        if(userName && csrfToken){
             setLoadingChildsData(true)
     
             async function childsData(){
     
                 const response = await axios({
                     method: 'post',
-                    url: `${url}/api/in-sala?id=${salaId}`
+                    url: `${url}/api/in-sala?id=${salaId}`,
+                    headers: { 
+                        'X-CSRF-Token': csrfToken
+                    }
                 })       
                 
                 const data = await response.data
@@ -39,7 +42,7 @@ export const useChildsData = (salaId, userName) => {
             }  
             childsData()
         }
-    },[salaId, userName])
+    },[salaId, userName, csrfToken])
 
     return {arbolData, loadingChildsData}
 

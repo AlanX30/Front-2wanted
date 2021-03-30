@@ -6,7 +6,6 @@ import ListRooms from '../Components/ListRooms'
 import Swal from 'sweetalert2'
 import './Styles/Home.css'
 import axios from 'axios'
-import Cookies from 'js-cookie'
 
 export const Home = (props) => {
 
@@ -27,10 +26,7 @@ export const Home = (props) => {
 
                 <div className='section-video'>
                     <div className='youtube-container'>
-                        <h3>instructions</h3>
-                        <div className='youtube-wrap'>
-                            <iframe className='youtube-video' width="560" height="315" title='Instrucciones' src="https://www.youtube.com/embed/-XOuu1vd_fk" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                        </div>
+                        <button className='instruction_home' onClick={()=>props.history.push('/help')}>Instructions</button>
                     </div>
                 </div>
 

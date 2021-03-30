@@ -1,27 +1,37 @@
-import React, { useState } from 'react'
-import Swal from 'sweetalert2'
-import axios from 'axios'
+import React, { useState, useContext } from 'react'
+import { Context } from '../../context'
+import PasswordVerificationNewRoom from '../Modals/PasswordVerificationNewRoom'
 import '../../Pages/Styles/Home.css'
 import { MdHome, MdInfo } from "react-icons/md"
 import { useFormValues } from '../../hooks/useFormValues'
+import { url } from '../../urlServer'
 
 const NewSalaForm = props => {
 
+    const [modalOpen, setModalOpen] = useState(null)
+
     const [roomValid, setRoomValid] = useState(true)
     const [priceValid, setPriceValid] = useState(true)
-    const [createLoading, setCreateLoading] = useState(false)
-
+    
     const reg_whiteSpace = /^$|\s+/
+
+    const { usdBtc } = useContext(Context)
 
     const name = useFormValues()
     const price = useFormValues()
+
+    const inUsd = (price.value / usdBtc).toFixed(2)
+
+    function onCloseModal(){
+        setModalOpen(null)
+    }
     
     const newSalaData = {
         name: name.value,
         price: price.value,
     }
 
-    async function newSala( e ){
+    function newSala( e ){
         e.preventDefault()
 
         if( reg_whiteSpace.test(name.value) || name.value.length < 4 || name.value.length > 15){
@@ -31,29 +41,8 @@ const NewSalaForm = props => {
             return setPriceValid(false)
         }else{ setPriceValid(true) }
 
-        setCreateLoading(true)
-
-        await axios({
-            data: newSalaData,
-            method: 'post',
-            url: props.url+'/api/new/sala'
-        }).then(res => {
-            setCreateLoading(false)
-            if (res.data.error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: res.data.error,
-                })
-            }else{ props.props.history.push(`/sala/${res.data.id}`)}
-        }).catch(err => {
-            setCreateLoading(false)
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: err,
-            })
-        })
+        setModalOpen(true)
+        
     }
 
     return(
@@ -75,18 +64,19 @@ const NewSalaForm = props => {
                             <div>
                                 <div className="input-group-text input-guide">$</div>
                             </div>
-                            <input  placeholder='Price' type='text' {...price} />
+                            <input  placeholder='Price in bitcoin' type='number' {...price} />
                         </div>
-                        <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimum room value $5.000 COP</label>
+                        <p className={inUsd > 0 ? 'salaPriceInUsd' : 'dNone'}>={inUsd} USD</p>
+                        <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimum room value 0.00005 BTC</label>
                     </div>
-                    <button disabled={createLoading ? true : false}>
-                        <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
-                        <p className={createLoading ? 'dNone' : ''}>Create!</p>
+                    <button>
+                        <p>Create!</p>
                     </button>
                 </form>   
             </div>       
+
+            <PasswordVerificationNewRoom isOpen={modalOpen} onClose={onCloseModal} data={newSalaData} history={props.props.history} url={url+'/api/new/sala'}/>
+
         </div>
     )
 }
