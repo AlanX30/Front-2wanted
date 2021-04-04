@@ -104,7 +104,7 @@ const Navbar_navigation2 = props => {
             </div>  
             <WithdrawToUserModal wallet={userData.wallet} isOpen={modal2Open} onClose={onClose2Modal}/>
             <WithdrawModal  wallet={userData.wallet} isOpen={modal3Open} onClose={onClose3Modal} />
-            <DepositModal isOpen={modal4Open} onClose={onClose4Modal} />        
+            <DepositModal userData={userData} isOpen={modal4Open} onClose={onClose4Modal} />        
         </div>
     )    
 }
