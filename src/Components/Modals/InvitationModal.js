@@ -43,7 +43,7 @@ const InvitationModal = (props) => {
                 invitation && <div className='invitationModal'>
                     <p>Invited by: <span>{invitation.host}</span></p>
                     <p>Room Name: <span>{invitation.salaName}</span></p>
-                    <p>Price: <span>{invitation.price.toFixed(7)} BTC</span></p>
+                    <p>Price: <span>{invitation.price.toString().slice(0,9)} BTC</span></p>
                     <p>Parent user: <span>{invitation.parentUsername}</span></p>
                     <p>Message: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
                     <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>

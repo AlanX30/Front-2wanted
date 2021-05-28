@@ -9,9 +9,9 @@ import PasswordVerificationNewRoom from './PasswordVerificationNewRoom'
 const JoinModal = props => {
 
     const [modalOpen, setModalOpen] = useState(null)
-    const [radio1, setRadio1] = useState(true)
-    const [radio2, setRadio2] = useState(false)
-    const [parentInput, setParentInput] = useState(true)
+    const [radio1, setRadio1] = useState(false)
+    const [radio2, setRadio2] = useState(true)
+    const [parentInput, setParentInput] = useState(false)
 
     function onCloseModal(){
         setModalOpen(null)
@@ -27,8 +27,6 @@ const JoinModal = props => {
         setRadio2(true)
         setParentInput(false)
     }
-
-    /* ----------------------------------------------------API---------------------------------------------------- */
 
     const parentUser = useFormValues()
 
@@ -52,24 +50,22 @@ const JoinModal = props => {
         setModalOpen(true)
     }
 
-     /* ----------------------------------------------------API---------------------------------------------------- */
-
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
             <div className='join-modal'>
                 <h2>Are you sure?</h2>
                 <p>Room name: <span>{salaName}</span></p>
-                <p>Price: <span>{price.toFixed(7)} BTC</span></p>
+                <p>Price: <span>{price.toString().slice(0,9)} BTC</span></p>
 
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div>
-                            <input type="radio" checked={radio1} onChange={handleRadio1} />
-                            <label onClick={handleRadio1}>Choose parent user</label>
-                        </div>
-                        <div>
                             <input type="radio" checked={radio2} onChange={handleRadio2} />
                             <label onClick={handleRadio2}>Random parent user</label>
+                        </div>
+                        <div>
+                            <input type="radio" checked={radio1} onChange={handleRadio1} />
+                            <label onClick={handleRadio1}>Choose parent user</label>
                         </div>
                     </div>
                     <div className={parentInput ? 'form-group' : 'dNone'}>
@@ -83,7 +79,7 @@ const JoinModal = props => {
                     </div>
                     <div className={!parentInput ? 'join-nota' : 'dNone'}>
                         <p>
-                            <span>Nota:</span> "You will be added as a referral from some random user with available space in this room."
+                            <span>Note:</span> "You will be added as a referral from some random user with available space in this room."
                         </p>
                     </div>
                     <button className='btn btn-dark btn-block invitation-button'>

@@ -67,7 +67,7 @@ export const UsersInSalas = (props) => {
                 list.map( balance => {
                     return (
                         balance.type === 'won' ?  <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card-admin'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <div className='historyCards-group'>
                                     <p className='balance-description-title'>Recibido en sala:</p>
@@ -75,15 +75,15 @@ export const UsersInSalas = (props) => {
                                 </div>
                                 <div className='historyCards-group'>
                                     <p className='balance-description-title'>Billetera:</p>
-                                    <p>${balance.wallet.toFixed(7)}</p>
+                                    <p>${balance.wallet.toString().slice(0,9)}</p>
                                 </div>
                             </div>
                             <div>
-                                <p className='balance-won-amount'>+ ${balance.won.toFixed(7)}</p>
+                                <p className='balance-won-amount'>+ ${balance.won.toString().slice(0,9)}</p>
                             </div>
                         </li> :
                         balance.type === 'buy' && <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card-admin'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <div className="historyCards-group">
                                     <p className='balance-description-title'>Compra de sala:</p>
@@ -91,11 +91,11 @@ export const UsersInSalas = (props) => {
                                 </div>
                                 <div className="historyCards-group">
                                     <p className='balance-description-title'>Billetera:</p>
-                                    <p>${balance.wallet.toFixed(7)}</p>
+                                    <p>${balance.wallet.toString().slice(0,9)}</p>
                                 </div>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>- ${balance.salaPrice.toFixed(7)}</p>
+                                <p className='balance-won-amount'>- ${balance.salaPrice.toString().slice(0,9)}</p>
                             </div>
                         </li>
                     )

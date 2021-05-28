@@ -20,6 +20,8 @@ export const HistoryUsers = (props) => {
     
     useEffect(()=>{
 
+        if(!csrfToken){ return }
+
         setResponseList([])
         setListLoading(true)
 
@@ -152,6 +154,71 @@ export const HistoryUsers = (props) => {
         setActualPage(1)
         setModeList('withdraw')
     }
+
+    function onCancelWithdraw(signature){
+
+        axios({
+            method: 'post',
+            data: {id: signature},
+            url: url+'/api/cancelWithdraw',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
+        })
+        .then(res => {
+            if(res.data.error) {
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error,
+                })
+            }else{
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: res.data.msg,
+                })
+            }
+        }).catch( err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: err,
+            })
+        })
+    }
+
+    function onTxId(id){
+        axios({
+            method: 'post',
+            data: {id: id},
+            url: url+'/api/transactiondetail',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
+        })
+        .then(res => {
+            if(res.data.error) {
+                return Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error
+                })
+            }else{
+                Swal.fire({
+                    icon: 'success',
+                    title: 'TxId',
+                    text: res.data.msg
+                })
+            }
+        }).catch( err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: err,
+            })
+        })
+    }
     
     return <div className='balance-container'>
         <div className='section-title'>
@@ -177,7 +244,7 @@ export const HistoryUsers = (props) => {
                 responseList.map( balance => {
                     return (
                         balance.type === 'won' ?  <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card-admin'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <div className='historyCards-group'>
                                     <p className='balance-description-title'>Recibido en sala:</p>
@@ -185,15 +252,15 @@ export const HistoryUsers = (props) => {
                                 </div>
                                 <div className='historyCards-group'>
                                     <p className='balance-description-title'>Billetera:</p>
-                                    <p>${balance.wallet.toFixed(7)}</p>
+                                    <p>${balance.wallet.toString().slice(0,9)}</p>
                                 </div>
                             </div>
                             <div>
-                                <p className='balance-won-amount'>+ ${balance.won.toFixed(7)}</p>
+                                <p className='balance-won-amount'>+ ${balance.won.toString().slice(0,9)}</p>
                             </div>
                         </li> :
                         balance.type === 'buy' ? <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card-admin'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <div className="historyCards-group">
                                     <p className='balance-description-title'>Compra de sala:</p>
@@ -201,30 +268,30 @@ export const HistoryUsers = (props) => {
                                 </div>
                                 <div className="historyCards-group">
                                     <p className='balance-description-title'>Billetera:</p>
-                                    <p>${balance.wallet.toFixed(7)}</p>
+                                    <p>${balance.wallet.toString().slice(0,9)}</p>
                                 </div>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>- ${balance.salaPrice.toFixed(7)}</p>
+                                <p className='balance-won-amount'>- ${balance.salaPrice.toString().slice(0,9)}</p>
                             </div>
                         </li> :
                         balance.type === 'deposit' ? <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card-admin'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <p className='balance-description-title'>Deposito</p>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>+${balance.depositAmount.toFixed(7)}</p>
+                                <p className='balance-won-amount'>+${balance.depositAmount.toString().slice(0,9)}</p>
                             </div>
                         </li> :
                         balance.type === 'withdrawBtc' ? <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card-admin'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <div className="historyCards-group">
                                     <p className='balance-description-title'>Retiro a direccion:</p>
                                     <p>{balance.toAddress}</p>
                                 </div>
                                 <div className="historyCards-group">
-                                    <p className='balance-description-title'>txId:</p>
-                                    <p>{balance.txId}</p>
+                                    <p className='balance-description-title'>Fee:</p>
+                                    <p>{balance.fee}</p>
                                 </div>
                                 <div className="historyCards-group">
                                     <p className='balance-description-title'>Billetera:</p>
@@ -232,11 +299,13 @@ export const HistoryUsers = (props) => {
                                 </div>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>+${balance.withdrawAmount.toFixed(7)}</p>
+                                <p className='balance-won-amount'>+{balance.withdrawAmount.toString().slice(0,9)} + Fee</p>
                             </div>
+                            <button onClick={()=>onCancelWithdraw(balance.signatureId)}>Cancelar</button>
+                            <button onClick={()=>onTxId(balance.signatureId)}>txId</button>
                         </li> :
                         balance.type === 'withdrawToUser' && <li key={balance._id}>
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card-admin'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
                             <div>
                                 <div className="historyCards-group">
                                     <p className='balance-description-title'>Retiro a usuario:</p>

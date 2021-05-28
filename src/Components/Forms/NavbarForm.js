@@ -31,8 +31,10 @@ const NavbarForm = ({ ArbolImg, url, iconSet, useComponentVisible }) => {
     }
 
     async function searchRoom1( e ){
-        e.preventDefault()
-        
+        if(e){
+            e.preventDefault()
+        }
+
         setSearchLoading(true)
 
         dropdownFilter.setIsComponentVisible(true)
@@ -59,6 +61,43 @@ const NavbarForm = ({ ArbolImg, url, iconSet, useComponentVisible }) => {
             })
         }
     }
+
+    const params = new URLSearchParams(window.location.search)
+    const salaParams = params.get('add')
+
+    useEffect(() => {
+        if(salaParams && csrfToken){
+            setSearchLoading(true)
+            axios({
+                data: { name: salaParams },
+                method: 'post',
+                url: url+'/api/search/sala',
+                headers:{ 
+                    'X-CSRF-Token': csrfToken
+                }
+            }).then(res => {
+                setSearchLoading(false)
+                if(res.data.error){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: res.data.error,
+                    })
+                }else{
+                    setFilterSala(res.data)
+                    onOpen2Modal(true)
+                }
+            })
+            .catch( err => {
+                setSearchLoading(false)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: err,
+                })
+            })
+        }
+    },[salaParams, csrfToken, url])
 
     return <>
 
@@ -105,7 +144,7 @@ const NavbarForm = ({ ArbolImg, url, iconSet, useComponentVisible }) => {
                                 <div className='filter-sala-description'>
                                     <p> Room Name:  <span> {filterSala.data.name}</span>  </p>
                                     <p> Creator:  <span> {filterSala.data.creator}</span>  </p>
-                                    <p> Price:  <span> {filterSala.data.price.toFixed(7)} BTC</span>  </p>
+                                    <p> Price:  <span> {filterSala.data.price.toString().slice(0,9)} BTC</span>  </p>
                                 </div>
                             </div>
                         <button onClick={onOpen2Modal} className=''>Join</button>

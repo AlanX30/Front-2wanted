@@ -86,7 +86,7 @@ export const Room = (props) => {
                 </div>
             </div>    
             <div>
-                <RomDetails loading={loadingDetails} usdBtc={usdBtc} count={count} url={url} parent={parent} inBalance={inBalance} dataRoom={dataRoom} arbolData={arbolData} userName={userName} salaId={salaId}  />
+                <RomDetails loading={loadingDetails} usdBtc={usdBtc} count={count} url={url} parent={parent} inBalance={inBalance} dataRoom={dataRoom} arbolData={arbolData} salaId={salaId}  />
             </div>    
         </div>
     )

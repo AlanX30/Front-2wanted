@@ -4,6 +4,7 @@ import { useGeneralBalance } from '../hooks/useGeneralBalance'
 import { useFormValues } from '../hooks/useFormValues'
 import { url } from '../urlServer'
 import { Withdraw2wantedModal } from '../Components/Modals/Withdraw2wantedModal'
+import { TatumStatus } from '../Components/Modals/TatumStatus'
 import { ToExcelModal } from '../Components/Modals/ToExcelModal'
 import { MailModal } from '../Components/Modals/MailModal'
 import Swal from 'sweetalert2'
@@ -18,14 +19,20 @@ export const AdminHome = (props) => {
     const [viewList, setViewList] = useState(false)
     const [list, setList] = useState([])
 
-    const { reload, totalDeposit, actualCuenta, totalGanado, moneyUsersRooms, totalWallets, actual2wanted, withdrawUsers, withdraw2wanted, totalRetirado, generalLoading, verification } = useGeneralBalance()
+    const { reload, totalDeposit, actualCuenta, totalGanado, moneyUsersRooms, totalWallets, actual2wanted, withdrawUsers, withdraw2wanted, totalRetirado, generalLoading, verification, verification2 } = useGeneralBalance()
 
     const retiradoTotalTotal = totalRetirado ? totalRetirado : 0
 
     const user = useFormValues()
+    const username = useFormValues()
+
+    const [ balanceTatum, setBalanceTatum ] = useState({})
+    const [ myWallet, setMyWallet ] = useState(false)
+    const [ userTatum, setUserTatum ] = useState('')
 
     const [ modal1Open, setModal1Open ] = useState(false)
     const [ modal2Open, setModal2Open ] = useState(false)
+    const [ modal3Open, setModal3Open ] = useState(false)
     const [ modal4Open, setModal4Open ] = useState(false)
     const [ available, setAvailable ] = useState(0)
     const [ used, setUsed ] = useState(0)
@@ -36,8 +43,51 @@ export const AdminHome = (props) => {
     function onCloseModal2(){
         setModal2Open(false)
     }
+    function onCloseModal3(){
+        setModal3Open(false)
+    }
     function onCloseModal4(){
         setModal4Open(false)
+    }
+    
+    function onTatumDetail(me){
+        
+        let myWallet = false
+        
+        if(me){ myWallet = true }
+
+        const form = { username: username.value, myWallet }
+
+        axios({
+            method: 'post',
+            data: form,
+            url: url+'/api/tatumDetailUser',
+            headers: {
+                'X-CSRF-Token': csrfToken
+            }
+        })
+        .then(res => {
+            if(res.data.error){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: res.data.error,
+                })
+            }else{
+                setBalanceTatum(res.data)
+                if(me){ setMyWallet(true) }else{
+                    setMyWallet(false)
+                    setUserTatum(username.value)
+                } 
+                setModal3Open(true)
+            }
+        }).catch( err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: err,
+            })
+        })
     }
 
     function refresh(){
@@ -170,16 +220,16 @@ export const AdminHome = (props) => {
         <div className={viewButton ? 'dNone' : 'section-general-container'}>
             <div className={!viewList ? '' : 'dNone'}>
                 <h1 className={generalLoading ? '' : 'dNone'}>Cargando...</h1>
-                <p>Total Depositado: <span>  {totalDeposit.toFixed(7)}</span> </p>
-                <p>Actual en cuenta: <span> {actualCuenta.toFixed(7)} </span> </p>
-                <p>Total obtenido por 2wanted: <span>{totalGanado.toFixed(7)}</span></p>
-                <p>dinero de Usuarios en salas: <span> {moneyUsersRooms.toFixed(7)} </span> </p>
-                <p>dinero actual en wallet de Usuarios: <span> {totalWallets.toFixed(7)} </span> </p>
-                <p>dinero actual de 2wanted: <span> {actual2wanted.toFixed(7)} </span> </p>
-                <p>dinero retirado de usuarios: <span> {withdrawUsers.toFixed(7)} </span></p>
-                <p>dinero retirado de 2wanted: <span> {withdraw2wanted.toFixed(7)} </span> </p>
-                <p>Total dinero retirado: <span> ${`${parseFloat(retiradoTotalTotal).toFixed(7)}`} </span></p>
-                <p>Verificacion: <span>--{verification}--</span></p>
+                <p>Total Depositado: <span>  {totalDeposit.toString().slice(0,9)}</span> </p>
+                <p>Actual en cuenta: <span> {actualCuenta.toString().slice(0,9)} </span> </p>
+                <p>Total obtenido por 2wanted: <span>{totalGanado.toString().slice(0,9)}</span></p>
+                <p>dinero de Usuarios en salas: <span> {moneyUsersRooms.toString().slice(0,9)} </span> </p>
+                <p>dinero actual en wallet de Usuarios: <span> {totalWallets.toString().slice(0,9)} </span> </p>
+                <p>dinero actual de 2wanted: <span> {actual2wanted.toString().slice(0,9)} </span> </p>
+                <p>dinero retirado de usuarios: <span> {withdrawUsers.toString().slice(0,9)} </span></p>
+                <p>dinero retirado de 2wanted: <span> {withdraw2wanted.toString().slice(0,9)} </span> </p>
+                <p>Total dinero retirado: <span> ${`${parseFloat(retiradoTotalTotal).toString().slice(0,9)}`} </span></p>
+                <p>Verificacion: <span>--{verification}--</span><span>{`( ${actualCuenta.toString().slice(0,9)} - ${verification2.toString().slice(0,9)} )`}</span> </p>
                 <div>
                     <form className='withdrawform' onSubmit={handleWithdraw}>
                         <h2>Regitrar Retiro 2wanted</h2>
@@ -192,6 +242,14 @@ export const AdminHome = (props) => {
                     setViewList(true)
                     setRefresh2wanted(!refresh2wanted)
                 }}>Lista de retiros por 2wanted</button>
+                <div>
+                    <h2>Tatum Wallet</h2>
+                    <div className='d-flex'>
+                        <input {...username} type="text" placeholder="user"/>
+                        <button onClick={()=>onTatumDetail()}>Buscar</button>
+                    </div>
+                    <button onClick={ ()=>onTatumDetail(true) }>My status</button>
+                </div>
                 <h2>Descargar Balance en Excel</h2>
                 <button className='general-inferiorButtons' onClick={()=>setModal2Open(true)}>Balance a excel</button>
             </div>
@@ -247,6 +305,7 @@ export const AdminHome = (props) => {
             </div>
         </div>
         <Withdraw2wantedModal available={available} used={used} refresh={refresh} user={user.value} isOpen={modal1Open} onClose={onCloseModal1} />    
+        <TatumStatus user={userTatum} myWallet={myWallet} balance={balanceTatum} isOpen={modal3Open} onClose={onCloseModal3} />    
         <ToExcelModal isOpen={modal2Open} onClose={onCloseModal2} />      
         <MailModal msg={emailPersonalized.value} asunto={asunto.value} user={userEmailPersonalized.value} isOpen={modal4Open} onClose={onCloseModal4} />    
     </div>

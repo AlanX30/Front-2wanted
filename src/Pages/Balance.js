@@ -102,7 +102,7 @@ export const Balance = () => {
         })
     }
 
-    const wallet = userData.wallet ? userData.wallet.toFixed(7) : 0
+    const wallet = userData.wallet ? userData.wallet.toString().slice(0,9) : 0
 
     return <div className='balance-container'>
 
@@ -152,69 +152,69 @@ export const Balance = () => {
                 balance.map((balance)=> {
                     return (
                         balance.type === 'won' ?  <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${ new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
                                 <p className='balance-description-title'>Won in room:</p>
                                 <p>{balance.salaName}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet.toFixed(7)}</p>
+                                <p>{balance.wallet.toString().slice(0,9)} BTC</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>+ ${balance.won.toFixed(7)}</p>
+                                <p className='balance-won-amount'>+ {balance.won.toString().slice(0,9)}</p>
                             </div>
                         </li> :
                         balance.type === 'buy' ? <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
                                 <p className='balance-description-title'>Room payment:</p>
                                 <p>{balance.salaName}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet.toFixed(7)}</p>
+                                <p>{balance.wallet.toString().slice(0,9)} BTC</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-buy-amount'>- ${balance.salaPrice}</p>
+                                <p className='balance-buy-amount'>- {balance.salaPrice}</p>
                             </div>
                         </li> :
                         balance.type === 'deposit' ? <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
                                 <p className='balance-description-title'>Deposit:</p>
-                                <p>${balance.depositAmount.toFixed(7)}</p>
+                                <p>{balance.depositAmount.toString().slice(0,9)}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet.toFixed(7)}</p>
+                                <p>{balance.wallet.toString().slice(0,9)} BTC</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-won-amount'>+ ${balance.depositAmount.toFixed(7)}</p>
+                                <p className='balance-won-amount'>+ {balance.depositAmount.toString().slice(0,9)}</p>
                             </div>
                         </li> :
                         balance.type === 'withdrawToUser' ? <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
                                 <p className='balance-description-title'>Withdraw:</p>
-                                <p>${balance.withdrawAmount.toFixed(7)}</p>
+                                <p>{balance.withdrawAmount.toString().slice(0,9)}</p>
                                 <p className='balance-description-title'>To user:</p>
                                 <p>{balance.toUser}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet.toFixed(7)}</p>
+                                <p>{balance.wallet.toString().slice(0,9)} BTC</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-buy-amount'>- ${balance.withdrawAmount.toFixed(7)}</p>
+                                <p className='balance-buy-amount'>- {balance.withdrawAmount.toString().slice(0,9)}</p>
                             </div>
                         </li> :
                         balance.type === 'withdrawBtc' && <li key={balance._id} >
-                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()}/${new Date(balance.date).getMonth() + 1}/${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${new Date(balance.date).getMinutes()}`}</div>
+                            <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
                                 <p className='balance-description-title'>Withdraw:</p>
-                                <p>${balance.withdrawAmount.toFixed(7)}</p>
+                                <p>{balance.withdrawAmount.toString().slice(0,9)} + Fee</p>
+                                <p className='balance-description-title'>Fee:</p>
+                                <p>{balance.fee}</p>
                                 <p className='balance-description-title'>To Address:</p>
                                 <p>{balance.toAddress}</p>
-                                <p className='balance-description-title'>TxId:</p>
-                                <p>{balance.txId}</p>
                                 <p className='balance-description-title'>Wallet:</p>
-                                <p>${balance.wallet.toFixed(7)}</p>
+                                <p>{balance.wallet.toString().slice(0,9)} BTC</p>
                             </div>
                             <div className='balance-won-amount-container'>
-                                <p className='balance-buy-amount'>- ${balance.withdrawAmount.toFixed(7)}</p>
+                                <p className='balance-buy-amount'>- {balance.totalAmount.toString().slice(0,9)}</p>
                             </div>
                         </li>
                     )   

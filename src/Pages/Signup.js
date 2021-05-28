@@ -3,6 +3,7 @@ import { MdInfo, MdLockOutline, MdMail } from "react-icons/md"
 import { useFormValues } from '../hooks/useFormValues'
 import { url } from '../urlServer'
 import Swal from 'sweetalert2'
+import { Helmet } from 'react-helmet'
 import NavbarLogin from '../Components/NavbarLogin'
 import { Context } from '../context'
 import axios from 'axios'
@@ -15,8 +16,13 @@ export const Signup = (props) => {
 
     const conected = Cookies.get('conected')
 
+    const params = new URLSearchParams(window.location.search)
+    const salaParams = params.get('add')
+
     if(conected){
-        props.history.push(`/home`)
+        if(salaParams){
+            props.history.push(`/home?add=${salaParams}`)
+        }else{ props.history.push(`/home`) }
     }
 
     const reg_password = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
@@ -96,7 +102,9 @@ export const Signup = (props) => {
         
     return <div>   
 
-        <NavbarLogin toggleAuth={toggleAuth} />
+        <Helmet> <title>2wanted | Log In or Sign Up</title> </Helmet>
+
+        <NavbarLogin toggleAuth={toggleAuth} invitation={salaParams} />
 
         <div className='signup-container'>
             <div className='wrap-1100'>
@@ -109,7 +117,7 @@ export const Signup = (props) => {
              <div className='signup-right'>
                 <div className='card-signup'>
                             <h3 className="text-center text-white card-header pl-4">
-                                Signup
+                                Create user
                             </h3>
                             <div className="card-body form-body">
                                 <form onSubmit={handleSubmit}>
@@ -118,7 +126,7 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form">@</div>
                                             </div>
-                                            <input type="text" id="inlineFormInputGroupUsername2" className='form-control' {...userName} placeholder='Username' required/>
+                                            <input type="text" className='form-control' {...userName} placeholder='Username' required/>
                                         </div>
                                         <label className={!userValid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimum 8 characters without spaces, upper and lower case</label>
                                     </div>
@@ -160,7 +168,7 @@ export const Signup = (props) => {
                                         <div className={signupLoading ? "spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
-                                        <p className={signupLoading ? 'dNone' : ''}>Signup</p>
+                                        <p className={signupLoading ? 'dNone' : ''}>Create user</p>
                                     </button>
                                 </form>
                             </div>
@@ -169,5 +177,5 @@ export const Signup = (props) => {
                 </div>
         </div>    
         <EmailVerificationModal props={props} email={email.value} isOpen={modalOpen} onClose={onCloseModal} />
-        </div>
+    </div>
 }

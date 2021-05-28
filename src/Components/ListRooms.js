@@ -77,7 +77,7 @@ const ListRooms = ({ url }) => {
                                                     <img src={ArbolImg} alt="ArbolImg"/>
                                                     <div className='actives-description'>
                                                         <p>Room Name: <span>{data.salaName}</span></p>
-                                                        <p>Price: <span>{data.salaPrice} BTC</span></p>
+                                                        <p>Price: <span>{data.salaPrice.toString().slice(0,9)} BTC</span></p>
                                                         <p>Creator: <span>{data.salaCreator}</span></p>
                                                     </div>
                                                 </Link>

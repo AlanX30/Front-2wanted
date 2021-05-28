@@ -1,11 +1,15 @@
 import React, { useState, useContext } from 'react'
+import Decimal from 'decimal.js-light'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { Context } from '../context'
-import { MdAccountBalanceWallet } from "react-icons/md";
+import { IoIosCheckmarkCircle } from "react-icons/io"
+import { MdAccountBalanceWallet, MdContentCopy } from "react-icons/md"
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-const RomDetails = ({loading, usdBtc, count, url, salaId, userName, arbolData, dataRoom, inBalance, parent}) => {
+const RomDetails = ({loading, usdBtc, count, url, salaId, arbolData, dataRoom, inBalance, parent}) => {
 
+    const [ copy, setCopy ] = useState(false)
     const [loadingToBalance, setLoadingToBalance] = useState(false)
     const [countUserData, setCountUserData] = useState(0)
     const { csrfToken } = useContext(Context)
@@ -19,7 +23,7 @@ const RomDetails = ({loading, usdBtc, count, url, salaId, userName, arbolData, d
         setLoadingToBalance(true)
         await axios({
             method: 'post',
-            data: {user: userName, toBalance: 'true'},
+            data: {toBalance: 'true'},
             url: `${url}/api/in-sala?id=${salaId}`,
             headers: { 
                 'X-CSRF-Token': csrfToken
@@ -53,46 +57,73 @@ const RomDetails = ({loading, usdBtc, count, url, salaId, userName, arbolData, d
 
     let acum3 = 0
     let acum4 = 0   
+    let tAcum = 0   
+    let newCash = 0
 
-    for(let i = 6; i<=13; i++) {
-        let divide = price/2   
-        if(arbolData[i]){
-            acum3 = acum3 + divide
+    if(arbolData && dataRoom && loading === false) {
+
+        for(let i = 6; i<=13; i++) {
+            let divide = new Decimal(price).div(2).toNumber()   
+            if(arbolData[i]){
+                acum3 = new Decimal(acum3).add(divide).toNumber()
+            }
         }
-    }
-    for(let i = 14; i<=29; i++){
-        let divide = price/4  
-        if(arbolData[i]){
-            acum4 = acum4 + divide
+        for(let i = 14; i<=29; i++){
+            let divide = new Decimal(price).div(4).toNumber()
+            if(arbolData[i]){
+                acum4 = new Decimal(acum4).add(divide).toNumber()
+            }
         }
+    
+        tAcum = new Decimal(acum3).add(acum4).toNumber()
+        newCash= new Decimal(tAcum).sub(inBalance).toNumber()
+
     }
 
-    const tAcum = acum3 + acum4
+    function onCopy(){
+        setCopy(true)
+        setTimeout(() => {
+            setCopy(false)
+        }, 5000)
+    }
 
     if(loading){ return <div className='room-details'>Loading...</div>}
 
     return(
         <div className='room-details'>
+            <CopyToClipboard text={`https://2wanted.com?add=${dataRoom.name}`} onCopy={onCopy}>
+                    <div className='copyLinkInvitation' type='button'>
+                        {
+                            copy ? 
+                            <div>
+                                Copied <IoIosCheckmarkCircle />     
+                            </div> : 
+                            <div>
+                                Copy room link <MdContentCopy />
+                            </div>
+                        } 
+                    </div>
+            </CopyToClipboard>
             <p>Room Name:</p>
             <span>{dataRoom.name}</span>
             <p>Room Price:</p>
-            <span>{`${dataRoom.price.toFixed(7)} BTC  (${formatNumber(dataRoom.price / usdBtc)} USD)`}</span>
+            <span>{`${dataRoom.price.toString().slice(0,9)} BTC  (${formatNumber(dataRoom.price / usdBtc)} USD)`}</span>
             <p>Parent User:</p>
             <span>{parent}</span>
             <p>Creator:</p>
             <span>{`${dataRoom.creator}`}</span>
             <p>accumulated level 3:</p>
-            <span>{`${acum3 > 0 ? acum3.toFixed(7) : 0}  (${formatNumber(acum3 / usdBtc)} USD)`}</span>
+            <span>{`${acum3 > 0 ? acum3.toString().slice(0,9) : 0} BTC  (${formatNumber(acum3 / usdBtc)} USD)`}</span>
             <p>accumulated level 4:</p>
-            <span>{`${acum4 > 0 ? acum4.toFixed(7) : 0}  (${formatNumber(acum4 / usdBtc)} USD)`}</span>
+            <span>{`${acum4 > 0 ? acum4.toString().slice(0,9) : 0} BTC  (${formatNumber(acum4 / usdBtc)} USD)`}</span>
             <p>Total accumulated:</p>
-            <span>{`${tAcum > 0 ? tAcum.toFixed(7) : 0}  (${formatNumber(tAcum / usdBtc)} USD)`}</span>                   
+            <span>{`${tAcum > 0 ? tAcum.toString().slice(0,9) : 0} BTC  (${formatNumber(tAcum / usdBtc)} USD)`}</span>                   
             <p>accumulated paid:</p>
-            <span>{`${inBalance > 0 ? inBalance.toFixed(7) : 0}  (${formatNumber(inBalance / usdBtc)} USD)`}</span>
+            <span>{`${inBalance > 0 ? inBalance.toString().slice(0,9) : 0} BTC  (${formatNumber(inBalance / usdBtc)} USD)`}</span>
             <button disabled={tAcum > inBalance ? false : true} onClick={handleToBalance}>
                 <div className={!loadingToBalance ? '' : 'dNone'}>
                     <p>Withdraw to wallet</p>
-                    <label>{tAcum > inBalance ? (tAcum - inBalance).toFixed(7) : 0} BTC ➜ <MdAccountBalanceWallet /></label>
+                    <label>{tAcum > inBalance ? newCash.toString().slice(0,9) : 0} BTC ➜ <MdAccountBalanceWallet /></label>
                 </div>
                 <div className={loadingToBalance ? "spinner-toBalance spinner-border text-danger" : 'dNone'} role="status">
                     <span className="sr-only">Loading...</span>

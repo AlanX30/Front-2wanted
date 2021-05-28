@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useFormValues } from '../../hooks/useFormValues'
 import Modal from './Modal'
 import Swal from 'sweetalert2'
@@ -57,14 +57,17 @@ const EmailVerificationModal2 = props => {
         }) 
     }
 
-    async function handleRefresh(){
+    function handleRefresh(){
 
         setLoading(true)
 
-        await axios({
+        axios({
             data: {email: props.email},
             method: 'post',
-            url: url+'/api/mailverificationRefresh'
+            url: url+'/api/mailverificationRefresh',
+            headers: { 
+                'X-CSRF-Token': csrfToken
+            }
         }).then(res => {
             setLoading(false)
             if(res.data.error){
@@ -89,6 +92,13 @@ const EmailVerificationModal2 = props => {
             })
         }) 
     }
+
+    useEffect(()=>{
+        if(props.refresh === 1){ handleRefresh() }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[props.refresh])
+
+    
 
     return <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <div className='emailVerification'>

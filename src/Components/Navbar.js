@@ -4,6 +4,7 @@ import './Styles/Navbar.css'
 import { useComponentVisible } from '../hooks/useComponentVisible'
 import { url } from '../urlServer'
 import { withRouter } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import Cookies from 'js-cookie'
 import NavbarForm from './Forms/NavbarForm'
 import Logo from './NavbarLogo'
@@ -30,8 +31,9 @@ const Navbar = (props) => {
 
     return(
         <>
+        <Helmet> <title>2wanted</title> </Helmet>
         <nav className='principal-navbar'>
-          
+            
 {/* ------------------------------------Section-Logos---------------------------------------------------------------------- */}       
             <Logo iconNone={iconNone} />
 {/* ------------------------------------/Section-Logos---------------------------------------------------------------------- */}       

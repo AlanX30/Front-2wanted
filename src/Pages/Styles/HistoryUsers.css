@@ -17,6 +17,7 @@
     flex-wrap: wrap;
 }
 .historyCards-container li {
+    word-break: break-word;
     background: #efa049;
     border-radius: 10px;
     width: 46%;
@@ -47,6 +48,7 @@
     font-weight: 700;
     margin-right: 6px
 }
-.balance-date-card {
+.balance-date-card-admin {
     font-weight: 700;
+    color: #343a40;
 }

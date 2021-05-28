@@ -13,7 +13,7 @@ const Navbar_navigation2 = props => {
 
     const [countUserData, setCountUserData] = useState(0)
 
-    const { logout, userData, loadingUserData, usdBtc, onUpdate } = useContext(Context)
+    const { logout, autoLogout, userData, loadingUserData, usdBtc, onUpdate } = useContext(Context)
 
     function formatNumber(number){
         return new Intl.NumberFormat('en-US').format(number)
@@ -24,9 +24,9 @@ const Navbar_navigation2 = props => {
             const cookie = Cookies.get('conected')
             if(!cookie){ 
                 props.pushLogout()
-                logout() 
+                autoLogout()
             }
-        }, 290000)
+        }, 300000)
         return () => clearInterval(interval)
     })
 
@@ -55,7 +55,7 @@ const Navbar_navigation2 = props => {
 
     const toggle3 = props.useComponentVisible(false)
 
-    const wallet = userData.wallet ? userData.wallet.toFixed(7) : 0
+    const wallet = userData.wallet ? userData.wallet.toString().slice(0,9) : 0
 
     return (
         <div className='section-navIcons'>
@@ -73,8 +73,8 @@ const Navbar_navigation2 = props => {
                     <div className='item-menu-right-wallet-container'>
                         <div><MdAccountBalanceWallet />&nbsp;Wallet</div>
                         <div>
-                            <div className='d-flex balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  {wallet} <p>&nbsp;BTC</p></div>
-                            <div className='d-flex justify-content-center'><p>&nbsp;&nbsp;($&nbsp;</p><p>  {!usdBtc ? '' : userData.wallet < usdBtc ? 0 : formatNumber(userData.wallet / usdBtc)}</p><p>&nbsp;USD)</p></div>
+                            <div className='d-flex balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  {Number(wallet)} <p>&nbsp;BTC</p></div>
+                            <div className='d-flex justify-content-center'><p>&nbsp;&nbsp;(&nbsp;</p><p>  {!usdBtc ? '' : userData.wallet < usdBtc ? 0 : formatNumber(userData.wallet / usdBtc)}</p><p>&nbsp; Dollar)</p></div>
                         </div>
                     </div>
                     <div className='item-menu-right-cashier'>

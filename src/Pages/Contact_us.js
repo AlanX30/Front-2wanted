@@ -65,7 +65,7 @@ export const Contact_us = () => {
             <form onSubmit={handleSubmit}>
                 <div className='contact_text'>
                     <p>Send a request and it will be answered as soon as possible to your email</p>
-                    <p>Or send email to our email &nbsp; <MdMail /> support@2wanted.io</p>
+                    <p>Or send email to our email &nbsp; <MdMail /> support@2wanted.com</p>
                 </div>
                 <div>
                     <input className='contact_asunto' required {...asunto} type="text" placeholder='Asunto'/>

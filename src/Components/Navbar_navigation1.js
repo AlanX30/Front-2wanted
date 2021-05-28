@@ -32,7 +32,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
 
         if(csrfToken){
 
-            const socket = io(url)
+            const socket = io('/')
 
             socket.emit('user_online', username)
             
@@ -116,7 +116,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
                                     <div className='invitation-description'>
                                         <p>Invited by: <span> {invitation.host}</span></p>
                                         <p>Room Name: <span> {invitation.salaName}</span></p>
-                                        <p>Price: <span> {invitation.price.toFixed(7)} BTC</span></p>
+                                        <p>Price: <span> {invitation.price.toString().slice(0,9)} BTC</span></p>
                                     </div>
                                 </button>
                             </li>

@@ -67,6 +67,36 @@ const Provider = ({ children }) => {
     }
   }
 
+  async function onAutoLogout(){
+    try {
+
+        const response = await axios({
+            method: 'post',
+            data: {username: Cookies.get('username') },
+            url: url+'/api/autologout',
+            headers: { 
+              'X-CSRF-Token': csrfToken
+            }
+        })
+        if(response.data.error){
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: response.data.error,
+          })
+        }
+
+        Cookies.remove('username')
+
+    }catch(error){
+      Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error,
+      })
+    }
+  }
+
   useEffect(() => {
     async function getUserData(){
 
@@ -113,7 +143,7 @@ const Provider = ({ children }) => {
     onUpdate:(update)=>{setUpdate(update)},
     toggleAuth:(userName)=>{
       setIsAuth(true)
-      Cookies.set('username', userName, { expires: 0.041660 })
+      Cookies.set('username', userName)
       Cookies.set('conected', true, { expires: 0.041660 })
     },
     toggleAdminAuth:()=>{
@@ -126,6 +156,11 @@ const Provider = ({ children }) => {
       setIsAuth(false)
       Cookies.remove('conected') 
       Cookies.remove('username') 
+    },
+    autoLogout: () => { 
+      socket.emit('disconnectClient', Cookies.get('username'))
+      onAutoLogout()
+      setIsAuth(false)
     }
     
   }

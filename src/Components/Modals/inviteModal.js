@@ -16,10 +16,13 @@ export const InviteModal = (props) => {
     const [inviteLoading, setInviteLoading] = useState(false)
 
     let data
-
+    
     if(props.data){
+
+        let parentUser = props.data.parentUsername ? props.data.parentUsername.split(" ")[0] : ''
+        
         data = {
-            newUser: `@${user.value}`, parentUsername: props.data.parentUsername,
+            newUser: `@${user.value}`, parentUsername: parentUser,
             message: message.value, salaId: props.data.salaId,
             price: props.data.price, salaName: props.data.salaName, host: props.data.host
         }

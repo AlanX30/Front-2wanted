@@ -49,16 +49,10 @@ export const useGeneralBalance = () => {
     
     },[reload, csrfToken])
 
-    let totalRetirado = 0
-
-    if(general){
-        totalRetirado = general.totalEgresoUsers + general.totalEgreso2wanted
-    }
-
     function refresh(){
         setReload(!reload)
     }
 
-    return {reload: refresh, totalDeposit: general.totalDeposits, actualCuenta: general.actualEnCuenta, totalGanado: general.totalWon, moneyUsersRooms: general.userMoneyRooms, totalWallets: general.totalInWallets, actual2wanted: general.actual2wanted, withdrawUsers: general.totalEgresoUsers, withdraw2wanted: general.totalEgreso2wanted, totalRetirado, generalLoading: loading, verification: general.verification}
+    return {reload: refresh, totalDeposit: general.totalDeposits, actualCuenta: general.actualEnCuenta, totalGanado: general.totalWon, moneyUsersRooms: general.userMoneyRooms, totalWallets: general.totalInWallets, actual2wanted: general.actual2wanted, withdrawUsers: general.totalEgresoUsers, withdraw2wanted: general.totalEgreso2wanted, totalRetirado: general.egresos, generalLoading: loading, verification: general.verification, verification2: general.verification2}
 
 }

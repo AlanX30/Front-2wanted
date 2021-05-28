@@ -14,10 +14,12 @@ export const Signin = (props) => {
 
     const id = useFormValues()
     const password = useFormValues()
+    const password2 = useFormValues()
 
     const form = {
         id: id.value,
-        password: password.value
+        password: password.value,
+        password2: password2.value
     }
 
     function handleSubmit( e ){
@@ -61,6 +63,7 @@ export const Signin = (props) => {
         <form onSubmit={handleSubmit}>
             <input { ...id } type="text" placeholder='ID'/>
             <input { ...password } type="password" placeholder='PASSWORD'/>
+            <input { ...password2 } type="password" placeholder='REPEAT PASSWORD'/>
             <button>{loginLoading ? 'CARGANDO......' : 'Entrar'}</button>
         </form>
     </div>

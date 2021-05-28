@@ -22,7 +22,7 @@ export const WithdrawModal = props => {
 
     const data = {amount: amount.value, address: address.value}
 
-    let totalAmount = isNaN(amountNumber) ? 'Invalid value' : amountNumber === 0 ? 0 : amountWithFee.toFixed(7)
+    let totalAmount = isNaN(amountNumber) ? 'Invalid value' : amountNumber === 0 ? 0 : amountWithFee.toString().slice(0,9)
 
     function onCloseModal(){
         setModalOpen(null)
@@ -56,7 +56,7 @@ export const WithdrawModal = props => {
         setModalOpen(true)
     }
 
-    const wallet = props.wallet ? props.wallet.toFixed(7) : 0
+    const wallet = props.wallet ? props.wallet.toString().slice(0,9) : 0
 
     return <Modal isOpen={props.isOpen} onClose={onClose}>
             <form className='withdraw-modal' onSubmit={handleWithdraw} >
@@ -74,22 +74,22 @@ export const WithdrawModal = props => {
                     </div>
                     <div>
                         <p className='p-withdrawModal'>Amount</p>
-                        <input {...amount} required={true} className='join-input' type="text" placeholder='$ 0.01'/>
+                        <input {...amount} required={true} className='join-input' type='number' placeholder='$ 0.01'/>
                         <p className={errorBalance ? 'minimun-withdraw-p minimunBtc' : 'dNone'}><MdInfo />  The balance in the wallet is not enough.</p>
-                        <p className={errorAmount ? 'minimun-withdraw-p minimunBtc' : 'minimun-withdraw-p'}><MdInfo />  Minimum amount 0.0003 BTC.</p>
+                        <p className={errorAmount ? 'minimun-withdraw-p minimunBtc' : 'minimun-withdraw-p'}><MdInfo />  Minimum amount 0.0002 BTC.</p>
                     </div>
                 </div>
                 <div className='total-receive-withdraw'>
-                    <p>Total to receive in address: <span className={totalAmount === 'Invalid value' ? 'total-receive-span' : ''}>{totalAmount}</span></p>
+                    <p>Total to receive in address: <span className={totalAmount === 'Invalid value' ? 'total-receive-span' : ''}>{totalAmount} BTC</span></p>
                 </div>
                 <div>
-                    <p><MdInfo />  Fee: 0.0001 BTC.</p>
+                    <p><MdInfo />  Fee: {fee} BTC.</p>
                     <p><MdInfo />  Bitcoin transactions usually take 20 minutes to 1 day to complete.</p>
                 </div>
 
                 <button onClick={onError} className={!confirm ? 'btn btn-dark btn-block invitation-button' : 'dNone'} type='button'>Send</button>
                 <button className={confirm ? 'btn btn-dark btn-block invitation-button' : 'dNone'} type='submit'>
-                    <p> Confirm withdrawal for {Number(amount.value).toFixed(7)}</p>
+                    <p> Confirm withdrawal for {Number(amount.value).toString().slice(0,9)}</p>
                 </button>
                 <button className='btn btn-dark btn-block withdraw-modal-cancelar' onClick={onClose} type='button'>Cancel</button>
             </form>

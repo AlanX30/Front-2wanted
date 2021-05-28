@@ -18,7 +18,14 @@ export const DepositModal = props => {
         setCopy(false)
         props.onClose()
     }
-    console.log(userData, address)
+
+    function onCopy(){
+        setCopy(true)
+        setTimeout(() => {
+            setCopy(false)
+        }, 5000)
+    }
+
     return <Modal isOpen={props.isOpen} onClose={onClose}>
 
         {
@@ -35,7 +42,7 @@ export const DepositModal = props => {
 
                     <p>{address}</p>
                     
-                    <CopyToClipboard text={address} onCopy={()=>setCopy(true)}>
+                    <CopyToClipboard text={address} onCopy={onCopy}>
                         <button type='button' className='button-copy-deposit'>
                             {
                                 copy ? 
@@ -48,6 +55,8 @@ export const DepositModal = props => {
                             } 
                         </button>
                     </CopyToClipboard>
+
+                    <p className='mb-4'>The first deposit has a fee of 0.00002 btc.</p>
 
                 </div>
 

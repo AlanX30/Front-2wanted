@@ -25,91 +25,96 @@ export const Help = () => {
             <h1 className='help_h1'>Instructions</h1>
             <div>
                 <p>
-                    Para iniciar el algoritmo de 2wanted primeramente se debe ingresar a una  “sala”, la cual se puede crear desde cero en la opción “Create Room” en el menú principal, colocando un nombre único y un valor mínimo de 0.00005 BTC, con una billetera cargada previamente.  
-                    <a className='help_a' href='#walletInstruction'> Click Aquí para instrucciones de deposito y retiro en la billetera.</a>
+                To begin the algorithm of 2wanted,  first:  you need to enter a “room”, in which you create from the start in the option “Create Room”. In the main menu, add a unique name for the value of 0.00005 BTC with a previously loaded wallet.   
+                    <a className='help_a' href='#walletInstruction'> Click Here for instructions on the deposit and the withdraw from the wallet.</a>
                 </p>
                 <div className='help_imgContainer'> <img className='help_create' src={createImg} alt="create"/> </div>
-                <p>También puede unirse a una sala con una invitación recibida en la bandeja de notificaciones por usuarios pertenecientes a una sala ya creada anteriormente.</p>
+                <p>You can also join a “room” with an invitation received from the tab of notifications for users that are participating in a room already. </p>
                 <div className='help_imgContainer'>
                     <img className='help_img help_medium' src={invitatonImg} alt=""/>
                     <img className='help_img help_medium' src={invitationModalImg} alt=""/>
                 </div>
-                <p>o ingresar a una sala creada con anterioridad por otra persona, ya que toda sala creada quedará publica, y puede ingresar a ella por su nombre a través del buscador, con este método se le pedirá especificar si va a entrar como referido de un usuario perteneciente a la sala o desea beneficiar a un usuario aleatorio en ella.</p>
+                <p>or you can enter a room previously existent through another. Taking into consideration that the room  is created public, you can  search for the name which will consider to specify the person created. The, enter through this method if you are going to enter like a user apart of the room. Or if you desire benefit a random user from the room.</p>
                 <div className='help_imgContainer '>
                     <img className='help_img help_medium' src={searchImg} alt=""/>
                     <img className='help_img help_medium' src={searchModalImg} alt=""/>
                 </div>
                 <p>
-                    Por cualquier método de ingreso a una sala se tendrá que pagar el coste de valor estipulado en ella la cual representa la única inversión que se realizará para ganar. <br></br><br></br>
-                    Después de haber ingresado a una sala correctamente ya podrá visualizarla desde la lista de salas activas e ingresar para ver su estado.
+                    Through any method of entrance to a room you will have to pay the cost of value stipulated in it, which represents the only version  in which it will preform to win. <br></br><br></br>
+                    After having entered in a room correctly, you can now visualize from the list of room active and enter to see you state.
                 </p>
                 <div className='help_imgContainer'>
                     <img className='help_listRoom' src={help_listRooms} alt=""/>
                 </div>
                 <p>
-                    Una vez dentro de la sala el objetivo será completar una estructura piramidal limitada con 4 niveles, al comenzar serás siempre el usuario que encabeza dicha pirámide, los usuarios activos se representan con círculos amarillos encendidos, la idea es llegar al tercer y cuarto nivel, ya que por cada usuario activo en tercer nivel se pagara un valor del 50% del valor de la sala, y por cada usuario activo en el cuarto nivel se pagara un valor de 25%  del valor de la sala, con solo dos usuarios en el tercer nivel ya se recuperaría la inversión ya que sumaría un 100% y el resto de usuarios serian ganancia, dichos usuarios ingresados tienen la opción de ganar haciendo lo mismo como se mostrara a continuación con la siguiente dinámica de ingresos. <br></br><br></br>
-                    Al empezar este user1 tendrá su sala vacía como se muestra en la imagen, solo estando este como participante en la cima
+                    Once have entered the room, the objective will be to complete a structure of pyramidal limited with 4 levels. When you begin, you will always be the user that is ahead the pyramidal.The users active will represent with lighted yellow circles. The idea is to get to the third and fourth level, now that for each user active in the third level the pay will have a value of the 50% in that room. For every user active in the fourth level the pay will have a value of the 25% of that room. With only two users in the third level, there will be the recompenastion of the investment and it will add up to the 100%. The rest of the users will be a profit: having said that, users involved will have the option to win by doing the same as it will be shown in the continuing dynamic of profits. <br></br><br></br>
+                    When begining, the user 1, will have the room empty like it is shown in the image, only having them being the only participants in the top.
                 </p>
                 <div className='help_imgContainer'>
                     <img src={room1} alt=""/>
                 </div>
                 <p>
-                    Para empezar a llenar su sala, invitará a un user2 haciendo Click en el botón + y escribiendo el nombre de usuario al que se desea invitar, este usuario recibirá una invitación en su bandeja de notificaciones para unirse y tendrá que pagar el importe del costo de la sala, luego de unirse se vería de esta manera
+                    To  begin to fill the room, invite user2 by clicking the + and writing the name of the user that you desire to invite. This user will receive an invitation in the tab of notifications to join. Then, they will have to pay the import of cost of the room: then join. This is how it will look:
                 </p>
                 <div className='help_imgContainer'>
+                    <h4 className='img-h4'>View from user1</h4>
                     <img className='help_img' src={room2} alt=""/>
+                    <h4 className='img-h4'>View from user2</h4>
                     <img className='help_img' src={room3} alt=""/>
                 </div>
                 <p>
-                    Nótese que el user2 invitado empieza solo desde la cima para obtener el también sus ganancias completando el proceso, pero desde el user1 ya tiene su primer integrante, cuando el user2 invite un nuevo usuario que en este ejemplo llamaremos user3 se vería de esta manera
+                    Note that the user2 invite, will begin alone from the top to obtain as will a profit which will complete the process. But, from user1 already has its first member. When the user2 invites a new user, for example user3, it will look as shown in the images down below:
                 </p>
                 <div className='help_imgContainer'>
+                    <h4 className='img-h4'>View from user1</h4>
                     <img className='help_img' src={room4} alt=""/>
+                    <h4 className='img-h4'>View from user2</h4>
                     <img className='help_img' src={room5} alt=""/>
                 </div>
                 <div className='help_imgContainer'>
+                    <h4>View from user3</h4>
                     <img src={room6} alt=""/>
                 </div>
                 <p>
-                    Viendo los ejemplos, El objetivo es buscar a 2 usuarios que estén interesados en ganar, que ellos hagan su trabajo, para rellenar tu sala de manera que puedas empezar a ganar en el tercer nivel, si cada usuario hace su trabajo de buscar dos usuarios para su sala, esta se llenara sola, sino esta la opción de llenarla tu mismo invitando todas las personas que puedas para ganar y a la ves los estas ayudando a ellos a llenar su sala. <br></br><br></br>
+                    After viewing the examples of the images: the objective is to look for two users that are interested in winning. They will do there job to refill the room in a way that you can begin to will in the third level. If every user does there job to look for two users for there room then this one will fill up on its own. If not, there is an option to fill it up on your own, by inviting all the users that you can to win. Meanwhile, you help them fill there rooms up.  <br></br><br></br>
                 </p>
-                <h5>Ejemplo de sala con usuarios en tercer y cuarto nivel:</h5>
+                <h5>Example of room with users in the third and fourth level:</h5>
                 <div className='help_imgContainer'>
                     <img src={room7} alt=""/>
                 </div>
                 <p>
-                    En esta sala con un valor de ejemplo de 1 BTC se puede observar que lleva 3 usuarios en el tercer nivel y 2 en el cuarto nivel, cada usuario en tercera línea producirá 50% del valor de la sala en ganancia, ya que el valor de sala es de 1BTC, cada uno esta produciendo 0.5 BTC, los 3 usuarios actuales en tercer nivel sumarian 1.5 BTC, los usuarios en el cuarto nivel producen un 25% del valor de la sala por cada uno, los dos usuarios actuales en cuarto nivel estarían produciendo 0.25 BTC cada uno, sumando 0.5 BTC en cuarta línea. Sumando lo producido actualmente por tercer y cuarto nivel se estaría generando 2 BTC de ganancia, en una sala donde su única inversión fue de 1 BTC y todavía quedan muchos puestos por llenar. <br></br><br></br>
-                    Una sala llena de 2Wanted devuelve un 800% del valor de la inversión, en la tabla derecha podrás ver los detalles de ganancias e información de la sala y retirar ganancias a la billetera en cualquier momento. Luego de haber llenado la sala, esta desaparecerá de sus salas activas. Puedes crear y unirte a cuantas salas quieras al mismo tiempo y aprovechar este algoritmo fijo puesto para ti… <br></br><br></br>
+                    In this room, with the value of example 1BTC  you can observe that it has 3 users in the third level and two in the fourth level. Each user in the third line produces 50% of the value in the room of profits. Now that the value in the room is 1BTC. Each one is producing, 0.5BTC the three current users in the third level will save up 1.5BTC. The users in the fourth level will produce a 25% value in the room for each one. The two current users in the fourth level will be producing 0.25BTC each. Adding up to, 0.5BTC en the fourth line. Adding up everything produced currently for every third and fourth level; it will be generating 2 BTC of profit. Thus, in one room the only investment was of 1BTC and there will still be numerous spots remaining to fill.   <br></br><br></br>
+                    One room full of  2wanted returns a 800% of value, of the investment. In the table to the right, you can see the details of the profit and information of the room. As well as, the take away of the profits from the wallet at any moment. After have filled the room, this one will desapear from your currently active room. You can create and join any room  at the same time: taking advantage of this algorithm positioned for you. <br></br><br></br>
                 </p>
             </div>
             <div id='walletInstruction'>
-                <h1 className='help_h1'>Instrucciones de deposito y retiro de la billetra 2Wanted</h1><br></br>
+                <h1 className='help_h1'>Wallet Deposit and Withdrawal Instructions </h1><br></br>
                 <div>
-                    <h4>Depositar btc en la billetera de 2wanted</h4>
+                    <h4>How To Deposit BTC in the Wallet of 2Wanted</h4>
                     <p>
-                        El Bitcoin es la moneda es con que manejamos todos los depósitos, retiros y transferencias entre usuarios. <br></br><br></br>
-                        Para depositar dinero en 2WANTED deberás enviar Bitcoin (BTC) desde una billetera externa hacia tu billetera en 2Wanted <br></br><br></br>
-                        Oprimiendo Click en el icono se desplegará el menú lateral donde harás click en el botón deposit, el cual desplegara una ventana con una dirección asignada a tu cuenta de usuario y el código QR con los que podrás depositar a tu billetera en 2WANTED. 
+                        The Bitcoin is the coin in which we manage all the deposits, withdraws and transfers between the users.  <br></br><br></br>
+                        To deposit money into 2wanted you need to send Bitcoin (BTC) from an external wallet towards the your wallet in 2wanted. <br></br><br></br>
+                        In the right side menu click on the option deposit. In which it will displace a window with a direction signed to your account of user. The code QP is with what you will be able to deposit to your wallet in 2wanted.  
                     </p>
                     <div className='help_imgContainer'>
                         <img className='help_img help_medium' src={lateralMenu} alt=""/>
                         <img className='help_img help_medium' src={depositImg} alt=""/>
                     </div>
                     <p>
-                        Los tiempos en verificarse las transferencias de billeteras externas en BTC a tu cuenta 2Wanted dependen de varios factores, ver link <a className='help_a' href='https://es.cointelegraph.com/explained/how-long-does-a-cryptocurrency-transaction-take' rel='noreferrer' target='_blank'>https://es.cointelegraph.com/explained/how-long-does-a-cryptocurrency-transaction-take</a><br></br><br></br>
+                        The time of verification to the transfers of the external wallets en BTC to your account in 2wanted depend on various factors. View the following link:  <a className='help_a' href='https://es.cointelegraph.com/explained/how-long-does-a-cryptocurrency-transaction-take' rel='noreferrer' target='_blank'>https://es.cointelegraph.com/explained/how-long-does-a-cryptocurrency-transaction-take</a><br></br><br></br>
                     </p>
-                    <h4>Retirar btc de la billetera de 2wanted hacia billeteras externas</h4>
+                    <h4>How to Remove BTC from Wallet of 2Wanted towards the External Wallets </h4>
                     <p>
-                        Para el retiro hacia billeteras externas, hacer click en el botón se desplegará el menú lateral donde harás click en el botón retirar el cual desplegará un formato donde deberás redactar la dirección que va a recibir el retiro, el monto y a su vez tendrás información automática del fee de descuento y el total que recibiría la billetera receptora.
+                        In the right side menu click on the option Withdraw which will them displace a format in which you need to write in the direction that will receive the withdraw the amount. In this way, you will have information automatically from the fee of discount: and the total that the wallet will receive.
                     </p>
                     <div className='help_imgContainer'>
                         <img className='help_img help_medium' src={lateralMenu} alt=""/>
                         <img className='help_img help_medium' src={help_withdraw} alt=""/>
                     </div>
-                    <h4>Transferir btc entre usuarios de 2wanted(Gratis sin comisiones)</h4>
+                    <h4>Transfer BTC between users of 2Wanted (Free with no commissions)</h4>
                     <p>
-                        Para transferir BTC entre usuarios dar click en el botón se desplegará el menú lateral donde harás click en el botón Send BTC to 2Wanted User (free) el cual desplegará un formato donde deberás redactar el nombre de usuario, el monto y click en enviar. <br></br>
-                        Las transferencias entre usuarios son gratuitas.
+                        In the right side menu click on the option “Send BTC to 2Wanted User (free)”. At this time this will displace a format where you should write the name of the user, the amount. Then, click on send. <br></br>
+                        The transfers between the users are free.
                     </p>
                     <div className='help_imgContainer'>
                         <img className='help_img help_medium' src={lateralMenu} alt=""/>
