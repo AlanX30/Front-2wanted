@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { MdInfo, MdLockOutline, MdMail } from "react-icons/md"
 import { useFormValues } from '../hooks/useFormValues'
 import { url } from '../urlServer'
@@ -16,6 +16,8 @@ export const Signup = (props) => {
 
     const conected = Cookies.get('conected')
 
+    const sitekey = '0c5fbce3-bbe4-4510-8a92-7b2b439f5e4d'
+    console.log(sitekey)
     const params = new URLSearchParams(window.location.search)
     const salaParams = params.get('add')
 
@@ -99,7 +101,7 @@ export const Signup = (props) => {
             })
         }) 
     }
-        
+
     return <div>   
 
         <Helmet> <title>2wanted | Log In or Sign Up</title> </Helmet>
