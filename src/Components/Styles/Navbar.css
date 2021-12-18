@@ -307,19 +307,6 @@ nav {
 .section-searcher-hidden {
   display: none;
 }
-.item-menu-right-withdrawToUser svg {
-  margin-bottom: 3px;
-}
-.item-menu-right-withdrawToUser {
-  background: #4a76ad;
-  color: white;
-  height: 40px;
-  justify-content: center;
-  padding: 6px 5px 5px 5px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
 .item-menu-right {
   color: var(--text);
   height: 50px;

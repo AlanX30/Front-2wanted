@@ -11,13 +11,26 @@ import IMG from '../Images/bigLogo.svg'
 import './Styles/Signup.css'
 import Cookies from 'js-cookie'
 import EmailVerificationModal from '../Components/Modals/EmailVerificationModal';
+import ReCAPTCHA from "react-google-recaptcha";
 
 export const Signup = (props) => {
 
     const conected = Cookies.get('conected')
 
-    const sitekey = '0c5fbce3-bbe4-4510-8a92-7b2b439f5e4d'
-    console.log(sitekey)
+    const [tokenCaptcha, setTokenCaptcha] = useState('')
+    const [validCaptcha, setValidCaptcha] = useState(true)
+
+    const captchaRef = useRef(null)
+
+    function onChangeCaptcha(value){
+        if(value){
+            setTokenCaptcha(value) 
+            setValidCaptcha(true)
+        }else{ 
+            setValidCaptcha(false) 
+        }
+    }
+    
     const params = new URLSearchParams(window.location.search)
     const salaParams = params.get('add')
 
@@ -49,6 +62,7 @@ export const Signup = (props) => {
         email: email.value,
         password: password.value,
         confirm_password: confirm_password.value,
+        captchaToken: tokenCaptcha
     }
 
     const [validEmail, setValidEmail] = useState(true)
@@ -63,6 +77,7 @@ export const Signup = (props) => {
         if(email2.value === email.value){ setValidEmail(true)}else{ return setValidEmail(false)}
         if(reg_whiteSpace.test(userName.value)){return setUserValid(false)}else{setUserValid(true)}
         if(!reg_password.test(password.value)){return setPassword_valid(false)}else{setPassword_valid(true)}
+        if(!tokenCaptcha){return setValidCaptcha(false)}else{setValidCaptcha(true)}
 
         setSignupLoading(true)
 
@@ -82,14 +97,20 @@ export const Signup = (props) => {
                     title: 'Error',
                     text: res.data.error,
                 })
+                captchaRef.current.reset()
+                setTokenCaptcha('')
             }else if(res.data === 'has exceeded the number of attempts, try again in 10 minutes'){
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: res.data,
                 })
+                captchaRef.current.reset()
+                setTokenCaptcha('')
             }else{
                 setModalOpen(true)
+                captchaRef.current.reset()
+                setTokenCaptcha('')
             }
         })
         .catch( err => {
@@ -99,6 +120,7 @@ export const Signup = (props) => {
                 title: 'Error',
                 text: err,
             })
+            captchaRef.current.reset()
         }) 
     }
 
@@ -166,6 +188,17 @@ export const Signup = (props) => {
                                             <input autoComplete='true' type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirm Password' required/>
                                         </div>
                                     </div>
+
+                                    <div className='captcha'>
+                                        <ReCAPTCHA
+                                            ref={captchaRef}
+                                            sitekey='6LeGRqQaAAAAAAc2AHqZPfH5QHbfyZyPntAXoy0G'
+                                            onChange={onChangeCaptcha}
+                                            size='compact'
+                                        />
+                                        <label className={!validCaptcha ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Please complete captcha</label>
+                                    </div>
+
                                     <button disabled={signupLoading ? true : false} type='submit' className='button-signup'>
                                         <div className={signupLoading ? "spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>

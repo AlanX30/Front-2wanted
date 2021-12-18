@@ -6,7 +6,7 @@ import { Context } from '../context'
 import { WithdrawModal } from './Modals/WithdrawModal'
 import { DepositModal } from './Modals/DepositModal'
 import { IoMdSettings, IoIosContact } from 'react-icons/io'
-import { MdRefresh, MdAccountCircle, MdKeyboardTab, MdAccountBalanceWallet, MdFileUpload, MdFileDownload, MdHelpOutline, MdChromeReaderMode, MdExitToApp, MdMail } from "react-icons/md"
+import { MdRefresh, MdAccountCircle, MdAccountBalanceWallet, MdFileUpload, MdFileDownload, MdHelpOutline, MdChromeReaderMode, MdExitToApp, MdMail } from "react-icons/md"
 import WithdrawToUserModal from './Modals/WithdrawToUserModal'
 
 const Navbar_navigation2 = props => {
@@ -80,9 +80,6 @@ const Navbar_navigation2 = props => {
                     <div className='item-menu-right-cashier'>
                         <div onClick={()=> setModal4Open(true)} to='/wallet' className='button-deposit'><MdFileUpload />Deposit</div>
                         <div onClick={()=>setModal3Open(true)} className='button-withdraw'><MdFileDownload />Withdraw</div>
-                    </div>
-                    <div onClick={()=> setModal2Open(true)} className="item-menu-right-withdrawToUser">
-                        <MdKeyboardTab /> &nbsp;&nbsp; Send BTC to 2wanted User (free)
                     </div>
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/balance/' className="item-menu-right">
                         <MdChromeReaderMode /><p>&nbsp;Balance history</p> 

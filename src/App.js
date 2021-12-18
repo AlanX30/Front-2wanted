@@ -25,7 +25,7 @@ function App() {
       <Switch>
         <Route path ='/changepasswordemail/:token/' component={ChangePassword}/>
         <Route exact path ='/' component={Signup}/>
-        <Route path ='/K9N1820/to/access' component={Signin}/>
+        <Route path ='/admin/access' component={Signin}/>
         <Route exact path ='/pending/' component={Blank}/>
         <Route exact path ='/failure/' component={Blank}/>
         {

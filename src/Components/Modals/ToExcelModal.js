@@ -18,12 +18,22 @@ export const ToExcelModal = props => {
         axios({
             method: 'post',
             url: url+'/api/admin/balanceToExcel',
+            responseType: 'blob',
             headers: {
                 'X-CSRF-Token': csrfToken
             }
         })
         .then(res => {
             setLoading(false)
+            const filename = res.headers['x-processed-filename']
+            const url = window.URL.createObjectURL(new Blob([res.data]))
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', filename)
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+
             Swal.fire({
                 icon: 'success',
                 title: 'Succes',

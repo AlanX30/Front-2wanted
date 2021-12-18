@@ -49,6 +49,14 @@
   display: flex;
   align-items: center;
 }
+
+.captcha {
+    width: 142px;
+    margin: 0 auto;
+    margin-top: 22px;
+    margin-bottom: 15px;
+}
+
 .button-signup {
   border-radius: 10px;
   border: 2px solid var(--bg-color);
