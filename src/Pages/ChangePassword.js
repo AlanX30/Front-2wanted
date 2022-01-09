@@ -26,7 +26,7 @@ export const ChangePassword= props => {
             return Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'It must contain uppercase, lowercase and number, minimum 8 characters',
+                text: 'Minimo 8 caracteres, sin espacios, usar mayuscula y minuscula.',
             })
         }
         if(password.value === confirmPassword.value){
@@ -66,23 +66,23 @@ export const ChangePassword= props => {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Passwords do not match',
+                text: 'Las contraseñas no coinciden',
             })
         }
     }
 
     return <div className='changePasswordEmail'>
         <form onSubmit={handleChange}>
-            <h1>Change of password</h1>
-            <p>Enter new password</p>
+            <h1>Cambio de contraseña</h1>
+            <p>Ingrese nueva contraseña</p>
             <input  {...password} type="password"/>
-            <p>Confirm new password</p>
+            <p>Confirme nueva contraseña</p>
             <input  {...confirmPassword} type="password"/>
             <button disabled={loading ? true : false} className='btn btn-dark btn-block changepasswordemail-button'>
                 <div className={loading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
-                    <span className="sr-only">Loading...</span>
+                    <span className="sr-only">Cargando...</span>
                 </div>
-                <p  className={loading ? 'dNone' : ''}>Change</p>
+                <p  className={loading ? 'dNone' : ''}>Actualizar</p>
             </button>
         </form>
     </div>

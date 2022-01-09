@@ -51,7 +51,7 @@ const PasswordVerificationNewRoom = props => {
 
     return <Modal2 isOpen={props.isOpen} onClose={props.onClose}>
         <form onSubmit={onConfirm}>
-            <h4>Enter your password</h4>
+            <h4>Ingresa tu contraseña</h4>
             <div className='mb-3 mt-1 d-flex'>
                 <div className="pre-formS">
                     <div className="input-group-text invite-pre-form"><MdLockOutline /></div>
@@ -62,7 +62,7 @@ const PasswordVerificationNewRoom = props => {
                 <div className={createLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                     <span className="sr-only">Loading...</span>
                 </div>
-                <p className={createLoading ? 'dNone' : ''}>Confirm!</p>
+                <p className={createLoading ? 'dNone' : ''}>Confirmar!</p>
             </button>
         </form>
     </Modal2>

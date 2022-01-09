@@ -107,19 +107,19 @@ export const Balance = () => {
     return <div className='balance-container'>
 
         <div className='balance-title'>
-            <h3><MdChromeReaderMode />Balance History</h3>
+            <h3><MdChromeReaderMode />Historial de balance</h3>
         </div>
         <form className='date-form' onSubmit={handleDate}>
             <div className='wallet-balance'>
                 <label>Wallet:</label><span>{wallet} BTC</span>
             </div>
-            <p onClick={()=>setViewDates(!viewDates)}>Search by date</p>
+            <p onClick={()=>setViewDates(!viewDates)}>Buscar por fecha</p>
             <div onClick={()=>setViewDates(!viewDates)} className='flecha-busqueda-balance'>< RiArrowDownSLine /></div>
-            <p className={viewDates ? '' : 'none-balance'}>From </p>
+            <p className={viewDates ? '' : 'none-balance'}>Desde </p>
             <input className={viewDates ? '' : 'none-balance'} type="date" required={true} onChange={(e)=>setValueFecha1(e.target.value)}/>
-            <p className={viewDates ? '' : 'none-balance'}>To </p>
+            <p className={viewDates ? '' : 'none-balance'}>a </p>
             <input className={viewDates ? '' : 'none-balance'} type="date" required={true} onChange={(e)=>setValueFecha2(e.target.value)}/>
-            <button className={viewDates ? '' : 'none-balance'}>Search</button>
+            <button className={viewDates ? '' : 'none-balance'}>Buscar</button>
         </form>
         <div className={totalPages === 1 ? 'dNone' : 'pagination pages-balance'}>
             <button disabled={countPages === 1 ? true : false} className='pagination-button' onClick={()=> {
@@ -141,11 +141,11 @@ export const Balance = () => {
         {
             loading ? <div>
                 <div className="spinner-balance spinner-border text-danger" role="status">
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only">Cargando...</span>
             </div>
             </div> :
             balance.length <= 0 ? <div>
-                <h3 className='no-events-balance'>Empty</h3>
+                <h3 className='no-events-balance'>Vacio</h3>
             </div> :
             <div className='balance-list'>       
             {
@@ -154,7 +154,7 @@ export const Balance = () => {
                         balance.type === 'won' ?  <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${ new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
-                                <p className='balance-description-title'>Won in room:</p>
+                                <p className='balance-description-title'>Pago de sala:</p>
                                 <p>{balance.salaName}</p>
                                 <p className='balance-description-title'>Wallet:</p>
                                 <p>{balance.wallet.toString().slice(0,9)} BTC</p>
@@ -166,7 +166,7 @@ export const Balance = () => {
                         balance.type === 'buy' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
-                                <p className='balance-description-title'>Room payment:</p>
+                                <p className='balance-description-title'>Ingreso a sala:</p>
                                 <p>{balance.salaName}</p>
                                 <p className='balance-description-title'>Wallet:</p>
                                 <p>{balance.wallet.toString().slice(0,9)} BTC</p>
@@ -178,7 +178,7 @@ export const Balance = () => {
                         balance.type === 'deposit' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
-                                <p className='balance-description-title'>Deposit:</p>
+                                <p className='balance-description-title'>Deposito:</p>
                                 <p>{balance.depositAmount.toString().slice(0,9)}</p>
                                 <p className='balance-description-title'>Wallet:</p>
                                 <p>{balance.wallet.toString().slice(0,9)} BTC</p>
@@ -190,7 +190,7 @@ export const Balance = () => {
                         balance.type === 'withdrawToUser' ? <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
-                                <p className='balance-description-title'>Withdraw:</p>
+                                <p className='balance-description-title'>Retiro:</p>
                                 <p>{balance.withdrawAmount.toString().slice(0,9)}</p>
                                 <p className='balance-description-title'>To user:</p>
                                 <p>{balance.toUser}</p>
@@ -204,11 +204,11 @@ export const Balance = () => {
                         balance.type === 'withdrawBtc' && <li key={balance._id} >
                             <div className='balance-date-card'>{`${new Date(balance.date).getDate()} / ${ ('0' + (new Date(balance.date).getMonth() + 1)).slice(-2)} / ${new Date(balance.date).getFullYear()}  -  ${new Date(balance.date).getHours()}:${ ('0' + new Date(balance.date).getMinutes()).slice(-2)}`}</div>
                             <div>
-                                <p className='balance-description-title'>Withdraw:</p>
+                                <p className='balance-description-title'>Retiro:</p>
                                 <p>{balance.withdrawAmount.toString().slice(0,9)} + Fee</p>
                                 <p className='balance-description-title'>Fee:</p>
                                 <p>{balance.fee}</p>
-                                <p className='balance-description-title'>To Address:</p>
+                                <p className='balance-description-title'>A direccion:</p>
                                 <p>{balance.toAddress}</p>
                                 <p className='balance-description-title'>Wallet:</p>
                                 <p>{balance.wallet.toString().slice(0,9)} BTC</p>

@@ -108,17 +108,17 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
                     <input required autoComplete="on" type="email" className='form-control' {...email} placeholder='Email'/>
                 </div>
                 <div className="form-group login-inputs">
-                    <input required autoComplete='on' className="form-control" type={type} {...password} placeholder="Password"/>
+                    <input required autoComplete='on' className="form-control" type={type} {...password} placeholder="Contraseña"/>
                     <div className='checkLogin'>
-                        <input checked={check} onChange={handleCheck} className="" type="checkbox" /><span> Show password</span>
+                        <input checked={check} onChange={handleCheck} className="" type="checkbox" /><span> Mostrar contraseña</span>
                     </div>
-                    <label className='forgotPassworLogin' onClick={()=>setModal2Open(true)}>Forgot password?</label>
+                    <label className='forgotPassworLogin' onClick={()=>setModal2Open(true)}>Olvidaste tu contraseña?</label>
                 </div>
                 <button disabled={loginLoading ? true : false} type='submit' className="login-button">
                     <div className={loginLoading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
-                        <span className="sr-only">Loading...</span>
+                        <span className="sr-only">Cargando...</span>
                     </div>
-                <p className={loginLoading ? 'dNone' : 'p-nav-login'}>Log in</p>
+                <p className={loginLoading ? 'dNone' : 'p-nav-login'}>Entrar</p>
                 </button>
             </form>
             <EmailVerificationModal2 refresh={refresh} props={props} email={email.value} isOpen={modalOpen} onClose={onCloseModal}/>

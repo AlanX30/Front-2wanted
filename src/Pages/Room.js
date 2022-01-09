@@ -73,7 +73,7 @@ export const Room = (props) => {
     if(!dataRoom || loadingChildsData){
         return <div className='loading-room'>
             <div className="spinner-border spiner-room text-danger" role="status">
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only">Cargando...</span>
             </div>
         </div>
     }

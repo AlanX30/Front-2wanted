@@ -11,7 +11,7 @@ export const ChildModal = (props) =>{
 
     return (
         <MiniModal isOpen={props.isOpen} onClose={props.onClose}>
-            <h3>User:</h3>
+            <h3>Usuario:</h3>
             <br/>
             <h4>{user}</h4>
         </MiniModal>

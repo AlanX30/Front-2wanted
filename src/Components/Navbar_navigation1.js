@@ -105,7 +105,7 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
             </button>
             <div ref={toggle1.ref} className={toggle1.isComponentVisible ? 'dropdown-menu-navbar1 isActive' : 'dropdown-menu-navbar1'}>
                 {
-                    invitations.length === 0 && <p className='no-spaces'>No notifications</p>
+                    invitations.length === 0 && <p className='no-spaces'>No hay notificaciones</p>
                 }
                 {
                     invitations.map(invitation => {
@@ -114,16 +114,16 @@ const Navbar_navigation1 = ({ArbolImg, useComponentVisible, url, username}) => {
                                 <button className='' onClick={()=> onOpenModal(invitation)}>
                                     <img src={ArbolImg} alt="ArbolImg"/>
                                     <div className='invitation-description'>
-                                        <p>Invited by: <span> {invitation.host}</span></p>
-                                        <p>Room Name: <span> {invitation.salaName}</span></p>
-                                        <p>Price: <span> {invitation.price.toString().slice(0,9)} BTC</span></p>
+                                        <p>Invitado por: <span> {invitation.host}</span></p>
+                                        <p>Nombre de sala: <span> {invitation.salaName}</span></p>
+                                        <p>Precio: <span> {invitation.price.toString().slice(0,9)} BTC</span></p>
                                     </div>
                                 </button>
                             </li>
                         )
                     })
                 }
-                <button className={totalPages > countPages ? 'button-more-notifications' : 'dNone'} onClick={()=>{setCountPages(countPages + 1)}}>More ▼</button>
+                <button className={totalPages > countPages ? 'button-more-notifications' : 'dNone'} onClick={()=>{setCountPages(countPages + 1)}}>Mas ▼</button>
             </div>
             <InvitationModal invitationData={invitationData} isOpen={modalOpen} onClose={onCloseModal} />
         </div>

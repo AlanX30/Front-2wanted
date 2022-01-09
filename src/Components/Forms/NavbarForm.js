@@ -109,7 +109,7 @@ const NavbarForm = ({ ArbolImg, url, iconSet, useComponentVisible }) => {
             <div className={iconNone  ? 'searcher-hidden' : 'dNone'}>
                 <form onSubmit={searchRoom1} >
                     <button onClick={()=> setIconNone(false)} type='button' className='icon-navbar'><MdKeyboardReturn size='23' /></button>
-                    <input {...room1} type='text' placeholder='Room Name' />
+                    <input {...room1} type='text' placeholder='Nombre de sala' />
                     <button type='submit' className='icon-navbar'><MdSearch size='23' /></button>
                 </form>
             </div>
@@ -122,7 +122,7 @@ const NavbarForm = ({ ArbolImg, url, iconSet, useComponentVisible }) => {
 
             <form onSubmit={searchRoom1} >
                 <div>
-                    <input {...room1} type='text' placeholder='Room Name'/>
+                    <input {...room1} type='text' placeholder='Nombre de sala'/>
                 </div>
                 <button type='submit' className='icon-navbar'><MdSearch size='23' /></button>
             </form>
@@ -142,15 +142,15 @@ const NavbarForm = ({ ArbolImg, url, iconSet, useComponentVisible }) => {
                             <div onClick={onOpen2Modal} className=' filter-sala-wrap'>
                                 <img src={ArbolImg} className='' alt="..." />
                                 <div className='filter-sala-description'>
-                                    <p> Room Name:  <span> {filterSala.data.name}</span>  </p>
-                                    <p> Creator:  <span> {filterSala.data.creator}</span>  </p>
-                                    <p> Price:  <span> {filterSala.data.price.toString().slice(0,9)} BTC</span>  </p>
+                                    <p> Nombre de sala:  <span> {filterSala.data.name}</span>  </p>
+                                    <p> Creador:  <span> {filterSala.data.creator}</span>  </p>
+                                    <p> Precio:  <span> {filterSala.data.price.toString().slice(0,9)} BTC</span>  </p>
                                 </div>
                             </div>
-                        <button onClick={onOpen2Modal} className=''>Join</button>
+                        <button onClick={onOpen2Modal} className=''>Unirse</button>
                     </div> 
-                    <p className='aviso-filtro'><MdInfo />Remember to respect uppercase and lowercase letters</p>
-                    </div> : <div className='no-spaces'>{filterSala.error}! <p className='aviso-filtro'><MdInfo />Remember to respect uppercase and lowercase letters</p></div>
+                    <p className='aviso-filtro'><MdInfo />Recuerda respetar mayusculas y minusculas</p>
+                    </div> : <div className='no-spaces'>{filterSala.error}! <p className='aviso-filtro'><MdInfo />Recuerda respetar mayusculas y minusculas</p></div>
                 } 
             </div>
 

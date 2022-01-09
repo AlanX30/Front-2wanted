@@ -21,19 +21,19 @@ const TreeData = ({price, username, arbolData, onOpenModal, onOpen2Modal}) => {
             <div className='nivel'>
                 <div className='child'></div>
             </div>
-            <p className='level-text'>Level 1</p>
+            <p className='level-text'>Nivel 1</p>
             <div className='nivel'>
                 <button onClick={arbolData[0] ? ()=> onOpenModal(arbolData[0]) : ()=> onOpen2Modal(username)} className={arbolData[0] ? 'child' : 'noChild'}>+</button>
                 <button onClick={arbolData[1] ? ()=> onOpenModal(arbolData[1]) : ()=> onOpen2Modal(username)} className={arbolData[1] ? 'child' : 'noChild'}>+</button>
             </div>
-            <p className='level-text'>Level 2</p>
+            <p className='level-text'>Nivel 2</p>
             <div className='nivel'>
                 <button disabled={arbolData[0] ? false : true} onClick={arbolData[2] ? ()=> onOpenModal(arbolData[2]) : ()=> onOpen2Modal(arbolData[0])} className={arbolData[2] ? 'child' : 'noChild'}>{arbolData[0] && '+'}</button>
                 <button disabled={arbolData[0] ? false : true} onClick={arbolData[3] ? ()=> onOpenModal(arbolData[3]) : ()=> onOpen2Modal(arbolData[0])} className={arbolData[3] ? 'child' : 'noChild'}>{arbolData[0] && '+'}</button>
                 <button disabled={arbolData[1] ? false : true} onClick={arbolData[4] ? ()=> onOpenModal(arbolData[4]) : ()=> onOpen2Modal(arbolData[1])} className={arbolData[4] ? 'child' : 'noChild'}>{arbolData[1] && '+'}</button>
                 <button disabled={arbolData[1] ? false : true} onClick={arbolData[5] ? ()=> onOpenModal(arbolData[5]) : ()=> onOpen2Modal(arbolData[1])} className={arbolData[5] ? 'child' : 'noChild'}>{arbolData[1] && '+'}</button>
             </div>
-            <p className='level-text'>Level 3 &nbsp; <span>{formatNumber(level3)} USD c/u</span></p>
+            <p className='level-text'>Nivel 3 &nbsp; <span>{formatNumber(level3)} USD c/u</span></p>
             <div className='nivel'>
                 <button disabled={arbolData[2] ? false : true} onClick={arbolData[6] ? ()=> onOpenModal(arbolData[6]) : ()=> onOpen2Modal(arbolData[2])} className={arbolData[6] ? 'child' : 'noChild'}>{arbolData[2] && '+'}</button>
                 <button disabled={arbolData[2] ? false : true} onClick={arbolData[7] ? ()=> onOpenModal(arbolData[7]) : ()=> onOpen2Modal(arbolData[2])} className={arbolData[7] ? 'child' : 'noChild'}>{arbolData[2] && '+'}</button>
@@ -44,7 +44,7 @@ const TreeData = ({price, username, arbolData, onOpenModal, onOpen2Modal}) => {
                 <button disabled={arbolData[5] ? false : true} onClick={arbolData[12] ? ()=> onOpenModal(arbolData[12]) : ()=> onOpen2Modal(arbolData[5])} className={arbolData[12] ? 'child' : 'noChild'}>{arbolData[5] && '+'}</button>
                 <button disabled={arbolData[5] ? false : true} onClick={arbolData[13] ? ()=> onOpenModal(arbolData[13]) : ()=> onOpen2Modal(arbolData[5])} className={arbolData[13] ? 'child' : 'noChild'}>{arbolData[5] && '+'}</button>
             </div>
-            <p className='level-text'>Level 4 &nbsp; <span>{formatNumber(level4)} USD c/u</span></p>
+            <p className='level-text'>Nivel 4 &nbsp; <span>{formatNumber(level4)} USD c/u</span></p>
             <div className='nivel displayNone1'>
                 <button disabled={arbolData[6] ? false : true} onClick={arbolData[14] ? ()=> onOpenModal(arbolData[14]) : ()=> onOpen2Modal(arbolData[6])} className={arbolData[14] ? 'child' : 'noChild'}>{arbolData[6] && '+'}</button>
                 <button disabled={arbolData[6] ? false : true} onClick={arbolData[15] ? ()=> onOpenModal(arbolData[15]) : ()=> onOpen2Modal(arbolData[6])} className={arbolData[15] ? 'child' : 'noChild'}>{arbolData[6] && '+'}</button>

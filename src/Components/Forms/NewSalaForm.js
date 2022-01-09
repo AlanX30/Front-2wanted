@@ -48,29 +48,29 @@ const NewSalaForm = props => {
     return(
         <div className="create-custom">
             <div className='create-form-container'>
-                <h3>Create Room</h3>    
+                <h3>Crear sala</h3>    
                 <form onSubmit={newSala} >
                     <div className={roomValid ? 'mb-3' : 'mb-2'}>
                         <div className='d-flex'>
                             <div>
                                 <div className="input-group-text input-guide">< MdHome /></div>
                             </div>
-                            <input type='text' {...name} placeholder='Room Name' />
+                            <input type='text' {...name} placeholder='Nombre de sala' />
                         </div>
-                        <label className={!roomValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimum 4 characters, maximum 15, must not contain spaces</label>
+                        <label className={!roomValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimo 4 caracteres, maximo 15, sin espacios.</label>
                     </div>
                     <div className={priceValid ? 'mb-3' : 'mb-2'}>
                         <div className='d-flex'>
                             <div>
                                 <div className="input-group-text input-guide">$</div>
                             </div>
-                            <input  placeholder='Price in bitcoin' type='number' {...price} />
+                            <input  placeholder='Precio en bitcoin' type='number' {...price} />
                         </div>
                         <p className={inUsd > 0 ? 'salaPriceInUsd' : 'dNone'}>={inUsd} USD</p>
-                        <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Minimum room value 0.00005 BTC</label>
+                        <label className={!priceValid ? 'new-room-valid' : 'dNone'}><MdInfo />Valor minimo de 0.00005 BTC</label>
                     </div>
                     <button>
-                        <p>Create!</p>
+                        <p>Crear!</p>
                     </button>
                 </form>   
             </div>       

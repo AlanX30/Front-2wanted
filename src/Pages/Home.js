@@ -26,7 +26,7 @@ export const Home = (props) => {
 
                     <div className='section-video'>
                         <div className='youtube-container'>
-                            <button className='instruction_home' onClick={()=>props.history.push('/help')}>Instructions</button>
+                            <button className='instruction_home' onClick={()=>props.history.push('/help')}>Instrucciones</button>
                         </div>
                     </div>
 

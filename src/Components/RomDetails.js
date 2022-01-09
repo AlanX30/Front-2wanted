@@ -87,7 +87,7 @@ const RomDetails = ({loading, usdBtc, count, url, salaId, arbolData, dataRoom, i
         }, 5000)
     }
 
-    if(loading){ return <div className='room-details'>Loading...</div>}
+    if(loading){ return <div className='room-details'>Cargando...</div>}
 
     return(
         <div className='room-details'>
@@ -96,33 +96,33 @@ const RomDetails = ({loading, usdBtc, count, url, salaId, arbolData, dataRoom, i
                         {
                             copy ? 
                             <div>
-                                Copied <IoIosCheckmarkCircle />     
+                                Copiado <IoIosCheckmarkCircle />     
                             </div> : 
                             <div>
-                                Copy room link <MdContentCopy />
+                                Copiar link de sala <MdContentCopy />
                             </div>
                         } 
                     </div>
             </CopyToClipboard>
-            <p>Room Name:</p>
+            <p>Nombre de sala:</p>
             <span>{dataRoom.name}</span>
-            <p>Room Price:</p>
+            <p>Precio:</p>
             <span>{`${dataRoom.price.toString().slice(0,9)} BTC  (${formatNumber(dataRoom.price / usdBtc)} USD)`}</span>
-            <p>Parent User:</p>
+            <p>Usuario padre:</p>
             <span>{parent}</span>
-            <p>Creator:</p>
+            <p>Creador:</p>
             <span>{`${dataRoom.creator}`}</span>
-            <p>accumulated level 3:</p>
+            <p>Acomulado en nivel 3:</p>
             <span>{`${acum3 > 0 ? acum3.toString().slice(0,9) : 0} BTC  (${formatNumber(acum3 / usdBtc)} USD)`}</span>
-            <p>accumulated level 4:</p>
+            <p>Acomulado en nivel 4:</p>
             <span>{`${acum4 > 0 ? acum4.toString().slice(0,9) : 0} BTC  (${formatNumber(acum4 / usdBtc)} USD)`}</span>
-            <p>Total accumulated:</p>
+            <p>Total acomulado:</p>
             <span>{`${tAcum > 0 ? tAcum.toString().slice(0,9) : 0} BTC  (${formatNumber(tAcum / usdBtc)} USD)`}</span>                   
-            <p>accumulated paid:</p>
+            <p>Acomulado pago:</p>
             <span>{`${inBalance > 0 ? inBalance.toString().slice(0,9) : 0} BTC  (${formatNumber(inBalance / usdBtc)} USD)`}</span>
             <button disabled={tAcum > inBalance ? false : true} onClick={handleToBalance}>
                 <div className={!loadingToBalance ? '' : 'dNone'}>
-                    <p>Withdraw to wallet</p>
+                    <p>Retirar a billetera</p>
                     <label>{tAcum > inBalance ? newCash.toString().slice(0,9) : 0} BTC ➜ <MdAccountBalanceWallet /></label>
                 </div>
                 <div className={loadingToBalance ? "spinner-toBalance spinner-border text-danger" : 'dNone'} role="status">

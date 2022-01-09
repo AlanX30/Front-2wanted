@@ -60,12 +60,12 @@ export const Contact_us = () => {
     }
 
     return<div className='balance-container'>
-            <h1 className='text-center'>Contact us</h1>
+            <h1 className='text-center'>Contactanos</h1>
 
             <form onSubmit={handleSubmit}>
                 <div className='contact_text'>
-                    <p>Send a request and it will be answered as soon as possible to your email</p>
-                    <p>Or send email to our email &nbsp; <MdMail /> support@2wanted.com</p>
+                    <p>Envíe una solicitud y será respondida lo antes posible a su correo electrónico</p>
+                    <p>O envienos un correo a nuestro email &nbsp; <MdMail /> support@2wanted.com</p>
                 </div>
                 <div>
                     <input className='contact_asunto' required {...asunto} type="text" placeholder='Asunto'/>
@@ -73,9 +73,9 @@ export const Contact_us = () => {
                 </div>
                 <button disabled={loading ? true : false} className='contact_send'>
                     <div className={loading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
-                        <span className="sr-only">Loading...</span>
+                        <span className="sr-only">Cargando...</span>
                     </div>
-                    <p className={loading ? 'dNone' : ''}>Send</p>
+                    <p className={loading ? 'dNone' : ''}>Enviar</p>
                 </button>
             </form>
         

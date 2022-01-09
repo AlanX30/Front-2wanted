@@ -54,15 +54,15 @@ const ForgotPasswordModal = props => {
 
     return <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <div>
-            <h4>Forgot password?</h4>
+            <h4>Olvidaste tu contraseña?</h4>
             <form onSubmit={handleForgotPassword}>
-                <p>Write your access email and you will receive a password recovery link in the email.</p>
+                <p>Ingresa tu email de acceso y recibiras un link de acceso en tu correo.</p>
                 <input required className='join-input forgotModalInput' {...email} placeholder='Email' type='email'/>
                 <button disabled={loading ? true : false} className='btn btn-dark btn-block invitation-button'>
                     <div className={loading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                    <p  className={loading ? 'dNone' : ''}>{count > 0 ? 'Retry' : 'Send'}</p>
+                    <p  className={loading ? 'dNone' : ''}>{count > 0 ? 'Reenviar' : 'Enviar'}</p>
                 </button>
             </form>
         </div>

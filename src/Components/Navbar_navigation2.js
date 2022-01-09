@@ -74,27 +74,27 @@ const Navbar_navigation2 = props => {
                         <div><MdAccountBalanceWallet />&nbsp;Wallet</div>
                         <div>
                             <div className='d-flex balance-refresh-container'>< MdRefresh size='35' className={loadingUserData ? 'refresh-balance-loading ' : 'refresh-balance'} onClick={()=> setCountUserData(countUserData + 1)} />  {Number(wallet)} <p>&nbsp;BTC</p></div>
-                            <div className='d-flex justify-content-center'><p>&nbsp;&nbsp;(&nbsp;</p><p>  {!usdBtc ? '' : userData.wallet < usdBtc ? 0 : formatNumber(userData.wallet / usdBtc)}</p><p>&nbsp; Dollar)</p></div>
+                            <div className='d-flex justify-content-center'><p>&nbsp;&nbsp;(&nbsp;</p><p>  {!usdBtc ? '' : userData.wallet < usdBtc ? 0 : formatNumber(userData.wallet / usdBtc)}</p><p>&nbsp; USD)</p></div>
                         </div>
                     </div>
                     <div className='item-menu-right-cashier'>
-                        <div onClick={()=> setModal4Open(true)} to='/wallet' className='button-deposit'><MdFileUpload />Deposit</div>
-                        <div onClick={()=>setModal3Open(true)} className='button-withdraw'><MdFileDownload />Withdraw</div>
+                        <div onClick={()=> setModal4Open(true)} to='/wallet' className='button-deposit'><MdFileUpload />Depositar</div>
+                        <div onClick={()=>setModal3Open(true)} className='button-withdraw'><MdFileDownload />Retirar</div>
                     </div>
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/balance/' className="item-menu-right">
-                        <MdChromeReaderMode /><p>&nbsp;Balance history</p> 
+                        <MdChromeReaderMode /><p>&nbsp;Historial de balance</p> 
                     </Link>
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/profile/' className="item-menu-right" >
-                    < IoMdSettings /><p>&nbsp;User settings</p> 
+                    < IoMdSettings /><p>&nbsp;Configuracion</p> 
                     </Link>
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/help/' className="item-menu-right">
-                        <MdHelpOutline /><p>&nbsp;Instructions</p> 
+                        <MdHelpOutline /><p>&nbsp;Instrucciones</p> 
                     </Link>
                     <Link onClick={()=> toggle3.setIsComponentVisible(false)} to='/contact_us/' className="item-menu-right">
-                        <MdMail /><p>&nbsp;Contact us</p> 
+                        <MdMail /><p>&nbsp;Contactanos</p> 
                     </Link>
                     <div onClick={handleLogout} className="item-menu-right">
-                        <MdExitToApp /><p>&nbsp;Logout</p>  
+                        <MdExitToApp /><p>&nbsp;Cerrar sesion</p>  
                     </div>
                 </div> 
                 

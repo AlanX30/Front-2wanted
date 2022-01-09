@@ -74,23 +74,23 @@ export const InviteModal = (props) => {
     
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
-           <h3>Invite user</h3>
+           <h3>Invitar usuario</h3>
             <form className='invite-form' onSubmit={handleSubmit}>
                 <div className='d-flex'>
                     <div className="pre-formS">
                         <div className="input-group-text invite-pre-form">@</div>
                     </div>
-                    <input {...user} type="text" placeholder='User'/>
+                    <input {...user} type="text" placeholder='Usuario'/>
                 </div>
                 <div className="form-group mt-4 mb-4">
-                    <input {...message} type="text" placeholder='Optional message'/>
-                    <label className={msg_valid ? 'dNone' : 'warning-invite'}><MdInfo />&nbsp;Maximum 50 characters</label>
+                    <input {...message} type="text" placeholder='Mensaje opcional'/>
+                    <label className={msg_valid ? 'dNone' : 'warning-invite'}><MdInfo />&nbsp;Maximo 50 caracteres</label>
                 </div>
                 <button disabled={inviteLoading ? true : false} className='btn btn-dark btn-block invitation-button'>
                     <div className={inviteLoading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
-                    <p className={inviteLoading ? 'dNone' : ''}>Invite</p>
+                    <p className={inviteLoading ? 'dNone' : ''}>Invitar</p>
                 </button>
             </form>
         </Modal>

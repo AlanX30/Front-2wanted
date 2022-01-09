@@ -141,7 +141,7 @@ export const Signup = (props) => {
              <div className='signup-right'>
                 <div className='card-signup'>
                             <h3 className="text-center text-white card-header pl-4">
-                                Create user
+                                Registro
                             </h3>
                             <div className="card-body form-body">
                                 <form onSubmit={handleSubmit}>
@@ -152,7 +152,7 @@ export const Signup = (props) => {
                                             </div>
                                             <input type="text" className='form-control' {...userName} placeholder='Username' required/>
                                         </div>
-                                        <label className={!userValid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimum 8 characters without spaces, upper and lower case</label>
+                                        <label className={!userValid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimo 4 caracteres, maximo 16.</label>
                                     </div>
                                     <div className="form-group form-inputs">
                                         <div className='d-flex'>
@@ -167,25 +167,25 @@ export const Signup = (props) => {
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdMail /></div>
                                             </div>
-                                            <input type="text" className='form-control' {...email2} placeholder='Repeat Email' required/>
+                                            <input type="text" className='form-control' {...email2} placeholder='Repetir Email' required/>
                                         </div>
-                                        <label className={!validEmail ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Emails do not match</label>
+                                        <label className={!validEmail ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Emails no coinciden</label>
                                     </div>
                                     <div className="form-group form-inputs">
                                         <div className='d-flex'>
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
-                                            <input autoComplete='true' type="password"  className='form-control' {...password} placeholder='Password' required/>
+                                            <input autoComplete='true' type="password"  className='form-control' {...password} placeholder='Contraseña' required/>
                                         </div>
-                                        <label className={!password_valid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimum 8 characters without spaces, upper and lower case</label>
+                                        <label className={!password_valid ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Minimo 8 caracteres, sin espacios, usar mayuscula y minuscula.</label>
                                     </div>
                                     <div className="form-group form-inputs">
                                     <div className='d-flex'>
                                             <div className="input-group- pre-formS">
                                                 <div className="input-group-text pre-form"><MdLockOutline /></div>
                                             </div>
-                                            <input autoComplete='true' type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Confirm Password' required/>
+                                            <input autoComplete='true' type="password" suggested="new-password" className='form-control' {...confirm_password} placeholder='Repetir contraseña' required/>
                                         </div>
                                     </div>
 
@@ -196,14 +196,14 @@ export const Signup = (props) => {
                                             onChange={onChangeCaptcha}
                                             size='compact'
                                         />
-                                        <label className={!validCaptcha ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Please complete captcha</label>
+                                        <label className={!validCaptcha ? 'password-valid' : 'dNone'}><MdInfo />&nbsp;Complete el captcha</label>
                                     </div>
 
                                     <button disabled={signupLoading ? true : false} type='submit' className='button-signup'>
                                         <div className={signupLoading ? "spinner-border text-danger" : 'dNone'} role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>
-                                        <p className={signupLoading ? 'dNone' : ''}>Create user</p>
+                                        <p className={signupLoading ? 'dNone' : ''}>Crear usuario</p>
                                     </button>
                                 </form>
                             </div>

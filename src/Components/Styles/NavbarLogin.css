@@ -32,7 +32,7 @@
   margin: 0 auto;
 }
 .login-button {
-  width: max-content;
+  width: 62px;
   box-shadow: 0 -3px 7px black;
   height: 38px;
   border: none;
@@ -43,7 +43,6 @@
 }
 .login-button:hover {
   background-color: var(--bg-color);
-  border: 2px solid var(--bg-color);
   color: #ffc107;
 }
 .loading-login {

@@ -103,19 +103,19 @@ const EmailVerificationModal2 = props => {
     return <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <div className='emailVerification'>
 
-            <h4>Enter the six-digit code sent to your email.</h4>
+            <h4>Ingresa el codigo de 6 digitos enviado a tu email.</h4>
             
             <form onSubmit={onConfirm} className='input-verificationemail'> 
-                <input maxLength='6' className='join-input' {...code} type="text" placeholder='Code'/>
-                <button> Confirm </button>
+                <input maxLength='6' className='join-input' {...code} type="text" placeholder='Codigo'/>
+                <button> Confirmar </button>
             </form>
 
-            <label>If you have not received any email or want to resend, press the retry button</label>
+            <label>Si no has recivido tu codigo, presiona reenviar.</label>
             <button onClick={handleRefresh} disabled={loading ? true : false} className='btn btn-dark btn-block invitation-button'>
                 <div className={loading ? "spinner-conf spinner-border text-danger" : 'dNone'} role="status">
                     <span className="sr-only">Loading...</span>
                 </div>
-                <p  className={loading ? 'dNone' : ''}><MdRefresh />Retry</p>
+                <p  className={loading ? 'dNone' : ''}><MdRefresh />Reenviar</p>
             </button>
         </div>
     </Modal>

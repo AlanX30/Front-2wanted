@@ -58,18 +58,18 @@ const PasswordVerification = props => {
 
     return <Modal2 isOpen={props.isOpen} onClose={props.onClose2}>
         <form onSubmit={onConfirm}>
-            <h4>Enter your password</h4>
+            <h4>Ingresa tu contraseña</h4>
             <div className='mb-3 mt-1 d-flex'>
                 <div className="pre-formS">
                     <div className="input-group-text invite-pre-form"><MdLockOutline /></div>
                 </div>
-                <input className='join-input' {...password} type="password"/>
+                <input className='join-input' {...password} type="Contraseña"/>
             </div>
             <button className='btn btn-dark btn-block invitation-button' disabled={loading ? true : false}>
                 <div className={loading ? "spinner-border loading-login text-danger" : 'dNone'} role="status">
                     <span className="sr-only">Loading...</span>
                 </div>
-                <p className={loading ? 'dNone' : ''}>Confirm!</p>
+                <p className={loading ? 'dNone' : ''}>Confirmar!</p>
             </button>
         </form>
     </Modal2>

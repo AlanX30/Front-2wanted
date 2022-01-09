@@ -37,17 +37,17 @@ const InvitationModal = (props) => {
     
     return (
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
-           <h3>Are you sure?</h3>
+           <h3>Estas seguro?</h3>
 
             {
                 invitation && <div className='invitationModal'>
-                    <p>Invited by: <span>{invitation.host}</span></p>
-                    <p>Room Name: <span>{invitation.salaName}</span></p>
-                    <p>Price: <span>{invitation.price.toString().slice(0,9)} BTC</span></p>
-                    <p>Parent user: <span>{invitation.parentUsername}</span></p>
-                    <p>Message: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
+                    <p>Invitado por: <span>{invitation.host}</span></p>
+                    <p>Nombre de sala: <span>{invitation.salaName}</span></p>
+                    <p>Precio: <span>{invitation.price.toString().slice(0,9)} BTC</span></p>
+                    <p>Usuario padre: <span>{invitation.parentUsername}</span></p>
+                    <p>Mensaje: <span>{invitation.message ? invitation.message : 'Ninguno' }</span></p>
                     <button className='btn btn-dark btn-block invitation-button' onClick={handleClick}>
-                        <p>Join</p>
+                        <p>Unirse</p>
                     </button>
                 </div>
             }

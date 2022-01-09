@@ -32,7 +32,7 @@ export const DepositModal = props => {
             address ?
 
             <form className='depositForm'>
-                <h2>Your Btc address</h2>
+                <h2>Tu direccion Btc</h2>
 
                 <div>
 
@@ -47,20 +47,20 @@ export const DepositModal = props => {
                             {
                                 copy ? 
                                 <div>
-                                Copied <IoIosCheckmarkCircle />     
+                                    Copiado <IoIosCheckmarkCircle />     
                                 </div> : 
                                 <div>
-                                    Copy <MdContentCopy />
+                                    Copiar <MdContentCopy />
                                 </div>
                             } 
                         </button>
                     </CopyToClipboard>
 
-                    <p className='mb-4'>The first deposit has a fee of 0.00002 btc.</p>
+                    <p className='mb-4'>El primer deposito tiene un fee de 0.00002 btc.</p>
 
                 </div>
 
-                <button className='btn btn-dark btn-block withdraw-modal-cancelar' type='button' onClick={onClose}>Close</button>
+                <button className='btn btn-dark btn-block withdraw-modal-cancelar' type='button' onClick={onClose}>Cerrar</button>
 
             </form> :
 
