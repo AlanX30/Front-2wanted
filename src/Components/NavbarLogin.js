@@ -59,7 +59,7 @@ import ForgotPasswordModal from './Modals/ForgotPasswordModal'
             data: form,
             url: url+'/api/users/signin',
             headers: { 
-                'X-CSRF-Token': csrfToken
+                'xsrf-token': csrfToken
             }
         })
         .then(res => {

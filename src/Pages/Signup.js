@@ -44,7 +44,7 @@ export const Signup = (props) => {
     const reg_whiteSpace = /^$|\s+/
 
     const { toggleAuth, csrfToken } = useContext(Context)
-
+    console.log(csrfToken)
     const [modalOpen, setModalOpen] = useState(false)
     
     function onCloseModal(){
@@ -77,7 +77,7 @@ export const Signup = (props) => {
         if(email2.value === email.value){ setValidEmail(true)}else{ return setValidEmail(false)}
         if(reg_whiteSpace.test(userName.value)){return setUserValid(false)}else{setUserValid(true)}
         if(!reg_password.test(password.value)){return setPassword_valid(false)}else{setPassword_valid(true)}
-        if(!tokenCaptcha){return setValidCaptcha(false)}else{setValidCaptcha(true)}
+        /* if(!tokenCaptcha){return setValidCaptcha(false)}else{setValidCaptcha(true)} */
 
         setSignupLoading(true)
 

@@ -142,9 +142,9 @@ const Provider = ({ children }) => {
     usdBtc,
     onUpdate:(update)=>{setUpdate(update)},
     toggleAuth:(userName)=>{
-      setIsAuth(true)
       Cookies.set('username', userName)
       Cookies.set('conected', true, { expires: 0.041660 })
+      setIsAuth(true)
     },
     toggleAdminAuth:()=>{
       setIsAdminAuth(true)
